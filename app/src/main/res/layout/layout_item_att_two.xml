@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x70"
+    android:background="@android:color/white">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdvImg"
+        android:layout_width="@dimen/x50"
+        android:layout_height="@dimen/x50"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x15"
+        fresco:failureImage="@mipmap/ic_my_hpic"
+        fresco:placeholderImage="@mipmap/ic_my_hpic" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_toRightOf="@id/sdvImg"
+        android:maxWidth="@dimen/x150"
+        android:singleLine="true"
+        android:text="周远方"
+        android:textSize="@dimen/textsize_18sp" />
+
+    <TextView
+        android:id="@+id/tvJob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/tvName"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_marginTop="@dimen/x20"
+        android:layout_toRightOf="@id/tvName"
+        android:lines="1"
+        android:text="儿科  副主任医师"
+        android:textColor="@color/txt_color_ma3"
+        android:textSize="@dimen/textsize_12sp" />
+
+    <TextView
+        android:id="@+id/tvInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvName"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_marginRight="@dimen/x80"
+        android:layout_marginTop="@dimen/x5"
+        android:layout_toRightOf="@id/sdvImg"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="长期从事外科临床工作，具有杂事的基本技能和熟练的外科操作"
+        android:textColor="@color/txt_color_light76"
+        android:textSize="@dimen/textsize_14sp" />
+
+    <TextView
+        android:id="@+id/tvAttent"
+        android:layout_width="@dimen/x60"
+        android:layout_height="@dimen/x20"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/x15"
+        android:background="@drawable/shape_bg_blue"
+        android:gravity="center"
+        android:text="已关注"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/textsize_10sp" />
+
+</RelativeLayout>

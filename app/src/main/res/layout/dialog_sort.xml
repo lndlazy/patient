@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x40"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <!--<ImageView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1px"-->
+    <!--android:src="@color/line_colore5" />-->
+
+    <RelativeLayout
+        android:id="@+id/rlCount"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x40"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/tvCount"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:text="问诊量"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_16sp" />
+
+        <ImageView
+            android:id="@+id/ivCount"
+            android:layout_width="@dimen/x15"
+            android:layout_height="@dimen/x15"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x15"
+            android:src="@mipmap/ic_choosed"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <!--<ImageView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1px"-->
+    <!--android:src="@color/line_colore5" />-->
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/x40">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tvSpeed"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/x30"-->
+    <!--android:layout_centerVertical="true"-->
+
+    <!--android:layout_marginLeft="@dimen/x15"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:text="回复速度"-->
+    <!--android:textColor="@color/txt_color_ma3"-->
+    <!--android:textSize="@dimen/textsize_16sp" />-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/ivSpeed"-->
+    <!--android:layout_width="@dimen/x15"-->
+    <!--android:layout_height="@dimen/x15"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_marginRight="@dimen/x15"-->
+    <!--android:src="@mipmap/ic_choosed"-->
+    <!--android:visibility="gone" />-->
+
+    <!--</RelativeLayout>-->
+
+</LinearLayout>

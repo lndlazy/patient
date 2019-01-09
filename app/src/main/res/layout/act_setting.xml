@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="个人信息"
+        custom:mTitleLeft="@mipmap/ic_arrow_left" />
+
+    <include layout="@layout/line_gray" />
+
+    <RelativeLayout
+        android:id="@+id/rlHeadPic"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x71"
+        android:layout_marginTop="@dimen/x9"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/x13"
+        android:paddingRight="@dimen/x13">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="头像"
+            android:textColor="@color/txt_color_ma3" />
+
+        <ImageView
+            android:id="@+id/iv_arr"
+            android:layout_width="@dimen/x13"
+            android:layout_height="@dimen/x13"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_choose_arrow" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/ivPhoto"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x9"
+            android:layout_toLeftOf="@id/iv_arr"
+            fresco:failureImage="@mipmap/ic_default_headpic"
+            fresco:placeholderImage="@mipmap/ic_default_headpic"
+            fresco:roundAsCircle="true" />
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x10"
+        android:background="@color/bg_home" />
+
+    <com.ylean.cf_hospitalapp.widget.EnterItemView
+        android:id="@+id/sex"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44"
+        android:layout_marginTop="@dimen/x1"
+        custom:mRight="@mipmap/ic_choose_arrow"
+        custom:mText="性别"
+        custom:mTextColor="@color/txt_color_ma3"
+        custom:mTextSize="@dimen/textsize_15sp" />
+
+    <include layout="@layout/line_gray" />
+
+    <com.ylean.cf_hospitalapp.widget.EnterItemView
+        android:id="@+id/bindTel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44"
+        android:layout_marginTop="@dimen/x1"
+        custom:mRight="@mipmap/ic_choose_arrow"
+        custom:mText="手机绑定"
+        custom:mTextColor="@color/txt_color_ma3"
+        custom:mTextSize="@dimen/textsize_15sp" />
+
+    <include layout="@layout/line_gray" />
+
+    <com.ylean.cf_hospitalapp.widget.EnterItemView
+        android:id="@+id/wechat"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44"
+        android:layout_marginTop="@dimen/x1"
+        custom:mRight="@mipmap/ic_choose_arrow"
+        custom:mText="微信"
+        custom:mTextColor="@color/txt_color_ma3"
+        custom:mTextSize="@dimen/textsize_15sp" />
+
+    <include layout="@layout/line_gray" />
+
+    <com.ylean.cf_hospitalapp.widget.EnterItemView
+        android:id="@+id/modifyPwd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44"
+        android:layout_marginTop="@dimen/x1"
+        custom:mRight="@mipmap/ic_choose_arrow"
+        custom:mText="修改密码"
+        custom:mTextColor="@color/txt_color_ma3"
+        custom:mTextSize="@dimen/textsize_15sp" />
+
+    <include layout="@layout/line_gray" />
+
+    <RelativeLayout
+        android:id="@+id/rlNotice"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x44"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x9"
+            android:gravity="center_vertical|left"
+            android:text="消息提醒" />
+
+        <ImageView
+            android:id="@+id/ivNotice"
+            android:layout_width="@dimen/x44"
+            android:layout_height="@dimen/x44"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x10"
+            android:minHeight="@dimen/x44"
+            android:minWidth="@dimen/x44"
+            android:padding="@dimen/x8"
+            android:src="@drawable/select_notice" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/line_gray" />
+
+    <com.ylean.cf_hospitalapp.widget.EnterItemView
+        android:id="@+id/update"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44"
+        android:layout_marginTop="@dimen/x1"
+        custom:mRight="@mipmap/ic_choose_arrow"
+        custom:mText="新版本检测"
+        custom:mTextColor="@color/txt_color_ma3"
+        custom:mTextSize="@dimen/textsize_15sp" />
+
+    <include layout="@layout/line_gray" />
+
+    <com.ylean.cf_hospitalapp.widget.EnterItemView
+        android:id="@+id/aboutUs"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44"
+        android:layout_marginTop="@dimen/x1"
+        custom:mRight="@mipmap/ic_choose_arrow"
+        custom:mText="关于我们"
+        custom:mTextColor="@color/txt_color_ma3"
+        custom:mTextSize="@dimen/textsize_15sp" />
+
+    <include layout="@layout/line_gray" />
+
+</LinearLayout>

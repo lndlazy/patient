@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="@string/choose_dis"
+        custom:mTitleLeft="@mipmap/ic_arrow_left"
+        custom:mTitleRight="@mipmap/ic_choosed" />
+
+    <include layout="@layout/line_gray" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x40"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x15"
+        android:text="常见疾病"
+        android:textSize="@dimen/textsize_16sp"
+        android:textStyle="bold" />
+
+    <include layout="@layout/line_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/leftRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rightRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
+</LinearLayout>

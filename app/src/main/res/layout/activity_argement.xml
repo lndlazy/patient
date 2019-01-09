@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x50"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="@string/argument"
+        custom:mTitleLeft="@mipmap/ic_arrow_left" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line_colore5" />
+
+            <include layout="@layout/layout_doctor_info" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line_colorf7" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x60"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:id="@+id/tvType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:text="图文问诊"
+                    android:textColor="@color/txt_color_ma3"
+                    android:textSize="@dimen/textsize_16sp" />
+
+                <TextView
+                    android:id="@+id/tvPirce"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:text="$ 9.00"
+                    android:textColor="@color/txt_color_light36" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x10"
+                android:background="@color/bg_home" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x40"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/x15"
+                android:text="@string/order_info"
+                android:textSize="@dimen/textsize_20sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line_colore5" />
+
+            <include layout="@layout/layout_recommand" />
+
+            <EditText
+                android:id="@+id/etConent"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x80"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginRight="@dimen/x15"
+                android:background="@color/color_fb"
+                android:gravity="start"
+                android:hint="请输入评价信息"
+                android:padding="@dimen/x10"
+                android:textColor="@color/txt_color_light9"
+                android:textColorHint="@color/txt_color_light9"
+                android:textSize="@dimen/textsize_14sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/picRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvCommit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x50"
+                android:background="@color/tab_colorf9"
+                android:gravity="center"
+                android:text="提交评价"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_20sp" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

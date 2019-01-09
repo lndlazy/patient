@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:padding="@dimen/x15">
+
+    <RelativeLayout
+        android:id="@+id/tl1"
+        android:layout_width="@dimen/x50"
+        android:layout_height="@dimen/x50">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdvImg"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"
+            android:layout_marginTop="@dimen/x10"
+            fresco:failureImage="@mipmap/ic_my_hpic"
+            fresco:placeholderImage="@mipmap/ic_my_hpic"
+            fresco:roundAsCircle="true" />
+
+        <TextView
+            android:id="@+id/tvRead"
+            android:layout_width="@dimen/x12"
+            android:layout_height="@dimen/x12"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x2"
+            android:layout_marginTop="@dimen/x2"
+            android:background="@drawable/shape_yellow_circle"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textsize_10sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/x70"
+        android:layout_toRightOf="@id/tl1">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:maxWidth="@dimen/x150"
+            android:singleLine="true"
+
+            android:textSize="@dimen/textsize_18sp" />
+
+        <TextView
+            android:id="@+id/tvJob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tvName"
+            android:layout_marginLeft="@dimen/x5"
+            android:layout_marginTop="@dimen/x20"
+            android:layout_toRightOf="@id/tvName"
+            android:lines="1"
+
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_12sp" />
+
+        <TextView
+            android:id="@+id/tvCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvName"
+            android:layout_marginLeft="@dimen/x10"
+            android:lines="1"
+
+            android:textColor="@color/txt_color_light9"
+            android:textSize="@dimen/textsize_18sp" />
+
+        <TextView
+            android:id="@+id/tvInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvCompany"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/x5"
+            android:ellipsize="end"
+            android:lines="2"
+            android:textColor="@color/txt_color_light76"
+            android:textSize="@dimen/textsize_14sp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x80"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/x8">
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x5"
+            android:maxWidth="@dimen/x60"
+            android:singleLine="true"
+            android:textColor="@color/txt_color_light9"
+            android:textSize="@dimen/textsize_13sp" />
+        <!-- android:layout_alignParentRight="true"-->
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/shape_bg_blue_smale"
+            android:paddingBottom="@dimen/x2"
+            android:paddingLeft="@dimen/x7"
+            android:paddingRight="@dimen/x7"
+            android:paddingTop="@dimen/x2"
+            android:text="咨询中"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textsize_13sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

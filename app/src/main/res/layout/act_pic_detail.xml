@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<ImageView-->
+    <!--android:id="@+id/zoomView"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
+
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x50"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="图片详情"
+        custom:mTitleLeft="@mipmap/ic_arrow_left" />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/zoomView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true" />
+    <!--<TextView-->
+    <!--android:id="@+id/tvSave"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_marginBottom="@dimen/x36"-->
+    <!--android:background="@drawable/shape_search_white"-->
+    <!--android:paddingBottom="@dimen/x5"-->
+    <!--android:paddingLeft="@dimen/x11"-->
+    <!--android:paddingRight="@dimen/x11"-->
+    <!--android:paddingTop="@dimen/x5"-->
+    <!--android:text="保存图片"-->
+    <!--android:textColor="@android:color/black"-->
+    <!--android:textSize="@dimen/textsize_12sp" />-->
+
+</RelativeLayout>

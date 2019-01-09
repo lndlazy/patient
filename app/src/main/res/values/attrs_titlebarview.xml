@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TitleBackBarView">
+
+        <attr name="mTitleBarText" format="string" />
+        <attr name="mTitleBarSize" format="dimension" />
+        <attr name="mTitleBarColor" format="color" />
+        <attr name="mTitleLeft" format="reference" />
+        <attr name="mTitleRight" format="reference" />
+        <attr name="mTitleBackgroundColor" format="color"/>
+
+    </declare-styleable>
+
+</resources>

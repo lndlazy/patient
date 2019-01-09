@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="问诊详情"
+        custom:mTitleLeft="@mipmap/ic_arrow_left" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray" />
+
+    <RelativeLayout
+        android:id="@+id/rlInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x15">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="问诊人信息"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_17sp" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv1"
+            android:layout_marginTop="@dimen/x10"
+            android:text="高致函     身份证       3202010320323233"
+            android:textColor="@color/txt_color_light9"
+            android:textSize="@dimen/textsize_15sp" />
+
+        <TextView
+            android:id="@+id/tvAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvName"
+            android:layout_marginTop="@dimen/x10"
+            android:text="28岁     男       医保3202032233"
+            android:textColor="@color/txt_color_light9"
+            android:textSize="@dimen/textsize_15sp" />
+
+        <ImageView
+            android:layout_width="@dimen/x15"
+            android:layout_height="@dimen/x15"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_choose_arrow" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x30"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x15"
+        android:text="疾病类型"
+        android:textColor="@color/txt_color_ma3"
+        android:textSize="@dimen/textsize_17sp" />
+
+    <TextView
+        android:id="@+id/tvConditionType"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x20"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginTop="@dimen/x5"
+        android:background="@drawable/shape_bg_edit"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x10"
+        android:paddingRight="@dimen/x10"
+        android:text="草莓状血管瘤"
+        android:textColor="@color/txt_color_light6"
+        android:textSize="@dimen/textsize_15sp" />
+
+    <TextView
+        android:id="@+id/tvQues"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x10"
+        android:layout_marginTop="@dimen/x10"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x15"
+        android:text="血管瘤的治疗方法有哪些？"
+        android:textColor="@color/txt_color_light9"
+        android:textSize="@dimen/textsize_15sp" />
+
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x5"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x15"
+        android:paddingRight="@dimen/x15"
+        android:text="主要症状，发病时间，治疗过程，病情变化就是苦的九分裤圣诞节福利卡接收到了开机费"
+        android:textColor="@color/txt_color_light9"
+        android:textSize="@dimen/textsize_15sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/picRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x10" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdvImg"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x15"
+            fresco:failureImage="@mipmap/ic_default_headpic"
+            fresco:roundAsCircle="true" />
+
+        <TextView
+            android:id="@+id/tvVoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/x5"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/x5"
+            android:background="@mipmap/ic_chat_left"
+            android:gravity="center"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/tvReply"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_horizontal"-->
+    <!--android:background="@drawable/shape_round_corner_talk_bg"-->
+    <!--android:paddingBottom="@dimen/x10"-->
+    <!--android:paddingLeft="@dimen/x15"-->
+    <!--android:paddingRight="@dimen/x15"-->
+    <!--android:paddingTop="@dimen/x10"-->
+    <!--android:text="回复" />-->
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_marginTop="@dimen/x10">-->
+
+    <!--<include layout="@layout/layout_chat_input" />-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/recyclerView"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_marginBottom="@dimen/x40" />-->
+
+
+    <!--</RelativeLayout>-->
+
+
+</LinearLayout>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x50">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdvImg"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x10"
+            fresco:failureImage="@mipmap/ic_my_hpic"
+            fresco:placeholderImage="@mipmap/ic_my_hpic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_toRightOf="@id/sdvImg"
+            android:gravity="center"
+            android:text="告知函"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_16sp" />
+
+        <TextView
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/x25"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x10"
+            android:background="@drawable/shape_stroke_blue"
+            android:gravity="center"
+            android:text="关注"
+            android:textColor="@color/tab_colorf9" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x10"
+        android:text="香穴既是保健效穴，同时也是治疗鼻炎的囊中之宝，无论平日预防感冒，还是缓解鼻塞症。"
+        android:textColor="@color/txt_color_light6"
+        android:textSize="@dimen/textsize_16sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x30">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x10"
+            android:gravity="center"
+            android:text="今天 13：50"
+            android:textColor="@color/txt_color_light9"
+            android:textSize="@dimen/textsize_14sp" />
+
+        <TextView
+            android:id="@+id/tvReply"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x25"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x10"
+            android:gravity="center"
+            android:text="@string/reply"
+            android:textColor="@color/txt_color_light9"
+            android:textSize="@dimen/textsize_14sp" />
+
+        <ImageView
+            android:id="@+id/ivReply"
+            android:layout_width="@dimen/x25"
+            android:layout_height="@dimen/x25"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x2"
+            android:layout_toLeftOf="@id/tvReply"
+            android:padding="@dimen/x3"
+            android:src="@mipmap/ic_reply" />
+
+
+        <TextView
+            android:id="@+id/tvGood"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x20"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x10"
+            android:layout_toLeftOf="@id/ivReply"
+            android:gravity="center"
+            android:text="@string/good"
+            android:textColor="@color/txt_color_light9"
+            android:textSize="@dimen/textsize_14sp" />
+
+
+        <ImageView
+            android:id="@+id/ivGood"
+            android:layout_width="@dimen/x25"
+            android:layout_height="@dimen/x25"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x2"
+            android:layout_toLeftOf="@id/tvGood"
+            android:padding="@dimen/x3"
+            android:src="@mipmap/ic_good" />
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginTop="@dimen/x5"
+        android:layout_marginRight="@dimen/x15"
+        android:src="@color/line_colore5" />
+
+    <LinearLayout
+        android:id="@+id/llCommitReply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x15"
+        android:layout_marginBottom="@dimen/x15"
+        android:orientation="vertical">
+
+        <include layout="@layout/item_commit_reply" />
+
+    </LinearLayout>
+
+</LinearLayout>

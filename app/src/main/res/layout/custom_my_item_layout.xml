@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:id="@+id/iv_left"
+        android:layout_width="@dimen/x32"
+        android:layout_height="@dimen/x32"
+        android:padding="@dimen/x3"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x13" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_toRightOf="@id/iv_left"
+        android:gravity="center"
+        android:textColor="@color/txt_color_ma3"
+        android:textSize="@dimen/textsize_16sp" />
+
+    <ImageView
+        android:id="@+id/iv_right"
+        android:layout_width="@dimen/x25"
+        android:layout_height="@dimen/x30"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/x13"
+        android:padding="@dimen/x5"
+        android:src="@mipmap/ic_choose_arrow" />
+
+</merge>

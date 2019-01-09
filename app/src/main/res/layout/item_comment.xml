@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/x15">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="【文章】春季血管瘤患儿如何应对过敏现象"
+        android:textColor="@color/txt_color_ma3"
+        android:textSize="@dimen/textsize_15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitle"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="这个挺有用处啊"
+        android:textColor="@color/txt_color_light9"
+        android:textSize="@dimen/textsize_15sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="@dimen/x20"
+        android:layout_height="@dimen/x20"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/x3"
+        android:src="@mipmap/ic_choose_arrow" />
+
+</RelativeLayout>

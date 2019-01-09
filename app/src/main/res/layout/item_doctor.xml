@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/x15">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdvImg"
+        android:layout_width="@dimen/x35"
+        android:layout_height="@dimen/x35"
+        android:layout_marginTop="@dimen/x10"
+        fresco:roundAsCircle="true" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x30"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_toRightOf="@id/sdvImg"
+        android:gravity="center_vertical"
+        android:maxWidth="@dimen/x70"
+        android:singleLine="true"
+        android:text="医生姓名"
+        android:textColor="@color/txt_color_ma3"
+        android:textSize="@dimen/textsize_16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvDepartment"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x30"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_toRightOf="@id/tvName"
+        android:gravity="center_vertical"
+        android:text="科室 医生职称"
+        android:textColor="@color/txt_color_ma3"
+        android:textSize="@dimen/textsize_14sp"
+        android:textStyle="bold" />
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="@dimen/x30"-->
+        <!--android:layout_marginLeft="@dimen/x5"-->
+        <!--android:layout_toRightOf="@id/tvDepartment"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:text="医生职称"-->
+        <!--android:textColor="@color/txt_color_ma3"-->
+        <!--android:textSize="@dimen/textsize_14sp"-->
+        <!--android:textStyle="bold" />-->
+
+    <TextView
+        android:id="@+id/tvHospitalName"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x30"
+        android:layout_below="@id/tvName"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_toRightOf="@id/sdvImg"
+        android:gravity="center_vertical"
+        android:text="医院名称"
+        android:textColor="@color/line_color9b"
+        android:textSize="@dimen/textsize_15sp" />
+
+    <TextView
+        android:id="@+id/tvIntroduce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvHospitalName"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_toRightOf="@id/sdvImg"
+        android:ellipsize="end"
+        android:lines="2"
+        android:minHeight="@dimen/x30"
+        android:text="医生介绍"
+        android:textColor="@color/txt_color_light76"
+        android:textSize="@dimen/textsize_14sp" />
+
+    <TextView
+        android:id="@+id/tvAttention"
+        android:layout_width="@dimen/x50"
+        android:layout_height="@dimen/x20"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/x10"
+        android:layout_marginTop="@dimen/x5"
+        android:background="@drawable/shape_bg_blue"
+        android:gravity="center"
+        android:text="已关注"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/textsize_12sp" />
+
+</RelativeLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="帮助与反馈"
+        custom:mTitleLeft="@mipmap/ic_arrow_left" />
+
+    <include layout="@layout/line_gray" />
+
+    <EditText
+        android:id="@+id/tvFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/x15"
+        android:layout_marginTop="@dimen/x20"
+        android:background="@color/line_gray"
+        android:gravity="start"
+        android:hint="请输入反馈内容"
+        android:minHeight="@dimen/x150"
+        android:padding="@dimen/x15"
+        android:textColor="@color/txt_color_ma3"
+        android:textSize="@dimen/textsize_15sp" />
+
+    <EditText
+        android:id="@+id/etTel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x40"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginRight="@dimen/x15"
+        android:background="@color/line_gray"
+        android:gravity="center_vertical|start"
+        android:hint="请输入手机号"
+        android:inputType="phone"
+        android:paddingLeft="@dimen/x15"
+        android:paddingRight="@dimen/x15"
+        android:textColor="@color/txt_color_ma3"
+        android:textSize="@dimen/textsize_15sp" />
+
+    <TextView
+        android:id="@+id/tvSub"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x40"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginRight="@dimen/x15"
+        android:layout_marginTop="@dimen/x30"
+        android:background="@color/tab_colorf9"
+        android:gravity="center"
+        android:text="提交"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

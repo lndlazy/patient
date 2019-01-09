@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x60"
+    android:background="@android:color/white"
+    android:paddingLeft="@dimen/x15"
+    android:paddingRight="@dimen/x15">
+
+    <ImageView
+        android:id="@+id/ivGood"
+        android:layout_width="@dimen/x30"
+        android:layout_height="@dimen/x30"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/x6"
+        android:src="@mipmap/ic_good" />
+
+    <TextView
+        android:id="@+id/tvGoodCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x2"
+        android:layout_toRightOf="@id/ivGood"
+        android:text="322"
+        android:textColor="@color/txt_color_light9"
+        android:textSize="@dimen/textsize_14sp" />
+
+    <ImageView
+        android:id="@+id/ivLike"
+        android:layout_width="@dimen/x30"
+        android:layout_height="@dimen/x30"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_toRightOf="@id/tvGoodCount"
+        android:padding="@dimen/x6"
+        android:src="@mipmap/ic_like" />
+
+    <TextView
+        android:id="@+id/tvLikeCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x2"
+        android:layout_toRightOf="@id/ivLike"
+        android:text="32"
+        android:textColor="@color/txt_color_light9"
+        android:textSize="@dimen/textsize_14sp" />
+
+    <ImageView
+        android:id="@+id/ivRead"
+        android:layout_width="@dimen/x30"
+        android:layout_height="@dimen/x30"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_toRightOf="@id/tvLikeCount"
+        android:padding="@dimen/x6"
+        android:src="@mipmap/ic_read" />
+
+    <TextView
+        android:id="@+id/tvReadCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x2"
+        android:layout_toRightOf="@id/ivRead"
+        android:text="3千"
+        android:textColor="@color/txt_color_light9"
+        android:textSize="@dimen/textsize_14sp" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="08-09  | 12：23"
+        android:textColor="@color/txt_color_light9"
+        android:textSize="@dimen/textsize_14sp" />
+
+</RelativeLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MyItemView">
+
+        <attr name="ileftImage" format="reference" /> <!--左侧显示的图片-->
+        <attr name="irightImage" format="reference" /> <!--左侧显示的图片-->
+        <!--<attr name="backgroundResc" format="reference|color" />-->
+        <attr name="itextColor" format="color" />
+        <attr name="itextSize" format="dimension" />
+        <attr name="itxt" format="string" />
+        <!--<attr name="textInputType" format="string" /> &lt;!&ndash;输入类型&ndash;&gt;-->
+
+    </declare-styleable>
+
+</resources>

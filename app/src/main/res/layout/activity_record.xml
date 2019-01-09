@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/line_colore5">
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="@string/record"
+        custom:mTitleLeft="@mipmap/ic_arrow_left" />
+
+    <com.ylean.cf_hospitalapp.widget.TalkView
+        android:id="@+id/tvTalkView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="@string/press_speak"
+        android:textColor="@color/txt_color_ma3"
+        android:textSize="@dimen/textsize_18sp" />
+
+</RelativeLayout>

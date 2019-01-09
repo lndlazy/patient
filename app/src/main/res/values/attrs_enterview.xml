@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="EnterItemView">
+
+        <attr name="mText" format="string" />
+        <attr name="mTextSize" format="dimension" />
+        <attr name="mTextColor" format="color" />
+        <attr name="mLeft" format="reference" />
+        <attr name="mRight" format="reference" />
+        <attr name="mBackgroundColor" format="color"/>
+        <attr name="mRightTxtColor" format="color"/>
+
+        <attr name="mShowEnter" format="boolean"/>
+        <!--<attr name="mShowRightTxt" format="boolean"/>-->
+        <attr name="mRightTxt" format="string"/>
+
+    </declare-styleable>
+
+</resources>

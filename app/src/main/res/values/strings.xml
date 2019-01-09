@@ -1,0 +1,104 @@
+<resources>
+    <string name="app_name">好医无忧APP管理系统患者端</string>
+    <string name="s_one">首页</string>
+    <string name="s_two">科普讲堂</string>
+    <string name="s_three">问诊</string>
+    <string name="s_four">个人中心</string>
+    <string name="vip_value">会员规则</string>
+    <string name="usable_integral">可用积分</string>
+    <string name="total_integral">累计积分</string>
+    <string name="integral_detail">积分明细</string>
+    <string name="get_integral">赚取积分</string>
+    <string name="my_order">我的订单</string>
+    <string name="my_register">我的挂号</string>
+
+
+    <string name="my_item_1">我的义诊</string>
+    <string name="my_item_2">我的申请</string>
+    <string name="my_item_3">我的医生</string>
+    <string name="my_item_4">我的家人</string>
+    <string name="my_item_5">我的帮帮团</string>
+    <string name="my_item_6">我的评论</string>
+    <string name="my_item_7">我的收藏</string>
+    <string name="my_item_8">我的评价</string>
+    <string name="my_item_9">我的病友</string>
+    <string name="my_item_10">我的话题</string>
+    <string name="help">帮助与反馈</string>
+    <string name="recomd_friend">推荐给朋友</string>
+    <string name="contact_custom">联系客服</string>
+    <string name="my_tel">客服电话    4000-699-699</string>
+    <string name="article_detail">文章详情</string>
+    <string name="reply">回复</string>
+    <string name="good">赞</string>
+    <string name="no_reply_edit">没有评论了，欢迎你填写评论!</string>
+    <string name="some_read">相关阅读</string>
+    <string name="send_commit">发表评论</string>
+    <string name="argument">评价</string>
+    <string name="order_info">订单信息</string>
+    <string name="scince_speech">科普讲堂</string>
+    <string name="enter_search_name">请输入想查询的疾病名</string>
+    <string name="search">搜索</string>
+    <string name="history">历史记录</string>
+    <string name="please_input_search">\"请输入搜索内容\"</string>
+    <string name="pay_ask">付费问诊</string>
+    <string name="room_choose">科室选择</string>
+    <string name="message_sub">信息提交</string>
+    <string name="enter_question">请输入您想咨询的问题（不少于5个字）例如：血管瘤的治疗方法有哪些？</string>
+    <string name="enter_desc">请简单描述病情（不少于25个字）例如：主要症状、发病时间、治疗过程、病情变化、想得到怎样的帮助</string>
+    <string name="choose_ask_people">问诊人选择</string>
+    <string name="add_family_num">添加家人</string>
+    <string name="input_name">请输入姓名</string>
+    <string name="input_tel">请输入手机号码</string>
+    <string name="input_id_num">请输入身份证号码</string>
+    <string name="input_id_card">请输入医保卡号</string>
+    <string name="input_dis_history">请填写患过或现有的疾病</string>
+    <string name="input_allergy_history">请填写有过的药物过敏史</string>
+    <string name="input_surgery_history">请填写你做过的手术</string>
+    <string name="save">保存</string>
+    <string name="eivSex">性别</string>
+    <string name="done">完成</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="relationship">患者关系</string>
+    <string name="province">省份</string>
+    <string name="city">城市</string>
+    <string name="area">区县</string>
+    <string name="delete">删除</string>
+    <string name="choose_dis">疾病选择</string>
+    <string name="update_big_pic">上传患处、病例、检查单等照片（高清，能看清字）</string>
+    <string name="buy_service">购买服务</string>
+    <string name="buy_name">购买项目</string>
+    <string name="choose_buy_style">选择支付方式</string>
+    <string name="custom_service">客服</string>
+    <string name="choose_doctor">选择医生</string>
+
+    <string name="press_speak">按住  说话</string>
+    <string name="release_done">松开  结束</string>
+    <string name="speak_short">说话时间太短</string>
+    <string name="release_cancle_send">手指松开,取消发送</string>
+    <string name="slide_up_cancle_send">手指上滑,取消发送</string>
+    <string name="record">录音</string>
+    <string name="sub_notice">提交提醒</string>
+    <string name="sub_success">提交成功</string>
+    <string name="my_free_ask">我的义诊</string>
+    <string name="test_self">症状自测</string>
+    <string name="inquiry_detail">问诊详情</string>
+    <string name="my_registered">我的问诊</string>
+    <string name="my_goods_order">商品订单</string>
+    <string name="my_server_order">服务订单</string>
+    <string name="reset_pwd">重置密码</string>
+    <string name="pay_notice">支付提醒</string>
+    <string name="my_news">我的消息</string>
+    <string name="points_mall">积分商城</string>
+    <string name="points_detail">积分明细</string>
+    <string name="my_points">我的积分</string>
+    <string name="points_rule">积分规则</string>
+
+
+    <string name="day_name_format">EEE</string>
+    <string name="invalid_date">Date must be between %1$s and %2$s.</string>
+    <string name="month_name_format">MMMM yyyy</string>
+    <string name="choose_date">选择日期</string>
+
+
+</resources>

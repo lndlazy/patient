@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x200"
+    android:background="@mipmap/ic_my_bg">
+
+    <ImageView
+        android:id="@+id/ivSet"
+        android:layout_width="@dimen/x20"
+        android:layout_height="@dimen/x20"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/x10"
+        android:layout_marginTop="@dimen/x10"
+        android:src="@mipmap/ic_my_set" />
+
+    <ImageView
+        android:id="@+id/ivMsg"
+        android:layout_width="@dimen/x20"
+        android:layout_height="@dimen/x20"
+        android:layout_marginRight="@dimen/x10"
+        android:layout_marginTop="@dimen/x10"
+        android:layout_toLeftOf="@id/ivSet"
+        android:src="@mipmap/ic_my_msg" />
+
+    <ImageView
+        android:id="@+id/ivNewMsg"
+        android:layout_width="@dimen/x8"
+        android:layout_height="@dimen/x8"
+        android:layout_marginRight="@dimen/x6"
+        android:layout_marginTop="@dimen/x6"
+        android:layout_toLeftOf="@id/ivSet"
+        android:background="@drawable/shape_circle_red" />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdvImg"
+        android:layout_width="@dimen/x80"
+        android:layout_height="@dimen/x80"
+        android:layout_marginLeft="@dimen/x15"
+        android:padding="@dimen/x15"
+        android:layout_marginTop="@dimen/x40"
+        fresco:failureImage="@mipmap/ic_default_headpic"
+        fresco:placeholderImage="@mipmap/ic_default_headpic"
+        fresco:roundAsCircle="true" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginTop="@dimen/x60"
+        android:layout_toRightOf="@id/sdvImg"
+        android:text="周元方"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/textsize_20sp" />
+
+    <TextView
+        android:id="@+id/tvLevel"
+        android:layout_width="@dimen/x40"
+        android:layout_height="@dimen/x15"
+        android:layout_below="@id/tvName"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginTop="@dimen/x8"
+        android:layout_toRightOf="@id/sdvImg"
+        android:background="@drawable/shape_search_white"
+        android:gravity="center"
+        android:text="Lv1"
+        android:textColor="@color/point_selected"
+        android:textSize="@dimen/textsize_12sp" />
+
+    <TextView
+        android:id="@+id/tvVipRule"
+        android:layout_width="@dimen/x100"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/x60"
+        android:background="@mipmap/ic_vip_bg"
+        android:drawableLeft="@mipmap/ic_vip_rlue"
+        android:drawablePadding="@dimen/x2"
+        android:gravity="center"
+        android:padding="@dimen/x5"
+        android:text="@string/vip_value"
+        android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/ivLine"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/tvLevel"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginRight="@dimen/x15"
+        android:layout_marginTop="@dimen/x38"
+        android:background="@android:color/white" />
+
+    <include layout="@layout/layout_my_integral" />
+
+
+</RelativeLayout>

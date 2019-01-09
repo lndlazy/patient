@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="horizontal"
+    android:padding="@dimen/x15">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:layout_width="@dimen/x50"
+        android:layout_height="@dimen/x50"
+        android:layout_marginTop="@dimen/x10"
+        fresco:failureImage="@mipmap/ic_my_hpic"
+        fresco:placeholderImage="@mipmap/ic_my_hpic" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:text="周远方"
+            android:textSize="@dimen/textsize_18sp" />
+
+        <TextView
+            android:id="@+id/tvJob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tvName"
+            android:layout_marginLeft="@dimen/x5"
+            android:layout_marginTop="@dimen/x20"
+            android:layout_toRightOf="@id/tvName"
+            android:lines="1"
+            android:text="儿科  副主任医师"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_12sp" />
+
+        <TextView
+            android:id="@+id/tvCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvName"
+            android:layout_marginLeft="@dimen/x10"
+            android:lines="1"
+            android:text="北京长峰医院"
+            android:textColor="@color/txt_color_light9"
+            android:textSize="@dimen/textsize_18sp" />
+
+        <TextView
+            android:id="@+id/tvInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvCompany"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/x5"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="长期从事外科临床工作，具有杂事的基本技能和熟练的外科操作"
+            android:textColor="@color/txt_color_light76"
+            android:textSize="@dimen/textsize_14sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="@dimen/x60"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="12:50"
+            android:textColor="@color/txt_color_light9"
+            android:textSize="@dimen/textsize_14sp" />
+
+        <TextView
+            android:layout_width="@dimen/x50"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/shape_bg_blue_smale"
+            android:gravity="center"
+            android:padding="@dimen/x2"
+            android:text="咨询中"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textsize_12sp" />
+    </RelativeLayout>
+
+
+</LinearLayout>

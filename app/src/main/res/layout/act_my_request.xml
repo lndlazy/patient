@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="我的申请"
+        custom:mTitleLeft="@mipmap/ic_arrow_left" />
+
+    <include layout="@layout/line_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x40"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvAll"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="全部申请"
+            android:textColor="@color/color_select_blue_black"
+            android:textSize="@dimen/textsize_14sp" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginTop="@dimen/x8"
+            android:background="@color/line_colore5" />
+
+        <TextView
+            android:id="@+id/tvWaitUse"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="待使用"
+            android:textColor="@color/color_select_blue_black"
+            android:textSize="@dimen/textsize_14sp" />
+
+        <ImageView
+
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginTop="@dimen/x8"
+            android:background="@color/line_colore5" />
+
+        <TextView
+            android:id="@+id/tvTimeOut"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="已过期"
+            android:textColor="@color/color_select_blue_black"
+            android:textSize="@dimen/textsize_14sp" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginTop="@dimen/x8"
+            android:background="@color/line_colore5" />
+
+        <TextView
+            android:id="@+id/tvUsed"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="已使用"
+            android:textColor="@color/color_select_blue_black"
+            android:textSize="@dimen/textsize_14sp" />
+
+    </LinearLayout>
+
+    <include layout="@layout/line_gray" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

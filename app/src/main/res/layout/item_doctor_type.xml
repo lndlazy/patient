@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/line_gray" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x50"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/x15"
+            android:text="上午号源"
+            android:textSize="@dimen/textsize_18sp"
+            android:textStyle="bold" />
+
+        <include layout="@layout/line_gray" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvAM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x5" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x50"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/x15"
+            android:text="下午号源"
+            android:textSize="@dimen/textsize_18sp"
+            android:textStyle="bold" />
+
+        <include layout="@layout/line_gray" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvPM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x5" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

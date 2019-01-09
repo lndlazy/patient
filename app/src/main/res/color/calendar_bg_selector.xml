@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright 2012 Square, Inc. -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:color="@color/calendar_selected_range_bg" app:state_range_middle="true" />
+    <item android:color="@color/calendar_selected_day_bg" android:state_selected="true" />
+    <item android:color="@color/calendar_selected_day_bg" android:state_pressed="true" />
+    <item android:color="@color/calendar_inactive_month_bg" app:state_current_month="false" />
+    <item android:color="@color/calendar_highlighted_day_bg" app:state_highlighted="true" />
+    <item android:color="@color/calendar_text_active" app:state_today="true" />
+    <item android:color="@color/calendar_active_month_bg" />
+</selector>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <!--numStars:星的总数量
+stepSize:变化的步长
+isIndicator:false:允许拖动改变评分条 true:不允许通过拖动改变评分条
+rating:初始的星数量-->
+
+    <!--base_of_width_or_height 以宽度为准或已高度为准
+step 滑动间距
+rating 当前星值
+stars 星星总数-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x50"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/x80"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:text="态度"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_16sp" />
+
+
+        <com.ylean.cf_hospitalapp.widget.MyRatingBar
+            android:id="@+id/rb1"
+            android:layout_width="@dimen/x250"
+            android:layout_height="@dimen/x25"
+            android:layout_gravity="center"
+            app:base_of_width_or_height="height"
+            app:rating="0"
+            app:stars="5"
+            app:step="1" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x50"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/x80"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:text="治疗效果"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_16sp" />
+
+
+        <com.ylean.cf_hospitalapp.widget.MyRatingBar
+            android:id="@+id/rb2"
+            android:layout_width="@dimen/x250"
+            android:layout_height="@dimen/x25"
+            android:layout_gravity="center"
+            app:base_of_width_or_height="height"
+            app:rating="0"
+            app:stars="5"
+            app:step="1" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x50"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/x80"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="center_vertical"
+            android:text="性价比"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_16sp" />
+
+
+        <com.ylean.cf_hospitalapp.widget.MyRatingBar
+            android:id="@+id/rb3"
+            android:layout_width="@dimen/x250"
+            android:layout_height="@dimen/x25"
+            android:layout_gravity="center"
+            app:base_of_width_or_height="height"
+            app:rating="0"
+            app:stars="5"
+            app:step="1" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

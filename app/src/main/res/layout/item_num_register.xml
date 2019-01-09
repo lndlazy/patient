@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content"
+    android:padding="@dimen/x15">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdvImg"
+        android:layout_width="@dimen/x40"
+        android:layout_height="@dimen/x40"
+        android:layout_marginRight="@dimen/x8"
+        android:layout_marginTop="@dimen/x10"
+        fresco:roundAsCircle="true" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x20"
+        android:layout_toRightOf="@id/sdvImg"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxWidth="@dimen/x80"
+        android:singleLine="true"
+        android:text="尹接上官的"
+        android:textSize="@dimen/textsize_18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvjobTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x20"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_toLeftOf="@id/tvMoney"
+        android:layout_toRightOf="@id/tvName"
+        android:gravity="bottom"
+        android:text="副主任医师"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvName"
+        android:layout_marginTop="@dimen/x10"
+        android:layout_toEndOf="@+id/sdvImg"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="2"
+        android:minHeight="@dimen/x30"
+        android:text="长期从事外科临床工作，具有杂事的基科临床工作，具有杂事的基科临床工作，具有杂事的基科临床工作，具有杂事的基科临床工作，具有杂事的基科临床工作，具有杂事的基科临床工作，具有杂事的基科临床工作，具有杂事的基本技能和熟练的外科操"
+        android:textColor="@color/txt_color_light76"
+        android:textSize="@dimen/textsize_15sp" />
+
+    <TextView
+        android:id="@+id/tvOrder"
+        android:layout_width="@dimen/x55"
+        android:layout_height="@dimen/x23"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/shape_white_blue"
+        android:gravity="center"
+        android:text="挂号"
+        android:textSize="@dimen/textsize_13sp" />
+
+    <TextView
+        android:id="@+id/tvMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x23"
+        android:layout_marginRight="@dimen/x10"
+        android:layout_toLeftOf="@id/tvOrder"
+        android:gravity="center_vertical"
+        android:padding="@dimen/x2"
+        android:text="¥60.00"
+        android:textColor="@color/color_1b"
+        android:textSize="@dimen/textsize_15sp" />
+
+</RelativeLayout>

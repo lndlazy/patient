@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="@string/message_sub"
+        custom:mTitleLeft="@mipmap/ic_arrow_left" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line_colore5" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivAddPeo"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x40"
+                android:layout_gravity="center"
+                android:padding="@dimen/x5"
+                android:src="@mipmap/ic_add" />
+
+            <TextView
+                android:id="@+id/tvP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="请添加问诊人"
+                android:textColor="@color/txt_color_light6"
+                android:textSize="@dimen/textsize_14sp" />
+
+            <include
+                android:id="@+id/people"
+                layout="@layout/item_family_num" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x10"
+                android:layout_marginTop="@dimen/x5"
+                android:background="@color/bg_home" />
+
+            <LinearLayout
+                android:id="@+id/llt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rlTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x40">
+
+                    <ImageView
+                        android:id="@+id/ivr"
+                        android:layout_width="@dimen/x15"
+                        android:layout_height="@dimen/x15"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/x15"
+                        android:src="@mipmap/ic_choose_arrow" />
+
+                    <TextView
+                        android:id="@+id/tvTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="@dimen/x8"
+                        android:layout_toLeftOf="@id/ivr"
+                        android:gravity="center_vertical"
+                        android:hint="请选择预约时间"
+                        android:textColor="@color/txt_color_ma3"
+                        android:textSize="@dimen/textsize_16sp" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x10"
+                    android:layout_marginTop="@dimen/x5"
+                    android:background="@color/bg_home" />
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x40">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center"
+                    android:text="常见疾病"
+                    android:textColor="@color/txt_color_ma3"
+                    android:textSize="@dimen/textsize_15sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/ivMoreSick"
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/x30"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x10"
+                    android:padding="@dimen/x5"
+                    android:src="@mipmap/ic_add" />
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/sickRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginRight="@dimen/x15" />
+
+            <EditText
+                android:id="@+id/etQues"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x100"
+                android:layout_margin="@dimen/x15"
+                android:background="@drawable/shape_bg_edit_normal"
+                android:gravity="start"
+                android:hint="@string/enter_question"
+                android:padding="@dimen/x10"
+                android:textSize="@dimen/x14" />
+
+            <EditText
+                android:id="@+id/etDesc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x100"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginRight="@dimen/x15"
+                android:background="@drawable/shape_bg_edit_normal"
+                android:gravity="start"
+                android:hint="@string/enter_desc"
+                android:padding="@dimen/x10"
+                android:textSize="@dimen/x14" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/x5"
+                android:paddingLeft="@dimen/x15"
+                android:paddingTop="@dimen/x5"
+                android:text="@string/update_big_pic"
+                android:textColor="@color/txt_color_ma3"
+                android:textSize="@dimen/textsize_16sp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/picRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvVoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/x5"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginTop="@dimen/x5"
+                android:background="@mipmap/ic_chat_left"
+                android:gravity="center"
+                android:text="59s"
+                android:textColor="@android:color/white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x80"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/tvUploadPic"
+                    android:layout_width="@dimen/x80"
+                    android:layout_height="@dimen/x80"
+                    android:layout_marginRight="@dimen/x5"
+                    android:src="@mipmap/ic_upload_pic" />
+
+                <ImageView
+                    android:id="@+id/tvUploadVoice"
+                    android:layout_width="@dimen/x80"
+                    android:layout_height="@dimen/x80"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:src="@mipmap/ic_upload_voice" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvNext"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x45"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+                android:layout_marginTop="@dimen/x20"
+                android:background="@drawable/shape_bg_blue_big"
+                android:gravity="center"
+                android:text="下一步"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_16sp" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

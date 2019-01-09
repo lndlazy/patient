@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x46"
+    android:background="@android:color/white"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/rl_one"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/iv_one"
+            android:layout_width="@dimen/x27"
+            android:layout_height="@dimen/x27"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:padding="@dimen/x4"
+            android:src="@drawable/select_bottom_one" />
+
+        <TextView
+            android:id="@+id/tv_one"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/iv_one"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/s_one"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/textsize_12sp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_two"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/iv_two"
+            android:layout_width="@dimen/x27"
+            android:layout_height="@dimen/x27"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:padding="@dimen/x4"
+            android:src="@drawable/select_bottom_two" />
+
+        <TextView
+            android:id="@+id/tv_two"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/iv_two"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/s_two"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/textsize_12sp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_three"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/iv_three"
+            android:layout_width="@dimen/x27"
+            android:layout_height="@dimen/x27"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:padding="@dimen/x4"
+            android:src="@drawable/select_bottom_three" />
+
+        <TextView
+            android:id="@+id/tv_three"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/iv_three"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/s_three"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/textsize_12sp" />
+
+        <!--小红点-->
+        <TextView
+            android:id="@+id/tv_msg_count"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x14"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/x1"
+            android:layout_marginRight="@dimen/x18"
+            android:background="@drawable/shape_circle_red"
+            android:gravity="center"
+            android:minWidth="@dimen/x14"
+            android:paddingBottom="@dimen/x3"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textsize_10sp"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_four"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/iv_four"
+            android:layout_width="@dimen/x27"
+            android:layout_height="@dimen/x27"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:padding="@dimen/x4"
+            android:src="@drawable/select_bottom_four" />
+
+        <TextView
+            android:id="@+id/tv_four"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/iv_four"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/s_four"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/textsize_12sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

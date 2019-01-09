@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x30"
+    android:background="@android:color/white"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/x15"
+        android:background="@color/line_colored8" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/x10"
+        android:gravity="center"
+        android:text="高峰："
+        android:textColor="@color/tab_colorf9"
+        android:textSize="@dimen/textsize_16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="这个医生服务态度很好，非常专业。"
+        android:textSize="@dimen/textsize_16sp" />
+
+</LinearLayout>

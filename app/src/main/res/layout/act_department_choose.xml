@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="科室选择"
+        custom:mTitleLeft="@mipmap/ic_arrow_left" />
+
+    <include layout="@layout/line_gray" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x110"
+        android:padding="@dimen/x15">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdvPic"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/x80"
+            fresco:failureImage="@mipmap/ic_hospital"
+            fresco:placeholderImage="@mipmap/ic_hospital"
+            fresco:placeholderImageScaleType="fitXY"
+            fresco:roundedCornerRadius="@dimen/x5" />
+
+        <TextView
+            android:id="@+id/tvHospitalName"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x30"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_toRightOf="@id/sdvPic"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="北京长峰医院"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x20"
+            android:layout_below="@id/tvHospitalName"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_toRightOf="@id/sdvPic"
+            android:drawableLeft="@mipmap/ic_location_gray"
+            android:drawablePadding="@dimen/x5"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="北京丰台"
+            android:textColor="@color/txt_color_light9"
+            android:textSize="@dimen/textsize_15sp" />
+
+        <TextView
+            android:id="@+id/tel"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x30"
+            android:layout_below="@id/tvAddress"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_toRightOf="@id/sdvPic"
+            android:drawableLeft="@mipmap/ic_tel_gray"
+            android:drawablePadding="@dimen/x5"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="北京长峰医院"
+            android:textColor="@color/txt_color_light9"
+            android:textSize="@dimen/textsize_15sp" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x10"
+        android:background="@color/bg_home" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/leftRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scrollbars="none" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rightRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scrollbars="none" />
+
+    </LinearLayout>
+
+</LinearLayout>

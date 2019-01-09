@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="EditPicView">
+
+        <attr name="eLeftImage" format="reference" /> <!--左侧显示的图片-->
+        <!--<attr name="irightImage" format="reference" /> &lt;!&ndash;左侧显示的图片&ndash;&gt;-->
+        <!--<attr name="backgroundResc" format="reference|color" />-->
+        <attr name="eTextColor" format="color" />
+        <attr name="eTextHintColor" format="color" />
+        <attr name="eTextSize" format="dimension" />
+        <attr name="eTxt" format="string" />
+        <attr name="eTxtHint" format="string"/>
+        <!--<attr name="textInputType" format="string" /> &lt;!&ndash;输入类型&ndash;&gt;-->
+
+    </declare-styleable>
+
+</resources>

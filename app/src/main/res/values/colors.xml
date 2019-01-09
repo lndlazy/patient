@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#d9d9d9</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="white">#FFFFFF</color>
+
+    <color name="gray_bg_eb">#ebebeb</color>
+    <color name="line_gray">#d9d9d9</color>
+    <color name="text_color">#707070</color>
+    <color name="home_bottom_select_color">#009FF9</color>
+
+    <color name="bg_gray">#e0e0ea</color>
+
+    <color name="txt_color_ma3">#333333</color>
+    <color name="color_28">#F47528</color>
+    <color name="txt_color_light9">#999999</color>
+    <color name="txt_color_light6">#666666</color>
+    <color name="txt_color_light76">#767676</color>
+    <color name="bg_home">#E8F7FF</color>
+    <color name="blue">#33a9fa</color>
+
+    <color name="tab_colorf9">#009FF9</color>
+    <color name="point_selected">#F47528</color>
+    <color name="line_colore5">#E5E5E5</color>
+    <color name="line_colored8">#D8D8D8</color>
+    <color name="line_colorf7">#F7F7F7</color>
+    <color name="line_coloref5">#F5F5F5</color>
+    <color name="line_coloreff">#53C1FF</color>
+    <color name="color_3d">#f1453d</color>
+    <color name="color_c7">#c7c7c7</color>
+
+    <color name="txt_color_light36">#F44336</color>
+    <color name="color_fb">#FBFBFB</color>
+    <color name="line_color9b">#9b9b9b</color>
+    <color name="transparent">#00000000</color>
+    <color name="color_b6">#b6b6b6</color>
+    <color name="red">#fc213e</color>
+    <color name="color_36">#F44336</color>
+    <color name="color_70">#10DB70</color>
+    <color name="color_020">#FFC020</color>
+
+    <color name="color_ed">#EDEDED</color>
+    <color name="bulebg">#edf8ff</color>
+
+    <color name="color_1b">#D0021B</color>
+
+    <color name="alertdialog_line">#c6c6c6</color>
+    <color name="actionsheet_blue">#037BFF</color>
+    <color name="actionsheet_red">#FD4A2E</color>
+    <color name="actionsheet_gray">#8F8F8F</color>
+
+
+    <!-- 日历 -->
+    <color name="calendar_active_month_bg">#fff5f7f9</color>
+    <color name="calendar_bg">#ffffffff</color>
+    <color name="calendar_divider">#ffbababa</color>
+    <color name="calendar_inactive_month_bg">#ffd7d9db</color>
+    <color name="calendar_selected_day_bg">#ff379bff</color>
+    <color name="calendar_highlighted_day_bg">#ccffcc</color>
+    <color name="calendar_selected_range_bg">#ff96caff</color>
+    <color name="calendar_text_inactive">#40778088</color>
+    <color name="calendar_text_active">#ff778088</color>
+    <color name="calendar_text_selected">#ffffffff</color>
+    <color name="calendar_text_unselectable">#7f778088</color>
+
+
+
+</resources>

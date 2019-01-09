@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/x8">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:src="@color/line_colore5" />
+
+        <RelativeLayout
+            android:id="@+id/rlStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x10">
+
+            <TextView
+                android:id="@+id/tvStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginTop="@dimen/x8"
+                android:text="问诊类型"
+                android:textColor="@color/txt_color_ma3"
+                android:textSize="@dimen/textsize_16sp" />
+
+            <TextView
+                android:id="@+id/tvTuWen"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/x20"
+                android:layout_below="@id/tvStyle"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginTop="@dimen/x10"
+                android:layout_marginBottom="@dimen/x8"
+                android:background="@drawable/shape_bg_edit"
+                android:gravity="center"
+                android:paddingLeft="@dimen/x15"
+                android:paddingRight="@dimen/x15"
+                android:text="图文"
+                android:textColor="@color/txt_color_light6" />
+
+            <TextView
+                android:id="@+id/tvDianHua"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/x20"
+                android:layout_below="@id/tvStyle"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginTop="@dimen/x10"
+                android:layout_marginBottom="@dimen/x8"
+                android:layout_toRightOf="@id/tvTuWen"
+                android:background="@drawable/shape_bg_edit"
+                android:gravity="center"
+                android:paddingLeft="@dimen/x15"
+                android:paddingRight="@dimen/x15"
+                android:text="电话"
+                android:textColor="@color/txt_color_light6" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:src="@color/line_colore5" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvDoctorLevel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginTop="@dimen/x10"
+                android:text="医生级别"
+                android:textColor="@color/txt_color_ma3"
+                android:textSize="@dimen/textsize_16sp" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/doctorRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvDoctorLevel"
+                android:layout_marginTop="@dimen/x10"
+                android:layout_marginBottom="@dimen/x5"
+                android:paddingLeft="@dimen/x15"
+                android:paddingRight="@dimen/x15" />
+
+            <!--<TextView-->
+            <!--android:id="@+id/tvZhuRen"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="@dimen/x20"-->
+            <!--android:layout_below="@id/tvDoctorLevel"-->
+            <!--android:layout_marginLeft="@dimen/x15"-->
+            <!--android:layout_marginTop="@dimen/x10"-->
+            <!--android:layout_marginBottom="@dimen/x8"-->
+            <!--android:background="@drawable/shape_bg_edit"-->
+            <!--android:gravity="center"-->
+            <!--android:paddingLeft="@dimen/x15"-->
+            <!--android:paddingRight="@dimen/x15"-->
+            <!--android:text="主任医师"-->
+            <!--android:textColor="@color/txt_color_light6" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/tvFuZhuRen"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="@dimen/x20"-->
+            <!--android:layout_below="@id/tvDoctorLevel"-->
+            <!--android:layout_marginLeft="@dimen/x10"-->
+            <!--android:layout_marginTop="@dimen/x10"-->
+            <!--android:layout_marginBottom="@dimen/x8"-->
+            <!--android:layout_toRightOf="@id/tvZhuRen"-->
+            <!--android:background="@drawable/shape_bg_edit"-->
+            <!--android:gravity="center"-->
+            <!--android:paddingLeft="@dimen/x15"-->
+            <!--android:paddingRight="@dimen/x15"-->
+            <!--android:text="副主任工程师"-->
+            <!--android:textColor="@color/txt_color_light6" />-->
+
+
+            <!--<TextView-->
+            <!--android:id="@+id/tvZhuZhi"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="@dimen/x20"-->
+            <!--android:layout_below="@id/tvDoctorLevel"-->
+            <!--android:layout_marginLeft="@dimen/x10"-->
+            <!--android:layout_marginTop="@dimen/x10"-->
+            <!--android:layout_marginBottom="@dimen/x8"-->
+            <!--android:layout_toRightOf="@id/tvFuZhuRen"-->
+            <!--android:background="@drawable/shape_bg_edit"-->
+            <!--android:gravity="center"-->
+            <!--android:paddingLeft="@dimen/x15"-->
+            <!--android:paddingRight="@dimen/x15"-->
+            <!--android:text="主治医师"-->
+            <!--android:textColor="@color/txt_color_light6" />-->
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:src="@color/line_colore5" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvHospitalLevel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginTop="@dimen/x10"
+                android:text="医院级别"
+                android:textColor="@color/txt_color_ma3"
+                android:textSize="@dimen/textsize_16sp" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/hospitalRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvHospitalLevel"
+                android:layout_marginTop="@dimen/x10"
+                android:layout_marginBottom="@dimen/x5"
+                android:gravity="center"
+                android:paddingLeft="@dimen/x15"
+                android:paddingRight="@dimen/x15" />
+
+
+            <!--<TextView-->
+            <!--android:id="@+id/tvThreeJi"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="@dimen/x20"-->
+            <!--android:layout_below="@id/tvHospitalLevel"-->
+            <!--android:layout_marginLeft="@dimen/x15"-->
+            <!--android:layout_marginTop="@dimen/x10"-->
+            <!--android:layout_marginBottom="@dimen/x8"-->
+            <!--android:background="@drawable/shape_bg_edit"-->
+            <!--android:gravity="center"-->
+            <!--android:paddingLeft="@dimen/x15"-->
+            <!--android:paddingRight="@dimen/x15"-->
+            <!--android:text="三级"-->
+            <!--android:textColor="@color/txt_color_light6" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/tvZhuanke"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="@dimen/x20"-->
+            <!--android:layout_below="@id/tvHospitalLevel"-->
+            <!--android:layout_marginLeft="@dimen/x10"-->
+            <!--android:layout_marginTop="@dimen/x10"-->
+            <!--android:layout_marginBottom="@dimen/x8"-->
+            <!--android:layout_toRightOf="@id/tvThreeJi"-->
+            <!--android:background="@drawable/shape_bg_edit"-->
+            <!--android:gravity="center"-->
+            <!--android:paddingLeft="@dimen/x15"-->
+            <!--android:paddingRight="@dimen/x15"-->
+            <!--android:text="专科"-->
+            <!--android:textColor="@color/txt_color_light6" />-->
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="@dimen/x2"
+            android:background="@color/line_colorf7" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/rvReset"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="@dimen/x10"
+                android:text="重置"
+                android:textColor="@color/tab_colorf9"
+                android:textSize="@dimen/textsize_18sp" />
+
+            <TextView
+                android:id="@+id/tvSure"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/tab_colorf9"
+                android:gravity="center"
+                android:padding="@dimen/x10"
+                android:text="确定"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_18sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

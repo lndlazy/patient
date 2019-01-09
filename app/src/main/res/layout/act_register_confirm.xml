@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="确认挂号信息"
+        custom:mTitleLeft="@mipmap/ic_arrow_left" />
+
+    <include layout="@layout/line_gray" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/ivAddPeo"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x40"
+                android:layout_gravity="center"
+                android:padding="@dimen/x5"
+                android:src="@mipmap/ic_add" />
+
+            <TextView
+                android:id="@+id/tvPerson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="请添加挂号人"
+                android:textColor="@color/txt_color_light6"
+                android:textSize="@dimen/textsize_14sp" />
+
+            <!--<include-->
+            <!--android:id="@+id/people"-->
+            <!--layout="@layout/item_family_num" />-->
+
+            <RelativeLayout
+                android:id="@+id/rlPatient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/x15"
+                android:paddingRight="@dimen/x15"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/t1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x30"
+                    android:gravity="center_vertical"
+                    android:text="就诊人"
+                    android:textColor="@color/txt_color_ma3"
+                    android:textSize="@dimen/textsize_18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x30"
+                    android:layout_below="@id/t1"
+                    android:gravity="center_vertical"
+                    android:text="高致函"
+                    android:textColor="@color/txt_color_ma3"
+                    android:textSize="@dimen/textsize_18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvIdCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x30"
+                    android:layout_alignTop="@id/tvName"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:layout_toRightOf="@id/tvName"
+                    android:gravity="center_vertical"
+                    android:text="身份证   41323092039"
+                    android:textColor="@color/txt_color_light9"
+                    android:textSize="@dimen/textsize_15sp" />
+
+                <TextView
+                    android:id="@+id/tvAge"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x30"
+                    android:layout_below="@id/tvName"
+                    android:gravity="center_vertical"
+                    android:text="28岁  男"
+                    android:textColor="@color/txt_color_light9"
+                    android:textSize="@dimen/textsize_15sp" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x10"
+                android:layout_marginTop="@dimen/x5"
+                android:background="@color/bg_home" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x40"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="挂号信息"
+                android:textColor="@color/txt_color_ma3"
+                android:textSize="@dimen/textsize_18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x30"
+                android:layout_marginLeft="@dimen/x30"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x30"
+                    android:gravity="center_vertical"
+                    android:text="就诊医院"
+                    android:textColor="@color/line_color9b"
+                    android:textSize="@dimen/textsize_15sp" />
+
+                <TextView
+                    android:id="@+id/tvHospitalName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:text="北京长峰医院"
+                    android:textColor="@color/txt_color_ma3"
+                    android:textSize="@dimen/textsize_16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x30"
+                android:layout_marginLeft="@dimen/x30"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x30"
+                    android:gravity="center_vertical"
+                    android:text="就诊科室"
+                    android:textColor="@color/line_color9b"
+                    android:textSize="@dimen/textsize_15sp" />
+
+                <TextView
+                    android:id="@+id/tvDepartmentName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:text="科室名称门名称"
+                    android:textColor="@color/txt_color_ma3"
+                    android:textSize="@dimen/textsize_16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x30"
+                android:layout_marginLeft="@dimen/x30"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x30"
+                    android:gravity="center_vertical"
+                    android:text="就诊医生"
+                    android:textColor="@color/line_color9b"
+                    android:textSize="@dimen/textsize_15sp" />
+
+                <TextView
+                    android:id="@+id/tvDoctorName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="董全昌"
+                    android:textColor="@color/txt_color_ma3"
+                    android:textSize="@dimen/textsize_16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x30"
+                android:layout_marginLeft="@dimen/x30"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x30"
+                    android:gravity="center_vertical"
+                    android:text="挂号费用"
+                    android:textColor="@color/line_color9b"
+                    android:textSize="@dimen/textsize_15sp" />
+
+                <TextView
+                    android:id="@+id/tvMoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:text="9.00元"
+                    android:textColor="@color/txt_color_ma3"
+                    android:textSize="@dimen/textsize_16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x30"
+                android:layout_marginLeft="@dimen/x30"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x30"
+                    android:gravity="center_vertical"
+                    android:text="就诊日期"
+                    android:textColor="@color/line_color9b"
+                    android:textSize="@dimen/textsize_15sp" />
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:gravity="center_vertical"
+                    android:text="2018-10-10"
+                    android:textColor="@color/txt_color_ma3"
+                    android:textSize="@dimen/textsize_16sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x10"
+                android:layout_marginTop="@dimen/x5"
+                android:background="@color/bg_home" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x40"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="想要获得哪方面的帮助"
+                android:textColor="@color/txt_color_ma3"
+                android:textSize="@dimen/textsize_18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/x10"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginRight="@dimen/x15"
+                android:layout_marginTop="@dimen/x10"
+                android:background="@color/color_fb"
+                android:gravity="start"
+                android:hint="提问题前请先完善问诊人的健康档案，尤其是最近病历，再详细描述您的目前的病情以及想获得医生哪些方面的帮助（最少输入10个字）"
+                android:minHeight="@dimen/x60"
+                android:padding="@dimen/x10"
+                android:textColor="@color/txt_color_light9"
+                android:textSize="@dimen/textsize_14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x40"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="center_vertical"
+                android:text="上传辅助照片（高清，能看清字迹）"
+                android:textColor="@color/txt_color_ma3"
+                android:textSize="@dimen/textsize_18sp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/picRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/tvUploadPic"
+                android:layout_width="@dimen/x80"
+                android:layout_height="@dimen/x80"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="@dimen/x5"
+                android:layout_marginTop="@dimen/x10"
+                android:src="@mipmap/ic_upload_pic" />
+
+            <TextView
+                android:id="@+id/tvNext"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x45"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+                android:layout_marginTop="@dimen/x20"
+                android:background="@drawable/shape_bg_blue_big"
+                android:gravity="center"
+                android:text="确认挂号"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_16sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

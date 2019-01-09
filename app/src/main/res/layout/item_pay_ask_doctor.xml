@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/x15"
+    android:paddingTop="@dimen/x15"
+    android:paddingRight="@dimen/x15"
+    android:paddingBottom="@dimen/x5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdvImg"
+            fresco:roundAsCircle="true"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"
+            android:layout_marginTop="@dimen/x10"
+            fresco:failureImage="@mipmap/ic_my_hpic"
+            fresco:placeholderImage="@mipmap/ic_my_hpic" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x10"
+                android:maxWidth="@dimen/x150"
+                android:singleLine="true"
+                android:text="周远方"
+                android:textSize="@dimen/textsize_18sp" />
+
+            <TextView
+                android:id="@+id/tvJob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/tvName"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginTop="@dimen/x20"
+                android:layout_toRightOf="@id/tvName"
+                android:lines="1"
+                android:text="儿科  副主任医师"
+                android:textColor="@color/txt_color_ma3"
+                android:textSize="@dimen/textsize_12sp" />
+
+            <TextView
+                android:id="@+id/tvCompany"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvName"
+                android:layout_marginLeft="@dimen/x10"
+                android:lines="1"
+                android:text="北京长峰医院"
+                android:textColor="@color/txt_color_light9"
+                android:textSize="@dimen/textsize_18sp" />
+
+            <TextView
+                android:id="@+id/tvInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCompany"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginTop="@dimen/x5"
+                android:ellipsize="end"
+                android:lines="2"
+                android:text="长期从事外科临床工作，具有杂事的基本技能和熟练的外科操作"
+                android:textColor="@color/txt_color_light76"
+                android:textSize="@dimen/textsize_14sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x60"
+        android:paddingTop="@dimen/x5"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/llTuwen"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x20"
+                android:layout_gravity="center"
+                android:padding="@dimen/x2"
+                android:src="@mipmap/ic_picarticle" />
+
+            <TextView
+                android:id="@+id/tvp1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x5"
+                android:gravity="center"
+                android:text="¥6.00"
+                android:textColor="@color/txt_color_light76"
+                android:textSize="@dimen/textsize_14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llTel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x20"
+                android:layout_gravity="center"
+                android:padding="@dimen/x2"
+                android:src="@mipmap/ic_tel" />
+
+            <TextView
+                android:id="@+id/tvp2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x5"
+                android:gravity="center"
+                android:text="¥6.00"
+                android:textColor="@color/txt_color_light76"
+                android:textSize="@dimen/textsize_14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llVideo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x20"
+                android:layout_gravity="center"
+                android:padding="@dimen/x2"
+                android:src="@mipmap/ic_video" />
+
+            <TextView
+                android:id="@+id/tvp3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/x5"
+                android:gravity="center"
+                android:text="¥6.00"
+                android:textColor="@color/txt_color_light76"
+                android:textSize="@dimen/textsize_14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

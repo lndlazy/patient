@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_left"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/x40"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:minHeight="@dimen/x40"
+            android:minWidth="@dimen/x40"
+            android:padding="@dimen/x10"
+            android:src="@mipmap/ic_arrow_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x44"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/x71"
+            android:layout_marginRight="@dimen/x71"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/inquiry_detail"
+            android:textColor="@color/tab_colorf9"
+            android:textSize="@dimen/textsize_18sp" />
+
+        <TextView
+            android:id="@+id/tvCommit"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x44"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/x15"
+            android:gravity="center"
+            android:minWidth="@dimen/x40"
+            android:text="评价"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_14sp" />
+
+    </RelativeLayout>
+
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/line_gray" />
+
+        <include layout="@layout/layout_item_att_two" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x10"
+            android:background="@color/bg_home" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x40"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="bottom"
+            android:text="病情基础信息"
+            android:textSize="@dimen/textsize_17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x15"
+            android:layout_marginTop="@dimen/x5"
+            android:text="血管瘤有哪些治疗方法，能不能治好？血管变粗，疙疙瘩瘩的，有很长时间了，是血管瘤还是静脉曲张呢？[详细介绍]"
+            android:textColor="@color/txt_color_light9"
+            android:textSize="@dimen/textsize_15sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x10"
+            android:layout_marginTop="@dimen/x8"
+            android:background="@color/bg_home" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvStartTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/x5"
+                android:background="@drawable/shape_bg_edit"
+                android:gravity="center"
+                android:paddingBottom="1px"
+                android:paddingLeft="@dimen/x5"
+                android:paddingRight="@dimen/x5"
+                android:paddingTop="1px"
+                android:text="问题时间：2018-04-13 16：34" />
+
+
+            <include layout="@layout/layout_chat_input" />
+
+
+            <TextView
+                android:id="@+id/tvEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/x45"
+                android:background="@drawable/shape_bg_edit"
+                android:gravity="center"
+                android:paddingBottom="1px"
+                android:paddingLeft="@dimen/x5"
+                android:paddingRight="@dimen/x5"
+                android:paddingTop="1px"
+                android:text="问题时间：2018-04-13 16：34" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/x65"
+                android:layout_marginTop="@dimen/x40" />
+
+            <TextView
+                android:id="@+id/endInquiry"
+                android:layout_width="@dimen/x65"
+                android:layout_height="@dimen/x25"
+                android:layout_above="@id/tvEnd"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="@dimen/x8"
+                android:layout_marginRight="@dimen/x10"
+                android:background="@drawable/shape_yellow_big"
+                android:gravity="center"
+                android:text="结束问诊"
+                android:textColor="@android:color/white" />
+
+        </RelativeLayout>
+
+
+        <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/x40">-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tvStartTime"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:background="@drawable/shape_bg_edit"-->
+        <!--android:gravity="center"-->
+        <!--android:paddingBottom="1px"-->
+        <!--android:paddingLeft="@dimen/x5"-->
+        <!--android:paddingRight="@dimen/x5"-->
+        <!--android:paddingTop="1px"-->
+        <!--android:text="问题时间：2018-04-13 16：34" />-->
+
+        <!--</RelativeLayout>-->
+
+        <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/recyclerView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1" />-->
+
+        <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/x40">-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tvEnd"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:background="@drawable/shape_bg_edit"-->
+        <!--android:gravity="center"-->
+        <!--android:paddingBottom="1px"-->
+        <!--android:paddingLeft="@dimen/x5"-->
+        <!--android:paddingRight="@dimen/x5"-->
+        <!--android:paddingTop="1px"-->
+        <!--android:text="问题时间：2018-04-13 16：34" />-->
+
+        <!--</RelativeLayout>-->
+
+
+    </LinearLayout>
+
+
+    <!--</ScrollView>-->
+
+
+</LinearLayout>

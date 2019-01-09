@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="会员规则"
+        custom:mTitleLeft="@mipmap/ic_arrow_left" />
+
+    <include layout="@layout/line_gray" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x15"
+        android:text="      新生会员为“启爱会员” 进阶贡献值1000000分值，对应现金价值为1000 ，启爱会员基本权益为。
+      在院期间两次2+1专家联合会诊
+      出院前院长1对1谈话30分钟
+      在院衣服免费机洗
+      免费使用婴童车
+      免费使用医院专车市内车程两次
+      免费寄存服务
+
+   达到10000分即可升级为“萌爱会员”，进阶贡献值25000分值，对应现金价值2500，萌爱会员基本权益除享受启爱会员所属权益外额外为会员本人复诊或者好友患者初诊治疗费减免500元任何一家二级综合医院或者连锁体检机构体检300元现金助资在院期间二人2天全天餐食免费（人均30元/餐标准）在院期间单人病房达到25000分值即可升级为“挚爱会员”，进阶贡献值为60000分值，对应现金价值6000，挚爱会员基本权益除享受基础阶会员全部权益外，另外可享受赠送本人国内高铁二等座往返车资一次赠送国内5A级景点套票1套（限350元以内）赠送本人或亲友重大疾病诊疗资源咨询服务1次赠送在院期间二人7天餐食免费（人均40元/餐标准）赠送一次本人复诊居住地至当地长峰医院的专车接送达到60000分值即可升级为“大爱会员”，进阶贡献值为100000分值。
+
+      六、超级会员积分商城
+可以依托公众号和APP定制开发会员积分系统和网上商城，选择适合会员的的积分产品。
+      1、长峰品牌和会员品牌物，例如钥匙扣，背包，水杯等常用物品。
+      2、婴童成长相关产品，例如童车、奶粉、尿不湿、奶瓶等。
+      3、异业合作商品或者服务，例如各地婴童游泳馆游泳票，各地孩子王购物券等。
+      4、各地旅游景点门票等。
+
+" />
+</LinearLayout>

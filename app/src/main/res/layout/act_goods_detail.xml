@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="商品详情"
+        custom:mTitleLeft="@mipmap/ic_arrow_left" />
+
+    <!--<TextView-->
+        <!--android:id="@+id/tvNext"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/x40"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:background="@color/tab_colorf9"-->
+        <!--android:gravity="center"-->
+        <!--android:text="马上兑换"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--android:textSize="@dimen/textsize_18sp" />-->
+
+    <WebView
+        android:id="@+id/wb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tbv" />
+
+</RelativeLayout>

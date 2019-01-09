@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/x15">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:text="每日签到"
+        android:textColor="@color/txt_color_ma3"
+        android:textSize="@dimen/textsize_18sp" />
+
+    <TextView
+        android:id="@+id/tvType"
+        android:layout_width="@dimen/x60"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/shape_white_blue"
+        android:gravity="center"
+        android:paddingBottom="@dimen/x3"
+        android:paddingTop="@dimen/x3"
+        android:text="已完成"
+        android:textColor="@color/tab_colorf9"
+        android:textSize="@dimen/textsize_13sp" />
+
+    <TextView
+        android:id="@+id/tvPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/x15"
+        android:layout_toLeftOf="@id/tvType"
+        android:text="+500"
+        android:textSize="@dimen/textsize_15sp" />
+
+
+</RelativeLayout>

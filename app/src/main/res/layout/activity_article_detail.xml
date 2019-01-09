@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_home">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="vertical">
+
+        <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+            android:id="@+id/tbv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x45"
+            custom:mTitleBarColor="@color/tab_colorf9"
+            custom:mTitleBarText="@string/article_detail"
+            custom:mTitleLeft="@mipmap/ic_arrow_left"
+            custom:mTitleRight="@mipmap/ic_share" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line_colore5" />
+
+        <include layout="@layout/layout_item_attention" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:padding="@dimen/x15"
+            android:singleLine="true"
+            android:text="春季血管瘤患儿"
+            android:textSize="@dimen/textsize_25sp" />
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:paddingLeft="@dimen/x15"
+            android:paddingRight="@dimen/x15"
+            android:paddingBottom="@dimen/x15"
+            android:text="    最近我家孩子过敏，每天流鼻涕流眼泪的，看着心疼死了，但是她身上有血管瘤，我也不敢随便用药，这可怎么办？
+        ——@晴天下的妈妈
+
+        春暖花开是带孩子出门踏青的好时节，但也正是”过敏君“肆虐的时节，稍不注意孩子可能就“中招”了。皮肤起斑、红肿瘙痒、眼睛发痒、结膜红肿、喷嚏不断、哮喘连连、严重者还会影响休息睡眠
+        这些痛苦，都是拜过敏所赐!
+
+        现在正值春夏交接，最美的时节，然而也是易过敏患者的噩梦开始。出门必带手纸，严重的患者还会出现哮喘以及全身的皮疹，极其影响正常人的生活质量，更别说血管瘤患者。所以日常生活中血管瘤患者要格外的注意。"
+            android:textColor="@color/txt_color_light6"
+            android:textSize="@dimen/textsize_18sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line_colore5" />
+
+        <include layout="@layout/layout_item_commit_info" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x60"
+            android:layout_marginTop="@dimen/x10"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/x15"
+            android:text="全部评论（100）"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_22sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line_colore5" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x15"
+            android:background="@color/line_colorf7" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x40"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:text="@string/no_reply_edit"
+            android:textColor="@color/txt_color_light9"
+            android:textSize="@dimen/textsize_14sp" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x60"
+            android:layout_marginTop="@dimen/x10"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/x15"
+            android:text="@string/some_read"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_25sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x15"
+            android:background="@color/line_colorf7" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/readRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x15"
+            android:background="@color/line_colorf7" />
+
+        <com.ylean.cf_hospitalapp.widget.EditPicView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x60"
+            android:background="@android:color/white" />
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
