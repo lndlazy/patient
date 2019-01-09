@@ -11,13 +11,15 @@ import com.ylean.cf_hospitalapp.base.view.BaseActivity;
 import com.ylean.cf_hospitalapp.photoView.PhotoViewAttacher;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 
+import me.panpf.sketch.SketchImageView;
+
 /**
  * Created by linaidao on 2018/12/31.
  */
 
 public class PicDetailAc extends BaseActivity {
 
-    private PhotoViewAttacher mAttacher;
+//    private PhotoViewAttacher mAttacher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +27,17 @@ public class PicDetailAc extends BaseActivity {
 
         setContentView(R.layout.act_pic_detail);
 
-        SimpleDraweeView zoomView = findViewById(R.id.zoomView);
+//        SimpleDraweeView zoomView = findViewById(R.id.zoomView);
 
         String picUrl = getIntent().getStringExtra("picUrl");
-
+        SketchImageView image_main = findViewById(R.id.image_main);
+        image_main.displayImage(picUrl);
         Logger.d("图片地址::" + picUrl);
-        zoomView.setImageURI(Uri.parse(picUrl));
+//        zoomView.setImageURI(Uri.parse(picUrl));
+
+        //开启手势缩放
+        image_main.setZoomEnabled(true);
+
 
         TitleBackBarView tbv = findViewById(R.id.tbv);
         tbv.setOnLeftClickListener(new View.OnClickListener() {
@@ -44,7 +51,7 @@ public class PicDetailAc extends BaseActivity {
 //        pv_pre.setImageBitmap(detailBitmap);
 //        rl_pre.setVisibility(View.VISIBLE);
 //        isShowingPicDetail = true;
-        mAttacher = new PhotoViewAttacher(zoomView);
+//        mAttacher = new PhotoViewAttacher(zoomView);
     }
 
     /**
@@ -53,7 +60,7 @@ public class PicDetailAc extends BaseActivity {
     public void hintPicDetail() {
 //        isShowingPicDetail = false;
 //        rl_pre.setVisibility(View.GONE);
-        mAttacher = null;
+//        mAttacher = null;
     }
 
 }

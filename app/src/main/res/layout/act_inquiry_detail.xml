@@ -46,7 +46,8 @@
             android:minWidth="@dimen/x40"
             android:text="评价"
             android:textColor="@color/txt_color_ma3"
-            android:textSize="@dimen/textsize_14sp" />
+            android:textSize="@dimen/textsize_14sp"
+            android:visibility="invisible" />
 
     </RelativeLayout>
 
@@ -113,9 +114,7 @@
                 android:paddingTop="1px"
                 android:text="问题时间：2018-04-13 16：34" />
 
-
             <include layout="@layout/layout_chat_input" />
-
 
             <TextView
                 android:id="@+id/tvEnd"
@@ -143,7 +142,7 @@
                 android:id="@+id/endInquiry"
                 android:layout_width="@dimen/x65"
                 android:layout_height="@dimen/x25"
-                android:layout_above="@id/tvEnd"
+                android:layout_above="@id/llInput"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_marginBottom="@dimen/x8"

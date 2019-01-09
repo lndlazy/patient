@@ -36,6 +36,7 @@
                 android:ellipsize="end"
                 android:lineSpacingMultiplier="1.3"
                 android:lines="2"
+                android:text="xx"
                 android:padding="@dimen/x3"
                 android:textColor="@color/txt_color_ma3"
                 android:textSize="@dimen/textsize_16sp" />
@@ -45,6 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:text="xx"
                 android:lines="2"
                 android:padding="@dimen/x3"
                 android:textColor="@color/txt_color_light76"
@@ -78,7 +80,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x5"
             android:layout_toRightOf="@id/sdvImg"
-            android:text="张文丽"
+            android:text="xx"
             android:textColor="@color/txt_color_ma3" />
 
         <TextView
@@ -87,7 +89,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:gravity="center"
-            android:text="23"
+            android:text="0"
             android:textColor="@color/txt_color_light9"
             android:textSize="@dimen/textsize_12sp" />
 
@@ -98,7 +100,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x2"
             android:layout_toLeftOf="@id/tvCommitCount"
-            android:src="@mipmap/ic_commit" />
+            android:src="@mipmap/ic_commit_gray" />
 
         <TextView
             android:id="@+id/tvGoodCount"
@@ -107,7 +109,7 @@
             android:layout_marginRight="@dimen/x8"
             android:layout_toLeftOf="@id/ivCommit"
             android:gravity="center"
-            android:text="2232"
+            android:text="0"
             android:textColor="@color/txt_color_light9"
             android:textSize="@dimen/textsize_12sp" />
 
@@ -127,7 +129,7 @@
             android:layout_marginRight="@dimen/x8"
             android:layout_toLeftOf="@id/ivGood"
             android:gravity="center"
-            android:text="52434"
+            android:text="0"
             android:textColor="@color/txt_color_light9"
             android:textSize="@dimen/textsize_12sp" />
 
@@ -147,7 +149,7 @@
             android:layout_marginRight="@dimen/x8"
             android:layout_toLeftOf="@id/ivRead"
             android:gravity="center"
-            android:text="一天前"
+            android:text="0"
             android:textColor="@color/txt_color_light9"
             android:textSize="@dimen/textsize_12sp" />
 

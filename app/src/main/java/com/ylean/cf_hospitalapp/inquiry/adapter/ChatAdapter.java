@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,6 +87,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
     }
 
+
+    private Handler handler = new Handler();
+
     private void setChatinfo(MyViewHolder holder, final int i) {
         //头像
         holder.sdvImg.setImageURI(Uri.parse(ApiService.WEB_ROOT + chatInfoList.get(i).getImgurl()));
@@ -106,43 +111,53 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
                 holder.tvConent.setVisibility(View.GONE);
                 holder.sdvPic.setVisibility(View.GONE);
 
-                //录音时长
-                try {
-                    MediaPlayer mediaPlayer = new MediaPlayer();
-                    mediaPlayer.setDataSource(chatInfoList.get(i).getUrl());
-                    mediaPlayer.prepare();
-                    mediaPlayer.getDuration();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //录音时长
+                        try {
+                            MediaPlayer mediaPlayer = new MediaPlayer();
+                            mediaPlayer.setDataSource(chatInfoList.get(i).getUrl());
+                            mediaPlayer.prepare();
+                            mediaPlayer.getDuration();
 
-                    int round = Math.round(mediaPlayer.getDuration() / 1000);
+                            int round = Math.round(mediaPlayer.getDuration() / 1000);
 
-                    Logger.d("录音时长:::" + round + ",url地址::" + chatInfoList.get(i).getUrl());
+                            Logger.d("录音时长:::" + round + ",url地址::" + chatInfoList.get(i).getUrl());
 
-                    holder.tvVoice.setText(round + "''");
-                    mediaPlayer.release();
-                    holder.tvVoice.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                            //播放语音
-                            if (isPlaying) {
-                                //播放中,判断当前是否正在播放当前的录音文件, 如果是当前的录音文件 则停止播放,
-                                // 如果不是当前的录音文件,则停止播放,并且播放点击的录音文件
-                                if (uPlayer != null)
-                                    uPlayer.stop();
-
-                                //播放点击的录音文件
-                                startPlay(chatInfoList.get(i).getUrl());
-
-                            } else
-                                //未播放, 开始播放
-                                startPlay(chatInfoList.get(i).getUrl());
-
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    holder.tvVoice.setText(round + "''");
+                                }
+                            });
+                            mediaPlayer.release();
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    });
+                    }
+                }).start();
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                holder.tvVoice.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        //播放语音
+                        if (isPlaying) {
+                            //播放中,判断当前是否正在播放当前的录音文件, 如果是当前的录音文件 则停止播放,
+                            // 如果不是当前的录音文件,则停止播放,并且播放点击的录音文件
+                            if (uPlayer != null)
+                                uPlayer.stop();
+
+                            //播放点击的录音文件
+                            startPlay(chatInfoList.get(i).getUrl());
+
+                        } else
+                            //未播放, 开始播放
+                            startPlay(chatInfoList.get(i).getUrl());
+
+                    }
+                });
 
                 break;
             case ChatType.CHAT_CONTENT_TYPE_PIC:

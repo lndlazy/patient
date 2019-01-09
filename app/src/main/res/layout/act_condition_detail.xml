@@ -20,83 +20,17 @@
         android:layout_height="1dp"
         android:background="@color/line_gray" />
 
-    <RelativeLayout
-        android:id="@+id/rlInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/x15">
-
-        <TextView
-            android:id="@+id/tv1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="问诊人信息"
-            android:textColor="@color/txt_color_ma3"
-            android:textSize="@dimen/textsize_17sp" />
-
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv1"
-            android:layout_marginTop="@dimen/x10"
-            android:text="高致函     身份证       3202010320323233"
-            android:textColor="@color/txt_color_light9"
-            android:textSize="@dimen/textsize_15sp" />
-
-        <TextView
-            android:id="@+id/tvAge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvName"
-            android:layout_marginTop="@dimen/x10"
-            android:text="28岁     男       医保3202032233"
-            android:textColor="@color/txt_color_light9"
-            android:textSize="@dimen/textsize_15sp" />
-
-        <ImageView
-            android:layout_width="@dimen/x15"
-            android:layout_height="@dimen/x15"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/ic_choose_arrow" />
-
-    </RelativeLayout>
+    <include layout="@layout/item_doctor" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/x30"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/x15"
-        android:text="疾病类型"
+        android:text="症状描述"
         android:textColor="@color/txt_color_ma3"
-        android:textSize="@dimen/textsize_17sp" />
-
-    <TextView
-        android:id="@+id/tvConditionType"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/x20"
-        android:layout_marginLeft="@dimen/x15"
-        android:layout_marginTop="@dimen/x5"
-        android:background="@drawable/shape_bg_edit"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/x10"
-        android:paddingRight="@dimen/x10"
-        android:text="草莓状血管瘤"
-        android:textColor="@color/txt_color_light6"
-        android:textSize="@dimen/textsize_15sp" />
-
-    <TextView
-        android:id="@+id/tvQues"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/x10"
-        android:layout_marginTop="@dimen/x10"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/x15"
-        android:text="血管瘤的治疗方法有哪些？"
-        android:textColor="@color/txt_color_light9"
-        android:textSize="@dimen/textsize_15sp" />
+        android:textSize="@dimen/textsize_17sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvDesc"
@@ -116,14 +50,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x10" />
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/sdvImg"
+            android:id="@+id/sdvHeadpic"
             android:layout_width="@dimen/x30"
             android:layout_height="@dimen/x30"
             android:layout_gravity="center_vertical"

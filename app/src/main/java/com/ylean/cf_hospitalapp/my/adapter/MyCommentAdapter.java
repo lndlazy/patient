@@ -37,7 +37,7 @@ public class MyCommentAdapter extends RecyclerView.Adapter<MyCommentAdapter.MyVi
     @Override
     public void onBindViewHolder(MyCommentAdapter.MyViewHolder holder, int position) {
 
-        holder.tvTitle.setText(CommonUtils.getCommentType(commentList.get(position).getCommenttype()));
+        holder.tvTitle.setText(CommonUtils.getCommentType(commentList.get(position).getCommenttype()) + commentList.get(position).getWzname());
         holder.tvContent.setText(commentList.get(position).getContent());
     }
 

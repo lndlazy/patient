@@ -61,6 +61,18 @@
         android:background="@color/bg_home" />
 
     <com.ylean.cf_hospitalapp.widget.EnterItemView
+        android:id="@+id/tvnickname"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x44"
+        android:layout_marginTop="@dimen/x1"
+        custom:mRight="@mipmap/ic_choose_arrow"
+        custom:mText="昵称"
+        custom:mTextColor="@color/txt_color_ma3"
+        custom:mTextSize="@dimen/textsize_15sp" />
+
+    <include layout="@layout/line_gray" />
+
+    <com.ylean.cf_hospitalapp.widget.EnterItemView
         android:id="@+id/sex"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x44"

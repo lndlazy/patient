@@ -99,6 +99,7 @@
         android:gravity="center">
 
         <ImageView
+            android:id="@+id/ivnews"
             android:layout_width="@dimen/x30"
             android:layout_height="@dimen/x30"
             android:padding="@dimen/x4"

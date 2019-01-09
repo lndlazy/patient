@@ -1,4 +1,4 @@
-package com.ylean.cf_hospitalapp.my.activity;
+package com.ylean.cf_hospitalapp.mall.acitity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 
-import com.umeng.commonsdk.debug.E;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
-import com.ylean.cf_hospitalapp.mall.GoodsDetailActivity;
 import com.ylean.cf_hospitalapp.my.adapter.ClassifyAdapter;
 import com.ylean.cf_hospitalapp.my.adapter.GoodsAdapter;
 import com.ylean.cf_hospitalapp.my.bean.GoodsListEntry;

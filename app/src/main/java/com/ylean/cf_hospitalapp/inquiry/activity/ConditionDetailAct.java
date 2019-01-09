@@ -33,16 +33,14 @@ import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 import java.util.List;
 
 /**
- * 问诊详情
+ * 问诊详细介绍
  * Created by linaidao on 2019/1/9.
  */
 
 public class ConditionDetailAct extends BaseActivity implements IInquiryView, View.OnClickListener {
 
     private android.widget.TextView tvName;
-    private android.widget.TextView tvAge;
-    private android.widget.TextView tvConditionType;
-    private android.widget.TextView tvQues;
+
     private android.widget.TextView tvDesc;
     private android.support.v7.widget.RecyclerView picRecyclerView;
     //    private android.support.v7.widget.RecyclerView recyclerView;
@@ -52,7 +50,6 @@ public class ConditionDetailAct extends BaseActivity implements IInquiryView, Vi
 
     private IInquiryPres iInquiryPres = new IInquiryPres(this);
 
-    //    private List<ChatEntry.DataBean> chatInfoList = new ArrayList<>();
     private static final int REQUEST_PERMISSION_CAMERA_CODE = 0x20;
     private static final int REQUEST_PERMISSION_WRITE_CODE = 0x21;
     private PicAdapter picAdapter;
@@ -60,6 +57,12 @@ public class ConditionDetailAct extends BaseActivity implements IInquiryView, Vi
     private String consultaid;
 
     private SimpleDraweeView sdvImg;
+    private TextView tvDepartment;
+    private TextView tvIntroduce;
+    private SimpleDraweeView doctorImg;
+    private TextView tvAttention;
+    private String hospitalName;
+    private int askType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,8 @@ public class ConditionDetailAct extends BaseActivity implements IInquiryView, Vi
 
         checkPermisson();
         consultaid = getIntent().getStringExtra("consultaid");
+        hospitalName = getIntent().getStringExtra("hospitalName");
+        askType = getIntent().getIntExtra("askType", -1);//问诊类型 //1图文问诊，2电话，3视频
         iInquiryPres.setConsultaid(consultaid);
         iInquiryPres.detailInfo((String) SaveUtils.get(this, SpValue.TOKEN, ""));
 //        iInquiryPres.chatList((String) SaveUtils.get(this, SpValue.TOKEN, ""));
@@ -100,27 +105,23 @@ public class ConditionDetailAct extends BaseActivity implements IInquiryView, Vi
         this.picRecyclerView = (RecyclerView) findViewById(R.id.picRecyclerView);
 //        this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         this.tvDesc = (TextView) findViewById(R.id.tvDesc);
-        this.tvQues = (TextView) findViewById(R.id.tvQues);
-        this.tvConditionType = (TextView) findViewById(R.id.tvConditionType);
-        this.tvAge = (TextView) findViewById(R.id.tvAge);
+
+        doctorImg = findViewById(R.id.sdvImg);
         this.tvName = (TextView) findViewById(R.id.tvName);
-        this.sdvImg = findViewById(R.id.sdvImg);
+
+        tvAttention = findViewById(R.id.tvAttention);
+        tvDepartment = findViewById(R.id.tvDepartment);
+        TextView tvHospitalName = findViewById(R.id.tvHospitalName);
+        tvIntroduce = findViewById(R.id.tvIntroduce);
+        tvHospitalName.setText(hospitalName);
+
+        this.sdvImg = findViewById(R.id.sdvHeadpic);
         TitleBackBarView tbv = (TitleBackBarView) findViewById(R.id.tbv);
 
         tvVoice = findViewById(R.id.tvVoice);
-        RelativeLayout rlInfo = findViewById(R.id.rlInfo);
-
-//        TextView tvReply = findViewById(R.id.tvReply);
-
-//        tvReply.setOnClickListener(this);
-        rlInfo.setOnClickListener(this);
-//        TalkView ivVoice = findViewById(R.id.ivVoice);
-//        etInput = findViewById(R.id.etInput);
-//        ImageView choosePic = findViewById(R.id.choosePic);
-
 
         picRecycler();
-//        choosePic.setOnClickListener(this);
+
         tbv.setOnLeftClickListener(new View.OnClickListener() {
 
             @Override
@@ -128,26 +129,6 @@ public class ConditionDetailAct extends BaseActivity implements IInquiryView, Vi
                 finish();
             }
         });
-
-//        etInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//
-//                if (actionId == EditorInfo.IME_ACTION_SEND) {
-//
-//                    iInquiryPres.chatReply(etInput.getText().toString(),
-//                            (String) SaveUtils.get(ConditionDetailAct.this, SpValue.TOKEN, "")
-//                            , ChatType.CHAT_CONTENT_TYPE_TXT, ChatType.CHAT_USER_TYPE_DOCTOR);
-//
-//                }
-//
-//                return false;
-//            }
-//        });
-//
-//        chatAdapter = new ChatAdapter(this, chatInfoList);
-//        recyclerView.setAdapter(chatAdapter);
     }
 
     private void picRecycler() {
@@ -162,13 +143,6 @@ public class ConditionDetailAct extends BaseActivity implements IInquiryView, Vi
         picRecyclerView.setLayoutManager(manager);
         picRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-//        //添加自定义分割线
-//        DividerItemDecoration divider = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
-//        divider.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.shape_home_divider));
-//        recyclerView.addItemDecoration(divider);
-//        String[] images;
-//        askPicAdapter = new AskPicAdapter(this, images);
-//        picRecyclerView.setAdapter(askPicAdapter);
     }
 
     @Override
@@ -184,13 +158,13 @@ public class ConditionDetailAct extends BaseActivity implements IInquiryView, Vi
 //
 //                break;
 
-            case R.id.rlInfo:
+//            case R.id.rlInfo:
 
 //                Intent n = new Intent(this, PatienetInfoAct.class);
 //                n.putExtra("detailInfo", detailInfo);
 //                startActivity(n);
 
-                break;
+//                break;
         }
 
     }
@@ -209,26 +183,31 @@ public class ConditionDetailAct extends BaseActivity implements IInquiryView, Vi
 
     }
 
-    private PicAskDetailEntry.DataBean detailInfo;
+//    private PicAskDetailEntry.DataBean detailInfo;
 
     @Override
     public void setDetailInfo(PicAskDetailEntry.DataBean detailInfo) {
 
-        this.detailInfo = detailInfo;
-        tvName.setText(detailInfo.getFlokname() + "         " + "身份证    " + detailInfo.getIdcard());
+//        this.detailInfo = detailInfo;
 
-        tvAge.setText(detailInfo.getAge() + "           " + (SpValue.SEX_FEMALE.equals(detailInfo.getSex()) ? "女" : "男") + "     " + "医保     " + detailInfo.getMedicalcard());
-
-        tvConditionType.setText(detailInfo.getDiseasename());
-
-        tvQues.setText(detailInfo.getProblem());
+        tvName.setText(detailInfo.getDoctorname());
+        tvDepartment.setText(detailInfo.getDepartname() + "    " + detailInfo.getDoctitlename());
         tvDesc.setText(detailInfo.getDescription());
+        doctorImg.setImageURI(Uri.parse(ApiService.WEB_ROOT + detailInfo.getDocimg()));
+
+        tvIntroduce.setText(detailInfo.getAdeptdesc());
         sdvImg.setImageURI(Uri.parse(ApiService.WEB_ROOT + detailInfo.getImgs()));
         List<String> imglist = detailInfo.getImglist();
 
         if (imglist != null && imglist.size() > 0) {
             picAdapter = new PicAdapter(this, imglist);
             picRecyclerView.setAdapter(picAdapter);
+        }
+
+        if (detailInfo.getIscollect() == 1) {
+            tvAttention.setText("已关注");
+        } else {
+            tvAttention.setText("未关注");
         }
 
         tvVoice.setVisibility(TextUtils.isEmpty(detailInfo.getVoiceurl()) ? View.INVISIBLE : View.VISIBLE);
@@ -239,15 +218,33 @@ public class ConditionDetailAct extends BaseActivity implements IInquiryView, Vi
 
         try {
 
-            MediaPlayer mediaPlayer = new MediaPlayer();
-            mediaPlayer.setDataSource(detailInfo.getVoiceurl());
-            mediaPlayer.prepare();
-            mediaPlayer.getDuration();
+            new Thread(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                MediaPlayer mediaPlayer = new MediaPlayer();
+                                mediaPlayer.setDataSource(detailInfo.getVoiceurl());
+                                mediaPlayer.prepare();
+                                mediaPlayer.getDuration();
 
-            int round = Math.round(mediaPlayer.getDuration() / 1000);
+                                int round = Math.round(mediaPlayer.getDuration() / 1000);
 
-            tvVoice.setText(round + "''");
-            mediaPlayer.release();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        tvVoice.setText(round + "''");
+                                    }
+                                });
+
+                                mediaPlayer.release();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+            ).start();
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -301,7 +298,6 @@ public class ConditionDetailAct extends BaseActivity implements IInquiryView, Vi
 
     @Override
     public void setChatInfo(List<ChatEntry.DataBean> data, boolean isLoop) {
-
 
     }
 

@@ -21,7 +21,7 @@
         android:gravity="center_vertical"
         android:maxWidth="@dimen/x70"
         android:singleLine="true"
-        android:text="医生姓名"
+        android:text=""
         android:textColor="@color/txt_color_ma3"
         android:textSize="@dimen/textsize_16sp"
         android:textStyle="bold" />
@@ -33,21 +33,21 @@
         android:layout_marginLeft="@dimen/x5"
         android:layout_toRightOf="@id/tvName"
         android:gravity="center_vertical"
-        android:text="科室 医生职称"
+        android:text=""
         android:textColor="@color/txt_color_ma3"
         android:textSize="@dimen/textsize_14sp"
         android:textStyle="bold" />
 
     <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="@dimen/x30"-->
-        <!--android:layout_marginLeft="@dimen/x5"-->
-        <!--android:layout_toRightOf="@id/tvDepartment"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:text="医生职称"-->
-        <!--android:textColor="@color/txt_color_ma3"-->
-        <!--android:textSize="@dimen/textsize_14sp"-->
-        <!--android:textStyle="bold" />-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="@dimen/x30"-->
+    <!--android:layout_marginLeft="@dimen/x5"-->
+    <!--android:layout_toRightOf="@id/tvDepartment"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:text="医生职称"-->
+    <!--android:textColor="@color/txt_color_ma3"-->
+    <!--android:textSize="@dimen/textsize_14sp"-->
+    <!--android:textStyle="bold" />-->
 
     <TextView
         android:id="@+id/tvHospitalName"
@@ -84,7 +84,7 @@
         android:layout_marginTop="@dimen/x5"
         android:background="@drawable/shape_bg_blue"
         android:gravity="center"
-        android:text="已关注"
+        android:text="未关注"
         android:textColor="@android:color/white"
         android:textSize="@dimen/textsize_12sp" />
 

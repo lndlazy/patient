@@ -8,6 +8,7 @@
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdvImg"
         android:layout_width="@dimen/x50"
+        fresco:roundAsCircle="true"
         android:layout_height="@dimen/x50"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/x15"

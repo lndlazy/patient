@@ -31,16 +31,13 @@ stars 星星总数-->
             android:textColor="@color/txt_color_ma3"
             android:textSize="@dimen/textsize_16sp" />
 
-
-        <com.ylean.cf_hospitalapp.widget.MyRatingBar
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/rb1"
-            android:layout_width="@dimen/x250"
-            android:layout_height="@dimen/x25"
+            android:layout_width="@dimen/x130"
+            android:layout_height="@dimen/x20"
             android:layout_gravity="center"
-            app:base_of_width_or_height="height"
-            app:rating="0"
-            app:stars="5"
-            app:step="1" />
+            android:max="5"
+            android:stepSize="1" />
 
     </LinearLayout>
 
@@ -60,16 +57,13 @@ stars 星星总数-->
             android:textColor="@color/txt_color_ma3"
             android:textSize="@dimen/textsize_16sp" />
 
-
-        <com.ylean.cf_hospitalapp.widget.MyRatingBar
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/rb2"
-            android:layout_width="@dimen/x250"
-            android:layout_height="@dimen/x25"
+            android:layout_width="@dimen/x130"
+            android:layout_height="@dimen/x20"
             android:layout_gravity="center"
-            app:base_of_width_or_height="height"
-            app:rating="0"
-            app:stars="5"
-            app:step="1" />
+            android:max="5"
+            android:stepSize="1" />
 
     </LinearLayout>
 
@@ -89,16 +83,13 @@ stars 星星总数-->
             android:textColor="@color/txt_color_ma3"
             android:textSize="@dimen/textsize_16sp" />
 
-
-        <com.ylean.cf_hospitalapp.widget.MyRatingBar
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
             android:id="@+id/rb3"
-            android:layout_width="@dimen/x250"
-            android:layout_height="@dimen/x25"
+            android:layout_width="@dimen/x130"
+            android:layout_height="@dimen/x20"
             android:layout_gravity="center"
-            app:base_of_width_or_height="height"
-            app:rating="0"
-            app:stars="5"
-            app:step="1" />
+            android:max="5"
+            android:stepSize="1" />
 
     </LinearLayout>
 

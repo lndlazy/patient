@@ -170,6 +170,8 @@ public class FragmentThree extends BaseFragment implements IFreagThreeView {
 
                 Intent m = new Intent(getActivity(), InquiryDetailAct.class);
                 m.putExtra("consultaid", picAskList.get(position).getConsultaid());
+                m.putExtra("hospitalName", picAskList.get(position).getHospitalname());
+                m.putExtra("askType", 1);//1图文问诊，2电话，3视频
                 startActivity(m);
             }
 

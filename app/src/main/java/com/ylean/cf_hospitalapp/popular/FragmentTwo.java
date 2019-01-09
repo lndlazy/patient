@@ -140,7 +140,6 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
 
                     break;
 
-
             }
 
         }
@@ -157,7 +156,6 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
             Logger.d("onTabReselected" + tab.getText().toString());
         }
     };
-
 
     @Override
     public void onRefresh() {
@@ -237,6 +235,7 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
 
                 Intent m = new Intent(getActivity(), VideoSpeechActivity.class);
                 m.putExtra("id", videoList.get(position).getId());
+                m.putExtra("type", "1");
                 startActivity(m);
             }
 
@@ -306,7 +305,6 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
             @Override
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 
-                //TODO
                 if (speechList.get(position) == null || TextUtils.isEmpty(speechList.get(position).getType()))
                     return;
                 Intent m;
@@ -315,6 +313,7 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
                     m = new Intent();
                     m.setClass(getActivity(), VideoSpeechActivity.class);
                     m.putExtra("id", speechList.get(position).getId());
+                    m.putExtra("type", "2");
                     startActivity(m);
                 } else if ("3".equals(speechList.get(position).getType())) {
                     //文章

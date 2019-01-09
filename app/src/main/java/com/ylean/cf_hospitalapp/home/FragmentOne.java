@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,6 +37,7 @@ import com.ylean.cf_hospitalapp.home.presenter.IFragmentOnePrenenter;
 import com.ylean.cf_hospitalapp.home.view.IFragmentOneView;
 import com.ylean.cf_hospitalapp.inquiry.activity.InquiryDetailAct;
 import com.ylean.cf_hospitalapp.inquiry.bean.RecommendEntry;
+import com.ylean.cf_hospitalapp.my.activity.MyNewsListActivity;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
@@ -130,7 +132,7 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
 
         //检查定位权限
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkOtherPer();
+//            checkOtherPer();
             checkLocationPer();
         }
 
@@ -146,8 +148,12 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
         LinearLayout llSearch = view.findViewById(R.id.llSearch);
 
         tvLocation = view.findViewById(R.id.tvLocation);
+      ImageView ivnews = view.findViewById(R.id.ivnews);
+
+
         llLocation.setOnClickListener(this);
         llSearch.setOnClickListener(this);
+        ivnews.setOnClickListener(this);
 
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -194,6 +200,7 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
                             //视频 专家讲堂
                             m = new Intent();
                             m.setClass(getActivity(), VideoSpeechActivity.class);
+                            m.putExtra("type", "2");//1直播 2视频
                             m.putExtra("id", recommendList.get(position).getId());
                             startActivity(m);
                             break;
@@ -266,33 +273,36 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
     private void checkLocationPer() {
 
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                ) {
             startLocation();
         } else {
             //不具有定位权限，需要进行权限申请
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_LOCATION_CODE);
+                    Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_LOCATION_CODE);
         }
 
     }
 
-    /**
-     * 检查定位权限， 获取定位信息
-     */
-    private void checkOtherPer() {
-
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-
-        } else {
-            //不具有定位权限，需要进行权限申请
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_PHONE_STATE
-                            , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE}
-                    , REQUEST_PERMISSION_OTHER_CODE);
-        }
-
-    }
+//    /**
+//     * 检查定位权限， 获取定位信息
+//     */
+//    private void checkOtherPer() {
+//
+//        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
+//                && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+//                && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+//
+//        } else {
+//            //不具有定位权限，需要进行权限申请
+//            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_PHONE_STATE
+//                            , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE}
+//                    , REQUEST_PERMISSION_OTHER_CODE);
+//        }
+//
+//    }
 
     public void startLocation() {
         iOnePrenenter.startLocation(getActivity());
@@ -312,6 +322,12 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
             case R.id.llSearch://搜索
 
                 nextActivity(SearchActivity.class);
+
+                break;
+
+            case R.id.ivnews://消息
+
+                nextActivity(MyNewsListActivity.class);
 
                 break;
 

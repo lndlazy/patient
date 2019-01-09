@@ -1,27 +1,12 @@
 package com.ylean.cf_hospitalapp.my.adapter;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.orhanobut.logger.Logger;
-import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.my.activity.PointsMallAct;
 import com.ylean.cf_hospitalapp.my.bean.PointsEntry;
-import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
-import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
-import com.ylean.cf_hospitalapp.popular.bean.ExpertEntry;
-import com.ylean.cf_hospitalapp.popular.presenter.SpeechItemAdapter;
-import com.ylean.cf_hospitalapp.utils.SaveUtils;
-import com.ylean.cf_hospitalapp.utils.SpValue;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

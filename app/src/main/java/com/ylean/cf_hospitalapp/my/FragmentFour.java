@@ -24,21 +24,23 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.inquiry.activity.AskPeopleActivity;
 import com.ylean.cf_hospitalapp.base.view.BaseFragment;
+import com.ylean.cf_hospitalapp.my.activity.CustomerService;
 import com.ylean.cf_hospitalapp.my.activity.DoctorListActivity;
 import com.ylean.cf_hospitalapp.my.activity.EarnPointsActivity;
 import com.ylean.cf_hospitalapp.my.activity.FeedbackActivity;
-import com.ylean.cf_hospitalapp.my.activity.MyCollectionActivity;
+import com.ylean.cf_hospitalapp.my.activity.MyCollectionListActivity;
 import com.ylean.cf_hospitalapp.my.activity.MyCommentActivity;
 import com.ylean.cf_hospitalapp.my.activity.MyEvaluationActivity;
 import com.ylean.cf_hospitalapp.my.activity.MyFriendActivity;
-import com.ylean.cf_hospitalapp.my.activity.MyNewsAct;
-import com.ylean.cf_hospitalapp.my.activity.MyRequestActivity;
+import com.ylean.cf_hospitalapp.my.activity.MyHelpActivity;
+import com.ylean.cf_hospitalapp.my.activity.MyNewsListActivity;
+import com.ylean.cf_hospitalapp.my.activity.MyRequestListActivity;
 import com.ylean.cf_hospitalapp.my.activity.MyTopicActivity;
 import com.ylean.cf_hospitalapp.my.activity.ServiceOrderListActivity;
 import com.ylean.cf_hospitalapp.register.activity.MyRegisterOrderListActivity;
 import com.ylean.cf_hospitalapp.my.activity.PointsDetailActivity;
-import com.ylean.cf_hospitalapp.my.activity.PointsMallAct;
-import com.ylean.cf_hospitalapp.my.activity.SettingAct;
+import com.ylean.cf_hospitalapp.mall.acitity.PointsMallAct;
+import com.ylean.cf_hospitalapp.my.activity.SettingActivity;
 import com.ylean.cf_hospitalapp.my.activity.VipRoueActivity;
 import com.ylean.cf_hospitalapp.my.adapter.GroupMyAdapter;
 import com.ylean.cf_hospitalapp.my.activity.MyFreeAskAct;
@@ -63,6 +65,7 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
     private MyInfoEntry.DataBean myInfoEntryData;
     public static final int REQUEST_PERMISSION_CALL_CODE = 0x14;
     private Intent m;
+    private TextView tvLevel;
 
     @Nullable
     @Override
@@ -71,8 +74,16 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
         View view = inflater.inflate(R.layout.fragment_four, null);
 
         initView(view);
-        iMyFragmentPres.myInfo((String) SaveUtils.get(getActivity(), SpValue.TOKEN, ""));
+
         return view;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        iMyFragmentPres.myInfo((String) SaveUtils.get(getActivity(), SpValue.TOKEN, ""));
     }
 
     private void initView(View view) {
@@ -85,7 +96,7 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
         ImageView ivNewMsg = view.findViewById(R.id.ivNewMsg);
 
         tvName = view.findViewById(R.id.tvName);
-        TextView tvLevel = view.findViewById(R.id.tvLevel);
+        tvLevel = view.findViewById(R.id.tvLevel);
         TextView tvVipRule = view.findViewById(R.id.tvVipRule);//会员规则
         tvUsbableIntegral = view.findViewById(R.id.tvUsbableIntegral);
         tvTotalIntegral = view.findViewById(R.id.tvTotalIntegral);
@@ -131,19 +142,23 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
                         break;
 
                     case 1://我的申请
-                        nextActivity(MyRequestActivity.class);
+                        nextActivity(MyRequestListActivity.class);
                         break;
 
                     case 2://我的医生
                         nextActivity(DoctorListActivity.class);
                         break;
-                    case 3://我的家人
 
+                    case 3://我的家人
                         m = new Intent(getActivity(), AskPeopleActivity.class);
                         m.putExtra("title", "我的家人");
                         m.putExtra("type", "my");
                         startActivity(m);
+                        break;
 
+                    case 4://我的帮帮团
+                        m = new Intent(getActivity(), MyHelpActivity.class);
+                        startActivity(m);
                         break;
 
                     case 5://我的评论
@@ -155,7 +170,7 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
 
                     case 6://我的收藏
 
-                        m = new Intent(getActivity(), MyCollectionActivity.class);
+                        m = new Intent(getActivity(), MyCollectionListActivity.class);
                         startActivity(m);
 
                         break;
@@ -186,7 +201,7 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
 
             case R.id.ivMsg://我的消息
 
-                nextActivity(MyNewsAct.class);
+                nextActivity(MyNewsListActivity.class);
 
                 break;
 
@@ -198,7 +213,7 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
 
             case R.id.ivSet://个人设置
 
-                Intent m = new Intent(getActivity(), SettingAct.class);
+                Intent m = new Intent(getActivity(), SettingActivity.class);
                 if (myInfoEntryData != null)
                     m.putExtra("myInfoEntryData", myInfoEntryData);
                 startActivity(m);
@@ -258,6 +273,8 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
 
             case R.id.mivCustomer://联系客服
 
+                nextActivity(CustomerService.class);
+
                 break;
 
             case R.id.mivCustomerTel:// 客服电话
@@ -310,11 +327,11 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
             return;
 
         myInfoEntryData = myInfoEntry.getData();
-        tvName.setText(TextUtils.isEmpty(myInfoEntry.getData().getNickname()) ? "未设置" : myInfoEntry.getData().getNickname());
+        tvName.setText(TextUtils.isEmpty(myInfoEntry.getData().getRealname()) ? "未设置" : myInfoEntry.getData().getRealname());
         sdvImg.setImageURI(Uri.parse(ApiService.WEB_ROOT + myInfoEntry.getData().getImgurl()));
 
         tvUsbableIntegral.setText(myInfoEntry.getData().getPoints());
         tvTotalIntegral.setText(myInfoEntry.getData().getTotalPoints());
-
+        tvLevel.setText(myInfoEntry.getData().getLevel());
     }
 }

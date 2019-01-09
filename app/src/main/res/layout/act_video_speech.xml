@@ -19,32 +19,170 @@
 
     <include layout="@layout/line_gray" />
 
-
     <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
         android:id="@+id/detail_player"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x180" />
 
-
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_layout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="@color/tab_colorf9"
-        app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/tab_colorf9">
+        android:layout_height="wrap_content">
 
-    </android.support.design.widget.TabLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/tab_layout">
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/x15"
+                android:text="隐形正畸的危害？30岁再进行正畸还来得及吗？"
+                android:textColor="@color/txt_color_ma3"
+                android:textSize="@dimen/textsize_20sp"
+                android:textStyle="bold" />
 
-    </android.support.v4.view.ViewPager>
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/i1"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/x5"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginRight="@dimen/x15"
+                android:layout_marginTop="@dimen/x5"
+                app:cardElevation="@dimen/x5">
+
+                <include layout="@layout/item_doctor" />
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvstarttime"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x45"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/x15"
+                android:text="开播时间"
+                android:textColor="@color/txt_color_ma3"
+                android:textSize="@dimen/textsize_16sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x10"
+                android:layout_marginTop="@dimen/x10"
+                android:background="@color/bg_home" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x30"
+                android:layout_marginLeft="@dimen/x15"
+                android:gravity="bottom"
+                android:text="医生寄语"
+                android:textSize="@dimen/textsize_16sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/tvtalk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/x80"
+                android:padding="@dimen/x15"
+                android:text="    正规且专业的隐形矫正才能做到对牙齿的伤害微乎其微。为什么这么说?首先，牙齿的硬度是比较大的，明显不同于骨骼的硬度，所以合适的力量并不会对牙齿造成太大伤害。" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x30"
+                android:layout_marginBottom="@dimen/x5"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/x15"
+                android:paddingRight="@dimen/x15">
+
+                <ImageView
+                    android:id="@+id/ivgood"
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/x30"
+                    android:padding="@dimen/x8"
+                    android:src="@mipmap/ic_good" />
+
+                <TextView
+                    android:id="@+id/tvgoodcount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="5"
+                    android:textColor="@color/txt_color_light9" />
+
+                <ImageView
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/x30"
+                    android:padding="@dimen/x8"
+                    android:src="@mipmap/ic_read" />
+
+                <TextView
+                    android:id="@+id/tvviewcount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x8"
+                    android:gravity="center_vertical"
+                    android:text="5"
+                    android:textColor="@color/txt_color_light9" />
+
+                <ImageView
+                    android:id="@+id/ivlike"
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/x30"
+                    android:padding="@dimen/x8"
+                    android:src="@drawable/select_like" />
+
+                <TextView
+                    android:id="@+id/tvlike"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="5"
+                    android:textColor="@color/txt_color_light9" />
+
+                <TextView
+                    android:id="@+id/tvTimedesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x8"
+                    android:gravity="center_vertical"
+                    android:text="1天前"
+                    android:textColor="@color/txt_color_light9" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+    <!--<android.support.design.widget.TabLayout-->
+    <!--android:id="@+id/tab_layout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--app:tabGravity="fill"-->
+    <!--app:tabIndicatorColor="@color/tab_colorf9"-->
+    <!--app:tabMode="fixed"-->
+    <!--app:tabSelectedTextColor="@color/tab_colorf9">-->
+
+    <!--</android.support.design.widget.TabLayout>-->
+
+    <!--<android.support.v4.view.ViewPager-->
+    <!--android:id="@+id/vp_viewpager"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_above="@+id/tab_layout">-->
+
+    <!--</android.support.v4.view.ViewPager>-->
 
 
 </LinearLayout>

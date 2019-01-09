@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="我的帮帮团"
+        custom:mTitleLeft="@mipmap/ic_arrow_left" />
+
+    <include layout="@layout/line_gray" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/x20"
+        android:text="开发中"
+        android:textSize="@dimen/textsize_20sp" />
+
+</LinearLayout>

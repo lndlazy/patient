@@ -33,7 +33,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ForgetPwdAct extends BaseActivity implements View.OnClickListener {
 
-    private TitleBackBarView tbv;
     private android.widget.EditText etforgetname;
     private android.widget.EditText edcode;
     private android.widget.EditText ednewpwd;
@@ -47,7 +46,6 @@ public class ForgetPwdAct extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.act_forget_pwd);
-
         initView();
 
     }
@@ -60,7 +58,7 @@ public class ForgetPwdAct extends BaseActivity implements View.OnClickListener {
         this.edcode = (EditText) findViewById(R.id.ed_code);
         this.ednewpwd = (EditText) findViewById(R.id.ednewpwd);
         this.etforgetname = (EditText) findViewById(R.id.et_forgetname);
-        this.tbv = (TitleBackBarView) findViewById(R.id.tbv);
+        TitleBackBarView tbv = (TitleBackBarView) findViewById(R.id.tbv);
 
         tbv.setOnLeftClickListener(new View.OnClickListener() {
             @Override

@@ -483,7 +483,7 @@ public class RetrofitHttpUtil {
     }
 
     /**
-     * 支付宝支付信息
+     * 获取验证码
      */
     public void smsCode(Observer subscriber, String ch, String ph, String smsType) {
         getService().smsCode(ch, ph, smsType)
@@ -640,7 +640,33 @@ public class RetrofitHttpUtil {
         getService().collectList(ch, token, type, page, size)
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
+    }
 
+    /**
+     * 我的消息列表
+     */
+    public void myNewstList(Observer subscriber, String ch, String token, String type, int page, String size) {
+        getService().myNewstList(ch, token, type, page, size)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 更改手机号
+     */
+    public void changeTel(Observer subscriber, String ch, String token, String sms, String pwd, String phone) {
+        getService().changeTel(ch, token, sms, pwd, phone)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 修改密码
+     */
+    public void changePwd(Observer subscriber, String ch, String token, String sms, String newpwd, String renewpwd) {
+        getService().changePwd(ch, token, sms, newpwd, renewpwd)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
     }
 
     /**
@@ -648,6 +674,48 @@ public class RetrofitHttpUtil {
      */
     public void goodsClassify(Observer subscriber, String ch) {
         getService().goodsClassify(ch)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 我的 评价列表
+     */
+    public void commandList(Observer subscriber, String ch, String token, int page, String size) {
+        getService().commandList(ch, token, page, size)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 评价详情
+     */
+    public void commandInfo(Observer subscriber, String ch, String token, String id) {
+        getService().commandInfo(ch, token, id)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 添加收藏
+     */
+    public void addCollection(Observer subscriber, String ch, String token
+            , String relateid, String type) {
+        getService().addCollection(ch, token, relateid, type)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 取消收藏
+     */
+    public void removeCollection(Observer subscriber, String ch, String token
+            , String relateid, String type) {
+        getService().removeCollection(ch, token, relateid, type)
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
 

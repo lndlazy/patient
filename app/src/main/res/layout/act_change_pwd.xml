@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="修改密码"
+        custom:mTitleLeft="@mipmap/ic_arrow_left" />
+
+    <include layout="@layout/line_gray" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x100">
+
+
+        <ImageView
+            android:id="@+id/i1"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x80"
+            android:padding="@dimen/x5"
+            android:src="@mipmap/ic_change_pwd" />
+
+
+        <TextView
+            android:id="@+id/t1"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x45"
+            android:layout_marginLeft="@dimen/x8"
+            android:layout_toRightOf="@id/i1"
+            android:gravity="bottom"
+            android:text="点击获取验证码"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_15sp" />
+
+
+        <TextView
+            android:id="@+id/t2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/t1"
+            android:layout_marginLeft="@dimen/x8"
+            android:layout_marginTop="@dimen/x2"
+            android:layout_toRightOf="@id/i1"
+            android:gravity="bottom"
+            android:text="我们会将验证码发送到您的手机"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_15sp" />
+
+        <TextView
+            android:id="@+id/tvtel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/t2"
+            android:layout_marginLeft="@dimen/x8"
+            android:layout_marginTop="@dimen/x2"
+            android:layout_toRightOf="@id/i1"
+            android:gravity="bottom"
+            android:text=""
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_15sp" />
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:background="@color/bg_home"
+        android:layout_height="@dimen/x10" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/x15"
+        android:paddingRight="@dimen/x15">
+
+        <TextView
+            android:layout_width="@dimen/x80"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:src="@mipmap/img_code"
+            android:text="验证码"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_15sp" />
+
+
+        <EditText
+            android:id="@+id/edcode"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:hint="请输入验证码"
+            android:textColor="@color/txt_color_ma3"
+            android:textColorHint="@color/color_b6"
+            android:textSize="@dimen/textsize_15sp" />
+
+        <TextView
+            android:id="@+id/tvcode"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:text="发送验证码"
+            android:textColor="#ff6e00"
+            android:textSize="@dimen/textsize_15sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/x15"
+        android:paddingRight="@dimen/x15">
+
+        <TextView
+            android:layout_width="@dimen/x80"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:src="@mipmap/img_code"
+            android:text="新密码"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_15sp" />
+
+
+        <EditText
+            android:id="@+id/etpwd"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:inputType="textPassword"
+            android:hint="请输入新密码"
+            android:textColor="@color/txt_color_ma3"
+            android:textColorHint="@color/color_b6"
+            android:textSize="@dimen/textsize_15sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/x15"
+        android:paddingRight="@dimen/x15">
+
+        <TextView
+            android:layout_width="@dimen/x80"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:src="@mipmap/img_code"
+            android:text="确认密码"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_15sp" />
+
+
+        <EditText
+            android:id="@+id/etpwdrepeat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:hint="请再次输入密码"
+            android:inputType="textPassword"
+            android:textColor="@color/txt_color_ma3"
+            android:textColorHint="@color/color_b6"
+            android:textSize="@dimen/textsize_15sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginRight="@dimen/x15"
+        android:layout_marginTop="@dimen/x50"
+        android:background="@drawable/shape_login"
+        android:gravity="center"
+        android:padding="@dimen/x15"
+        android:text="确定"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/textsize_16sp" />
+
+</LinearLayout>

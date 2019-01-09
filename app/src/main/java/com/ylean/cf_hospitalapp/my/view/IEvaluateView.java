@@ -8,5 +8,6 @@ import com.ylean.cf_hospitalapp.base.view.BaseView;
 
 public interface IEvaluateView extends BaseView {
 
-
+    //评价成功
+    void evaluateSuccess();
 }

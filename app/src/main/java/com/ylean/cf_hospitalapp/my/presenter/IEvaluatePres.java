@@ -18,7 +18,6 @@ public class IEvaluatePres {
         this.iEvaluateView = iEvaluateView;
     }
 
-
     /**
      * @param token
      * @param relateid        问诊订单和挂号订单评论的是 医生，所以传医生id  商品订单和服务订单 relateid 传 商品id
@@ -41,23 +40,16 @@ public class IEvaluatePres {
                         new BaseNoTObserver<Basebean>() {
                             @Override
                             public void onHandleSuccess(Basebean basebean) {
-
+                                iEvaluateView.evaluateSuccess();
                             }
 
                             @Override
                             public void onHandleError(String message) {
-
+                                iEvaluateView.showErr(message);
                             }
 
-
-                        }
-
-                        , SpValue.CH
-                        , token
-                        , relateid
-                        , ordercode
+                        }, SpValue.CH, token, relateid, ordercode
                         , content, stardepict, starservice, starperformance, type, imgs, ordertype);
-
 
     }
 

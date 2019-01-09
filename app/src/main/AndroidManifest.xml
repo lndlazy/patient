@@ -396,7 +396,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".my.activity.SettingAct"
+            android:name=".my.activity.SettingActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
 
@@ -406,7 +406,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".my.activity.MyNewsAct"
+            android:name=".my.activity.MyNewsListActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
 
@@ -416,7 +416,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".my.activity.PointsMallAct"
+            android:name=".mall.acitity.PointsMallAct"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
 
@@ -504,7 +504,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".mall.GoodsDetailActivity"
+            android:name=".mall.acitity.GoodsDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
 
@@ -524,20 +524,91 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
-        <activity android:name=".popular.activity.DiseaseDetailActivity" />
-        <activity android:name=".my.activity.MyRequestActivity" />
-        <activity android:name=".my.activity.FamilyDetailActivity" />
-        <activity android:name=".my.activity.MyCollectionActivity" />
-        <activity android:name=".my.activity.PicPayActivity" />
-        <activity android:name=".my.activity.MyEvaluationActivity" />
-        <activity android:name=".my.activity.MyFriendActivity" />
-        <activity android:name=".my.activity.MyTopicActivity" />
-        <activity android:name=".my.activity.ServiceOrderListActivity" />
-        <activity android:name=".home.activity.VideoSpeechActivity"
+        <activity
+            android:name=".popular.activity.DiseaseDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".my.activity.MyRequestListActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".my.activity.FamilyDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".my.activity.MyCollectionListActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".my.activity.PicPayActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".my.activity.MyEvaluationActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".my.activity.MyFriendActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".my.activity.MyTopicActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".my.activity.ServiceOrderListActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".home.activity.VideoSpeechActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".inquiry.activity.ConditionDetailAct" />
-        <activity android:name=".inquiry.activity.InquiryIntroAct" />
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".inquiry.activity.ConditionDetailAct"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".inquiry.activity.InquiryIntroAct"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".my.activity.MyHelpActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".my.activity.CustomerService"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".my.activity.ChangeTelActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".my.activity.ChangePwdActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".my.activity.ChangeNicknameActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
 
         <!--<activity android:name=".register.activity.HospitalDetailActivity" />-->
 

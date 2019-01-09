@@ -68,7 +68,37 @@ public class PicAskDetailEntry extends Basebean {
         private String problem;
         private int sex;
         private int status;
+
+        private String overtime;
+        private String price;
+        private String code;
+
         private String voiceurl;
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
+
+        public String getOvertime() {
+            return overtime;
+        }
+
+        public void setOvertime(String overtime) {
+            this.overtime = overtime;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+
+        public void setPrice(String price) {
+            this.price = price;
+        }
+
         private List<String> imglist;
 
         public String getAdeptdesc() {
@@ -328,6 +358,9 @@ public class PicAskDetailEntry extends Basebean {
             dest.writeString(this.problem);
             dest.writeInt(this.sex);
             dest.writeInt(this.status);
+            dest.writeString(this.overtime);
+            dest.writeString(this.price);
+            dest.writeString(this.code);
             dest.writeString(this.voiceurl);
             dest.writeStringList(this.imglist);
         }
@@ -362,6 +395,9 @@ public class PicAskDetailEntry extends Basebean {
             this.problem = in.readString();
             this.sex = in.readInt();
             this.status = in.readInt();
+            this.overtime = in.readString();
+            this.price = in.readString();
+            this.code = in.readString();
             this.voiceurl = in.readString();
             this.imglist = in.createStringArrayList();
         }
@@ -378,6 +414,7 @@ public class PicAskDetailEntry extends Basebean {
             }
         };
     }
+
 
     @Override
     public int describeContents() {

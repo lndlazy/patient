@@ -23,7 +23,7 @@ import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
  * Created by linaidao on 2019/1/8.
  */
 
-public class MyRequestActivity extends BaseActivity implements View.OnClickListener {
+public class MyRequestListActivity extends BaseActivity implements View.OnClickListener {
 
     private com.ylean.cf_hospitalapp.widget.TitleBackBarView tbv;
     private android.widget.TextView tvAll;

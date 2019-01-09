@@ -30,15 +30,16 @@
         android:layout_marginRight="@dimen/x6"
         android:layout_marginTop="@dimen/x6"
         android:layout_toLeftOf="@id/ivSet"
-        android:background="@drawable/shape_circle_red" />
+        android:background="@drawable/shape_circle_red"
+        android:visibility="invisible" />
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdvImg"
         android:layout_width="@dimen/x80"
         android:layout_height="@dimen/x80"
         android:layout_marginLeft="@dimen/x15"
-        android:padding="@dimen/x15"
         android:layout_marginTop="@dimen/x40"
+        android:padding="@dimen/x5"
         fresco:failureImage="@mipmap/ic_default_headpic"
         fresco:placeholderImage="@mipmap/ic_default_headpic"
         fresco:roundAsCircle="true" />

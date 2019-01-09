@@ -27,22 +27,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/line_colore5" />
+            <include layout="@layout/line_gray" />
 
             <include layout="@layout/layout_doctor_info" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/line_colorf7" />
+            <include layout="@layout/line_gray" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x60"
+                android:layout_height="@dimen/x45"
                 android:background="@android:color/white">
 
                 <TextView
@@ -62,7 +55,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/x15"
                     android:gravity="center_vertical"
-                    android:text="$ 9.00"
+                    android:text=""
                     android:textColor="@color/txt_color_light36" />
 
             </RelativeLayout>
@@ -79,7 +72,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/x15"
                 android:text="@string/order_info"
-                android:textSize="@dimen/textsize_20sp" />
+                android:textSize="@dimen/textsize_15sp" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -105,17 +98,25 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/picRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x10" />
+
+            <ImageView
+                android:id="@+id/iv_add_pic"
+                android:layout_width="@dimen/x80"
+                android:layout_height="@dimen/x80"
+                android:layout_margin="@dimen/x15"
+                android:src="@mipmap/ic_upload_pic" />
 
             <TextView
                 android:id="@+id/tvCommit"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x50"
+                android:layout_height="@dimen/x40"
                 android:background="@color/tab_colorf9"
                 android:gravity="center"
                 android:text="提交评价"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/textsize_20sp" />
+                android:textSize="@dimen/textsize_18sp" />
 
         </LinearLayout>
 

@@ -43,7 +43,7 @@ import java.util.UUID;
  * Created by linaidao on 2019/1/2.
  */
 
-public class SettingAct extends BaseActivity implements View.OnClickListener, ISettingView, DataUploadView {
+public class SettingActivity extends BaseActivity implements View.OnClickListener, ISettingView, DataUploadView {
 
     private android.widget.ImageView ivarr;
     private com.facebook.drawee.view.SimpleDraweeView ivPhoto;
@@ -64,6 +64,7 @@ public class SettingAct extends BaseActivity implements View.OnClickListener, IS
     private ISettingPres iSettingPres = new ISettingPres(this);
     private IPicPresenter iPicPresenter = new IPicPresenter(this);
     private MyInfoEntry.DataBean myInfoEntryData;
+    private EnterItemView tvnickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,7 @@ public class SettingAct extends BaseActivity implements View.OnClickListener, IS
 
         this.aboutUs = (EnterItemView) findViewById(R.id.aboutUs);
         this.update = (EnterItemView) findViewById(R.id.update);
+        tvnickname = (EnterItemView) findViewById(R.id.tvnickname);
         this.rlNotice = (RelativeLayout) findViewById(R.id.rlNotice);
         this.ivNotice = (ImageView) findViewById(R.id.ivNotice);
         this.modifyPwd = (EnterItemView) findViewById(R.id.modifyPwd);
@@ -105,14 +107,13 @@ public class SettingAct extends BaseActivity implements View.OnClickListener, IS
         bindTel.setOnClickListener(this);
         eivSex.setOnClickListener(this);
         rlHeadPic.setOnClickListener(this);
-
+        tvnickname.setOnClickListener(this);
 
         if (myInfoEntryData != null) {
-
             ivPhoto.setImageURI(Uri.parse(ApiService.WEB_ROOT + myInfoEntryData.getImgurl()));
             eivSex.setRightTxt(SpValue.MY_SEX_FEMALE.equals(myInfoEntryData.getSex()) ? "女" : "男");
             bindTel.setRightTxt(myInfoEntryData.getMobile());
-
+            tvnickname.setRightTxt(myInfoEntryData.getRealname());
         }
     }
 
@@ -120,6 +121,15 @@ public class SettingAct extends BaseActivity implements View.OnClickListener, IS
     public void onClick(View v) {
 
         switch (v.getId()) {
+
+            case R.id.tvnickname://昵称
+
+                Intent n = new Intent(this, ChangeNicknameActivity.class);
+                if (myInfoEntryData != null)
+                    n.putExtra("nickname", myInfoEntryData.getNickname());
+                startActivityForResult(n, 0x91);
+
+                break;
 
             case R.id.aboutUs:
                 break;
@@ -130,7 +140,13 @@ public class SettingAct extends BaseActivity implements View.OnClickListener, IS
             case R.id.rlNotice:
                 break;
 
-            case R.id.modifyPwd:
+            case R.id.modifyPwd://修改密码
+
+                Intent i = new Intent(this, ChangePwdActivity.class);
+                if (myInfoEntryData != null)
+                    i.putExtra("tel", myInfoEntryData.getMobile());
+                startActivity(i);
+
                 break;
 
             case R.id.wechat:
@@ -138,6 +154,8 @@ public class SettingAct extends BaseActivity implements View.OnClickListener, IS
 
             case R.id.bindTel://绑定手机号
                 Intent m = new Intent(this, TelBindAct.class);
+                if (myInfoEntryData != null)
+                    m.putExtra("tel", myInfoEntryData.getMobile());
                 startActivity(m);
                 break;
 
@@ -164,7 +182,7 @@ public class SettingAct extends BaseActivity implements View.OnClickListener, IS
                             @Override
                             public void onClick(int which) {
                                 // 男
-                                iSettingPres.updateInfo((String) SaveUtils.get(SettingAct.this, SpValue.TOKEN, "")
+                                iSettingPres.updateInfo((String) SaveUtils.get(SettingActivity.this, SpValue.TOKEN, "")
                                         , "", "", "", SpValue.MY_SEX_MALE, "", "");
 
                             }
@@ -175,7 +193,7 @@ public class SettingAct extends BaseActivity implements View.OnClickListener, IS
                             @Override
                             public void onClick(int which) {
                                 // 女
-                                iSettingPres.updateInfo((String) SaveUtils.get(SettingAct.this, SpValue.TOKEN, "")
+                                iSettingPres.updateInfo((String) SaveUtils.get(SettingActivity.this, SpValue.TOKEN, "")
                                         , "", "", "", SpValue.MY_SEX_FEMALE, "", "");
                             }
                         }).show();
@@ -237,7 +255,7 @@ public class SettingAct extends BaseActivity implements View.OnClickListener, IS
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_WRITE_CODE);
         } else {
-            iSettingPres.getFromPhotoAlbum(ISettingPres.PHOTO_ALBUM_CODE, SettingAct.this);
+            iSettingPres.getFromPhotoAlbum(ISettingPres.PHOTO_ALBUM_CODE, SettingActivity.this);
         }
 
     }
@@ -256,7 +274,7 @@ public class SettingAct extends BaseActivity implements View.OnClickListener, IS
                 break;
 
             case REQUEST_PERMISSION_WRITE_CODE:
-                iSettingPres.getFromPhotoAlbum(ISettingPres.PHOTO_ALBUM_CODE, SettingAct.this);
+                iSettingPres.getFromPhotoAlbum(ISettingPres.PHOTO_ALBUM_CODE, SettingActivity.this);
 
                 break;
         }
@@ -271,6 +289,18 @@ public class SettingAct extends BaseActivity implements View.OnClickListener, IS
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
+
+            case 0x91:
+
+                if (resultCode == 0x90) {
+                    if (data != null) {
+                        String nickname = data.getStringExtra("nickname");
+                        iSettingPres.updateInfo((String) SaveUtils.get(SettingActivity.this, SpValue.TOKEN, "")
+                                , "", nickname, "", "", "", "");
+                    }
+                }
+
+                break;
 
             case ISettingPres.TAKE_PHOTO_CODE://拍照返回的code, 裁剪
 
@@ -361,6 +391,7 @@ public class SettingAct extends BaseActivity implements View.OnClickListener, IS
     @Override
     public void setName(String name) {
 
+        tvnickname.setRightTxt(name);
     }
 
     @Override

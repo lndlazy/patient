@@ -28,11 +28,15 @@ import com.ylean.cf_hospitalapp.my.bean.AreaEntry;
 import com.ylean.cf_hospitalapp.my.bean.BindEntry;
 import com.ylean.cf_hospitalapp.my.bean.CityEntry;
 import com.ylean.cf_hospitalapp.my.bean.CommentListEntry;
+import com.ylean.cf_hospitalapp.my.bean.EvalDetailEntry;
+import com.ylean.cf_hospitalapp.my.bean.EvalListEntry;
 import com.ylean.cf_hospitalapp.my.bean.FamilyDetailEntry;
 import com.ylean.cf_hospitalapp.my.bean.GoodsListEntry;
+import com.ylean.cf_hospitalapp.my.bean.MCollectionListEntry;
 import com.ylean.cf_hospitalapp.my.bean.MyAskReusltList;
 import com.ylean.cf_hospitalapp.my.bean.MyDoctorListEntry;
 import com.ylean.cf_hospitalapp.my.bean.MyInfoEntry;
+import com.ylean.cf_hospitalapp.my.bean.NewsListEntry;
 import com.ylean.cf_hospitalapp.my.bean.OrderInquiryDetailEntry;
 import com.ylean.cf_hospitalapp.my.bean.PointsDetailEntry;
 import com.ylean.cf_hospitalapp.my.bean.PointsEntry;
@@ -373,9 +377,30 @@ public interface ApiService {
     //我的收藏列表
     @FormUrlEncoded
     @POST("/api/app/art/getcollectlist")
-    Observable<MyInfoEntry> collectList(@Field("ch") String ch, @Field("token") String token
+    Observable<MCollectionListEntry> collectList(@Field("ch") String ch, @Field("token") String token
             , @Field("type") String type, @Field("page") int page
             , @Field("size") String size);
+
+    //我的消息列表
+    @FormUrlEncoded
+    @POST("/api/app/patient/mymessagelist")
+    Observable<NewsListEntry> myNewstList(@Field("ch") String ch, @Field("token") String token
+            , @Field("type") String type, @Field("page") int page
+            , @Field("size") String size);
+
+    //更换手机号
+    @FormUrlEncoded
+    @POST("/api/app/patient/updphone")
+    Observable<Basebean> changeTel(@Field("ch") String ch, @Field("token") String token
+            , @Field("sms") String sms, @Field("pwd") String pwd
+            , @Field("phone") String phone);
+
+    //修改密码
+    @FormUrlEncoded
+    @POST("/api/app/patient/updatepwd")
+    Observable<Basebean> changePwd(@Field("ch") String ch, @Field("token") String token
+            , @Field("sms") String sms, @Field("newpwd") String newpwd
+            , @Field("renewpwd") String renewpwd);
 
     //添加评价
     @FormUrlEncoded
@@ -389,6 +414,28 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/api/app/pro/getclalist")
     Observable<PointsEntry> goodsClassify(@Field("ch") String ch);
+
+    //我的评价列表
+    @FormUrlEncoded
+    @POST("/api/app/patient/getpjlist")
+    Observable<EvalListEntry> commandList(@Field("ch") String ch, @Field("token") String token, @Field("page") int page, @Field("size") String size);
+
+    //评价详情
+    @FormUrlEncoded
+    @POST("/api/app/patient/commentdetail")
+    Observable<EvalDetailEntry> commandInfo(@Field("ch") String ch, @Field("token") String token, @Field("id") String id);
+
+    //添加收藏
+    @FormUrlEncoded
+    @POST("/api/app/art/addcollect")
+    Observable<Basebean> addCollection(@Field("ch") String ch, @Field("token") String token
+            , @Field("relateid") String relateid, @Field("type") String type);
+
+    //取消收藏
+    @FormUrlEncoded
+    @POST("/api/app/art/delcollect")
+    Observable<Basebean> removeCollection(@Field("ch") String ch, @Field("token") String token
+            , @Field("relateid") String relateid, @Field("type") String type);
 
     //商品列表
     @FormUrlEncoded
@@ -601,12 +648,10 @@ public interface ApiService {
             , @Field("isDefault") String isDefault);
 
 
-
     //结束问诊
     @FormUrlEncoded
     @POST("/api/app/consultation/overconsulta")
     Observable<Basebean> endInquiry(@Field("ch") String ch, @Field("token") String token, @Field("consultaid") String consultaid);
-
 
 
     //查看问诊小结

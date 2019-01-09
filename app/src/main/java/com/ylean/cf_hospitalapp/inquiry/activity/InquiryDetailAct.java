@@ -92,6 +92,10 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
     private boolean noedit;//不能编辑，回复
     private LinearLayout llInput;
     private TextView endInquiry;
+    private String hospitalName;//医院名称
+    private int askType;//问诊类型。图文，电话，视频
+    private TextView tvCommit;
+    private PicAskDetailEntry.DataBean inquiryInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,11 +106,12 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
         isLoad = true;
         noedit = getIntent().getBooleanExtra("noedit", false);
         consultaid = getIntent().getStringExtra("consultaid");
+        hospitalName = getIntent().getStringExtra("hospitalName");
+        askType = getIntent().getIntExtra("askType", -1);
+
         initView();
 
-        if (noedit) {
-            llInput.setVisibility(View.GONE);
-        }
+        noEdit();
         iInquiryPres.setConsultaid(consultaid);
         iInquiryPres.detailInfo((String) SaveUtils.get(this, SpValue.TOKEN, ""));
         iInquiryPres.chatList((String) SaveUtils.get(this, SpValue.TOKEN, ""), true);
@@ -115,6 +120,12 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
 
         checkPermisson();
 
+    }
+
+    private void noEdit() {
+        if (noedit) {
+            llInput.setVisibility(View.GONE);
+        }
     }
 
     private boolean isLoad = false;
@@ -157,7 +168,7 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
         this.tvStartTime = (TextView) findViewById(R.id.tvStartTime);
         this.tvDesc = (TextView) findViewById(R.id.tvDesc);
         this.ivleft = (ImageView) findViewById(R.id.iv_left);
-        TextView tvCommit = findViewById(R.id.tvCommit);
+        tvCommit = findViewById(R.id.tvCommit);
 
         endInquiry = findViewById(R.id.endInquiry);
         llInput = findViewById(R.id.llInput);
@@ -402,21 +413,25 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
 
                 Intent m = new Intent(this, EvaluateActivity.class);
                 m.putExtra("consultaid", consultaid);
+                m.putExtra("hospitalName", hospitalName);
                 m.putExtra("inquiryInfo", inquiryInfo);
+                m.putExtra("askType", askType);
 
-                startActivity(m);
-
-                break;
-
-            case R.id.tvAttent://关注 TODO
-
+                startActivityForResult(m, 0x0041);
 
                 break;
+
+//            case R.id.tvAttent://关注 TODO
+//
+//
+//                break;
 
             case R.id.tvDesc://详细介绍
 
                 Intent n = new Intent(this, ConditionDetailAct.class);
                 n.putExtra("consultaid", iInquiryPres.getConsultaid());
+                n.putExtra("hospitalName", hospitalName);
+                n.putExtra("askType", askType);
                 startActivity(n);
                 break;
 
@@ -430,12 +445,18 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
 
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
+
+            case 0x0041:
+
+                if (resultCode == 0x003)
+                    tvCommit.setVisibility(View.INVISIBLE);
+
+                break;
 
             case IInquiryPres.TAKE_PHOTO_CODE://拍照返回的code
 
@@ -446,34 +467,12 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
                         strings.add(iInquiryPres.getCurrentFile().getPath());
                         iPicPresenter.uploadPic(strings);
 
-//                        File photoFile = new File(cacheDir);
-//                        //文件夹不存在就创建文件夹
-//                        if (!photoFile.exists())
-//                            photoFile.mkdirs();
-//
-//                        outFile = new File(photoFile.getPath(), UUID.randomUUID().toString() + ".jpg");
-//
-//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) //如果大于等于7.0使用FileProvider
-//                            iSettingPresenter.startPhotoZoom(
-//                                    FileProvider.getUriForFile(this, Constant.FILE_URL, iSettingPresenter.getCurrentFile())
-//                                    , outFile);//裁剪
-//                        else
-//                            iSettingPresenter.startPhotoZoom(Uri.fromFile(iSettingPresenter.getCurrentFile()), outFile);//裁剪
-
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
-
-//            case IInquiryPres.PHOTO_RESOULT://裁剪后的图片
-//
-//                if (outFile == null)
-//                    return;
-//
-//                upload_pic(this, outFile, get_user_img_upload_url());
-//                break;
 
             case IInquiryPres.PHOTO_ALBUM_CODE://相册选择返回的code
                 if (data == null)
@@ -497,23 +496,11 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
                     e.printStackTrace();
                 }
 
-//                File photoFile = new File(cacheDir);
-//                //文件夹不存在就创建文件夹
-//                if (!photoFile.exists())
-//                    photoFile.mkdirs();
-//
-//                outFile = new File(photoFile, UUID.randomUUID().toString() + ".jpg");
-//
-//                iSettingPresenter.startPhotoZoom(iSettingPresenter.checkSelectPhoto(this, data, this), outFile);//开始裁剪
-////                iSettingPresenter.startPhotoZoom(FileProvider.getUriForFile(this, "com.kungfuhacking.wristbandpro.fileprovider", iSettingPresenter.getCurrentFile()));//开始裁剪
-
                 break;
 
 
         }
     }
-
-    private PicAskDetailEntry.DataBean inquiryInfo;
 
 
     @Override
@@ -528,15 +515,12 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
         tvAttent.setText(data.getIscollect() == 0 ? "未关注" : "已关注");
         tvDesc.setText(data.getDescription());
 
-        tvStartTime.setText("问题时间：" + data.getCreatetime());
-
         String content = "<font color=\"#767676\">" + data.getDescription() + "</font>"
                 + "<font color=\"#33a9fa\">" + "[详细介绍]" + "</font>";
         tvDesc.setText(Html.fromHtml(content));
         tvStartTime.setText("问题时间： " + data.getCreatetime());
 
 
-//
         switch (data.getStatus()) {
             case 3://未结束
 
@@ -544,7 +528,16 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
 
                 break;
             case 4://已结束
-//                tvEnd.setText("结束时间：" + data.get());
+                tvEnd.setVisibility(View.VISIBLE);
+                tvEnd.setText("结束时间：" + data.getOvertime());
+                endInquiry.setVisibility(View.GONE);
+                noedit = true;
+                noEdit();//已经结束了 就不能聊天，不定时刷新了
+
+                //已结束，并且未评论的 才可以评论
+                if (data.getIscomment() == 0) {
+                    tvCommit.setVisibility(View.VISIBLE);
+                }
 
                 break;
 

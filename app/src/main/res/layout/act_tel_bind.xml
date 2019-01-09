@@ -13,7 +13,6 @@
         custom:mTitleBarText="手机号"
         custom:mTitleLeft="@mipmap/ic_arrow_left" />
 
-
     <RelativeLayout
         android:id="@+id/rlTel"
         android:layout_width="match_parent"
@@ -26,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="1623233434434"
+            android:inputType="phone"
             android:textColor="@color/txt_color_ma3"
             android:textSize="@dimen/textsize_18sp" />
 
