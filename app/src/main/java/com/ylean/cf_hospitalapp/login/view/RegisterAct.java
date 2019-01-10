@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.bean.Basebean;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
@@ -48,13 +49,24 @@ public class RegisterAct extends BaseActivity implements View.OnClickListener {
     private android.widget.CheckBox checkbox_select;
     private android.widget.TextView tv_info;
     private android.widget.TextView tv_vip_regist;
+    private String name;
+    private String gender;
+    private String type;
+    private String url;
+    private String openid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.act_register);
+        name = getIntent().getStringExtra("name");
+        gender = getIntent().getStringExtra("gender");
+        type = getIntent().getStringExtra("type");
+        url = getIntent().getStringExtra("url");
+        openid = getIntent().getStringExtra("openid");
 
+        Logger.d("name:" + name + ",gender:" + gender + ",type:" + type + ",url:" + url + ",openid:" + openid);
         initView();
 
     }
@@ -195,16 +207,8 @@ public class RegisterAct extends BaseActivity implements View.OnClickListener {
                                 showErr(message);
                             }
 
-                        }
-                        , SpValue.CH
-                        , et_registname.getText().toString()
-                        , ed_code.getText().toString()
-                        , ed_pwd.getText().toString()
-                        , ""
-                        , ""
-                        , ""
-                        , ""
-                        , "");
+                        }, SpValue.CH, et_registname.getText().toString(), ed_code.getText().toString()
+                        , ed_pwd.getText().toString(), name, openid, type, url, "");
 
     }
 

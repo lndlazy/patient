@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">好医无忧APP管理系统患者端</string>
+    <string name="app_name">好医无忧</string>
     <string name="s_one">首页</string>
     <string name="s_two">科普讲堂</string>
     <string name="s_three">问诊</string>

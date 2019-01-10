@@ -2,6 +2,7 @@ package com.ylean.cf_hospitalapp.net;
 
 
 import com.ylean.cf_hospitalapp.base.bean.AddBean;
+import com.ylean.cf_hospitalapp.home.bean.SearchListEntry;
 import com.ylean.cf_hospitalapp.home.bean.VideoSpeechDetailEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.AlipayEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.ChatEntry;
@@ -28,6 +29,7 @@ import com.ylean.cf_hospitalapp.my.bean.AreaEntry;
 import com.ylean.cf_hospitalapp.my.bean.BindEntry;
 import com.ylean.cf_hospitalapp.my.bean.CityEntry;
 import com.ylean.cf_hospitalapp.my.bean.CommentListEntry;
+import com.ylean.cf_hospitalapp.my.bean.DoctorDetailEntry;
 import com.ylean.cf_hospitalapp.my.bean.EvalDetailEntry;
 import com.ylean.cf_hospitalapp.my.bean.EvalListEntry;
 import com.ylean.cf_hospitalapp.my.bean.FamilyDetailEntry;
@@ -204,6 +206,21 @@ public interface ApiService {
     @POST("/api/app/patient/delhzfolk")
     Observable<Basebean> deleteFamilyNum(@Field("token") String token, @Field("ch") String ch, @Field("id") String id);
 
+    //第三方登录
+    @FormUrlEncoded
+    @POST("/api/app/patient/thirdLogin")
+    Observable<LoginEntry> thirdLogin(@Field("openid") String openid, @Field("dtype") String dtype, @Field("ch") String ch);
+
+    //绑定第三方登录
+    @FormUrlEncoded
+    @POST("/api/app/patient/bundling")
+    Observable<Basebean> bindThirdLogin(@Field("openid") String openid, @Field("dtype") String dtype, @Field("token") String token);
+
+    //退出登录
+    @FormUrlEncoded
+    @POST("/api/app/patient/signOut")
+    Observable<Basebean> exitApp(@Field("token") String token, @Field("ch") String ch);
+
     //全部疾病
     @FormUrlEncoded
     @POST("/api/app/consultation/getdistree")
@@ -259,6 +276,13 @@ public interface ApiService {
     @POST("/api/app/consultation/wechatpay")
     Observable<WxPayInfoEntry> wxPayInfo(@Field("token") String token, @Field("ch") String ch
             , @Field("groupnum") String groupnum);
+
+
+    //医生详细详细
+    @FormUrlEncoded
+    @POST("/api/app/hospital/getdoctordetail")
+    Observable<DoctorDetailEntry> doctorDetail(@Field("token") String token, @Field("ch") String ch
+            , @Field("doctorid") String doctorid);
 
 
     //支付宝支付数据获取
@@ -448,6 +472,30 @@ public interface ApiService {
     @POST("/api/app/checkin/getchecklist")
     Observable<PointsDetailEntry> pointsHistory(@Field("ch") String ch, @Field("token") String token
             , @Field("fromtype") String fromtype, @Field("page") int page, @Field("size") String size);
+
+    //搜索医生列表
+    @FormUrlEncoded
+    @POST("/api/app/doctor/searchdoctor")
+    Observable<SearchListEntry> searchDoctor(@Field("ch") String ch, @Field("name") String name
+            , @Field("hosptialid") String hosptialid, @Field("page") int page, @Field("size") String size);
+
+    //搜索医院列表
+    @FormUrlEncoded
+    @POST("/api/app/hospital/searchhospital")
+    Observable<SearchListEntry> searchHospital(@Field("ch") String ch, @Field("name") String name
+            , @Field("page") int page, @Field("size") String size);
+
+    //搜索文章列表
+    @FormUrlEncoded
+    @POST("/api/app/art/articlesearch")
+    Observable<SearchListEntry> searchArticle(@Field("ch") String ch, @Field("name") String name
+            , @Field("hosptialid") String hosptialid, @Field("page") int page, @Field("size") String size);
+
+    //搜索问诊列表
+    @FormUrlEncoded
+    @POST("/api/app/consultation/searchconsult")
+    Observable<SearchListEntry> searchInquiry(@Field("ch") String ch, @Field("name") String name
+            , @Field("hosptialid") String hosptialid, @Field("page") int page, @Field("size") String size);
 
     //精彩问诊
     @FormUrlEncoded

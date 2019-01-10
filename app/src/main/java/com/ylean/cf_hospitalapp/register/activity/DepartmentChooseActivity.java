@@ -15,6 +15,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.bean.Basebean;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.home.bean.SearchListEntry;
 import com.ylean.cf_hospitalapp.my.adapter.RegisterLeftAdapter;
 import com.ylean.cf_hospitalapp.my.adapter.RegisterRightAdapter;
 import com.ylean.cf_hospitalapp.net.ApiService;
@@ -49,6 +50,7 @@ public class DepartmentChooseActivity extends BaseActivity {
     private List<RegisterDeartmentListEntry.DataBean.MenzhenlistBean> menzhenlist = new ArrayList<>();
     private String departid;
     private String departname;
+    private SearchListEntry.DataBean hospitalSearchInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class DepartmentChooseActivity extends BaseActivity {
 
         setContentView(R.layout.act_department_choose);
         hospitalInfo = getIntent().getParcelableExtra("hospitalInfo");
+//        hospitalSearchInfo = getIntent().getParcelableExtra("hospitalSearchInfo");
         initView();
         getRegisterDeartment();
     }

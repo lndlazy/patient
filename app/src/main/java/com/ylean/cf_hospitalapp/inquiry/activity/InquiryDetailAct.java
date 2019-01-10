@@ -125,6 +125,7 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
     private void noEdit() {
         if (noedit) {
             llInput.setVisibility(View.GONE);
+            endInquiry.setVisibility(View.INVISIBLE);
         }
     }
 

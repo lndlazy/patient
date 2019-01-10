@@ -274,6 +274,8 @@ public class EvaluateActivity extends BaseActivity implements IEvaluateView, Vie
                 break;
             case 3://视频问诊
                 tvType.setText("视频问诊");
+            case 4://免费义诊
+                tvType.setText("免费问诊");
                 break;
         }
     }

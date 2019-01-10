@@ -1,7 +1,12 @@
 package com.ylean.cf_hospitalapp.login.view;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,21 +16,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.orhanobut.logger.Logger;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.ylean.cf_hospitalapp.R;
+import com.ylean.cf_hospitalapp.base.bean.Basebean;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
 import com.ylean.cf_hospitalapp.base.view.HomeActivity;
 import com.ylean.cf_hospitalapp.home.bean.LoginEntry;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
+import com.ylean.cf_hospitalapp.utils.DemoActivity;
 import com.ylean.cf_hospitalapp.utils.NumFormatUtils;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 
 import java.util.Map;
 
+import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -35,9 +47,9 @@ import io.reactivex.disposables.Disposable;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
+    private static final int REQUEST_PERMISSION_LOCATION_CODE = 0x12;
     private EditText et_username;
     private EditText ed_pwd;
-    private UMShareAPI umShareAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +57,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         setContentView(R.layout.act_login);
 
-        umShareAPI = UMShareAPI.get(this);
-
         initView();
+
+//        Logger.d("存储的token::" + (String) SaveUtils.get(this, SpValue.TOKEN, ""));
 
         if (!TextUtils.isEmpty((String) SaveUtils.get(this, SpValue.TOKEN, "")))
             nextActivityThenKill(HomeActivity.class);
 
+        //检查权限
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkLocationPer();
+        }
     }
 
     private void initView() {
@@ -89,6 +105,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         });
     }
 
+    /**
+     * 检查定位权限， 获取定位信息
+     */
+    private void checkLocationPer() {
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                ) {
+
+        } else {
+            //不具有定位权限，需要进行权限申请
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_LOCATION_CODE);
+        }
+
+    }
+
+
     @Override
     public void onClick(View v) {
 
@@ -114,18 +150,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
             case R.id.iv_qq:
 
-                umShareAPI.getPlatformInfo(this, SHARE_MEDIA.QQ, umAuthListener);//QQ登录
+                UMShareAPI.get(this).getPlatformInfo(this, SHARE_MEDIA.QQ, umAuthListener);//QQ登录
 
                 break;
 
             case R.id.iv_weixin:
 
-                umShareAPI.getPlatformInfo(this, SHARE_MEDIA.WEIXIN, umAuthListener);//weix
+                UMShareAPI.get(this).getPlatformInfo(this, SHARE_MEDIA.WEIXIN, umAuthListener);//weix
 
                 break;
 
             case R.id.iv_weibo:
-                umShareAPI.getPlatformInfo(this, SHARE_MEDIA.SINA, umAuthListener);//weix
+                UMShareAPI.get(this).getPlatformInfo(this, SHARE_MEDIA.SINA, umAuthListener);//weibo
 
                 break;
 
@@ -148,11 +184,72 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         @Override
         public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
 
-            String openId = map.get("uid");
-            String name = map.get("name");
-            String iconurl = map.get("iconurl");
-            String gender = map.get("gender");
+            //   dtype  0-微信 1-扣扣 2-微博
+            switch (share_media) {
+                case QQ:
+                    getThirdLogin(map.get("openid"), "1", map.get("name"), map.get("gender"), map.get("iconurl"));
+                    break;
+                case WEIXIN:
+                    getThirdLogin(map.get("openid"), "0", map.get("name"), map.get("gender"), map.get("iconurl"));
+                    break;
+                case SINA:
+                    getThirdLogin(map.get("id"), "2", map.get("name"), map.get("gender"), map.get("iconurl"));
+                    break;
 
+            }
+
+//
+///**
+// *  String uid = map.get("uid");
+// String openid = map.get("openid");//微博没有
+// String unionid = map.get("unionid");//微博没有
+// String access_token = map.get("access_token");
+// String refresh_token = map.get("refresh_token");//微信,qq,微博都没有获取到
+// String expires_in = map.get("expires_in");
+// String name = map.get("name");
+// String gender = map.get("gender");
+// String iconurl = map.get("iconurl");
+//
+// */
+//            String openId = map.get("uid");
+//            String name = map.get("name");
+//            String iconurl = map.get("iconurl");
+//
+//
+//            //qq
+//            String gender = map.get("gender");//性别  qq登录
+//            String openid = map.get("openid");//qq登录  Key = openid, Value = E510C8632D72B7FD8846F3831869C975
+//
+//            //Key = profile_image_url, Value = http://thirdqq.qlogo.cn/qqapp/1106735139/E510C8632D72B7FD8846F3831869C975/100
+//            //Key = iconurl, Value = http://thirdqq.qlogo.cn/qqapp/1106735139/E510C8632D72B7FD8846F3831869C975/100
+//            String profile_image_url = map.get("profile_image_url");
+////            String iconurl = map.get("iconurl");
+//            //Key = accessToken, Value = 85DC4F34DD5A9C0D2FF2D4DEAAA57176
+//            String accessToken = map.get("accessToken");
+//            String access_token = map.get("access_token");//与accessToken同值
+//            //Key = uid, Value = E510C8632D72B7FD8846F3831869C975
+//            String uid = map.get("uid");
+//            //Key = screen_name, Value = Aaron
+//            // Key = name, Value = Aaron
+//            String screen_name = map.get("screen_name");
+//            // Key = expiration, Value = 1554869795077
+//            String expiration = map.get("expiration");
+//            // Key = expires_in, Value = 1554869795077
+//            String expires_in = map.get("expires_in");
+//
+//
+//            //微博
+//            /*
+//             *
+//             *  Key = id, Value = 5928335579
+//             *  Key = screen_name, Value = AutoMasterLee
+//             *  Key = accessToken, Value = 2.00ntgMTG06PphWc9b7ceffffZ23OAE
+//             *  Key = access_token, Value = 2.00ntgMTG06PphWc9b7ceffffZ23OAE
+//             *  Key = name, Value = AutoMasterLee
+//             *  Key = expiration, Value = 1549738799441
+//             *  Key = gender, Value = 男
+//             *
+//             */
 
         }
 
@@ -171,7 +268,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
-
     }
 
     //检测输入内容
@@ -208,8 +304,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 //                Logger.d("登录成功缓存token：：" + loginEntry.getToken());
 
 //                SharedPreferences sp = getSharedPreferences(SaveUtils.CONFIG, Context.MODE_PRIVATE);
+                saveUserinfo(loginEntry);
 
-                SaveUtils.put(getApplicationContext(), SpValue.TOKEN, loginEntry.getToken());
+//                String data = loginEntry.getData();
 //                sp.edit().putString("patient_taken", loginEntry.getToken()).apply();
 //                Logger.d("存储的数据::" + sp.getString("patient_taken", ""));
                 nextActivityThenKill(HomeActivity.class);
@@ -225,4 +322,85 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }, SpValue.CH, et_username.getText().toString(), ed_pwd.getText().toString());
 
     }
+
+    //保存用户数据
+    private void saveUserinfo(LoginEntry loginEntry) {
+
+        String data = loginEntry.getData();
+
+        JSONObject objects = (JSONObject) JSONObject.parse(data);
+//        String hxname = objects.getString("hxname");
+//        Logger.d("hxname：：：：" + hxname);
+        SaveUtils.put(getApplicationContext(), SpValue.HX_NAME, objects.getString("hxname"));
+        SaveUtils.put(getApplicationContext(), SpValue.TOKEN, loginEntry.getToken());
+
+    }
+
+    //dtype  0-微信 1-扣扣 2-微博
+    private void getThirdLogin(String openid, String type, String name, String gender, String url) {
+
+        RetrofitHttpUtil.getInstance()
+                .thirdLogin(
+                        new Observer<LoginEntry>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+
+                                showLoading("获取中...");
+                            }
+
+                            @Override
+                            public void onNext(LoginEntry value) {
+
+                                hideLoading();
+                                if (value.getCode() == 0) {
+
+                                    saveUserinfo(value);
+                                    nextActivityThenKill(HomeActivity.class);
+
+                                } else {
+
+                                    Intent m = new Intent(LoginActivity.this, RegisterAct.class);
+                                    m.putExtra("name", name);
+                                    m.putExtra("gender", gender);
+                                    m.putExtra("type", type);
+                                    m.putExtra("url", url);
+                                    m.putExtra("openid", openid);
+                                    startActivity(m);
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                hideLoading();
+                                showErr(e.getMessage());
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        }, openid, type, SpValue.CH);
+//                        new BaseNoTObserver<Basebean>() {
+//                            @Override
+//                            public void onHandleSuccess(Basebean basebean) {
+//
+//                                Intent m = new Intent(LoginActivity.this, RegisterAct.class);
+//                                m.putExtra("name", name);
+//                                m.putExtra("gender", gender);
+//                                m.putExtra("type", type);
+//                                m.putExtra("url", url);
+//                                m.putExtra("openid", openid);
+//                                startActivity(m);
+//                            }
+//
+//                            @Override
+//                            public void onHandleError(String message) {
+//                                showErr(message);
+//                            }
+//
+//                        }, openid, type, SpValue.CH);
+    }
+
 }

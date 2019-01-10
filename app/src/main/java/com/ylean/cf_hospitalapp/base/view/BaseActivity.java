@@ -41,7 +41,7 @@ public class BaseActivity extends FragmentActivity implements BaseView {
         super.onCreate(savedInstanceState);
 
         // 竖屏锁定
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 //        sp = getSharedPreferences(SaveUtils.CONFIG, MODE_PRIVATE);
         bundle = getIntent().getBundleExtra("bundle");
         mapplication = (Mapplication) getApplication();

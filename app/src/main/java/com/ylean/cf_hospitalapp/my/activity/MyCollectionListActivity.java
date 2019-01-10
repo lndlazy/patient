@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.home.activity.ArtDetailAct;
+import com.ylean.cf_hospitalapp.home.activity.NewsActivity;
 import com.ylean.cf_hospitalapp.home.activity.VideoSpeechActivity;
 import com.ylean.cf_hospitalapp.my.adapter.MCollectionAdapter;
 import com.ylean.cf_hospitalapp.my.bean.MCollectionListEntry;
@@ -131,12 +133,22 @@ public class MyCollectionListActivity extends BaseActivity implements View.OnCli
                         startActivity(m);
                         break;
                     case "2":
+                        m = new Intent(MyCollectionListActivity.this, NewsActivity.class);
+                        m.putExtra("id", collectionList.get(position).getInformationid());
+                        startActivity(m);
                         break;
                     case "3":
+                        m = new Intent(MyCollectionListActivity.this, VideoSpeechActivity.class);
+                        m.putExtra("id", collectionList.get(position).getLiveid());
+                        m.putExtra("type", "1");
+                        startActivity(m);
                         break;
                     case "4":
                         break;
                     case "7":
+                        m = new Intent(MyCollectionListActivity.this, ArtDetailAct.class);
+                        m.putExtra("id", collectionList.get(position).getInformationid());
+                        startActivity(m);
                         break;
 
                 }

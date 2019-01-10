@@ -1,7 +1,9 @@
 package com.ylean.cf_hospitalapp.utils;
 
+import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.view.WindowManager;
 
 import java.text.DecimalFormat;
 
@@ -19,6 +21,17 @@ public class CommonUtils {
 
         ClipboardManager clip = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         clip.setText(txt);
+    }
+
+    /**
+     * 改变背景颜色
+     */
+    public static void darkenBackground(Float bgcolor, Activity context) {
+        WindowManager.LayoutParams lp = context.getWindow().getAttributes();
+        lp.alpha = bgcolor;
+        context.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        context.getWindow().setAttributes(lp);
+
     }
 
 

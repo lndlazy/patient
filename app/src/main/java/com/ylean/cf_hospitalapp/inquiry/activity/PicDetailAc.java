@@ -8,7 +8,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
-import com.ylean.cf_hospitalapp.photoView.PhotoViewAttacher;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 
 import me.panpf.sketch.SketchImageView;

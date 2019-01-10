@@ -2,6 +2,7 @@ package com.ylean.cf_hospitalapp.my.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -14,8 +15,13 @@ import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.orhanobut.logger.Logger;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.IPicPresenter;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
@@ -36,6 +42,7 @@ import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -91,6 +98,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         this.rlHeadPic = (RelativeLayout) findViewById(R.id.rlHeadPic);
         this.ivPhoto = (SimpleDraweeView) findViewById(R.id.ivPhoto);
         this.ivarr = (ImageView) findViewById(R.id.iv_arr);
+        TextView tv_submit = findViewById(R.id.tv_submit);
+
         TitleBackBarView tbv = (TitleBackBarView) findViewById(R.id.tbv);
         tbv.setOnLeftClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +117,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         eivSex.setOnClickListener(this);
         rlHeadPic.setOnClickListener(this);
         tvnickname.setOnClickListener(this);
+        tv_submit.setOnClickListener(this);
 
         if (myInfoEntryData != null) {
             ivPhoto.setImageURI(Uri.parse(ApiService.WEB_ROOT + myInfoEntryData.getImgurl()));
@@ -149,7 +159,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
                 break;
 
-            case R.id.wechat:
+            case R.id.wechat://绑定第三方登录
+
+                showThirdLogin();
                 break;
 
             case R.id.bindTel://绑定手机号
@@ -167,7 +179,56 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 showPicChoose();
                 break;
 
+            case R.id.tv_submit://退出登录
+
+                exitApp();
+
+                break;
+
         }
+
+    }
+
+    //第三方登录
+    private void showThirdLogin() {
+
+        new ActionSheetDialog(this)
+                .builder()
+                .setCancelable(true)
+                .setCanceledOnTouchOutside(true)
+                .addSheetItem("微信", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                UMShareAPI.get(SettingActivity.this).getPlatformInfo(SettingActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener);//weix
+                            }
+
+                        })
+                .addSheetItem("QQ", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                UMShareAPI.get(SettingActivity.this).getPlatformInfo(SettingActivity.this, SHARE_MEDIA.QQ, umAuthListener);//QQ登录
+                            }
+                        })
+                .addSheetItem("微博", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                UMShareAPI.get(SettingActivity.this).getPlatformInfo(SettingActivity.this, SHARE_MEDIA.SINA, umAuthListener);//weibo
+                            }
+                        }).show();
+
+    }
+
+    //退出app
+    private void exitApp() {
+
+        String token = (String) SaveUtils.get(this, SpValue.TOKEN, "");
+        SharedPreferences sp = getSharedPreferences(SaveUtils.CONFIG, MODE_PRIVATE);
+        sp.edit().clear().apply();
+
+        iSettingPres.exitApp(token);
 
     }
 
@@ -287,7 +348,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
 
             case 0x91:
@@ -432,4 +493,111 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         }
 
     }
+
+    UMAuthListener umAuthListener = new UMAuthListener() {
+        @Override
+        public void onStart(SHARE_MEDIA share_media) {
+
+        }
+
+        @Override
+        public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+
+            //   dtype  0-微信 1-扣扣 2-微博
+            switch (share_media) {
+                case QQ:
+
+                    iSettingPres.bindThirdLogin((String) SaveUtils.get(SettingActivity.this, SpValue.TOKEN, "")
+                            , map.get("openid"), "1", map.get("name"), map.get("gender"), map.get("iconurl"));
+                    break;
+                case WEIXIN:
+                    iSettingPres.bindThirdLogin((String) SaveUtils.get(SettingActivity.this, SpValue.TOKEN, "")
+                            , map.get("openid"), "0", map.get("name"), map.get("gender"), map.get("iconurl"));
+                    break;
+                case SINA:
+                    iSettingPres.bindThirdLogin((String) SaveUtils.get(SettingActivity.this, SpValue.TOKEN, "")
+                            , map.get("id"), "2", map.get("name"), map.get("gender"), map.get("iconurl"));
+                    break;
+
+            }
+
+//
+///**
+// *  String uid = map.get("uid");
+// String openid = map.get("openid");//微博没有
+// String unionid = map.get("unionid");//微博没有
+// String access_token = map.get("access_token");
+// String refresh_token = map.get("refresh_token");//微信,qq,微博都没有获取到
+// String expires_in = map.get("expires_in");
+// String name = map.get("name");
+// String gender = map.get("gender");
+// String iconurl = map.get("iconurl");
+//
+// */
+//            String openId = map.get("uid");
+//            String name = map.get("name");
+//            String iconurl = map.get("iconurl");
+//
+//
+//            //qq
+//            String gender = map.get("gender");//性别  qq登录
+//            String openid = map.get("openid");//qq登录  Key = openid, Value = E510C8632D72B7FD8846F3831869C975
+//
+//            //Key = profile_image_url, Value = http://thirdqq.qlogo.cn/qqapp/1106735139/E510C8632D72B7FD8846F3831869C975/100
+//            //Key = iconurl, Value = http://thirdqq.qlogo.cn/qqapp/1106735139/E510C8632D72B7FD8846F3831869C975/100
+//            String profile_image_url = map.get("profile_image_url");
+////            String iconurl = map.get("iconurl");
+//            //Key = accessToken, Value = 85DC4F34DD5A9C0D2FF2D4DEAAA57176
+//            String accessToken = map.get("accessToken");
+//            String access_token = map.get("access_token");//与accessToken同值
+//            //Key = uid, Value = E510C8632D72B7FD8846F3831869C975
+//            String uid = map.get("uid");
+//            //Key = screen_name, Value = Aaron
+//            // Key = name, Value = Aaron
+//            String screen_name = map.get("screen_name");
+//            // Key = expiration, Value = 1554869795077
+//            String expiration = map.get("expiration");
+//            // Key = expires_in, Value = 1554869795077
+//            String expires_in = map.get("expires_in");
+//
+//
+//            //微博
+//            /*
+//             *
+//             *  Key = id, Value = 5928335579
+//             *  Key = screen_name, Value = AutoMasterLee
+//             *  Key = accessToken, Value = 2.00ntgMTG06PphWc9b7ceffffZ23OAE
+//             *  Key = access_token, Value = 2.00ntgMTG06PphWc9b7ceffffZ23OAE
+//             *  Key = name, Value = AutoMasterLee
+//             *  Key = expiration, Value = 1549738799441
+//             *  Key = gender, Value = 男
+//             *
+//             */
+
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA share_media, int i) {
+
+        }
+    };
+
+    @Override
+    public void exitSuccess() {
+
+        System.exit(0);
+    }
+
+    @Override
+    public void bindSuccess(String name, String gender, String iconurl) {
+        if (gender.equals(""))
+            iSettingPres.updateInfo((String) SaveUtils.get(SettingActivity.this, SpValue.TOKEN, "")
+                    , iconurl, name, "", "男".equals(gender) ? "1" : "2", "", "");
+    }
+
 }

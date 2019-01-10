@@ -1,11 +1,9 @@
 package com.ylean.cf_hospitalapp.base;
 
-import android.annotation.TargetApi;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.util.Config;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.lzy.imagepicker.ImagePicker;
@@ -14,15 +12,10 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
-import com.umeng.commonsdk.UMConfigure;
+import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareConfig;
-import com.ylean.cf_hospitalapp.base.bean.Basebean;
-import com.ylean.cf_hospitalapp.home.bean.LoginEntry;
-import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
-import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
-import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.PicassoImageLoader;
 
@@ -32,13 +25,7 @@ import java.util.Locale;
 
 public class Mapplication extends Application {
 
-    private String TAG = "PATIENT_APP";
-
-//    private static Context context = getContext();
-//
-//    public static Context getContext() {
-//        return context;
-//    }
+    private static final String TAG = "PATIENT_APP";
 
     @Override
     public void onCreate() {
@@ -50,25 +37,15 @@ public class Mapplication extends Application {
 //        Logger.d("sha1值::" + sHA1(this));
 
         initPicChoose();
-
-        //初始化友盟SDK
-//        UMShareAPI.get(this);//初始化sd
-        UMConfigure.init(this, "5ade89768f4a9d7a320001ef", "Planet", UMConfigure.DEVICE_TYPE_PHONE,"");
-
         /**
          * 友盟
          * */
-//        Config.DEBUG = true;
-//        UMShareAPI.get(this);
-        UMConfigure.setLogEnabled(true);
-
+        Config.DEBUG = true;
+        UMShareAPI.get(this);//初始化sdk
         //三方登录
         PlatformConfig.setWeixin(SpValue.WX_APP_ID, SpValue.WX_APP_SECRET);
         PlatformConfig.setQQZone(SpValue.QQ_APP_ID, SpValue.QQ_APP_KEY);
-        PlatformConfig.setSinaWeibo(SpValue.WB_APP_ID,SpValue.WB_APP_SECRET,"https://sns.whalecloud.com/sina2/callback");
-        UMShareConfig config = new UMShareConfig();
-        config.isNeedAuthOnGetUserInfo(true);
-        UMShareAPI.get(this).setShareConfig(config);
+        PlatformConfig.setSinaWeibo(SpValue.WB_APP_ID, SpValue.WB_APP_SECRET, "https://sns.whalecloud.com/sina2/callback");
 
 
 //        RetrofitHttpUtil.getInstance().loginIn(new BaseNoTObserver<LoginEntry>() {

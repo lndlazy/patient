@@ -367,6 +367,33 @@ public class RetrofitHttpUtil {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 第三方登录
+     */
+    public void thirdLogin(Observer subscriber, String openid, String dtype, String ch) {
+        getService().thirdLogin(openid, dtype, ch)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 绑定第三方登录
+     */
+    public void bindThirdLogin(Observer subscriber, String openid, String dtype, String token) {
+        getService().bindThirdLogin(openid, dtype, token)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 退出登录
+     */
+    public void exitApp(Observer subscriber, String token, String ch) {
+        getService().exitApp(token, ch)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+    }
+
 
     /**
      * 获取全部疾病
@@ -437,6 +464,16 @@ public class RetrofitHttpUtil {
      */
     public void wxPayInfo(Observer subscriber, String token, String ch, String groupnum) {
         getService().wxPayInfo(token, ch, groupnum)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 医生详情
+     */
+    public void doctorDetail(Observer subscriber, String token, String ch, String doctorid) {
+        getService().doctorDetail(token, ch, doctorid)
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
 
@@ -736,6 +773,46 @@ public class RetrofitHttpUtil {
      */
     public void pointsHistory(Observer subscriber, String ch, String token, String fromtype, int page, String size) {
         getService().pointsHistory(ch, token, fromtype, page, size)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 搜索医生列表
+     */
+    public void searchDoctor(Observer subscriber, String ch, String name, String hosptialid, int page, String size) {
+        getService().searchDoctor(ch, name, hosptialid, page, size)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 搜索问诊列表
+     */
+    public void searchInquiry(Observer subscriber, String ch, String name, String hosptialid, int page, String size) {
+        getService().searchInquiry(ch, name, hosptialid, page, size)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 搜索文章列表
+     */
+    public void searchArticle(Observer subscriber, String ch, String name, String hosptialid, int page, String size) {
+        getService().searchArticle(ch, name, hosptialid, page, size)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 搜索医院列表
+     */
+    public void searchHospital(Observer subscriber, String ch, String name, int page, String size) {
+        getService().searchHospital(ch, name, page, size)
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
 

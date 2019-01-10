@@ -92,7 +92,6 @@ public class EditPicView extends LinearLayout {
                 }
             });
 
-
             typedArray.recycle();
         }
 

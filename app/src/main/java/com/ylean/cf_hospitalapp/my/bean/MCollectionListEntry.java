@@ -143,8 +143,17 @@ public class MCollectionListEntry extends Basebean{
         private String praisenum;
         private String timedesc;
         private String title;
+        private String informationid;
         private String titlename;
         private String type;
+
+        public String getInformationid() {
+            return informationid;
+        }
+
+        public void setInformationid(String informationid) {
+            this.informationid = informationid;
+        }
 
         public String getType() {
             return type;
@@ -271,6 +280,7 @@ public class MCollectionListEntry extends Basebean{
             dest.writeString(this.praisenum);
             dest.writeString(this.timedesc);
             dest.writeString(this.title);
+            dest.writeString(this.informationid);
             dest.writeString(this.titlename);
             dest.writeString(this.type);
         }
@@ -287,6 +297,7 @@ public class MCollectionListEntry extends Basebean{
             this.praisenum = in.readString();
             this.timedesc = in.readString();
             this.title = in.readString();
+            this.informationid = in.readString();
             this.titlename = in.readString();
             this.type = in.readString();
         }

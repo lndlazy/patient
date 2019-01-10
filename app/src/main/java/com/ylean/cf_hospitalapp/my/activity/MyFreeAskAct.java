@@ -1,5 +1,6 @@
 package com.ylean.cf_hospitalapp.my.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,6 +13,7 @@ import android.view.View;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
 import com.ylean.cf_hospitalapp.base.view.HomeActivity;
+import com.ylean.cf_hospitalapp.inquiry.activity.InquiryDetailAct;
 import com.ylean.cf_hospitalapp.my.bean.MyAskReusltList;
 import com.ylean.cf_hospitalapp.my.adapter.AskAdapter;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
@@ -19,6 +21,7 @@ import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
+import com.ylean.cf_hospitalapp.widget.swipe.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +79,6 @@ public class MyFreeAskAct extends BaseActivity implements SwipeRefreshLayout.OnR
         askAdapter = new AskAdapter(this, myAskResultList, SpValue.ASK_TYPE_FREE);
         readRecyclerView.setAdapter(askAdapter);
 
-
         readRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
@@ -99,6 +101,24 @@ public class MyFreeAskAct extends BaseActivity implements SwipeRefreshLayout.OnR
 
             }
 
+        });
+
+        readRecyclerView.addOnItemTouchListener(new OnItemClickListener(readRecyclerView) {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
+
+                Intent m = new Intent(MyFreeAskAct.this, InquiryDetailAct.class);
+                m.putExtra("noedit", true);
+                m.putExtra("consultaid", myAskResultList.get(position).getConsultaid());
+                m.putExtra("hospitalName", myAskResultList.get(position).getHospitalname());
+                m.putExtra("askType", 1);
+                startActivity(m);
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
         });
     }
 

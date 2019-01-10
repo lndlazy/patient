@@ -57,8 +57,10 @@
                 android:id="@+id/etSearchInfo"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:imeOptions="actionSearch"
                 android:layout_marginLeft="@dimen/x8"
                 android:layout_weight="1"
+
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:singleLine="true"
@@ -77,13 +79,13 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvStartSearch"
+            android:id="@+id/tvcancle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/x8"
             android:paddingRight="@dimen/x8"
-            android:text="@string/search"
+            android:text="@string/cp_cancel"
             android:textColor="@color/tab_colorf9"
             android:textSize="@dimen/textsize_16sp" />
 
@@ -92,17 +94,88 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="1dp"
         android:layout_marginTop="@dimen/x5"
         android:background="@color/line_colore5" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x40"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="文章"
+            android:textColor="@color/color_select_blue_black"
+            android:textSize="@dimen/textsize_14sp" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginTop="@dimen/x8"
+            android:background="@color/line_colore5" />
+
+        <TextView
+            android:id="@+id/tvInqu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="问诊"
+            android:textColor="@color/color_select_blue_black"
+            android:textSize="@dimen/textsize_14sp" />
+
+        <ImageView
+
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginTop="@dimen/x8"
+            android:background="@color/line_colore5" />
+
+        <TextView
+            android:id="@+id/tvDoct"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="医生"
+            android:textColor="@color/color_select_blue_black"
+            android:textSize="@dimen/textsize_14sp" />
+
+        <ImageView
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginTop="@dimen/x8"
+            android:background="@color/line_colore5" />
+
+        <TextView
+            android:id="@+id/tvHosp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="医院"
+            android:textColor="@color/color_select_blue_black"
+            android:textSize="@dimen/textsize_14sp" />
+
+    </LinearLayout>
+
+    <include layout="@layout/line_gray" />
 
     <RelativeLayout
         android:id="@+id/rlHistory"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x30"
         android:layout_marginLeft="@dimen/x10"
-        android:layout_marginTop="@dimen/x10"
-        android:layout_marginRight="@dimen/x10">
+        android:layout_marginRight="@dimen/x10"
+        android:layout_marginTop="@dimen/x10">
 
         <TextView
             android:layout_width="wrap_content"
@@ -110,7 +183,6 @@
             android:gravity="center_vertical"
             android:text="@string/history"
             android:textColor="@color/txt_color_light9" />
-
 
         <ImageView
             android:id="@+id/ivDelete"

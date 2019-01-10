@@ -64,9 +64,7 @@
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
 
-
         <activity android:name=".utils.DemoActivity">
-
 
         </activity>
 
@@ -129,14 +127,14 @@
         </activity>
 
         <activity
-            android:name=".home.activity.SearchActivity"
+            android:name=".home.activity.SearchResultActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait">
 
         </activity>
 
         <activity
-            android:name=".inquiry.activity.ChargeAskActivity"
+            android:name=".inquiry.activity.ChargeChooseDoctorActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait">
 
@@ -256,19 +254,6 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
 
-        <!--&lt;!&ndash;微信支付&ndash;&gt;-->
-        <!--<activity-->
-        <!--android:name=".wxapi.WXPayEntryActivity"-->
-        <!--android:exported="true"-->
-        <!--android:launchMode="singleTop">-->
-
-        <!--<intent-filter>-->
-        <!--<action android:name="android.intent.action.VIEW" />-->
-        <!--<category android:name="android.intent.category.DEFAULT" />-->
-        <!--<data android:scheme="wx938a108ab5898c2e" />-->
-        <!--</intent-filter>-->
-
-        <!--</activity>-->
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
@@ -283,25 +268,25 @@
         </activity>
 
         <!--QQ-->
-        <activity
-            android:name="com.tencent.tauth.AuthActivity"
-            android:launchMode="singleTask"
-            android:noHistory="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+        <!--<activity-->
+        <!--android:name="com.tencent.tauth.AuthActivity"-->
+        <!--android:launchMode="singleTask"-->
+        <!--android:noHistory="true">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.VIEW" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+        <!--<category android:name="android.intent.category.DEFAULT" />-->
+        <!--<category android:name="android.intent.category.BROWSABLE" />-->
 
-                <data android:scheme="101487823" />
-            </intent-filter>
-        </activity>
+        <!--<data android:scheme="tencent1106735139" />-->
+        <!--</intent-filter>-->
+        <!--</activity>-->
 
-        <activity
-            android:name="com.tencent.connect.common.AssistActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--<activity-->
+        <!--android:name="com.tencent.connect.common.AssistActivity"-->
+        <!--android:configChanges="orientation|keyboardHidden|screenSize"-->
+        <!--android:screenOrientation="portrait"-->
+        <!--android:theme="@android:style/Theme.Translucent.NoTitleBar" />-->
 
         <!--微信-->
         <activity
@@ -318,21 +303,40 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--qq精简版-->
         <activity
-            android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
+            android:name="com.umeng.qq.tencent.AuthActivity"
             android:launchMode="singleTask"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+            android:noHistory="true">
             <intent-filter>
-                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!--这里的scheme是qq分享要用的，100424468为自己申请的appid，真实项目中需要替换-->
+                <data android:scheme="tencent100424468" />
+            </intent-filter>
         </activity>
+        <activity
+            android:name="com.umeng.qq.tencent.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--<activity-->
+        <!--android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"-->
+        <!--android:configChanges="keyboardHidden|orientation"-->
+        <!--android:exported="false"-->
+        <!--android:windowSoftInputMode="adjustResize" />-->
+        <!--<activity-->
+        <!--android:name="com.sina.weibo.sdk.share.WbShareTransActivity"-->
+        <!--android:launchMode="singleTask"-->
+        <!--android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />-->
+        <!--<category android:name="android.intent.category.DEFAULT" />-->
+        <!--</intent-filter>-->
+
+        <!--</activity>-->
 
 
         <!--友盟key-->
@@ -608,6 +612,13 @@
             android:name=".my.activity.ChangeNicknameActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".home.activity.SearchingAcivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name=".my.activity.DoctorDetailActivity" />
 
 
         <!--<activity android:name=".register.activity.HospitalDetailActivity" />-->

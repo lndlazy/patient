@@ -23,6 +23,8 @@ import com.ylean.cf_hospitalapp.utils.SpValue;
 
 import java.io.File;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by linaidao on 2019/1/2.
  */
@@ -60,7 +62,7 @@ public class ISettingPres {
                             @Override
                             public void onHandleSuccess(BindEntry bindEntry) {
 
-                                if (bindEntry!=null && bindEntry.getData()!=null) {
+                                if (bindEntry != null && bindEntry.getData() != null) {
                                     iSettingView.bindInfo(bindEntry.getData());
                                 }
 
@@ -75,7 +77,7 @@ public class ISettingPres {
 
     }
 
-    //修改个人信息
+    //修改个人信息 1-男 2-女
     public void updateInfo(String token, final String imgUrl, final String name, final String birthday, final String sex
             , final String location, final String address) {
 
@@ -228,4 +230,56 @@ public class ISettingPres {
             return Uri.fromFile(new File(picturePath));
 
     }
+
+    //退出app
+    public void exitApp(String token) {
+
+        RetrofitHttpUtil.getInstance()
+                .exitApp(
+                        new BaseNoTObserver<Basebean>() {
+
+                            @Override
+                            public void onSubscribe(Disposable d) {
+                                super.onSubscribe(d);
+                                iSettingView.showLoading("正在退出...");
+                            }
+
+                            @Override
+                            public void onHandleSuccess(Basebean basebean) {
+                                iSettingView.hideLoading();
+                                iSettingView.exitSuccess();
+                            }
+
+                            @Override
+                            public void onHandleError(String message) {
+                                iSettingView.hideLoading();
+                                iSettingView.showErr(message);
+                            }
+
+                        }, token, SpValue.CH);
+    }
+
+
+    //绑定第三方登录
+    public void bindThirdLogin(String token, String openId, String type, String name, String gender, String iconurl) {
+
+        RetrofitHttpUtil.getInstance()
+                .bindThirdLogin(
+                        new BaseNoTObserver<Basebean>() {
+                            @Override
+                            public void onHandleSuccess(Basebean basebean) {
+
+                                iSettingView.showErr("绑定成功");
+                                iSettingView.bindSuccess(name, gender, iconurl);
+
+                            }
+
+                            @Override
+                            public void onHandleError(String message) {
+                                iSettingView.showErr(message);
+                            }
+                        }, openId, type, token);
+
+    }
+
 }

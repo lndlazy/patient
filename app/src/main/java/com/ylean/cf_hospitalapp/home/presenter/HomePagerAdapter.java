@@ -11,6 +11,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.home.activity.NewsActivity;
 import com.ylean.cf_hospitalapp.home.bean.BannerBean;
+import com.ylean.cf_hospitalapp.my.activity.WebviewActivity;
 import com.ylean.cf_hospitalapp.net.ApiService;
 
 import java.util.ArrayList;
@@ -53,13 +54,24 @@ public class HomePagerAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
 
-                Intent m = new Intent(context, NewsActivity.class);
-                m.putExtra("id", bannerList.get(position).getId());
-                context.startActivity(m);
+                switch (bannerList.get(position).getType()) {
 
+                    case "-1"://不需要跳转
+                        break;
+
+                    case "1"://外部链接
+                        Intent m = new Intent(context, WebviewActivity.class);
+                        m.putExtra("url", bannerList.get(position).getUrl());
+                        m.putExtra("title", "详情");
+                        context.startActivity(m);
+                        break;
+
+                    case "2"://医生详情 TODO
+                        break;
+
+                }
             }
         });
-
 
         return view;
     }

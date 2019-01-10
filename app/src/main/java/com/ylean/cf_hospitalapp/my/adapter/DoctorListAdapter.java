@@ -1,15 +1,18 @@
 package com.ylean.cf_hospitalapp.my.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
+import com.ylean.cf_hospitalapp.my.activity.DoctorDetailActivity;
 import com.ylean.cf_hospitalapp.my.bean.MyDoctorListEntry;
 import com.ylean.cf_hospitalapp.my.presenter.IDoctorListPres;
 import com.ylean.cf_hospitalapp.net.ApiService;
@@ -41,7 +44,7 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(DoctorListAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(DoctorListAdapter.MyViewHolder holder, int position) {
 
         holder.sdvImg.setImageURI(Uri.parse(ApiService.WEB_ROOT + myDoctorList.get(position).getImgurl()));
         holder.tvName.setText(myDoctorList.get(position).getDocname());
@@ -49,7 +52,17 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.My
                 + "  " + myDoctorList.get(position).getDtitlename());
         holder.tvHospitalName.setText(myDoctorList.get(position).getHospital());
         holder.tvIntroduce.setText(myDoctorList.get(position).getAdeptdesc());
+        holder.rldoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+//                holder.getAdapterPosition();
+                Intent m = new Intent(context, DoctorDetailActivity.class);
+                m.putExtra("doctorId", myDoctorList.get(holder.getAdapterPosition()).getDoctorid());
+                context.startActivity(m);
+
+            }
+        });
         //是否关注 0 否 1 是
         switch (myDoctorList.get(position).getIsconsult()) {
 
@@ -75,14 +88,14 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.My
             @Override
             public void onClick(View v) {
 
-                if ("0".equals(myDoctorList.get(position).getIsconsult())) {
+                if ("0".equals(myDoctorList.get(holder.getAdapterPosition()).getIsconsult())) {
                     //关注医生
-                    iDoctorListPres.attentionDoctor(myDoctorList.get(position).getDoctorid()
-                            , (String) SaveUtils.get(context, SpValue.TOKEN, ""),DoctorListAdapter.this, position);
-                } else if ("1".equals(myDoctorList.get(position).getIsconsult())) {
+                    iDoctorListPres.attentionDoctor(myDoctorList.get(holder.getAdapterPosition()).getDoctorid()
+                            , (String) SaveUtils.get(context, SpValue.TOKEN, ""), DoctorListAdapter.this, holder.getAdapterPosition());
+                } else if ("1".equals(myDoctorList.get(holder.getAdapterPosition()).getIsconsult())) {
                     //取消关注
-                    iDoctorListPres.noAttentionDoctor(myDoctorList.get(position).getDoctorid()
-                            , (String) SaveUtils.get(context, SpValue.TOKEN, ""), DoctorListAdapter.this, position);
+                    iDoctorListPres.noAttentionDoctor(myDoctorList.get(holder.getAdapterPosition()).getDoctorid()
+                            , (String) SaveUtils.get(context, SpValue.TOKEN, ""), DoctorListAdapter.this, holder.getAdapterPosition());
                 }
 
             }
@@ -109,6 +122,7 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.My
         TextView tvHospitalName;
         TextView tvIntroduce;
         TextView tvAttention;
+        RelativeLayout rldoctor;
 
         MyViewHolder(View view) {
             super(view);
@@ -118,6 +132,7 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.My
             tvHospitalName = view.findViewById(R.id.tvHospitalName);
             tvIntroduce = view.findViewById(R.id.tvIntroduce);
             tvAttention = view.findViewById(R.id.tvAttention);
+            rldoctor = view.findViewById(R.id.rldoctor);
         }
     }
 }

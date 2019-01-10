@@ -36,19 +36,13 @@ public class NewsActivity extends BaseActivity {
         this.wb = findViewById(R.id.wb);
         this.tbv = (TitleBackBarView) findViewById(R.id.tbv);
 
-
         id = getIntent().getStringExtra("id");
-
-//        infoDetail();
-
 
         MyWebViewClient client = new MyWebViewClient();
 
         WebSettings settings = wb.getSettings();
-
         settings.setDomStorageEnabled(true);
         settings.setJavaScriptEnabled(true);
-
         wb.setWebViewClient(client);
 
         wb.setWebChromeClient(new WebChromeClient());

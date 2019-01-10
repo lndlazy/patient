@@ -520,7 +520,7 @@ public class FreeAskDoctorListActivity extends BaseActivity implements View.OnCl
         if (roomRightAdapter != null)
             roomRightAdapter.notifyDataSetChanged();
 
-//        iPayPresenter.doctorTypeList(ChargeAskActivity.this, searchname, departid, doctitleid, hosgradid, asktype
+//        iPayPresenter.doctorTypeList(ChargeChooseDoctorActivity.this, searchname, departid, doctitleid, hosgradid, asktype
 //                , sorttype, page, size);
     }
 

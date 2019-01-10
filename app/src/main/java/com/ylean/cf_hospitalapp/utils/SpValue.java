@@ -6,6 +6,14 @@ public interface SpValue {
     String PAGE_SIZE = "15";
 
     String TOKEN = "paient_token";//token
+    String HX_NAME = "HX_NAME";//token
+    String USER_PIC = "USER_PIC";//头像
+    String USER_GENDER = "USER_GENDER";//性别
+    String USER_NICKNAME = "USER_NICKNAME";//昵称
+    String USER_ID = "USER_ID";//userid
+    String USER_PATIENT_ID = "USER_PATIENT_ID";//patientid
+    String USER_PHONE = "USER_PHONE";//手机号
+    String ID = "ID";//id
 
     String USER_IMG = "user_img";//用户头像
 
@@ -97,8 +105,10 @@ public interface SpValue {
     String QQ_APP_ID = "1106735139";
     String QQ_APP_KEY = "quxxPP5R47mwxCAX";
     // WX_APP_ID替换为你的应用从官方网站申请到的合法appId
-    String WX_APP_ID = "wx938a108ab5898c2e";//TODO 微信id
+//    String WX_APP_ID = "wxbf509e0d834bc8fa";//  微信id
+    String WX_APP_ID = "wx938a108ab5898c2e";//  微信id
     // 自己微信应用的 appSecret
+//    String WX_APP_SECRET = "59d80d4f92d0b09dc231df25f5ad22cd";
     String WX_APP_SECRET = "58e66b8d1ff6c2f4bdb440cae4d6a5dc";
 
     String WB_APP_ID = "483287855";

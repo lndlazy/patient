@@ -23,13 +23,10 @@ import android.widget.TextView;
 import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.bean.AddBean;
-import com.ylean.cf_hospitalapp.base.bean.Basebean;
 import com.ylean.cf_hospitalapp.base.view.BaseFragment;
-import com.ylean.cf_hospitalapp.home.activity.AnswerDetailAct;
 import com.ylean.cf_hospitalapp.home.activity.ArtDetailAct;
 import com.ylean.cf_hospitalapp.home.activity.LocationActivity;
-import com.ylean.cf_hospitalapp.home.activity.SearchActivity;
-import com.ylean.cf_hospitalapp.home.activity.SpeechAct;
+import com.ylean.cf_hospitalapp.home.activity.SearchingAcivity;
 import com.ylean.cf_hospitalapp.home.activity.VideoSpeechActivity;
 import com.ylean.cf_hospitalapp.home.bean.BannerBean;
 import com.ylean.cf_hospitalapp.home.presenter.HomeAdapter;
@@ -40,7 +37,6 @@ import com.ylean.cf_hospitalapp.inquiry.bean.RecommendEntry;
 import com.ylean.cf_hospitalapp.my.activity.MyNewsListActivity;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
-import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.swipe.OnItemClickListener;
@@ -62,7 +58,7 @@ import retrofit2.converter.fastjson.FastJsonConverterFactory;
 
 public class FragmentOne extends BaseFragment implements View.OnClickListener, IFragmentOneView {
 
-    //    , SwipeRefreshLayout.OnRefreshListener
+    //SwipeRefreshLayout.OnRefreshListener
     private static final int CODE_CHOOSE_LOCATION = 0x01;
     private static final int CODE_CHOOSE_LOCATION_RESULT = 0x02;
     private static final int REQUEST_PERMISSION_OTHER_CODE = 0x03;
@@ -130,7 +126,7 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
 //        setCurrentPosition(0);
         initView(view);
 
-        //检查定位权限
+        //检查权限
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //            checkOtherPer();
             checkLocationPer();
@@ -142,14 +138,13 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
     private void initView(View view) {
 
 //        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-
 //        swipeRefreshLayout.setOnRefreshListener(this);
+
         LinearLayout llLocation = view.findViewById(R.id.llLocation);
         LinearLayout llSearch = view.findViewById(R.id.llSearch);
 
         tvLocation = view.findViewById(R.id.tvLocation);
-      ImageView ivnews = view.findViewById(R.id.ivnews);
-
+        ImageView ivnews = view.findViewById(R.id.ivnews);
 
         llLocation.setOnClickListener(this);
         llSearch.setOnClickListener(this);
@@ -321,7 +316,7 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
 
             case R.id.llSearch://搜索
 
-                nextActivity(SearchActivity.class);
+                nextActivity(SearchingAcivity.class);
 
                 break;
 
@@ -504,6 +499,22 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
 
 //        }
 //        loadedPosition.add(position);
+
+
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        Logger.d("======onDestroyView=======");
+
+        currentPosition = 0;
+
+        pageOne = 1;
+        pageTwo = 1;
+        pageThree = 1;
 
 
     }

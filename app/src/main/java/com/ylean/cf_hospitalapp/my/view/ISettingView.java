@@ -1,6 +1,5 @@
 package com.ylean.cf_hospitalapp.my.view;
 
-import com.ylean.cf_hospitalapp.base.view.BaseView;
 import com.ylean.cf_hospitalapp.my.bean.BindEntry;
 
 /**
@@ -22,4 +21,8 @@ public interface ISettingView extends TakePhotoView {
     void setAddress(String address);
 
     void bindInfo(BindEntry.DataBean data);
+
+    void exitSuccess();
+
+    void bindSuccess(String name, String gender, String iconurl);
 }

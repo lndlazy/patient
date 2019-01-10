@@ -16,8 +16,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.home.FragmentOne;
+import com.ylean.cf_hospitalapp.inquiry.activity.ChargeChooseDoctorActivity;
 import com.ylean.cf_hospitalapp.inquiry.bean.RecommendEntry;
-import com.ylean.cf_hospitalapp.inquiry.activity.ChargeAskActivity;
 import com.ylean.cf_hospitalapp.inquiry.activity.PayTWActivity;
 import com.ylean.cf_hospitalapp.home.bean.BannerBean;
 import com.ylean.cf_hospitalapp.net.ApiService;
@@ -255,7 +255,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                 break;
 
             case R.id.llCharge://付费问诊
-                Intent m = new Intent(context, ChargeAskActivity.class);
+                Intent m = new Intent(context, ChargeChooseDoctorActivity.class);
                 m.putExtra("askType", SpValue.ASK_CHARGE);
                 context.startActivity(m);
                 break;
