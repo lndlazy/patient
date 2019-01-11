@@ -15,8 +15,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
 import com.ylean.cf_hospitalapp.base.view.HomeActivity;
-import com.ylean.cf_hospitalapp.my.activity.MyFreeAskAct;
-import com.ylean.cf_hospitalapp.my.activity.MyRegisteredAct;
+import com.ylean.cf_hospitalapp.my.activity.MyInquiryListActivity;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 
@@ -132,13 +131,13 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 
             case R.id.checkOrder://查看订单
 
-                nextActivity(MyRegisteredAct.class);
+                nextActivity(MyInquiryListActivity.class);
 
                 break;
 
             case R.id.watch://查看我的问诊
 
-                nextActivity(MyRegisteredAct.class);
+                nextActivity(MyInquiryListActivity.class);
 
                 break;
 

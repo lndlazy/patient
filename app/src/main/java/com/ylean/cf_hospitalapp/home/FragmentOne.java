@@ -29,7 +29,7 @@ import com.ylean.cf_hospitalapp.home.activity.LocationActivity;
 import com.ylean.cf_hospitalapp.home.activity.SearchingAcivity;
 import com.ylean.cf_hospitalapp.home.activity.VideoSpeechActivity;
 import com.ylean.cf_hospitalapp.home.bean.BannerBean;
-import com.ylean.cf_hospitalapp.home.presenter.HomeAdapter;
+import com.ylean.cf_hospitalapp.home.adapter.HomeAdapter;
 import com.ylean.cf_hospitalapp.home.presenter.IFragmentOnePrenenter;
 import com.ylean.cf_hospitalapp.home.view.IFragmentOneView;
 import com.ylean.cf_hospitalapp.inquiry.activity.InquiryDetailAct;
@@ -195,7 +195,7 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
                             //视频 专家讲堂
                             m = new Intent();
                             m.setClass(getActivity(), VideoSpeechActivity.class);
-                            m.putExtra("type", "2");//1直播 2视频
+                            m.putExtra("type", "3");//1直播 3视频
                             m.putExtra("id", recommendList.get(position).getId());
                             startActivity(m);
                             break;
@@ -206,7 +206,6 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
                             m.putExtra("id", recommendList.get(position).getId());
                             startActivity(m);
                         }
-
 
                 }
 

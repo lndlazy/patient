@@ -31,9 +31,9 @@ public class Mapplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        /////////////////////////////  测试  /////////////////////////////////////////
         initLogger(TAG, true);
         Fresco.initialize(this);
-
 //        Logger.d("sha1值::" + sHA1(this));
 
         initPicChoose();
@@ -46,6 +46,24 @@ public class Mapplication extends Application {
         PlatformConfig.setWeixin(SpValue.WX_APP_ID, SpValue.WX_APP_SECRET);
         PlatformConfig.setQQZone(SpValue.QQ_APP_ID, SpValue.QQ_APP_KEY);
         PlatformConfig.setSinaWeibo(SpValue.WB_APP_ID, SpValue.WB_APP_SECRET, "https://sns.whalecloud.com/sina2/callback");
+
+
+//        /////////////////////////////  正式  /////////////////////////////////////////
+//
+//        initLogger(TAG, false);
+//        Fresco.initialize(this);
+////        Logger.d("sha1值::" + sHA1(this));
+//
+//        initPicChoose();
+//        /**
+//         * 友盟
+//         * */
+//        Config.DEBUG = false;
+//        UMShareAPI.get(this);//初始化sdk
+//        //三方登录
+//        PlatformConfig.setWeixin(SpValue.WX_APP_ID, SpValue.WX_APP_SECRET);
+//        PlatformConfig.setQQZone(SpValue.QQ_APP_ID, SpValue.QQ_APP_KEY);
+//        PlatformConfig.setSinaWeibo(SpValue.WB_APP_ID, SpValue.WB_APP_SECRET, "https://sns.whalecloud.com/sina2/callback");
 
 
 //        RetrofitHttpUtil.getInstance().loginIn(new BaseNoTObserver<LoginEntry>() {

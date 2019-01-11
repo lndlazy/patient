@@ -120,7 +120,7 @@
         <!--android:screenOrientation="portrait" />-->
 
         <activity
-            android:name=".my.activity.EvaluateActivity"
+            android:name=".my.activity.EvaulateDoctorActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait">
 
@@ -240,7 +240,7 @@
         -->
 
         <activity
-            android:name=".my.activity.MyRegisteredAct"
+            android:name=".my.activity.MyInquiryListActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
 
@@ -455,7 +455,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".register.activity.MyRegisterOrderListActivity"
+            android:name=".register.activity.MyRegisterListActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
@@ -618,7 +618,8 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name=".my.activity.DoctorDetailActivity" />
+        <activity android:name=".doctor.activity.DoctorDetailActivity" />
+        <activity android:name=".hospital.HospitalDetailActivity" />
 
 
         <!--<activity android:name=".register.activity.HospitalDetailActivity" />-->

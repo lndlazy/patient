@@ -10,7 +10,7 @@
 //
 //import com.ylean.cf_hospitalapp.R;
 //import com.ylean.cf_hospitalapp.base.view.BaseActivity;
-//import com.ylean.cf_hospitalapp.inquiry.adapter.CommitAdapter;
+//import com.ylean.cf_hospitalapp.doctor.adapter.CommitAdapter;
 //import com.ylean.cf_hospitalapp.inquiry.adapter.MoreReadAdapter;
 //import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 //

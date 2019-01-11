@@ -14,7 +14,6 @@ import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
-import com.ylean.cf_hospitalapp.register.PayStatus;
 import com.ylean.cf_hospitalapp.register.adapter.RegisterListAdapter;
 import com.ylean.cf_hospitalapp.register.bean.RegisterOrderEntry;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
@@ -30,7 +29,7 @@ import java.util.List;
  * Created by linaidao on 2019/1/4.
  */
 
-public class MyRegisterOrderListActivity extends BaseActivity {
+public class MyRegisterListActivity extends BaseActivity {
 
     private android.support.v7.widget.RecyclerView recyclerView;
     private List<RegisterOrderEntry.DataBean> registerList = new ArrayList<>();
@@ -126,7 +125,7 @@ public class MyRegisterOrderListActivity extends BaseActivity {
             @Override
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 
-                m = new Intent(MyRegisterOrderListActivity.this, RegisterPayActivity.class);
+                m = new Intent(MyRegisterListActivity.this, RegisterPayActivity.class);
                 m.putExtra("id", registerList.get(position).getId());
                 startActivity(m);
 

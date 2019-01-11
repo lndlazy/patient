@@ -86,22 +86,22 @@
             android:textColor="@color/color_select_blue_black"
             android:textSize="@dimen/textsize_14sp" />
 
-        <ImageView
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/x8"
-            android:layout_marginTop="@dimen/x8"
-            android:background="@color/line_colore5" />
+        <!--<ImageView-->
+            <!--android:layout_width="1px"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginBottom="@dimen/x8"-->
+            <!--android:layout_marginTop="@dimen/x8"-->
+            <!--android:background="@color/line_colore5" />-->
 
-        <TextView
-            android:id="@+id/tv5"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="帖子话题"
-            android:textColor="@color/color_select_blue_black"
-            android:textSize="@dimen/textsize_14sp" />
+        <!--<TextView-->
+            <!--android:id="@+id/tv5"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:text="帖子话题"-->
+            <!--android:textColor="@color/color_select_blue_black"-->
+            <!--android:textSize="@dimen/textsize_14sp" />-->
 
     </LinearLayout>
 

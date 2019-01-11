@@ -20,6 +20,7 @@ public class ICollectionPres {
     }
 
     private String id;
+    //直播(1),资讯(2),讲堂(3),帖子(4),医生(5),病友(6),文章(7),商品(8)
     private String type;
 
     public String getId() {
@@ -39,6 +40,9 @@ public class ICollectionPres {
     }
 
     //添加收藏  收藏关联id（直播id，资讯id…）   type 收藏类型  1-直播 2-资讯 3-讲堂 4-帖子 5-医生
+
+
+    //////直播(1),资讯(2),讲堂(3),帖子(4),医生(5),病友(6),文章(7),商品(8)
     public void addCollection(String token) {
 
         RetrofitHttpUtil.getInstance()
@@ -59,7 +63,6 @@ public class ICollectionPres {
                         }, SpValue.CH, token, id, type);
 
     }
-
 
     //取消收藏
     public void removeCollection(String token) {

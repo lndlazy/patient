@@ -39,7 +39,7 @@ public class MyCollectionListActivity extends BaseActivity implements View.OnCli
     private android.widget.TextView tv2;
     private android.widget.TextView tv3;
     private android.widget.TextView tv4;
-    private android.widget.TextView tv5;
+//    private android.widget.TextView tv5;
     private android.support.v7.widget.RecyclerView recyclerView;
     private String type;
     private int page;
@@ -56,6 +56,7 @@ public class MyCollectionListActivity extends BaseActivity implements View.OnCli
         setContentView(R.layout.act_my_collection);
         initView();
 
+        //收藏类型  1-直播 2-资讯 3-讲堂 4-帖子 5-医生 6-病友 7-文章
         tv1.setSelected(true);
         type = "7";
         collectionList(type);
@@ -64,7 +65,7 @@ public class MyCollectionListActivity extends BaseActivity implements View.OnCli
     private void initView() {
 
         this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        this.tv5 = (TextView) findViewById(R.id.tv5);
+//        this.tv5 = (TextView) findViewById(R.id.tv5);
         this.tv4 = (TextView) findViewById(R.id.tv4);
         this.tv3 = (TextView) findViewById(R.id.tv3);
         this.tv2 = (TextView) findViewById(R.id.tv2);
@@ -82,7 +83,7 @@ public class MyCollectionListActivity extends BaseActivity implements View.OnCli
         tv2.setOnClickListener(this);
         tv3.setOnClickListener(this);
         tv4.setOnClickListener(this);
-        tv5.setOnClickListener(this);
+//        tv5.setOnClickListener(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -140,7 +141,7 @@ public class MyCollectionListActivity extends BaseActivity implements View.OnCli
                     case "3":
                         m = new Intent(MyCollectionListActivity.this, VideoSpeechActivity.class);
                         m.putExtra("id", collectionList.get(position).getLiveid());
-                        m.putExtra("type", "1");
+                        m.putExtra("type", "3");
                         startActivity(m);
                         break;
                     case "4":
@@ -166,38 +167,37 @@ public class MyCollectionListActivity extends BaseActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.tv1:
+            case R.id.tv1://文章 7
                 type = "7";
                 setAllGray();
                 tv1.setSelected(true);
                 break;
 
-            case R.id.tv2:
+            case R.id.tv2:// 直播 1
                 type = "1";
                 setAllGray();
                 tv2.setSelected(true);
 
                 break;
 
-            case R.id.tv3:
+            case R.id.tv3://资讯 2
                 type = "2";
                 setAllGray();
                 tv3.setSelected(true);
 
                 break;
 
-            case R.id.tv4:
+            case R.id.tv4://讲堂 3
                 type = "3";
                 setAllGray();
                 tv4.setSelected(true);
                 break;
 
-            case R.id.tv5:
-                type = "4";
-                setAllGray();
-                tv5.setSelected(true);
-
-                break;
+//            case R.id.tv5:// 帖子话题 4
+//                type = "4";
+//                setAllGray();
+//                tv5.setSelected(true);
+//                break;
 
         }
 
@@ -211,7 +211,7 @@ public class MyCollectionListActivity extends BaseActivity implements View.OnCli
         tv2.setSelected(false);
         tv3.setSelected(false);
         tv4.setSelected(false);
-        tv5.setSelected(false);
+//        tv5.setSelected(false);
         page = 1;
 
     }

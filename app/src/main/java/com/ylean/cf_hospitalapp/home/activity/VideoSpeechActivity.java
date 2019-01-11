@@ -69,7 +69,7 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
         setContentView(R.layout.act_video_speech);
 
         id = getIntent().getStringExtra("id");
-        //类型 直播1 还是 视频2
+        //类型 直播1 还是 视频3
         type = getIntent().getStringExtra("type");
 
         initView();

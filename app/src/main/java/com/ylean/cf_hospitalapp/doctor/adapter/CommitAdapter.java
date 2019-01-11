@@ -1,4 +1,4 @@
-package com.ylean.cf_hospitalapp.inquiry.adapter;
+package com.ylean.cf_hospitalapp.doctor.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,12 +9,17 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
+import com.ylean.cf_hospitalapp.doctor.bean.CommitListEntry;
+
+import java.util.List;
 
 public class CommitAdapter extends RecyclerView.Adapter<CommitAdapter.MyViewHolder> {
 
     private Context context;
+    private List<CommitListEntry.DataBean> commitList;
 
-    public CommitAdapter(Context context) {
+    public CommitAdapter(Context context, List<CommitListEntry.DataBean> commitList) {
+        this.commitList = commitList;
         this.context = context;
     }
 
@@ -32,25 +37,27 @@ public class CommitAdapter extends RecyclerView.Adapter<CommitAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-//        if (msgs == null)
-//            return 0;
-//        return msgs.size();
-        return 2;
+        return commitList == null ? 0 : commitList.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
         SimpleDraweeView sdvImg;
         TextView tvName;
-        TextView tvTime;
+        TextView tvAttention;
+        TextView tvcontent;
+        TextView tvtime;
+
 
 
         MyViewHolder(View view) {
             super(view);
 
-            sdvImg = (SimpleDraweeView) view.findViewById(R.id.sdvImg);
-            tvName = (TextView) view.findViewById(R.id.tvName);
-            tvTime = (TextView) view.findViewById(R.id.tvTime);
+            sdvImg =   view.findViewById(R.id.sdvImg);
+            tvName =  view.findViewById(R.id.tvName);
+            tvAttention =  view.findViewById(R.id.tvAttention);
+            tvcontent =  view.findViewById(R.id.tvcontent);
+            tvtime =  view.findViewById(R.id.tvtime);
 
         }
     }

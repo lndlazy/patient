@@ -7,6 +7,7 @@ import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 
 /**
+ * 评价presenter
  * Created by linaidao on 2019/1/2.
  */
 

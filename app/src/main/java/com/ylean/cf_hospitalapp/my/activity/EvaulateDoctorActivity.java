@@ -47,11 +47,11 @@ import java.util.List;
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 /**
- * 评价页面
+ * 评价医生页面
  */
-public class EvaluateActivity extends BaseActivity implements IEvaluateView, View.OnClickListener, DataUploadView {
+public class EvaulateDoctorActivity extends BaseActivity implements IEvaluateView, View.OnClickListener, DataUploadView {
 
-    IEvaluatePres iEvaluatePres = new IEvaluatePres(this);
+    private IEvaluatePres iEvaluatePres = new IEvaluatePres(this);
 
     private PicAskDetailEntry.DataBean inquiryInfo;
     private String hospitalName;
@@ -77,17 +77,26 @@ public class EvaluateActivity extends BaseActivity implements IEvaluateView, Vie
     private TextView tvCompany;
     private ImageView iv_add_pic;
 
+    //评价id
+    private String evaluteId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_argement);
 
+        //用于获取评价详情的id
         consultaid = getIntent().getStringExtra("consultaid");
+
         hospitalName = getIntent().getStringExtra("hospitalName");
 
         //问诊过来的数据
         inquiryInfo = getIntent().getParcelableExtra("inquiryInfo");
+
+//        !!!!!!!!!!!问诊订单和挂号订单评论的是 医生，所以传医生id  商品订单和服务订单 relateid 传 商品id
+        if (inquiryInfo != null)
+            evaluteId = inquiryInfo.getDoctorid();//评论的id
 
         //是否 是无法编辑模式，只是查看
         noedit = getIntent().getBooleanExtra("noedit", false);
@@ -180,7 +189,7 @@ public class EvaluateActivity extends BaseActivity implements IEvaluateView, Vie
                 @Override
                 public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 
-                    Intent m = new Intent(EvaluateActivity.this, PicDetailAc.class);
+                    Intent m = new Intent(EvaulateDoctorActivity.this, PicDetailAc.class);
                     m.putExtra("picUrl", ApiService.WEB_ROOT + imgs.get(position));
                     startActivity(m);
                 }
@@ -366,7 +375,7 @@ public class EvaluateActivity extends BaseActivity implements IEvaluateView, Vie
 
                 iEvaluatePres.addEvaluate(
                         (String) SaveUtils.get(this, SpValue.TOKEN, "")
-                        , consultaid, inquiryInfo.getCode(), etConent.getText().toString()
+                        , evaluteId, inquiryInfo.getCode(), etConent.getText().toString()
                         , rating2 + "", rating1 + "", rating3 + ""
                         , "3", img, askType + "");
 

@@ -37,14 +37,14 @@ import com.ylean.cf_hospitalapp.my.activity.MyNewsListActivity;
 import com.ylean.cf_hospitalapp.my.activity.MyRequestListActivity;
 import com.ylean.cf_hospitalapp.my.activity.MyTopicActivity;
 import com.ylean.cf_hospitalapp.my.activity.ServiceOrderListActivity;
-import com.ylean.cf_hospitalapp.register.activity.MyRegisterOrderListActivity;
+import com.ylean.cf_hospitalapp.register.activity.MyRegisterListActivity;
 import com.ylean.cf_hospitalapp.my.activity.PointsDetailActivity;
 import com.ylean.cf_hospitalapp.mall.acitity.PointsMallAct;
 import com.ylean.cf_hospitalapp.my.activity.SettingActivity;
 import com.ylean.cf_hospitalapp.my.activity.VipRoueActivity;
 import com.ylean.cf_hospitalapp.my.adapter.GroupMyAdapter;
 import com.ylean.cf_hospitalapp.my.activity.MyFreeAskAct;
-import com.ylean.cf_hospitalapp.my.activity.MyRegisteredAct;
+import com.ylean.cf_hospitalapp.my.activity.MyInquiryListActivity;
 import com.ylean.cf_hospitalapp.my.bean.MyInfoEntry;
 import com.ylean.cf_hospitalapp.my.presenter.IMyFragmentPres;
 import com.ylean.cf_hospitalapp.my.view.IMyFragmentView;
@@ -179,6 +179,7 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
                         m = new Intent(getActivity(), MyEvaluationActivity.class);
                         startActivity(m);
                         break;
+
                     case 8://我的病友
                         m = new Intent(getActivity(), MyFriendActivity.class);
                         startActivity(m);
@@ -222,13 +223,13 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
 
             case R.id.llMyRegister://我的挂号
 
-                nextActivity(MyRegisterOrderListActivity.class);
+                nextActivity(MyRegisterListActivity.class);
 
                 break;
 
             case R.id.llMyRegistered://我的问诊
 
-                nextActivity(MyRegisteredAct.class);
+                nextActivity(MyInquiryListActivity.class);
 
                 break;
 

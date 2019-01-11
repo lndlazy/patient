@@ -33,7 +33,7 @@ import java.util.List;
  * Created by linaidao on 2018/12/23.
  */
 
-public class MyRegisteredAct extends BaseActivity implements IMyRegisteredView, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class MyInquiryListActivity extends BaseActivity implements IMyRegisteredView, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private android.widget.TextView tvPic;
     private android.widget.TextView tvTel;
@@ -59,7 +59,7 @@ public class MyRegisteredAct extends BaseActivity implements IMyRegisteredView, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.act_my_register);
+        setContentView(R.layout.act_my_inquiry);
 
         currentType = SpValue.ASK_TYPE_PIC;
 
@@ -151,7 +151,7 @@ public class MyRegisteredAct extends BaseActivity implements IMyRegisteredView, 
 
                     case SpValue.ASK_TYPE_PIC://图文详情
 
-                        Intent m = new Intent(MyRegisteredAct.this, PicPayActivity.class);
+                        Intent m = new Intent(MyInquiryListActivity.this, PicPayActivity.class);
                         m.putExtra("type", orderEntryList.get(position).getType());
                         m.putExtra("id", orderEntryList.get(position).getOrderid());
                         startActivity(m);

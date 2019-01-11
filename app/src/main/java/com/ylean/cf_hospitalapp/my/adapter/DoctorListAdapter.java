@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.my.activity.DoctorDetailActivity;
+import com.ylean.cf_hospitalapp.doctor.activity.DoctorDetailActivity;
 import com.ylean.cf_hospitalapp.my.bean.MyDoctorListEntry;
 import com.ylean.cf_hospitalapp.my.presenter.IDoctorListPres;
 import com.ylean.cf_hospitalapp.net.ApiService;
@@ -56,7 +56,7 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.My
             @Override
             public void onClick(View v) {
 
-//                holder.getAdapterPosition();
+                holder.getAdapterPosition();
                 Intent m = new Intent(context, DoctorDetailActivity.class);
                 m.putExtra("doctorId", myDoctorList.get(holder.getAdapterPosition()).getDoctorid());
                 context.startActivity(m);

@@ -1,4 +1,4 @@
-package com.ylean.cf_hospitalapp.home.presenter;
+package com.ylean.cf_hospitalapp.home.adapter;
 
 import android.content.Context;
 import android.net.Uri;

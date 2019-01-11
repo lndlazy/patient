@@ -313,7 +313,7 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
                     m = new Intent();
                     m.setClass(getActivity(), VideoSpeechActivity.class);
                     m.putExtra("id", speechList.get(position).getId());
-                    m.putExtra("type", "2");
+                    m.putExtra("type", "3");
                     startActivity(m);
                 } else if ("3".equals(speechList.get(position).getType())) {
                     //文章

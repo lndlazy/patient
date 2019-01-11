@@ -1,4 +1,4 @@
-package com.ylean.cf_hospitalapp.home.presenter;
+package com.ylean.cf_hospitalapp.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -54,11 +54,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
         switch (viewType) {
 
             case TYPE_HEAD:
-
                 return new HomeAdapter.MyViewHolder(
                         LayoutInflater.from(context).inflate(R.layout.layout_home_headview, parent,
                                 false), viewType);
-
             case TYPE_ARTICLE:
                 return new HomeAdapter.MyViewHolder(
                         LayoutInflater.from(context).inflate(R.layout.item_home_article, parent,

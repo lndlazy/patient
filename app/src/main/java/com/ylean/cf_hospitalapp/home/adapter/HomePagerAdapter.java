@@ -1,4 +1,4 @@
-package com.ylean.cf_hospitalapp.home.presenter;
+package com.ylean.cf_hospitalapp.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -40,6 +40,7 @@ public class HomePagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
+
         View view = viewList.get(position);
         ViewGroup parent = (ViewGroup) view.getParent();
         if (parent != null)

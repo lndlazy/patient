@@ -2,8 +2,12 @@ package com.ylean.cf_hospitalapp.net;
 
 
 import com.ylean.cf_hospitalapp.base.bean.AddBean;
+import com.ylean.cf_hospitalapp.doctor.bean.CommitListEntry;
+import com.ylean.cf_hospitalapp.doctor.bean.InquiryListEntry;
+import com.ylean.cf_hospitalapp.doctor.bean.VideoListEntry;
 import com.ylean.cf_hospitalapp.home.bean.SearchListEntry;
 import com.ylean.cf_hospitalapp.home.bean.VideoSpeechDetailEntry;
+import com.ylean.cf_hospitalapp.hospital.bean.ServiceInfoEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.AlipayEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.ChatEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.DisEntry;
@@ -284,13 +288,36 @@ public interface ApiService {
     Observable<DoctorDetailEntry> doctorDetail(@Field("token") String token, @Field("ch") String ch
             , @Field("doctorid") String doctorid);
 
+    //医生详情的评价列表
+    @FormUrlEncoded
+    @POST("/api/app/patient/docxqpjlist")
+    Observable<CommitListEntry> doctorDetailCommentList(@Field("token") String token, @Field("ch") String ch
+            , @Field("doctorid") String doctorid, @Field("page") int page
+            , @Field("size") String size);
+
+    //医生详情 问诊记录
+    @FormUrlEncoded
+    @POST("/api/app/doctor/getmyconsult")
+    Observable<InquiryListEntry> inquiryHistory(@Field("ch") String ch, @Field("doctorid") String doctorid
+            , @Field("page") int page, @Field("size") String size);
+
+    //医生详情 医讲堂记录
+    @FormUrlEncoded
+    @POST("/api/app/doctor/getmyleature")
+    Observable<VideoListEntry> videoHistory(@Field("ch") String ch, @Field("doctorid") String doctorid
+            , @Field("page") int page, @Field("size") String size);
+
+    //服务项目
+    @FormUrlEncoded
+    @POST("/api/app/doctor/getserverlist")
+    Observable<ServiceInfoEntry> serviceInfo(@Field("ch") String ch, @Field("doctorid") String doctorid);
+
 
     //支付宝支付数据获取
     @FormUrlEncoded
     @POST("/api/app/consultation/getalipayconfig")
     Observable<AlipayEntry> aliPayInfo(@Field("token") String token, @Field("ch") String ch
             , @Field("groupnum") String groupnum);
-
 
     //挂号 支付宝支付数据获取
     @FormUrlEncoded

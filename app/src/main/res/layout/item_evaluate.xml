@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x50">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdvImg"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x10"
+            fresco:failureImage="@mipmap/ic_my_hpic"
+            fresco:placeholderImage="@mipmap/ic_my_hpic" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_toRightOf="@id/sdvImg"
+            android:gravity="center"
+            android:text="告知函"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_16sp" />
+
+        <TextView
+            android:id="@+id/tvAttention"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/x25"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x10"
+            android:background="@drawable/shape_stroke_blue"
+            android:gravity="center"
+            android:text="关注"
+            android:textColor="@color/tab_colorf9" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x30"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="@dimen/x15"
+        android:paddingRight="@dimen/x15">
+
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
+            android:id="@+id/mrevaulate"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/x20"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:max="5"
+            android:stepSize="1" />
+
+        <TextView
+            android:id="@+id/tvstartcount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x8"
+            android:layout_toRightOf="@id/mrevaulate"
+            android:gravity="center_vertical"
+            android:text="5"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_15sp" />
+
+        <TextView
+            android:id="@+id/tvtime"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/x10"
+            android:gravity="center"
+            android:text="今天 13：50"
+            android:textColor="@color/txt_color_light9"
+            android:textSize="@dimen/textsize_14sp" />
+
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tvcontent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x10"
+        android:text="香穴既是保健效穴，同时也是治疗鼻炎的囊中之宝，无论平日预防感冒，还是缓解鼻塞症。"
+        android:textColor="@color/txt_color_light6"
+        android:textSize="@dimen/textsize_16sp" />
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginRight="@dimen/x15"
+        android:layout_marginTop="@dimen/x5"
+        android:src="@color/line_colore5" />
+
+
+</LinearLayout>

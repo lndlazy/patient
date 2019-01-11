@@ -30,7 +30,6 @@ import com.ylean.cf_hospitalapp.base.view.DataUploadView;
 import com.ylean.cf_hospitalapp.inquiry.adapter.AskPicAdapter;
 import com.ylean.cf_hospitalapp.inquiry.bean.DataUploadResultEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.MImageItem;
-import com.ylean.cf_hospitalapp.my.FragmentFour;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
@@ -196,7 +195,7 @@ public class PayBackActivity extends BaseActivity implements View.OnClickListene
                             @Override
                             public void onHandleSuccess(Basebean basebean) {
                                 showErr("申请成功");
-                                nextActivity(MyRegisterOrderListActivity.class);
+                                nextActivity(MyRegisterListActivity.class);
                             }
 
                             @Override

@@ -480,6 +480,46 @@ public class RetrofitHttpUtil {
     }
 
     /**
+     * 医生详情的评价列表
+     */
+    public void doctorDetailCommentList(Observer subscriber, String token, String ch, String doctorid, int page, String size) {
+        getService().doctorDetailCommentList(token, ch, doctorid, page, size)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 医生详情的 问诊记录
+     */
+    public void inquiryHistory(Observer subscriber, String ch, String doctorid, int page, String size) {
+        getService().inquiryHistory(ch, doctorid, page, size)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 医生详情的 医讲堂记录
+     */
+    public void videoHistory(Observer subscriber, String ch, String doctorid, int page, String size) {
+        getService().videoHistory(ch, doctorid, page, size)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 医生服务项目
+     */
+    public void serviceInfo(Observer subscriber, String ch, String doctorid) {
+        getService().serviceInfo(ch, doctorid)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
      * 支付宝支付信息
      */
     public void aliPayInfo(Observer subscriber, String token, String ch, String groupnum) {

@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.bean.Basebean;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
 import com.ylean.cf_hospitalapp.my.adapter.MyEvalAdapter;
 import com.ylean.cf_hospitalapp.my.bean.EvalListEntry;
@@ -128,7 +127,7 @@ public class MyEvaluationActivity extends BaseActivity implements SwipeRefreshLa
 
                     case SpValue.COMMIT_TYPE_DOCTOR://"【医生】"
 
-                        Intent m = new Intent(MyEvaluationActivity.this, EvaluateActivity.class);
+                        Intent m = new Intent(MyEvaluationActivity.this, EvaulateDoctorActivity.class);
                         m.putExtra("noedit", true);
                         m.putExtra("consultaid", commandList.get(position).getId());
                         startActivity(m);
