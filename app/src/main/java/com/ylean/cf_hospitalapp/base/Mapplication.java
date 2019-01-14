@@ -47,9 +47,7 @@ public class Mapplication extends Application {
         PlatformConfig.setQQZone(SpValue.QQ_APP_ID, SpValue.QQ_APP_KEY);
         PlatformConfig.setSinaWeibo(SpValue.WB_APP_ID, SpValue.WB_APP_SECRET, "https://sns.whalecloud.com/sina2/callback");
 
-
-//        /////////////////////////////  正式  /////////////////////////////////////////
-//
+        /////////////////////////////  正式  /////////////////////////////////////////
 //        initLogger(TAG, false);
 //        Fresco.initialize(this);
 ////        Logger.d("sha1值::" + sHA1(this));

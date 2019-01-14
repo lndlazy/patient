@@ -78,7 +78,22 @@ public class PayAskDoctorAdapter extends RecyclerView.Adapter<PayAskDoctorAdapte
         Intent m = new Intent(context, PayTWActivity.class);
         m.putExtra("doctorId", doctorInfoList.get(position).getDoctorid());//医生id
         m.putExtra("doctorName", doctorInfoList.get(position).getDoctorname());//医生姓名
-        m.putExtra("price", doctorInfoList.get(position).getTwprice());//问诊价格
+
+        switch (askType) {
+
+            case SpValue.ASK_TYPE_PIC:
+                m.putExtra("price", doctorInfoList.get(position).getTwprice());//问诊价格
+                break;
+
+            case SpValue.ASK_TYPE_TEL:
+                m.putExtra("price", doctorInfoList.get(position).getDhprice());//问诊价格
+                break;
+
+            case SpValue.ASK_TYPE_VIDEO:
+                m.putExtra("price", doctorInfoList.get(position).getSpprice());//问诊价格
+                break;
+
+        }
         m.putExtra("type", askType);//图文，视频，电话 问诊
         m.putExtra("askType", SpValue.ASK_CHARGE);//付费问诊
         context.startActivity(m);

@@ -121,13 +121,12 @@ public class PayTWActivity extends BaseActivity implements View.OnClickListener,
 
         doctorId = getIntent().getStringExtra("doctorId");
         doctorName = getIntent().getStringExtra("doctorName");
-        type = getIntent().getStringExtra("type");
+        type = getIntent().getStringExtra("type");//图文问诊 还是电话问诊 ，视频问诊
         price = getIntent().getDoubleExtra("price", 0.00);
+        askType = getIntent().getStringExtra("askType");//付费问诊还是免费问诊SpValue.ASK_CHARGE://付费问诊,SpValue.ASK_FREE://免费问诊
 
-        askType = getIntent().getStringExtra("askType");
         initView();
         iPayTWPresenter.getCommentSick();
-
         checkPermisson();
 
         EventBus.getDefault().register(this);
@@ -536,16 +535,10 @@ public class PayTWActivity extends BaseActivity implements View.OnClickListener,
                             }
 
                         }, (String) SaveUtils.get(this, SpValue.TOKEN, "")
-                        , SpValue.CH
-                        , peopleBean.getId()
-                        , diseaseId
+                        , SpValue.CH , peopleBean.getId() , diseaseId
                         , (String) SaveUtils.get(this, SpValue.HOSPITAL_ID, "")
-                        , etQues.getText().toString()
-                        , etDesc.getText().toString()
-                        , img
-                        , voiceurl
-                        , doctorId
-                        , type
+                        , etQues.getText().toString()  , etDesc.getText().toString()
+                        , img , voiceurl , doctorId , type
                         , SpValue.ASK_TYPE_PIC.equals(type) ? "" : tvTime.getText().toString()
                         , CommonUtils.getNum2(price));
     }

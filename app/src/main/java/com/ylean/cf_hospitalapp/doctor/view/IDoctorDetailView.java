@@ -1,9 +1,9 @@
 package com.ylean.cf_hospitalapp.doctor.view;
 
 import com.ylean.cf_hospitalapp.base.view.BaseView;
+import com.ylean.cf_hospitalapp.doctor.bean.CommComListEntry;
 import com.ylean.cf_hospitalapp.doctor.bean.InquiryListEntry;
 import com.ylean.cf_hospitalapp.doctor.bean.VideoListEntry;
-import com.ylean.cf_hospitalapp.hospital.bean.ServiceInfoEntry;
 import com.ylean.cf_hospitalapp.my.bean.DoctorDetailEntry;
 
 import java.util.List;
@@ -31,4 +31,10 @@ public interface IDoctorDetailView extends BaseView{
     void setInquiryData(List<InquiryListEntry.DataBean> data);
 
     void setVideoData(List<VideoListEntry.DataBean> data);
+
+    void setEvaluateData(List<CommComListEntry.DataBean> data);
+
+    void stopInquiryRefush();
+
+    void stopVideoSpeechRefush();
 }

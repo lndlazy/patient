@@ -81,11 +81,11 @@ public class ChooseNumActivity extends BaseActivity implements IChooseNumView, S
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        departid = getIntent().getStringExtra("departid");
-        registerId = getIntent().getStringExtra("registerId");
-        registerName = getIntent().getStringExtra("registerName");
-        departname = getIntent().getStringExtra("departname");
-        hospitalInfo = getIntent().getParcelableExtra("hospitalInfo");
+        departid = getIntent().getStringExtra("departid");//科室id
+        registerId = getIntent().getStringExtra("registerId");//门诊id
+        registerName = getIntent().getStringExtra("registerName");//门诊名称
+        departname = getIntent().getStringExtra("departname");//部门名称
+        hospitalInfo = getIntent().getParcelableExtra("hospitalInfo");//医院id跟医院昵称
 
         setContentView(R.layout.act_choose_num);
 

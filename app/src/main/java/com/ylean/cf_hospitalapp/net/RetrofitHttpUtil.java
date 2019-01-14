@@ -18,7 +18,6 @@ import retrofit2.converter.fastjson.FastJsonConverterFactory;
 
 public class RetrofitHttpUtil {
 
-
     private static RetrofitHttpUtil netService = new RetrofitHttpUtil();
 
     public static RetrofitHttpUtil getInstance() {
@@ -29,10 +28,6 @@ public class RetrofitHttpUtil {
     }
 
     private ApiService service;
-
-    public void setService(ApiService service) {
-        this.service = service;
-    }
 
     public ApiService getService() {
 
@@ -777,7 +772,8 @@ public class RetrofitHttpUtil {
     }
 
     /**
-     * 添加收藏
+     * 收藏(关注)类型  1-直播 2-资讯 3-讲堂 4-帖子 5-医生6-病友 7-文章
+     * 添加收藏, 关注
      */
     public void addCollection(Observer subscriber, String ch, String token
             , String relateid, String type) {
@@ -788,7 +784,7 @@ public class RetrofitHttpUtil {
     }
 
     /**
-     * 取消收藏
+     * 取消收藏 , 取消关注医生
      */
     public void removeCollection(Observer subscriber, String ch, String token
             , String relateid, String type) {
@@ -1028,29 +1024,61 @@ public class RetrofitHttpUtil {
 
     }
 
+    /**
+     * 视频详情的评价列表
+     */
+    public void videoCommentList(Observer subscriber, String ch, String token, String id, int page
+            , String size) {
+        getService().videoCommentList(ch, token, id, page, size)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+//    /**
+//     * 关注医生
+//     */
+//    public void attentionDoctor(Observer subscriber, String ch, String token
+//            , String doctorid) {
+//        getService().addCollection(ch, token, doctorid)
+//                .compose(schedulersTransformer())
+//                .subscribe(subscriber);
+//
+//    }
 
     /**
-     * 关注医生
+     * 点赞
      */
-    public void attentionDoctor(Observer subscriber, String ch, String token
-            , String doctorid) {
-        getService().attentionDoctor(ch, token, doctorid)
+    public void good(Observer subscriber, String token, String type
+            , String relateid) {
+        getService().good(token, type, relateid)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 点赞
+     */
+    public void removeGood(Observer subscriber, String token, String type
+            , String relateid) {
+        getService().removeGood(token, type, relateid)
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
 
     }
 
 
-    /**
-     * 取消关注医生
-     */
-    public void noAttentionDoctor(Observer subscriber, String ch, String token
-            , String doctorid, String type) {
-        getService().noAttentionDoctor(ch, token, doctorid, type)
-                .compose(schedulersTransformer())
-                .subscribe(subscriber);
-
-    }
+//    /**
+//     * 取消关注医生
+//     */
+//    public void noAttentionDoctor(Observer subscriber, String ch, String token
+//            , String doctorid, String type) {
+//        getService().noAttentionDoctor(ch, token, doctorid, type)
+//                .compose(schedulersTransformer())
+//                .subscribe(subscriber);
+//
+//    }
 
     /**
      * 添加回复
@@ -1063,19 +1091,19 @@ public class RetrofitHttpUtil {
 
     }
 
-    /**
-     * 添加评论
-     */
-    public void evaluate(Observer subscriber, String ch, String token
-            , String relateid, String ordercode, String content
-            , String stardepict, String starservice, String starperformance
-            , String type, String imgs, String ordertype) {
-        getService().evaluate(ch, token, relateid, ordercode, content, stardepict
-                , starservice, starperformance, type, imgs, ordertype)
-                .compose(schedulersTransformer())
-                .subscribe(subscriber);
-
-    }
+//    /**
+//     * 添加评论
+//     */
+//    public void evaluate(Observer subscriber, String ch, String token
+//            , String relateid, String ordercode, String content
+//            , String stardepict, String starservice, String starperformance
+//            , String type, String imgs, String ordertype) {
+//        getService().evaluate(ch, token, relateid, ordercode, content, stardepict
+//                , starservice, starperformance, type, imgs, ordertype)
+//                .compose(schedulersTransformer())
+//                .subscribe(subscriber);
+//
+//    }
 
     /**
      * 我的评论列表
@@ -1203,6 +1231,28 @@ public class RetrofitHttpUtil {
                 .subscribe(subscriber);
 
     }
+
+    /**
+     * 医院科室列表
+     */
+    public void hospitalDeartmentList(Observer subscriber, String ch, String hospitalid) {
+        getService().hospitalDeartmentList(ch, hospitalid)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 医院评论列表
+     */
+    public void hospitalCommentList(Observer subscriber, String ch, String token
+            , String hospitalid, int page, String size) {
+        getService().hospitalCommentList(ch, token, hospitalid, page, size)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+    }
+
+
 //
 //    /**
 //     * 资讯详情

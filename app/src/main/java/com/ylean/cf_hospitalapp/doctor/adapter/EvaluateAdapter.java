@@ -1,7 +1,6 @@
 package com.ylean.cf_hospitalapp.doctor.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +10,8 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.doctor.bean.CommitListEntry;
+import com.ylean.cf_hospitalapp.doctor.activity.DoctorDetailActivity;
+import com.ylean.cf_hospitalapp.doctor.bean.CommComListEntry;
 import com.ylean.cf_hospitalapp.net.ApiService;
 
 import java.util.List;
@@ -19,15 +19,16 @@ import java.util.List;
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 /**
+ * 评价列表
  * Created by linaidao on 2019/1/11.
  */
 
 public class EvaluateAdapter extends RecyclerView.Adapter<EvaluateAdapter.MyViewHolder> {
 
     private Context context;
-    private List<CommitListEntry.DataBean> commitList;
+    private List<CommComListEntry.DataBean> commitList;
 
-    public EvaluateAdapter(Context context, List<CommitListEntry.DataBean> commitList) {
+    public EvaluateAdapter(Context context, List<CommComListEntry.DataBean> commitList) {
         this.commitList = commitList;
         this.context = context;
     }
@@ -54,6 +55,16 @@ public class EvaluateAdapter extends RecyclerView.Adapter<EvaluateAdapter.MyView
         holder.mrevaulate.setIsIndicator(true);//评价星星不可编辑
         holder.tvtime.setText(commitList.get(i).getTimedesc());
         holder.tvcontent.setText(commitList.get(i).getContent());
+
+        holder.tvAttention.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (context instanceof DoctorDetailActivity) {
+                    DoctorDetailActivity activity = (DoctorDetailActivity) context;
+                    activity.personAttention(commitList.get(i));
+                }
+            }
+        });
     }
 
     @Override

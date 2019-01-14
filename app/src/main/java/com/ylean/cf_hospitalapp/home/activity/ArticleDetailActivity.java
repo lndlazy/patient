@@ -10,7 +10,7 @@
 //
 //import com.ylean.cf_hospitalapp.R;
 //import com.ylean.cf_hospitalapp.base.view.BaseActivity;
-//import com.ylean.cf_hospitalapp.doctor.adapter.CommitAdapter;
+//import com.ylean.cf_hospitalapp.doctor.adapter.CommentCommAdapter;
 //import com.ylean.cf_hospitalapp.inquiry.adapter.MoreReadAdapter;
 //import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 //
@@ -81,7 +81,7 @@
 //        DividerItemDecoration divider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
 //        divider.setDrawable(ContextCompat.getDrawable(this, R.drawable.shape_recyclerview_item));
 //        commitRecyclerView.addItemDecoration(divider);
-//        CommitAdapter commitAdapter = new CommitAdapter(this);
+//        CommentCommAdapter commitAdapter = new CommentCommAdapter(this);
 //        commitRecyclerView.setAdapter(commitAdapter);
 //
 //    }

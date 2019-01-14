@@ -20,6 +20,7 @@
     <color name="txt_color_light76">#767676</color>
     <color name="bg_home">#E8F7FF</color>
     <color name="blue">#33a9fa</color>
+    <color name="color_ff">#4FC0FF </color>
 
     <color name="tab_colorf9">#009FF9</color>
     <color name="point_selected">#F47528</color>
@@ -45,6 +46,11 @@
     <color name="bulebg">#edf8ff</color>
 
     <color name="color_1b">#D0021B</color>
+
+
+    <color name="menu_blue">#35a9e2</color>
+
+
 
     <color name="alertdialog_line">#c6c6c6</color>
     <color name="actionsheet_blue">#037BFF</color>

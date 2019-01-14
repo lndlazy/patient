@@ -1,11 +1,18 @@
 package com.ylean.cf_hospitalapp.home.activity;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -16,6 +23,11 @@ import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.Presenter.ICollectionPres;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
 import com.ylean.cf_hospitalapp.base.view.ICollectionView;
+import com.ylean.cf_hospitalapp.comm.activity.ReplyActivity;
+import com.ylean.cf_hospitalapp.comm.pres.IGoodPres;
+import com.ylean.cf_hospitalapp.comm.view.IGoodView;
+import com.ylean.cf_hospitalapp.doctor.adapter.CommentCommAdapter;
+import com.ylean.cf_hospitalapp.doctor.bean.CommComListEntry;
 import com.ylean.cf_hospitalapp.home.bean.VideoSpeechDetailEntry;
 import com.ylean.cf_hospitalapp.home.presenter.IVideoSpeechPres;
 import com.ylean.cf_hospitalapp.home.view.IVideoSpeechView;
@@ -24,24 +36,21 @@ import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 专家讲堂视频页面
  * Created by linaidao on 2019/1/8.
  */
 
-public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechView, View.OnClickListener, ICollectionView {
+public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechView, View.OnClickListener, ICollectionView, IGoodView {
 
     private String id;
-    private com.ylean.cf_hospitalapp.widget.TitleBackBarView tbv;
-    //    private android.support.design.widget.TabLayout mTabLayout;
-//    private android.support.v4.view.ViewPager vpviewpager;
-//    private List<View> viewList = new ArrayList<>();
-//    private VideoSpeechAdapter videoSpeechAdapter;
-    private IVideoSpeechPres iVideoSpeechPres = new IVideoSpeechPres(this);
     private StandardGSYVideoPlayer videoPlayer;
     private OrientationUtils orientationUtils;
-
     private android.widget.TextView tvTitle;
+
     private android.widget.TextView tvtalk;
     private android.widget.TextView tvgoodcount;
     //    private android.widget.TextView tvDate;
@@ -58,9 +67,21 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
     private ImageView ivlike;
     private ImageView ivgood;
 
+    //视频的presenter
+    private IVideoSpeechPres iVideoSpeechPres = new IVideoSpeechPres(this);
     //收藏Pers
     private ICollectionPres iCollectionPres = new ICollectionPres(this);
+    //点赞
+    private IGoodPres iGoodPres = new IGoodPres(this);
+    //关注
+//    private ICollectionPres iCollectionPres = new ICollectionPres(this);
+//    private IAttentionPres iAttentionPres = new IAttentionPres(this);
+    //评论列表
+    private List<CommComListEntry.DataBean> commentList = new ArrayList<>();
+
     private String type;
+    private RecyclerView recyclerView;
+    private CommentCommAdapter commAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,17 +97,17 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
 
         iVideoSpeechPres.setId(id);
         iVideoSpeechPres.videoSpeechDetail((String) SaveUtils.get(this, SpValue.TOKEN, ""));
+        iVideoSpeechPres.videoCommentList((String) SaveUtils.get(this, SpValue.TOKEN, ""));
     }
 
     private void initView() {
 
         videoPlayer = findViewById(R.id.detail_player);
 
-//        this.tvDate = findViewById(R.id.tvDate);
-        this.tvgoodcount = (TextView) findViewById(R.id.tvgoodcount);
-        this.tvtalk = (TextView) findViewById(R.id.tvtalk);
-        this.tvTitle = (TextView) findViewById(R.id.tvTitle);
-        this.tbv = (TitleBackBarView) findViewById(R.id.tbv);
+        this.tvgoodcount = findViewById(R.id.tvgoodcount);
+        this.tvtalk = findViewById(R.id.tvtalk);
+        this.tvTitle = findViewById(R.id.tvTitle);
+        TitleBackBarView tbv = findViewById(R.id.tbv);
 
         sdvImg = findViewById(R.id.sdvImg);
         tvstarttime = findViewById(R.id.tvstarttime);
@@ -100,19 +121,28 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
         tvlike = findViewById(R.id.tvlike);
         ivlike = findViewById(R.id.ivlike);
         ivgood = findViewById(R.id.ivgood);
+        recyclerView = findViewById(R.id.recyclerView);
+
+        LinearLayout llcomment = findViewById(R.id.llcomment);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //添加自定义分割线
+        DividerItemDecoration divider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        divider.setDrawable(ContextCompat.getDrawable(this, R.drawable.shape_recyclerview_item_gray));
+        recyclerView.addItemDecoration(divider);
+
+        linearLayoutManager.setSmoothScrollbarEnabled(true);
+        linearLayoutManager.setAutoMeasureEnabled(true);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
+
+        commAdapter = new CommentCommAdapter(this, commentList);
+        recyclerView.setAdapter(commAdapter);
 
         ivlike.setOnClickListener(this);
-//        this.vpviewpager = (ViewPager) findViewById(R.id.vp_viewpager);
-//        this.mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
-
-//        mTabLayout.addOnTabSelectedListener(listener);
-//        mTabLayout.setupWithViewPager(vpviewpager);
-
-//        viewList.add(View.inflate(this, R.layout.speech_dec, null));
-//        viewList.add(View.inflate(this, R.layout.speech_contents, null));
-
-//        videoSpeechAdapter = new VideoSpeechAdapter(this, viewList);
-//        vpviewpager.setAdapter(videoSpeechAdapter);
+        llcomment.setOnClickListener(this);
 
         tbv.setOnLeftClickListener(new View.OnClickListener() {
             @Override
@@ -128,37 +158,6 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
             }
         });
     }
-
-//    private TabLayout.OnTabSelectedListener listener = new TabLayout.OnTabSelectedListener() {
-//        @Override
-//        public void onTabSelected(TabLayout.Tab tab) {
-//
-//            int position = tab.getPosition();
-//
-//            switch (position) {
-//
-//                case 0://
-//                    break;
-//
-//                case 1://
-//
-//                    break;
-//            }
-//
-//        }
-//
-//        @Override
-//        public void onTabUnselected(TabLayout.Tab tab) {
-//            //离开的那个tab
-////            Logger.d("onTabUnselected,离开的那个tab::" + tab.getText().toString());
-//        }
-//
-//        @Override
-//        public void onTabReselected(TabLayout.Tab tab) {
-//            //再次选择tab
-////            Logger.d("onTabReselected,再次选择tab::" + tab.getText().toString());
-//        }
-//    };
 
     @Override
     public void setInfo(VideoSpeechDetailEntry.DataBean data) {
@@ -202,6 +201,15 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
 
     }
 
+    @Override
+    public void setCommentData(List<CommComListEntry.DataBean> data) {
+
+        commentList.addAll(data);
+
+        if (commAdapter != null)
+            commAdapter.notifyDataSetChanged();
+
+    }
 
     //播放视频
     private void videoPlay(VideoSpeechDetailEntry.DataBean data) {
@@ -209,7 +217,7 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
         //设置返回键
         videoPlayer.getBackButton().setVisibility(View.INVISIBLE);
 
-//设置旋转
+        //设置旋转
         orientationUtils = new OrientationUtils(this, videoPlayer);
         //设置全屏按键功能,这是使用的是选择屏幕，而不是全屏
         videoPlayer.getFullscreenButton().setOnClickListener(new View.OnClickListener() {
@@ -270,30 +278,158 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
             case R.id.ivlike:
 
                 iCollectionPres.setId(id);
-                iCollectionPres.setType(type);
 
                 if (ivlike.isSelected())
                     //取消收藏
-                    iCollectionPres.removeCollection((String) SaveUtils.get(this, SpValue.TOKEN, ""));
+                    iCollectionPres.removeCollection((String) SaveUtils.get(this, SpValue.TOKEN, ""), type);
                 else
                     //添加收藏
-                    iCollectionPres.addCollection((String) SaveUtils.get(this, SpValue.TOKEN, ""));
+                    iCollectionPres.addCollection((String) SaveUtils.get(this, SpValue.TOKEN, ""), type);
+
+                break;
+
+            case R.id.llcomment://评论
+
+                /*
+                 with_pic = getIntent().getBooleanExtra("with_pic", false);
+                id = getIntent().getStringExtra("id");
+                type = getIntent().getStringExtra("type");
+                ordertype = getIntent().getStringExtra("ordertype");
+                ordercode = getIntent().getStringExtra("ordercode");
+                 */
+                Intent mIntent = new Intent(this, CommentActivity.class);
+                mIntent.putExtra("with_pic", true);
+                mIntent.putExtra("id", id);
+                mIntent.putExtra("type", "6");
+                mIntent.putExtra("ordertype", "");
+                mIntent.putExtra("ordercode", "");
+                startActivity(mIntent);
 
                 break;
         }
 
     }
 
-    @Override
-    public void collectionSuccess() {
-        //收藏成功
-        ivlike.setSelected(true);
+    //点击关注病友
+    public void goodAction(CommComListEntry.DataBean dataBean) {
+
+        commentInfo = dataBean;
+
+        iGoodPres.setToken((String) SaveUtils.get(this, SpValue.TOKEN, ""));
+
+        //type 资讯(1),文章(2),直播(3),讲堂(4),帖子(5),评论(6);
+//        switch (type) {
+//
+//            case "1"://直播
+//                iGoodPres.setType("3");
+//                break;
+//
+//            case "3"://视频
+//                iGoodPres.setType("4");
+//                break;
+//
+//        }
+        iGoodPres.setType("6");
+        iGoodPres.setRelateid(dataBean.getEvaluateid());
+        if ("1".equals(dataBean.getIsdz())) {
+            //已经点赞， 取消点赞
+            iGoodPres.removeGood();
+        } else {
+            //未点赞， 点击点赞
+            iGoodPres.good();
+        }
+
     }
 
-    //取消收藏成功
+
+    //点赞成功
     @Override
-    public void removeCollectionSuccess() {
-        ivlike.setSelected(false);
+    public void goodSuccess() {
+
+        if (commentInfo != null)
+            commentInfo.setIsdz("1");
+
+        if (commAdapter != null)
+            commAdapter.notifyDataSetChanged();
+
     }
 
+    //当前点击病友信息
+    private CommComListEntry.DataBean commentInfo;
+
+    //点击关注
+    public void attentionAction(CommComListEntry.DataBean dataBean) {
+
+        commentInfo = dataBean;
+
+        iCollectionPres.setId(dataBean.getEvaluateid());
+        if ("1".equals(dataBean.getIsfollow())) {
+
+            //已关注，点击取消关注
+            iCollectionPres.removeCollection((String) SaveUtils.get(this, SpValue.TOKEN, ""), "6");
+
+        } else {
+            //未关注， 点击关注
+            iCollectionPres.addCollection((String) SaveUtils.get(this, SpValue.TOKEN, ""), "6");
+
+        }
+
+    }
+
+    //取消点赞
+    @Override
+    public void removeSuccess() {
+
+        if (commentInfo != null)
+            commentInfo.setIsdz("0");
+
+        if (commAdapter != null)
+            commAdapter.notifyDataSetChanged();
+
+    }
+
+    //收藏， 关注成功
+    @Override
+    public void collectionSuccess(String type) {
+
+        if (this.type.equals(type)) {
+            //收藏视频
+            ivlike.setSelected(true);
+        } else if ("6".equals(type)) {
+            //关注病友
+            if (commentInfo != null)
+                commentInfo.setIsfollow("1");
+
+            if (commAdapter != null)
+                commAdapter.notifyDataSetChanged();
+        }
+
+    }
+
+    //取消收藏， 关注成功
+    @Override
+    public void removeCollectionSuccess(String type) {
+
+        if (this.type.equals(type)) {
+            //收藏视频
+            ivlike.setSelected(false);
+        } else if ("6".equals(type)) {
+            //关注病友
+            if (commentInfo != null)
+                commentInfo.setIsfollow("0");
+
+            if (commAdapter != null)
+                commAdapter.notifyDataSetChanged();
+        }
+
+    }
+
+    //回复
+    public void replyAction(CommComListEntry.DataBean dataBean) {
+
+        Intent m = new Intent(this, ReplyActivity.class);
+        m.putExtra("id", dataBean.getId());
+        startActivityForResult(m, 0x998);
+
+    }
 }

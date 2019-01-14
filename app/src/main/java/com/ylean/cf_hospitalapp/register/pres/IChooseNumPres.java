@@ -151,14 +151,9 @@ public class IChooseNumPres {
                                       iChooseNumView.stopRefush();
                                   }
 
-                              }, SpValue.CH
-                        , hospitalId
-                        , departId
-                        , menzhenid
+                              }, SpValue.CH  , hospitalId , departId , menzhenid
                         , timeEntry == null ? IDateUtils.formatDateTime(new Date(), IDateUtils.DF_YYYY_MM_DD) : timeEntry.getTimeDesc()
-                        , timeType
-                        , doctypeid
-                        , doctorid);
+                        , timeType , doctypeid , doctorid);
 
     }
 

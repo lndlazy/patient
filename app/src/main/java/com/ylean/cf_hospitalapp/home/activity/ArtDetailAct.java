@@ -128,7 +128,11 @@ public class ArtDetailAct extends BaseActivity {
 
                 //拦截url地址
                 Intent m = new Intent(ArtDetailAct.this, CommentActivity.class);
+                m.putExtra("with_pic", false);
                 m.putExtra("id", id);
+                m.putExtra("type", "");
+                m.putExtra("ordertype", "");
+                m.putExtra("ordercode", "");
                 startActivity(m);
                 Logger.d("====评论====");
 

@@ -50,7 +50,7 @@ public class DepartmentChooseActivity extends BaseActivity {
     private List<RegisterDeartmentListEntry.DataBean.MenzhenlistBean> menzhenlist = new ArrayList<>();
     private String departid;
     private String departname;
-    private SearchListEntry.DataBean hospitalSearchInfo;
+//    private SearchListEntry.DataBean hospitalSearchInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

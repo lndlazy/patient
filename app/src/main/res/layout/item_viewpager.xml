@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.facebook.drawee.view.SimpleDraweeView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ivImg"
     android:layout_width="match_parent"
     android:layout_height="@dimen/x180"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    fresco:placeholderImageScaleType="fitXY">
 
 </com.facebook.drawee.view.SimpleDraweeView>

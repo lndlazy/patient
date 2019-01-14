@@ -92,7 +92,7 @@ public class IDoctorListPres {
 
         RetrofitHttpUtil
                 .getInstance()
-                .attentionDoctor(
+                .addCollection(
                         new BaseNoTObserver<Basebean>() {
                             @Override
                             public void onHandleSuccess(Basebean basebean) {
@@ -105,7 +105,7 @@ public class IDoctorListPres {
                                 iDoctorListView.showErr(message);
                             }
 
-                        }, SpValue.CH, token, doctorid);
+                        }, SpValue.CH, token, doctorid, "5");
 
     }
 
@@ -113,7 +113,7 @@ public class IDoctorListPres {
     public void noAttentionDoctor(String doctorid, String token, final DoctorListAdapter doctorListAdapter, final int position) {
         RetrofitHttpUtil
                 .getInstance()
-                .noAttentionDoctor(
+                .removeCollection(
                         new BaseNoTObserver<Basebean>() {
                             @Override
                             public void onHandleSuccess(Basebean basebean) {
@@ -126,7 +126,7 @@ public class IDoctorListPres {
                                 iDoctorListView.showErr(message);
                             }
 
-                        }, SpValue.CH, token, doctorid, DelCollectType.TYPE_DOCTOR);
+                        }, SpValue.CH, token, doctorid, "5");
     }
 
 }

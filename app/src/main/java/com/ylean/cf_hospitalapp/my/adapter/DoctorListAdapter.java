@@ -56,7 +56,6 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.My
             @Override
             public void onClick(View v) {
 
-                holder.getAdapterPosition();
                 Intent m = new Intent(context, DoctorDetailActivity.class);
                 m.putExtra("doctorId", myDoctorList.get(holder.getAdapterPosition()).getDoctorid());
                 context.startActivity(m);

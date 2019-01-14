@@ -32,8 +32,8 @@
 
         <TextView
             android:id="@+id/tvAttention"
-            android:layout_width="@dimen/x60"
-            android:layout_height="@dimen/x25"
+            android:layout_width="@dimen/x55"
+            android:layout_height="@dimen/x20"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x10"
@@ -53,10 +53,16 @@
         android:textColor="@color/txt_color_light6"
         android:textSize="@dimen/textsize_16sp" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/picRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x3"
+        android:layout_marginTop="@dimen/x3" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/x30">
-
 
         <TextView
             android:id="@+id/tvtime"
@@ -90,12 +96,12 @@
             android:padding="@dimen/x3"
             android:src="@mipmap/ic_reply" />
 
-
         <TextView
             android:id="@+id/tvGood"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/x20"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x3"
             android:layout_marginRight="@dimen/x10"
             android:layout_toLeftOf="@id/ivReply"
             android:gravity="center"
@@ -106,13 +112,12 @@
 
         <ImageView
             android:id="@+id/ivGood"
-            android:layout_width="@dimen/x25"
-            android:layout_height="@dimen/x25"
+            android:layout_width="@dimen/x18"
+            android:layout_height="@dimen/x18"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x2"
             android:layout_toLeftOf="@id/tvGood"
-            android:padding="@dimen/x3"
-            android:src="@mipmap/ic_good" />
+            android:background="@drawable/select_good" />
 
     </RelativeLayout>
 
@@ -121,19 +126,19 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginLeft="@dimen/x15"
-        android:layout_marginTop="@dimen/x5"
         android:layout_marginRight="@dimen/x15"
+        android:layout_marginTop="@dimen/x5"
         android:src="@color/line_colore5" />
 
     <LinearLayout
         android:id="@+id/llCommitReply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/x15"
         android:layout_marginBottom="@dimen/x15"
+        android:layout_marginTop="@dimen/x15"
         android:orientation="vertical">
 
-        <include layout="@layout/item_commit_reply" />
+        <!--<include layout="@layout/item_commit_reply" />-->
 
     </LinearLayout>
 

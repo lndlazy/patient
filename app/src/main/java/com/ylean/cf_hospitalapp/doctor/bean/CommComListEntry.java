@@ -4,22 +4,22 @@ import android.os.Parcel;
 
 import com.ylean.cf_hospitalapp.base.bean.Basebean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  * Created by linaidao on 2019/1/11.
  */
 
-public class CommitListEntry extends Basebean {
+public class CommComListEntry extends Basebean {
 
     /**
-     * data : [{"content":"全五星好评哦哦","evaluateid":366,"evaluatename":"小鸡","evaluatetime":"2019-01-11 11:26:38","id":35,"imgs":["/upload/imgs/2765fc30-43be-419e-91b3-17a641330377.jpg","/upload/imgs/9ca9e310-11a7-4d83-8f08-4595332d9226.jpg"],"isdz":1,"isfollow":0,"livestars":5,"plimg":"/upload/imgs/0d3a5dd2-9859-4bf8-9ecc-59e19fbbd3d1.jpg","reply":[],"timedesc":"2小时前"},{"content":"不带饭v","evaluateid":366,"evaluatename":"小鸡","evaluatetime":"2019-01-09 18:38:12","id":32,"imgs":["/upload/imgs/47e21122-dcb1-4ab5-ac3b-0687edd7ab1e.jpg","/upload/imgs/2f7f95b2-9d1e-48ea-8a9f-5c8b43b02e48.jpg"],"isdz":1,"isfollow":0,"livestars":5,"plimg":"/upload/imgs/0d3a5dd2-9859-4bf8-9ecc-59e19fbbd3d1.jpg","reply":[],"timedesc":"昨天"},{"content":"锦绣江山都好都好快科技多久能到","evaluateid":366,"evaluatename":"小鸡","evaluatetime":"2019-01-09 17:57:39","id":31,"imgs":[""],"isdz":1,"isfollow":0,"livestars":5,"plimg":"/upload/imgs/0d3a5dd2-9859-4bf8-9ecc-59e19fbbd3d1.jpg","reply":[],"timedesc":"昨天"},{"content":"全五星好评","evaluateid":366,"evaluatename":"小鸡","evaluatetime":"2019-01-09 16:54:07","id":28,"imgs":[""],"isdz":1,"isfollow":0,"livestars":3,"plimg":"/upload/imgs/0d3a5dd2-9859-4bf8-9ecc-59e19fbbd3d1.jpg","reply":[],"timedesc":"昨天"}]
-     * maxRow : 4
+     * data : [{"content":"frfeggrs","evaluateid":291,"evaluatename":"","evaluatetime":"2018-11-19 17:20:14","id":8,"imgs":[],"isdz":1,"isfollow":0,"livestars":0,"plimg":"https://thirdwx.qlogo.cn/mmopen/vi_32/lPgP1IUpXxCcqicePYpopNa6iaYIjsdnfyxiclwXLlOYm6CIt6GThZqlLSNUYCOqgszgVAQofFVvoBWB9YT1eepmw/132","reply":[{"id":2,"replycontent":"分开了发","replyname":"小米"}],"timedesc":"1月前"}]
+     * maxRow : 1
      * page : 0
      * pageIndex : 1
      * pageSize : 0
-     * startTime : 2019-01-11 13:48:09
+     * startTime : 2019-01-13 11:35:25
      * sum : 0
      * titleList :
      * token :
@@ -119,18 +119,18 @@ public class CommitListEntry extends Basebean {
 
     public static class DataBean implements android.os.Parcelable {
         /**
-         * content : 全五星好评哦哦
-         * evaluateid : 366
-         * evaluatename : 小鸡
-         * evaluatetime : 2019-01-11 11:26:38
-         * id : 35
-         * imgs : ["/upload/imgs/2765fc30-43be-419e-91b3-17a641330377.jpg","/upload/imgs/9ca9e310-11a7-4d83-8f08-4595332d9226.jpg"]
+         * content : frfeggrs
+         * evaluateid : 291
+         * evaluatename :
+         * evaluatetime : 2018-11-19 17:20:14
+         * id : 8
+         * imgs : []
          * isdz : 1
          * isfollow : 0
-         * livestars : 5
-         * plimg : /upload/imgs/0d3a5dd2-9859-4bf8-9ecc-59e19fbbd3d1.jpg
-         * reply : []
-         * timedesc : 2小时前
+         * livestars : 0
+         * plimg : https://thirdwx.qlogo.cn/mmopen/vi_32/lPgP1IUpXxCcqicePYpopNa6iaYIjsdnfyxiclwXLlOYm6CIt6GThZqlLSNUYCOqgszgVAQofFVvoBWB9YT1eepmw/132
+         * reply : [{"id":2,"replycontent":"分开了发","replyname":"小米"}]
+         * timedesc : 1月前
          */
 
         private String content;
@@ -144,7 +144,15 @@ public class CommitListEntry extends Basebean {
         private String plimg;
         private String timedesc;
         private List<String> imgs;
-//        private List<T> reply;
+        private List<ReplyBean> reply;
+
+        public List<String> getImgs() {
+            return imgs;
+        }
+
+        public void setImgs(List<String> imgs) {
+            this.imgs = imgs;
+        }
 
         public String getContent() {
             return content;
@@ -226,21 +234,82 @@ public class CommitListEntry extends Basebean {
             this.timedesc = timedesc;
         }
 
-        public List<String> getImgs() {
-            return imgs;
+        public List<ReplyBean> getReply() {
+            return reply;
         }
 
-        public void setImgs(List<String> imgs) {
-            this.imgs = imgs;
+        public void setReply(List<ReplyBean> reply) {
+            this.reply = reply;
         }
 
-//        public List<?> getReply() {
-//            return reply;
-//        }
-//
-//        public void setReply(List<?> reply) {
-//            this.reply = reply;
-//        }
+        public static class ReplyBean implements android.os.Parcelable {
+            /**
+             * id : 2
+             * replycontent : 分开了发
+             * replyname : 小米
+             */
+
+            private String id;
+            private String replycontent;
+            private String replyname;
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
+
+            public String getReplycontent() {
+                return replycontent;
+            }
+
+            public void setReplycontent(String replycontent) {
+                this.replycontent = replycontent;
+            }
+
+            public String getReplyname() {
+                return replyname;
+            }
+
+            public void setReplyname(String replyname) {
+                this.replyname = replyname;
+            }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(this.id);
+                dest.writeString(this.replycontent);
+                dest.writeString(this.replyname);
+            }
+
+            public ReplyBean() {
+            }
+
+            protected ReplyBean(Parcel in) {
+                this.id = in.readString();
+                this.replycontent = in.readString();
+                this.replyname = in.readString();
+            }
+
+            public static final Creator<ReplyBean> CREATOR = new Creator<ReplyBean>() {
+                @Override
+                public ReplyBean createFromParcel(Parcel source) {
+                    return new ReplyBean(source);
+                }
+
+                @Override
+                public ReplyBean[] newArray(int size) {
+                    return new ReplyBean[size];
+                }
+            };
+        }
 
         @Override
         public int describeContents() {
@@ -260,7 +329,7 @@ public class CommitListEntry extends Basebean {
             dest.writeString(this.plimg);
             dest.writeString(this.timedesc);
             dest.writeStringList(this.imgs);
-//            dest.writeList(this.reply);
+            dest.writeTypedList(this.reply);
         }
 
         public DataBean() {
@@ -278,7 +347,7 @@ public class CommitListEntry extends Basebean {
             this.plimg = in.readString();
             this.timedesc = in.readString();
             this.imgs = in.createStringArrayList();
-
+            this.reply = in.createTypedArrayList(ReplyBean.CREATOR);
         }
 
         public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
@@ -314,10 +383,10 @@ public class CommitListEntry extends Basebean {
         dest.writeTypedList(this.data);
     }
 
-    public CommitListEntry() {
+    public CommComListEntry() {
     }
 
-    protected CommitListEntry(Parcel in) {
+    protected CommComListEntry(Parcel in) {
         super(in);
         this.maxRow = in.readInt();
         this.page = in.readInt();
@@ -331,15 +400,15 @@ public class CommitListEntry extends Basebean {
         this.data = in.createTypedArrayList(DataBean.CREATOR);
     }
 
-    public static final Creator<CommitListEntry> CREATOR = new Creator<CommitListEntry>() {
+    public static final Creator<CommComListEntry> CREATOR = new Creator<CommComListEntry>() {
         @Override
-        public CommitListEntry createFromParcel(Parcel source) {
-            return new CommitListEntry(source);
+        public CommComListEntry createFromParcel(Parcel source) {
+            return new CommComListEntry(source);
         }
 
         @Override
-        public CommitListEntry[] newArray(int size) {
-            return new CommitListEntry[size];
+        public CommComListEntry[] newArray(int size) {
+            return new CommComListEntry[size];
         }
     };
 }

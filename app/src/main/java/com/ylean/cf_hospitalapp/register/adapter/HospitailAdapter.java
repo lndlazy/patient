@@ -11,9 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.my.activity.WebviewActivity;
+import com.ylean.cf_hospitalapp.hospital.activity.HospitalDetailActivity;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.register.activity.DepartmentChooseActivity;
 import com.ylean.cf_hospitalapp.register.bean.HospitalListEntry;
@@ -52,15 +51,15 @@ public class HospitailAdapter extends RecyclerView.Adapter<HospitailAdapter.MyVi
             @Override
             public void onClick(View v) {
 
-//                Intent m = new Intent(context, HospitalDetailActivity.class);
-//                m.putExtra("hospitalInfo", hospitailList.get(position));
-//                context.startActivity(m);
-
-                Intent m = new Intent(context, WebviewActivity.class);
-                m.putExtra("title", "医院详细介绍");
-                String url = ApiService.WEB_ROOT + ApiService.HOSPITAL_DETAIL + "?id=" + hospitailList.get(position).getHospitalid();
-                m.putExtra("url", url);
+                Intent m = new Intent(context, HospitalDetailActivity.class);
+                m.putExtra("hospitalInfo", hospitailList.get(position));
                 context.startActivity(m);
+
+//                Intent m = new Intent(context, WebviewActivity.class);
+//                m.putExtra("title", "医院详细介绍");
+//                String url = ApiService.WEB_ROOT + ApiService.HOSPITAL_DETAIL + "?id=" + hospitailList.get(position).getHospitalid();
+//                m.putExtra("url", url);
+//                context.startActivity(m);
 
 
             }
@@ -69,7 +68,7 @@ public class HospitailAdapter extends RecyclerView.Adapter<HospitailAdapter.MyVi
             @Override
             public void onClick(View v) {
 
-                //选择科室
+                //选择科室,去挂号
                 Intent m = new Intent(context, DepartmentChooseActivity.class);
                 m.putExtra("hospitalInfo", hospitailList.get(position));
                 context.startActivity(m);

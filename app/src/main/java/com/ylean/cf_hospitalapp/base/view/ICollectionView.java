@@ -7,9 +7,9 @@ package com.ylean.cf_hospitalapp.base.view;
 public interface ICollectionView extends BaseView {
 
     //收藏成功
-    void collectionSuccess();
+    void collectionSuccess(String type);
 
     //取消收藏成功
-    void removeCollectionSuccess();
+    void removeCollectionSuccess(String type);
 
 }

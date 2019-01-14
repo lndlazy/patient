@@ -1,12 +1,11 @@
 package com.ylean.cf_hospitalapp.doctor.presenter;
 
-import com.ylean.cf_hospitalapp.base.bean.Basebean;
-import com.ylean.cf_hospitalapp.doctor.bean.CommitListEntry;
+import com.ylean.cf_hospitalapp.doctor.bean.CommComListEntry;
 import com.ylean.cf_hospitalapp.doctor.bean.InquiryListEntry;
 import com.ylean.cf_hospitalapp.doctor.bean.VideoListEntry;
+import com.ylean.cf_hospitalapp.doctor.view.IDoctorDetailView;
 import com.ylean.cf_hospitalapp.hospital.bean.ServiceInfoEntry;
 import com.ylean.cf_hospitalapp.my.bean.DoctorDetailEntry;
-import com.ylean.cf_hospitalapp.doctor.view.IDoctorDetailView;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
 import com.ylean.cf_hospitalapp.utils.SpValue;
@@ -31,6 +30,43 @@ public class IDoctorDetailPres {
 
     private String doctorId;
     private String token;
+    private int inquiryPage = 1;
+    private String inquiryPageSize = "2";
+    private int videoPage = 1;
+    private String videoPageSize = "2";
+
+
+    public int getVideoPage() {
+        return videoPage;
+    }
+
+    public void setVideoPage(int videoPage) {
+        this.videoPage = videoPage;
+    }
+
+    public String getVideoPageSize() {
+        return videoPageSize;
+    }
+
+    public void setVideoPageSize(String videoPageSize) {
+        this.videoPageSize = videoPageSize;
+    }
+
+    public String getInquiryPageSize() {
+        return inquiryPageSize;
+    }
+
+    public void setInquiryPageSize(String inquiryPageSize) {
+        this.inquiryPageSize = inquiryPageSize;
+    }
+
+    public int getInquiryPage() {
+        return inquiryPage;
+    }
+
+    public void setInquiryPage(int inquiryPage) {
+        this.inquiryPage = inquiryPage;
+    }
 
     public void setToken(String token) {
         this.token = token;
@@ -105,15 +141,14 @@ public class IDoctorDetailPres {
     //医生评价列表
     public void doctorDetailCommentList() {
         RetrofitHttpUtil.getInstance()
-                .doctorDetailCommentList(new BaseNoTObserver<CommitListEntry>() {
+                .doctorDetailCommentList(new BaseNoTObserver<CommComListEntry>() {
                     @Override
-                    public void onHandleSuccess(CommitListEntry basebean) {
+                    public void onHandleSuccess(CommComListEntry basebean) {
 
-                        if (basebean==null || basebean.getData()==null)
+                        if (basebean == null || basebean.getData() == null)
                             return;
 
-                        List<CommitListEntry.DataBean> data = basebean.getData();
-
+                        iDoctorDetailView.setEvaluateData(basebean.getData());
 
                     }
 
@@ -178,6 +213,7 @@ public class IDoctorDetailPres {
 
     }
 
+
     //问诊记录
     public void inquiryHistory() {
 
@@ -185,6 +221,8 @@ public class IDoctorDetailPres {
                 .inquiryHistory(new BaseNoTObserver<InquiryListEntry>() {
                     @Override
                     public void onHandleSuccess(InquiryListEntry basebean) {
+
+                        iDoctorDetailView.stopInquiryRefush();
 
                         if (basebean == null || basebean.getData() == null)
                             return;
@@ -195,9 +233,10 @@ public class IDoctorDetailPres {
                     @Override
                     public void onHandleError(String message) {
                         iDoctorDetailView.showErr(message);
+                        iDoctorDetailView.stopInquiryRefush();
                     }
 
-                }, SpValue.CH, doctorId, 1, "2");
+                }, SpValue.CH, doctorId, inquiryPage, inquiryPageSize);
     }
 
     //医讲堂 记录
@@ -208,6 +247,8 @@ public class IDoctorDetailPres {
                     @Override
                     public void onHandleSuccess(VideoListEntry basebean) {
 
+                        iDoctorDetailView.stopVideoSpeechRefush();
+
                         if (basebean == null || basebean.getData() == null)
                             return;
 
@@ -217,9 +258,10 @@ public class IDoctorDetailPres {
                     @Override
                     public void onHandleError(String message) {
                         iDoctorDetailView.showErr(message);
+                        iDoctorDetailView.stopVideoSpeechRefush();
                     }
 
-                }, SpValue.CH, doctorId, 1, "2");
+                }, SpValue.CH, doctorId, videoPage, videoPageSize);
     }
 
 }

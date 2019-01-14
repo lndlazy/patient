@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:orientation="vertical"
-    android:padding="@dimen/x5">
+    android:padding="@dimen/x15">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,10 +14,8 @@
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/sdvImg"
-            android:layout_width="@dimen/x50"
-            android:layout_height="@dimen/x50"
-            android:layout_marginLeft="@dimen/x8"
-            android:padding="@dimen/x3"
+            android:layout_width="@dimen/x45"
+            android:layout_height="@dimen/x45"
             android:src="@mipmap/ic_doctor"
             fresco:failureImage="@mipmap/ic_doctor"
             fresco:placeholderImage="@mipmap/ic_doctor"
@@ -56,7 +54,7 @@
             android:id="@+id/iv1"
             android:layout_width="@dimen/x22"
             android:layout_height="@dimen/x22"
-            android:layout_marginLeft="@dimen/x8"
+
             android:layout_marginTop="@dimen/x8"
             android:src="@mipmap/ic_ask" />
 
@@ -81,10 +79,9 @@
 
         <ImageView
             android:id="@+id/iv2"
-            android:layout_width="@dimen/x25"
-            android:layout_height="@dimen/x25"
-            android:layout_marginLeft="@dimen/x8"
-            android:padding="@dimen/x2"
+            android:layout_width="@dimen/x22"
+            android:layout_height="@dimen/x22"
+
             android:src="@mipmap/ic_answer" />
 
         <TextView

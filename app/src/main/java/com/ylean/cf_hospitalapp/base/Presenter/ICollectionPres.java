@@ -7,7 +7,7 @@ import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 
 /**
- * 收藏pers
+ * 收藏pers  关注
  * Created by linaidao on 2019/1/9.
  */
 
@@ -21,7 +21,7 @@ public class ICollectionPres {
 
     private String id;
     //直播(1),资讯(2),讲堂(3),帖子(4),医生(5),病友(6),文章(7),商品(8)
-    private String type;
+//    private String type;
 
     public String getId() {
         return id;
@@ -31,19 +31,19 @@ public class ICollectionPres {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+//    public String getType() {
+//        return type;
+//    }
+//
+//    public void setType(String type) {
+//        this.type = type;
+//    }
 
     //添加收藏  收藏关联id（直播id，资讯id…）   type 收藏类型  1-直播 2-资讯 3-讲堂 4-帖子 5-医生
 
 
     //////直播(1),资讯(2),讲堂(3),帖子(4),医生(5),病友(6),文章(7),商品(8)
-    public void addCollection(String token) {
+    public void addCollection(String token, String type) {
 
         RetrofitHttpUtil.getInstance()
                 .addCollection(
@@ -51,7 +51,8 @@ public class ICollectionPres {
                             @Override
                             public void onHandleSuccess(Basebean basebean) {
 
-                                iCollectionView.collectionSuccess();
+                                iCollectionView.showErr("操作成功");
+                                iCollectionView.collectionSuccess(type);
                             }
 
                             @Override
@@ -64,15 +65,16 @@ public class ICollectionPres {
 
     }
 
-    //取消收藏
-    public void removeCollection(String token) {
+    //取消收藏,关注
+    public void removeCollection(String token, String type) {
 
         RetrofitHttpUtil.getInstance()
                 .removeCollection(
                         new BaseNoTObserver<Basebean>() {
                             @Override
                             public void onHandleSuccess(Basebean basebean) {
-                                iCollectionView.removeCollectionSuccess();
+                                iCollectionView.showErr("操作成功");
+                                iCollectionView.removeCollectionSuccess(type);
                             }
 
                             @Override

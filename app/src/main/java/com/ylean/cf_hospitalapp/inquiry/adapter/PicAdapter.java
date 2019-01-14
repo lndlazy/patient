@@ -18,6 +18,7 @@ import com.ylean.cf_hospitalapp.utils.SpValue;
 import java.util.List;
 
 /**
+ * 图片展示adapter
  * Created by linaidao on 2019/1/9.
  */
 
@@ -39,7 +40,7 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(PicAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(PicAdapter.MyViewHolder holder, int position) {
 
         holder.sdvImg.setImageURI(Uri.parse(ApiService.WEB_ROOT + images.get(position)));
         holder.ivDelete.setVisibility(View.GONE);
@@ -47,7 +48,7 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.MyViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent m = new Intent(context, PicDetailAc.class);
-                m.putExtra("picUrl", ApiService.WEB_ROOT + images.get(position));
+                m.putExtra("picUrl", ApiService.WEB_ROOT + images.get(holder.getAdapterPosition()));
                 context.startActivity(m);
             }
         });

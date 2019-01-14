@@ -75,7 +75,12 @@ public class NewsActivity extends BaseActivity {
 
                 //拦截url地址
                 Intent m = new Intent(NewsActivity.this, CommentActivity.class);
+                m.putExtra("with_pic", false);
                 m.putExtra("id", id);
+                m.putExtra("type", "");
+                m.putExtra("ordertype", "");
+                m.putExtra("ordercode", "");
+
                 startActivity(m);
 
             } else {

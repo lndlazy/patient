@@ -123,9 +123,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/x80"
+                android:paddingBottom="@dimen/x15"
                 android:paddingLeft="@dimen/x15"
                 android:paddingRight="@dimen/x15"
-                android:paddingBottom="@dimen/x15"
                 android:textColor="@color/txt_color_light9"
                 android:textSize="@dimen/textsize_15sp" />
 
@@ -189,19 +189,19 @@
                     android:layout_marginLeft="@dimen/x5"
                     android:gravity="center_vertical"
                     android:text="图文问诊"
-                    android:textSize="@dimen/textsize_15sp"
-                    android:textColor="@color/txt_color_light76" />
+                    android:textColor="@color/txt_color_light76"
+                    android:textSize="@dimen/textsize_15sp" />
 
                 <TextView
                     android:id="@+id/tvPicPrice"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/x30"
-                    android:textSize="@dimen/textsize_15sp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text=""
-                    android:textColor="@color/txt_color_light76" />
+                    android:textColor="@color/txt_color_light76"
+                    android:textSize="@dimen/textsize_15sp" />
 
                 <TextView
                     android:id="@+id/tvpicinquiry"
@@ -240,21 +240,21 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/x5"
                     android:gravity="center_vertical"
-                    android:textSize="@dimen/textsize_15sp"
-
                     android:text="电话问诊"
-                    android:textColor="@color/txt_color_light76" />
+
+                    android:textColor="@color/txt_color_light76"
+                    android:textSize="@dimen/textsize_15sp" />
 
                 <TextView
                     android:id="@+id/tvTelPrice"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:textSize="@dimen/textsize_15sp"
                     android:layout_marginLeft="@dimen/x30"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text=""
-                    android:textColor="@color/txt_color_light76" />
+                    android:textColor="@color/txt_color_light76"
+                    android:textSize="@dimen/textsize_15sp" />
 
                 <TextView
                     android:id="@+id/tvtelinquiry"
@@ -284,11 +284,11 @@
 
                 <ImageView
                     android:layout_width="@dimen/x30"
-                    android:textSize="@dimen/textsize_15sp"
                     android:layout_height="@dimen/x30"
                     android:layout_gravity="center_vertical"
                     android:padding="@dimen/x3"
-                    android:src="@mipmap/ic_video_inquiry" />
+                    android:src="@mipmap/ic_video_inquiry"
+                    android:textSize="@dimen/textsize_15sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -296,8 +296,8 @@
                     android:layout_marginLeft="@dimen/x5"
                     android:gravity="center_vertical"
                     android:text="视频问诊"
-                    android:textSize="@dimen/textsize_15sp"
-                    android:textColor="@color/txt_color_light76" />
+                    android:textColor="@color/txt_color_light76"
+                    android:textSize="@dimen/textsize_15sp" />
 
                 <TextView
                     android:id="@+id/tvvideoprice"
@@ -305,10 +305,10 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/x30"
                     android:layout_weight="1"
-                    android:textSize="@dimen/textsize_15sp"
                     android:gravity="center_vertical"
                     android:text=""
-                    android:textColor="@color/txt_color_light76" />
+                    android:textColor="@color/txt_color_light76"
+                    android:textSize="@dimen/textsize_15sp" />
 
                 <TextView
                     android:id="@+id/tvvideoinquiry"
@@ -338,19 +338,19 @@
                 <ImageView
                     android:layout_width="@dimen/x30"
                     android:layout_height="@dimen/x30"
-                    android:textSize="@dimen/textsize_15sp"
                     android:layout_gravity="center_vertical"
                     android:padding="@dimen/x3"
-                    android:src="@mipmap/ic_register" />
+                    android:src="@mipmap/ic_register"
+                    android:textSize="@dimen/textsize_15sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/x5"
-                    android:textSize="@dimen/textsize_15sp"
                     android:gravity="center_vertical"
                     android:text="门诊挂号"
-                    android:textColor="@color/txt_color_light76" />
+                    android:textColor="@color/txt_color_light76"
+                    android:textSize="@dimen/textsize_15sp" />
 
                 <TextView
                     android:id="@+id/tvregisterprice"
@@ -476,22 +476,17 @@
                 android:background="@color/bg_home" />
 
 
-            <RelativeLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x40"
+                android:gravity="center_vertical"
                 android:paddingLeft="@dimen/x15"
-                android:paddingRight="@dimen/x15">
+                android:paddingRight="@dimen/x15"
+                android:text="全部评论"
+                android:textColor="@color/txt_color_ma3"
+                android:textSize="@dimen/textsize_16sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="全部评论"
-                    android:textColor="@color/txt_color_ma3"
-                    android:textSize="@dimen/textsize_16sp"
-                    android:textStyle="bold" />
-
-            </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/commentRecyclerview"

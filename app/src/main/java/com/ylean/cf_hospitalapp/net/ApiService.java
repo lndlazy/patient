@@ -2,11 +2,12 @@ package com.ylean.cf_hospitalapp.net;
 
 
 import com.ylean.cf_hospitalapp.base.bean.AddBean;
-import com.ylean.cf_hospitalapp.doctor.bean.CommitListEntry;
+import com.ylean.cf_hospitalapp.doctor.bean.CommComListEntry;
 import com.ylean.cf_hospitalapp.doctor.bean.InquiryListEntry;
 import com.ylean.cf_hospitalapp.doctor.bean.VideoListEntry;
 import com.ylean.cf_hospitalapp.home.bean.SearchListEntry;
 import com.ylean.cf_hospitalapp.home.bean.VideoSpeechDetailEntry;
+import com.ylean.cf_hospitalapp.hospital.bean.HospDepartListEntry;
 import com.ylean.cf_hospitalapp.hospital.bean.ServiceInfoEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.AlipayEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.ChatEntry;
@@ -32,7 +33,6 @@ import com.ylean.cf_hospitalapp.mall.bean.AddressListEntry;
 import com.ylean.cf_hospitalapp.my.bean.AreaEntry;
 import com.ylean.cf_hospitalapp.my.bean.BindEntry;
 import com.ylean.cf_hospitalapp.my.bean.CityEntry;
-import com.ylean.cf_hospitalapp.my.bean.CommentListEntry;
 import com.ylean.cf_hospitalapp.my.bean.DoctorDetailEntry;
 import com.ylean.cf_hospitalapp.my.bean.EvalDetailEntry;
 import com.ylean.cf_hospitalapp.my.bean.EvalListEntry;
@@ -291,7 +291,7 @@ public interface ApiService {
     //医生详情的评价列表
     @FormUrlEncoded
     @POST("/api/app/patient/docxqpjlist")
-    Observable<CommitListEntry> doctorDetailCommentList(@Field("token") String token, @Field("ch") String ch
+    Observable<CommComListEntry> doctorDetailCommentList(@Field("token") String token, @Field("ch") String ch
             , @Field("doctorid") String doctorid, @Field("page") int page
             , @Field("size") String size);
 
@@ -476,13 +476,13 @@ public interface ApiService {
     @POST("/api/app/patient/commentdetail")
     Observable<EvalDetailEntry> commandInfo(@Field("ch") String ch, @Field("token") String token, @Field("id") String id);
 
-    //添加收藏
+    //添加收藏，关注
     @FormUrlEncoded
     @POST("/api/app/art/addcollect")
     Observable<Basebean> addCollection(@Field("ch") String ch, @Field("token") String token
             , @Field("relateid") String relateid, @Field("type") String type);
 
-    //取消收藏
+    //取消收藏 取消关注
     @FormUrlEncoded
     @POST("/api/app/art/delcollect")
     Observable<Basebean> removeCollection(@Field("ch") String ch, @Field("token") String token
@@ -606,13 +606,11 @@ public interface ApiService {
             , @Field("name") String name, @Field("birthday") String birthday, @Field("sex") String sex
             , @Field("location") String location, @Field("address") String address);
 
-
-    //修改个人信息
+    //添加信息反馈
     @FormUrlEncoded
     @POST("/api/app/patient/addFeedBack")
     Observable<Basebean> feedback(@Field("ch") String ch, @Field("token") String token, @Field("content") String content
             , @Field("type") String type, @Field("phone") String phone);
-
 
     //我咨询的医生列表
     @FormUrlEncoded
@@ -626,18 +624,29 @@ public interface ApiService {
     Observable<MyDoctorListEntry> attentionDoctorList(@Field("ch") String ch, @Field("token") String token
             , @Field("page") int page, @Field("size") String size);
 
-    //关注医生
+    //视频详情的评价列表
     @FormUrlEncoded
-    @POST("/api/app/patient/addconsult")
-    Observable<MyDoctorListEntry> attentionDoctor(@Field("ch") String ch, @Field("token") String token
-            , @Field("doctorid") String doctorid);
+    @POST("/api/app/live/commentlist")
+    Observable<CommComListEntry> videoCommentList(@Field("ch") String ch, @Field("token") String token, @Field("id") String id
+            , @Field("page") int page, @Field("size") String size);
 
-    //取消关注医生
+//    //关注医生
+//    @FormUrlEncoded
+//    @POST("/api/app/patient/addconsult")
+//    Observable<MyDoctorListEntry> attentionDoctor(@Field("ch") String ch, @Field("token") String token
+//            , @Field("doctorid") String doctorid);
+
+    //点赞
     @FormUrlEncoded
-    @POST("/api/app/art/delcollect")
-    Observable<MyDoctorListEntry> noAttentionDoctor(@Field("ch") String ch, @Field("token") String token
-            , @Field("relateid") String relateid, @Field("type") String type);
+    @POST("/api/app/art/fabulousNews")
+    Observable<Basebean> good(@Field("token") String token, @Field("type") String type
+            , @Field("relateid") String relateid);
 
+    //取消点赞
+    @FormUrlEncoded
+    @POST("/api/app/art/delfabulous")
+    Observable<Basebean> removeGood(@Field("token") String token, @Field("type") String type
+            , @Field("relateid") String relateid);
 
     //添加回复
     @FormUrlEncoded
@@ -645,20 +654,20 @@ public interface ApiService {
     Observable<Basebean> reply(@Field("ch") String ch, @Field("token") String token
             , @Field("id") String id, @Field("content") String content);
 
-    //评论
-    @FormUrlEncoded
-    @POST("/api/app/patient/evaluate")
-    Observable<Basebean> evaluate(@Field("ch") String ch, @Field("token") String token
-            , @Field("relateid") String relateid, @Field("ordercode") String ordercode
-            , @Field("content") String content, @Field("stardepict") String stardepict
-            , @Field("starservice") String starservice, @Field("starperformance") String starperformance
-            , @Field("type") String type, @Field("imgs") String imgs
-            , @Field("ordertype") String ordertype);
+//    //评论
+//    @FormUrlEncoded
+//    @POST("/api/app/patient/evaluate")
+//    Observable<Basebean> evaluate(@Field("ch") String ch, @Field("token") String token
+//            , @Field("relateid") String relateid, @Field("ordercode") String ordercode
+//            , @Field("content") String content, @Field("stardepict") String stardepict
+//            , @Field("starservice") String starservice, @Field("starperformance") String starperformance
+//            , @Field("type") String type, @Field("imgs") String imgs
+//            , @Field("ordertype") String ordertype);
 
     //添加回复
     @FormUrlEncoded
     @POST("/api/app/patient/getpllist")
-    Observable<CommentListEntry> commentList(@Field("ch") String ch, @Field("token") String token
+    Observable<com.ylean.cf_hospitalapp.my.bean.CommentListEntry> commentList(@Field("ch") String ch, @Field("token") String token
             , @Field("page") int page, @Field("size") String size);
 
     //取消订单
@@ -733,6 +742,20 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/api/app/consultation/summarydetail")
     Observable<Basebean> inquirySummaryReview(@Field("ch") String ch, @Field("token") String token, @Field("consultaid") String consultaid);
+
+
+    //医院科室列表
+    @FormUrlEncoded
+    @POST("/api/app/hospital/gethosdepart")
+    Observable<HospDepartListEntry> hospitalDeartmentList(@Field("ch") String ch, @Field("hospitalid") String hospitalid);
+
+
+    //医院详情的评论列表
+    @FormUrlEncoded
+    @POST("/api/app/patient/hosxqpjlist")
+    Observable<CommComListEntry> hospitalCommentList(@Field("ch") String ch, @Field("token") String token
+            , @Field("hospitalid") String hospitalid, @Field("page") int page, @Field("size") String size);
+
 
 //    //删除地址
 //    @FormUrlEncoded

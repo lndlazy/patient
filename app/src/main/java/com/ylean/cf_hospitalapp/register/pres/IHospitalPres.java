@@ -11,6 +11,7 @@ import com.ylean.cf_hospitalapp.register.view.IHospitalView;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 
 /**
+ * 医院列表p
  * Created by linaidao on 2019/1/3.
  */
 
@@ -61,8 +62,7 @@ public class IHospitalPres {
 
     public void hospitalList(String lat, String lon) {
 
-        RetrofitHttpUtil
-                .getInstance()
+        RetrofitHttpUtil.getInstance()
                 .hospitalList(
                         new BaseNoTObserver<HospitalListEntry>() {
                             @Override
@@ -78,13 +78,8 @@ public class IHospitalPres {
                                 iHospitalView.showErr(message);
                             }
 
-                        }, SpValue.CH
-                        , type
-                        , hospitalname
-                        , lon
-                        , lat
-                        , hostype
-                        , hosgrade);
+                        }, SpValue.CH, type, hospitalname, lon
+                        , lat, hostype, hosgrade);
 
     }
 
@@ -123,9 +118,8 @@ public class IHospitalPres {
                             @Override
                             public void onHandleSuccess(GradeLevelBean gradeLevelBean) {
 
-                                if (gradeLevelBean != null && gradeLevelBean.getData() != null) {
+                                if (gradeLevelBean != null && gradeLevelBean.getData() != null)
                                     iHospitalView.setGradeLevel(gradeLevelBean.getData());
-                                }
 
                             }
 
