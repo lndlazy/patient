@@ -2,32 +2,32 @@ package com.ylean.cf_hospitalapp.net;
 
 
 import com.ylean.cf_hospitalapp.base.bean.AddBean;
+import com.ylean.cf_hospitalapp.base.bean.Basebean;
 import com.ylean.cf_hospitalapp.doctor.bean.CommComListEntry;
 import com.ylean.cf_hospitalapp.doctor.bean.InquiryListEntry;
 import com.ylean.cf_hospitalapp.doctor.bean.VideoListEntry;
+import com.ylean.cf_hospitalapp.home.bean.BannerBean;
+import com.ylean.cf_hospitalapp.home.bean.LoginEntry;
 import com.ylean.cf_hospitalapp.home.bean.SearchListEntry;
 import com.ylean.cf_hospitalapp.home.bean.VideoSpeechDetailEntry;
 import com.ylean.cf_hospitalapp.hospital.bean.HospDepartListEntry;
 import com.ylean.cf_hospitalapp.hospital.bean.ServiceInfoEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.AlipayEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.ChatEntry;
-import com.ylean.cf_hospitalapp.inquiry.bean.DisEntry;
-import com.ylean.cf_hospitalapp.inquiry.bean.OrderEntry;
-import com.ylean.cf_hospitalapp.inquiry.bean.PicAskDetailEntry;
-import com.ylean.cf_hospitalapp.inquiry.bean.PicAskResutEntry;
-import com.ylean.cf_hospitalapp.inquiry.bean.DataUploadResultEntry;
-import com.ylean.cf_hospitalapp.inquiry.bean.WxPayInfoEntry;
-import com.ylean.cf_hospitalapp.base.bean.Basebean;
-import com.ylean.cf_hospitalapp.home.bean.BannerBean;
 import com.ylean.cf_hospitalapp.inquiry.bean.CommentDisBean;
+import com.ylean.cf_hospitalapp.inquiry.bean.DataUploadResultEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.DepartmentListEntry;
+import com.ylean.cf_hospitalapp.inquiry.bean.DisEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.DoctorLevelListBean;
 import com.ylean.cf_hospitalapp.inquiry.bean.DoctorListEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.GradeLevelBean;
 import com.ylean.cf_hospitalapp.inquiry.bean.HospitalEntry;
-import com.ylean.cf_hospitalapp.home.bean.LoginEntry;
+import com.ylean.cf_hospitalapp.inquiry.bean.OrderEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.PeopleEntry;
+import com.ylean.cf_hospitalapp.inquiry.bean.PicAskDetailEntry;
+import com.ylean.cf_hospitalapp.inquiry.bean.PicAskResutEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.RecommendEntry;
+import com.ylean.cf_hospitalapp.inquiry.bean.WxPayInfoEntry;
 import com.ylean.cf_hospitalapp.login.bean.RegisterResultEntry;
 import com.ylean.cf_hospitalapp.mall.bean.AddressListEntry;
 import com.ylean.cf_hospitalapp.my.bean.AreaEntry;
@@ -38,6 +38,7 @@ import com.ylean.cf_hospitalapp.my.bean.EvalDetailEntry;
 import com.ylean.cf_hospitalapp.my.bean.EvalListEntry;
 import com.ylean.cf_hospitalapp.my.bean.FamilyDetailEntry;
 import com.ylean.cf_hospitalapp.my.bean.GoodsListEntry;
+import com.ylean.cf_hospitalapp.my.bean.HelpEntry;
 import com.ylean.cf_hospitalapp.my.bean.MCollectionListEntry;
 import com.ylean.cf_hospitalapp.my.bean.MyAskReusltList;
 import com.ylean.cf_hospitalapp.my.bean.MyDoctorListEntry;
@@ -425,6 +426,11 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/api/app/patient/getpatientinfo")
     Observable<MyInfoEntry> patientInfo(@Field("ch") String ch, @Field("token") String token);
+
+    //医患帮帮团
+    @FormUrlEncoded
+    @POST("/api/app/chat/getlist")
+    Observable<HelpEntry> helpList(@Field("ch") String ch, @Field("token") String token);
 
     // 我的未读消息的数量
     @FormUrlEncoded

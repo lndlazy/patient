@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rldoctor"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/x15">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdvImg"
+        android:layout_width="@dimen/x35"
+        android:layout_height="@dimen/x35"
+        android:layout_marginTop="@dimen/x10"
+        fresco:failureImage="@mipmap/ic_hospital"
+        fresco:placeholderImage="@mipmap/ic_hospital"
+        fresco:roundAsCircle="true" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x30"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_toRightOf="@id/sdvImg"
+        android:gravity="center_vertical"
+        android:maxWidth="@dimen/x100"
+        android:singleLine="true"
+        android:text=""
+        android:textColor="@color/txt_color_ma3"
+        android:textSize="@dimen/textsize_16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvHospitalName"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x30"
+        android:layout_below="@id/tvName"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_toRightOf="@id/sdvImg"
+        android:gravity="center_vertical"
+        android:text=""
+        android:textColor="@color/line_color9b"
+        android:textSize="@dimen/textsize_15sp" />
+
+    <TextView
+        android:id="@+id/tvIntroduce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvHospitalName"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_toRightOf="@id/sdvImg"
+        android:ellipsize="end"
+        android:lines="2"
+        android:minHeight="@dimen/x30"
+        android:text=""
+        android:textColor="@color/txt_color_light76"
+        android:textSize="@dimen/textsize_14sp" />
+
+    <TextView
+        android:id="@+id/tvtime"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x20"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/x10"
+        android:layout_marginTop="@dimen/x5"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/txt_color_light9"
+        android:textSize="@dimen/textsize_12sp" />
+
+</RelativeLayout>

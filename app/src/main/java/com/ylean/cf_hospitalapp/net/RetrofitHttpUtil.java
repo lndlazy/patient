@@ -705,6 +705,16 @@ public class RetrofitHttpUtil {
 
     }
 
+    /**
+     * 医患帮帮团
+     */
+    public void helpList(Observer subscriber, String ch, String token) {
+        getService().helpList(ch, token)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
 
     /**
      * 我的未读消息数量

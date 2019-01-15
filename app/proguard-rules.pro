@@ -35,3 +35,6 @@
     public <init>(android.content.Context, android.util.AttributeSet);
     public <init>(android.content.Context, android.util.AttributeSet, int);
 }
+
+-keep class com.hyphenate.** {*;}
+-dontwarn  com.hyphenate.**

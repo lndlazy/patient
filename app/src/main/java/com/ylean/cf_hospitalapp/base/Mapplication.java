@@ -6,6 +6,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMOptions;
+import com.hyphenate.easeui.EaseUI;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -25,7 +28,14 @@ import java.util.Locale;
 
 public class Mapplication extends Application {
 
+    private static Mapplication instance;
+
     private static final String TAG = "PATIENT_APP";
+
+    public static Mapplication getInstance() {
+        return instance;
+    }
+
 
     @Override
     public void onCreate() {
@@ -35,7 +45,7 @@ public class Mapplication extends Application {
         initLogger(TAG, true);
         Fresco.initialize(this);
 //        Logger.d("sha1值::" + sHA1(this));
-
+        instance = this;
         initPicChoose();
         /**
          * 友盟
@@ -47,6 +57,11 @@ public class Mapplication extends Application {
         PlatformConfig.setQQZone(SpValue.QQ_APP_ID, SpValue.QQ_APP_KEY);
         PlatformConfig.setSinaWeibo(SpValue.WB_APP_ID, SpValue.WB_APP_SECRET, "https://sns.whalecloud.com/sina2/callback");
 
+        EMOptions options = new EMOptions();
+//        // 默认添加好友时，是不需要验证的，改成需要验证
+//        options.setAcceptInvitationAlways(false);
+        EaseUI.getInstance().init(this, options);
+        EMClient.getInstance().setDebugMode(true);
         /////////////////////////////  正式  /////////////////////////////////////////
 //        initLogger(TAG, false);
 //        Fresco.initialize(this);

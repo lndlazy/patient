@@ -1,6 +1,7 @@
 package com.ylean.cf_hospitalapp.base.view;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,18 +12,22 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.hyphenate.chat.EMClient;
 import com.ylean.cf_hospitalapp.R;
+import com.ylean.cf_hospitalapp.base.Presenter.IHxPresenter;
 import com.ylean.cf_hospitalapp.inquiry.FragmentThree;
 import com.ylean.cf_hospitalapp.home.FragmentOne;
 import com.ylean.cf_hospitalapp.my.FragmentFour;
 import com.ylean.cf_hospitalapp.popular.FragmentTwo;
+import com.ylean.cf_hospitalapp.utils.SaveUtils;
+import com.ylean.cf_hospitalapp.utils.SpValue;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 @SuppressLint("Registered")
-public class HomeActivity extends BaseActivity implements View.OnClickListener {
+public class HomeActivity extends BaseActivity implements View.OnClickListener, IHxView {
 
     private ImageView ivone;
     private TextView tvone;
@@ -47,6 +52,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private static final int REQUEST_PERMISSION_LOCATION_CODE = 0x13;
 
 
+    private IHxPresenter iHxPresenter = new IHxPresenter(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +62,13 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         initBottomView();
         initFragment();
         EventBus.getDefault().register(this);
+
+
+
+
+        iHxPresenter.loginHx((String) SaveUtils.get(this, SpValue.HX_NAME, ""));
     }
+
 
     @Override
     protected void onDestroy() {
@@ -320,6 +333,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     private void exit() {
         finish();
+        //退出环信登录
+        EMClient.getInstance().logout(true);
         System.exit(0);
     }
 

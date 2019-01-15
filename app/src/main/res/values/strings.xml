@@ -107,5 +107,5 @@
     <string name="hotel">附近酒店</string>
     <string name="attractions">周边景点</string>
 
-
+    <string name="at_your_in_group">%s在群聊中@了你</string>
 </resources>
