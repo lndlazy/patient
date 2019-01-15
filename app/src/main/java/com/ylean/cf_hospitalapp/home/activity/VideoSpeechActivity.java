@@ -91,7 +91,7 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
 
         id = getIntent().getStringExtra("id");
         //类型 直播1 还是 视频3
-        type = getIntent().getStringExtra("type");
+//        type = getIntent().getStringExtra("type");
 
         initView();
 
@@ -175,7 +175,7 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
         tvtalk.setText(data.getHopedesc());
         tvgoodcount.setText(data.getFabulouscount());
         tvlike.setText(data.getCollectcount());
-
+        type = data.getType();
 //        tvDate.setText(data.getStartime());
 
         if (!TextUtils.isEmpty(data.getStatus())) {
@@ -276,6 +276,9 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
         switch (v.getId()) {
 
             case R.id.ivlike:
+
+                if ("2".equals(type))//如果是讲堂，收藏type为3
+                    type = "3";
 
                 iCollectionPres.setId(id);
 

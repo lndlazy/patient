@@ -45,7 +45,7 @@ public class MyRegisterListActivity extends BaseActivity {
 
         initView();
 
-        reigsterOrderList();
+//        reigsterOrderList();
 
     }
 

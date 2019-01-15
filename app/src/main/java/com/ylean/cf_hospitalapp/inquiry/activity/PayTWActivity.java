@@ -180,21 +180,18 @@ public class PayTWActivity extends BaseActivity implements View.OnClickListener,
         this.tvVoice = findViewById(R.id.tvVoice);
         tvVoice.setVisibility(View.GONE);
         ImageView tvUploadVoice = findViewById(R.id.tvUploadVoice);
-        ImageView tvUploadPic = (ImageView) findViewById(R.id.tvUploadPic);
-        this.etDesc = (EditText) findViewById(R.id.etDesc);
-        this.etQues = (EditText) findViewById(R.id.etQues);
-        this.ivMoreSick = (ImageView) findViewById(R.id.ivMoreSick);
-        this.ivAddPeo = (ImageView) findViewById(R.id.ivAddPeo);
-        TitleBackBarView tbv = (TitleBackBarView) findViewById(R.id.tbv);
+        ImageView tvUploadPic = findViewById(R.id.tvUploadPic);
+        this.etDesc = findViewById(R.id.etDesc);
+        this.etQues = findViewById(R.id.etQues);
+        this.ivMoreSick = findViewById(R.id.ivMoreSick);
+        this.ivAddPeo = findViewById(R.id.ivAddPeo);
+        TitleBackBarView tbv = findViewById(R.id.tbv);
 
         RelativeLayout rlTime = findViewById(R.id.rlTime);
         LinearLayout llt = findViewById(R.id.llt);
         tvTime = findViewById(R.id.tvTime);
-        if (SpValue.ASK_TYPE_PIC.equals(type)) {
-            llt.setVisibility(View.GONE);
-        } else {
-            llt.setVisibility(View.VISIBLE);
-        }
+
+        llt.setVisibility(SpValue.ASK_TYPE_PIC.equals(type) ? View.GONE : View.VISIBLE);
 
         sdvPic = findViewById(R.id.sdvPic);
 
@@ -535,10 +532,10 @@ public class PayTWActivity extends BaseActivity implements View.OnClickListener,
                             }
 
                         }, (String) SaveUtils.get(this, SpValue.TOKEN, "")
-                        , SpValue.CH , peopleBean.getId() , diseaseId
+                        , SpValue.CH, peopleBean.getId(), diseaseId
                         , (String) SaveUtils.get(this, SpValue.HOSPITAL_ID, "")
-                        , etQues.getText().toString()  , etDesc.getText().toString()
-                        , img , voiceurl , doctorId , type
+                        , etQues.getText().toString(), etDesc.getText().toString()
+                        , img, voiceurl, doctorId, type
                         , SpValue.ASK_TYPE_PIC.equals(type) ? "" : tvTime.getText().toString()
                         , CommonUtils.getNum2(price));
     }

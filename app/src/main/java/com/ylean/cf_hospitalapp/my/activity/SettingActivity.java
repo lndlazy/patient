@@ -39,6 +39,8 @@ import com.ylean.cf_hospitalapp.widget.ActionSheetDialog;
 import com.ylean.cf_hospitalapp.widget.EnterItemView;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -590,7 +592,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void exitSuccess() {
 
-        System.exit(0);
+        EventBus.getDefault().post("exit");
     }
 
     @Override

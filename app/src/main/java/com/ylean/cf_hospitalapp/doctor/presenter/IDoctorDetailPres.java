@@ -86,6 +86,7 @@ public class IDoctorDetailPres {
         this.doctorId = doctorId;
     }
 
+    //医生详情
     public void doctorDetail() {
 
         RetrofitHttpUtil.getInstance()
@@ -201,7 +202,7 @@ public class IDoctorDetailPres {
                     iDoctorDetailView.setVideoPrice(data.get(i).getPrice());
 
                 } else if ("4".equals(data.get(i).getAsktype())) {
-                    iDoctorDetailView.setRegisterPrice(data.get(i).getPrice());
+                    iDoctorDetailView.setRegisterPrice(data.get(i).getPrice(), data.get(i).getOutdepartid());
 
                 }
 

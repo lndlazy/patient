@@ -3,6 +3,7 @@ package com.ylean.cf_hospitalapp.register.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -31,6 +32,7 @@ import com.ylean.cf_hospitalapp.inquiry.bean.DataUploadResultEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.MImageItem;
 import com.ylean.cf_hospitalapp.inquiry.bean.PeopleEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.PicAskResutEntry;
+import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
 import com.ylean.cf_hospitalapp.register.bean.HospitalListEntry;
@@ -144,7 +146,21 @@ public class RegisterConfirmActivity extends BaseActivity implements View.OnClic
         if (doctorRegisterInfo != null) {
 //            Logger.d("医院名称" + doctorRegisterInfo.getHospitalname() + "部门名称:" + doctorRegisterInfo.getDepartname());
             tvDepartmentName.setText(departname);
-            tvDoctorName.setText(doctorRegisterInfo.getDocname() + "  " + doctorRegisterInfo.getDoctitle() + "    " + doctorRegisterInfo.getTeachname());
+
+            switch (doctorRegisterInfo.getReserveType()) {
+
+                case "1"://普通门诊
+                    tvDoctorName.setText("普通门诊");
+                    break;
+                case "2"://专家门诊
+                    tvDoctorName.setText("专家门诊");
+                    break;
+                case "3"://针对医生的门诊
+                    tvDoctorName.setText(doctorRegisterInfo.getDocname() + "  " + doctorRegisterInfo.getDoctitle() + "    " + doctorRegisterInfo.getTeachname());
+
+                    break;
+            }
+
             tvMoney.setText(doctorRegisterInfo.getPrice() + "元");
         }
 
@@ -209,6 +225,8 @@ public class RegisterConfirmActivity extends BaseActivity implements View.OnClic
         startRegister();
     }
 
+    private String appointType = "";//挂号类型  1-普通号  2-专家号, 挂医生不传
+
     //开始挂号
     private void startRegister() {
 
@@ -223,53 +241,66 @@ public class RegisterConfirmActivity extends BaseActivity implements View.OnClic
             img = img.substring(0, img.length() - 1);
 
 //        String appointid = timeEntry.getDateDes();
-        RetrofitHttpUtil
-                .getInstance()
-                .registerOrder(
-                        new BaseNoTObserver<PicAskResutEntry>() {
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                                super.onSubscribe(d);
-                                showLoading("提交中...");
-                            }
 
-                            @Override
-                            public void onHandleSuccess(PicAskResutEntry resutEntry) {
-                                hideLoading();
 
-                                if (resutEntry == null || doctorRegisterInfo == null) {
-                                    showErr("数据错误");
-                                    return;
-                                }
+        switch (doctorRegisterInfo.getReserveType()) {
 
-                                Intent m = new Intent(RegisterConfirmActivity.this, PayRegiserActivity.class);
-                                m.putExtra("orderNum", resutEntry.getData());
-                                Logger.d("医生id::" + doctorRegisterInfo.getDoctorid()
-                                        + "\r\n名称:" + doctorRegisterInfo.getDocname()
-                                        + "\r\n订单号:" + resutEntry.getData());
-                                m.putExtra("doctorId", doctorRegisterInfo.getDoctorid());
-                                m.putExtra("doctorName", doctorRegisterInfo.getDocname());
-                                m.putExtra("price", doctorRegisterInfo.getPrice());
-                                m.putExtra("type", "挂号订单");
+            case "1"://普通门诊
+                appointType = "1";
+                break;
+            case "2"://专家门诊
+                appointType = "2";
+                break;
+            case "3"://针对医生的门诊
+                appointType = "";
+                break;
 
-                                startActivity(m);
+        }
 
-//                                //TODO
-                            }
+        RetrofitHttpUtil.getInstance()
+                .registerOrder(new BaseNoTObserver<PicAskResutEntry>() {
+                                   @Override
+                                   public void onSubscribe(Disposable d) {
+                                       super.onSubscribe(d);
+                                       showLoading("提交中...");
+                                   }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                hideLoading();
-                                showErr(message);
-                            }
+                                   @Override
+                                   public void onHandleSuccess(PicAskResutEntry resutEntry) {
+                                       hideLoading();
 
-                        }, SpValue.CH
+                                       if (resutEntry == null || doctorRegisterInfo == null) {
+                                           showErr("数据错误");
+                                           return;
+                                       }
+
+                                       Intent m = new Intent(RegisterConfirmActivity.this, PayRegiserActivity.class);
+                                       m.putExtra("orderNum", resutEntry.getData());
+                                       Logger.d("医生id::" + doctorRegisterInfo.getDoctorid()
+                                               + "\r\n名称:" + doctorRegisterInfo.getDocname()
+                                               + "\r\n订单号:" + resutEntry.getData());
+                                       m.putExtra("doctorId", doctorRegisterInfo.getDoctorid());
+                                       m.putExtra("doctorName", doctorRegisterInfo.getDocname());
+                                       m.putExtra("price", doctorRegisterInfo.getPrice());
+                                       m.putExtra("type", "挂号订单");
+
+                                       startActivity(m);
+
+                                   }
+
+                                   @Override
+                                   public void onHandleError(String message) {
+                                       hideLoading();
+                                       showErr(message);
+                                   }
+
+                               }, SpValue.CH
                         , (String) SaveUtils.get(this, SpValue.TOKEN, "")
                         , doctorRegisterInfo.getId()//时间id
                         , departid//科室id
                         , registerId//门诊id
                         , doctorRegisterInfo.getDoctorid()//医生id
-                        , ""// 1-普通号  2-专家号
+                        , appointType// 1-普通号  2-专家号
                         , peopleBean.getId()//就诊人id
                         , etContent.getText().toString()//就诊内容
                         , img);

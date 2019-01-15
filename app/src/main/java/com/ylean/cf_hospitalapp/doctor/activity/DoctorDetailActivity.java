@@ -28,10 +28,13 @@ import com.ylean.cf_hospitalapp.doctor.bean.VideoListEntry;
 import com.ylean.cf_hospitalapp.home.activity.VideoSpeechActivity;
 import com.ylean.cf_hospitalapp.inquiry.activity.InquiryDetailAct;
 import com.ylean.cf_hospitalapp.inquiry.activity.PayTWActivity;
+import com.ylean.cf_hospitalapp.my.activity.WebviewActivity;
 import com.ylean.cf_hospitalapp.my.bean.DoctorDetailEntry;
 import com.ylean.cf_hospitalapp.doctor.presenter.IDoctorDetailPres;
 import com.ylean.cf_hospitalapp.doctor.view.IDoctorDetailView;
 import com.ylean.cf_hospitalapp.net.ApiService;
+import com.ylean.cf_hospitalapp.register.activity.ChooseNumActivity;
+import com.ylean.cf_hospitalapp.register.bean.HospitalListEntry;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
@@ -81,6 +84,7 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
     private ICollectionPres iCollectionPres = new ICollectionPres(this);
 
     private EvaluateAdapter evaluateAdapter;
+    private String menzhenId;//门诊id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +119,7 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
     }
 
     private void initView() {
+
         this.commentRecyclerview = (RecyclerView) findViewById(R.id.commentRecyclerview);
         this.videoRecyclerview = (RecyclerView) findViewById(R.id.videoRecyclerview);
         this.rlmorevideo = (RelativeLayout) findViewById(R.id.rlmorevideo);
@@ -164,6 +169,7 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
         rlmoreregister.setOnClickListener(this);
         tvAttention.setOnClickListener(this);
         rlmorevideo.setOnClickListener(this);
+        tvhospitaldesc.setOnClickListener(this);
 
         inuqiryRecyclerView();
         inintVideoRecyclerview();
@@ -222,6 +228,8 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
 
     }
 
+    private Intent mIntent;
+
     @Override
     public void onClick(View v) {
 
@@ -234,50 +242,51 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
                     return;
                 }
 
-                Intent m = new Intent(this, PayTWActivity.class);
-                m.putExtra("doctorId", doctorInfo.getDoctorid());
-                m.putExtra("doctorName", doctorInfo.getDoctorname());
-                m.putExtra("type", SpValue.ASK_TYPE_PIC);
-                m.putExtra("price", picPrice);
-                m.putExtra("askType", SpValue.ASK_CHARGE);
-                startActivity(m);
+                mIntent = new Intent(this, PayTWActivity.class);
+                mIntent.putExtra("doctorId", doctorInfo.getDoctorid());
+                mIntent.putExtra("doctorName", doctorInfo.getDoctorname());
+                mIntent.putExtra("type", SpValue.ASK_TYPE_PIC);
+                mIntent.putExtra("price", picPrice);
+                mIntent.putExtra("askType", SpValue.ASK_CHARGE);
+                startActivity(mIntent);
 
                 break;
 
             case R.id.tvtelinquiry://电话问诊
-                Intent n = new Intent(this, PayTWActivity.class);
-                n.putExtra("doctorId", doctorInfo.getDoctorid());
-                n.putExtra("doctorName", doctorInfo.getDoctorname());
-                n.putExtra("type", SpValue.ASK_TYPE_TEL);
-                n.putExtra("price", telPrice);
-                n.putExtra("askType", SpValue.ASK_CHARGE);
-                startActivity(n);
+                mIntent = new Intent(this, PayTWActivity.class);
+                mIntent.putExtra("doctorId", doctorInfo.getDoctorid());
+                mIntent.putExtra("doctorName", doctorInfo.getDoctorname());
+                mIntent.putExtra("type", SpValue.ASK_TYPE_TEL);
+                mIntent.putExtra("price", telPrice);
+                mIntent.putExtra("askType", SpValue.ASK_CHARGE);
+                startActivity(mIntent);
 
                 break;
 
             case R.id.tvvideoinquiry://视频问诊
-                Intent intent = new Intent(this, PayTWActivity.class);
-                intent.putExtra("doctorId", doctorInfo.getDoctorid());
-                intent.putExtra("doctorName", doctorInfo.getDoctorname());
-                intent.putExtra("type", SpValue.ASK_TYPE_VIDEO);
-                intent.putExtra("price", videoPrice);
-                intent.putExtra("askType", SpValue.ASK_CHARGE);
-                startActivity(intent);
+                mIntent = new Intent(this, PayTWActivity.class);
+                mIntent.putExtra("doctorId", doctorInfo.getDoctorid());
+                mIntent.putExtra("doctorName", doctorInfo.getDoctorname());
+                mIntent.putExtra("type", SpValue.ASK_TYPE_VIDEO);
+                mIntent.putExtra("price", videoPrice);
+                mIntent.putExtra("askType", SpValue.ASK_CHARGE);
+                startActivity(mIntent);
 
                 break;
 
             case R.id.tvregister://挂号 TODO
 
-//                Intent rIntent = new Intent(this, ChooseNumActivity.class);
-//                rIntent.putExtra("departid", doctorInfo.getDepartid());//科室id
-//                rIntent.putExtra("registerId", "");//门诊id
-//                rIntent.putExtra("registerName", "");//门诊名称
-//                rIntent.putExtra("departname", doctorInfo.getDepartname());//
-//
-//                HospitalListEntry.DataBean hospitalInfo = new HospitalListEntry.DataBean();
-//
-//                rIntent.putExtra("hospitalInfo", "");
-//                startActivity(rIntent);
+                mIntent = new Intent(this, ChooseNumActivity.class);
+                mIntent.putExtra("departid", doctorInfo.getDepartid());//科室id
+                mIntent.putExtra("registerId", menzhenId);//门诊id
+                mIntent.putExtra("registerName", "门诊挂号");//门诊名称 TODO
+                mIntent.putExtra("departname", doctorInfo.getDepartname());//
+
+                HospitalListEntry.DataBean hospitalInfo = new HospitalListEntry.DataBean();
+                hospitalInfo.setHospitalid(doctorInfo.getHospitalid());
+                hospitalInfo.setHospitalname(doctorInfo.getHospiatlname());
+                mIntent.putExtra("hospitalInfo", hospitalInfo);
+                startActivity(mIntent);
 
 //                departid = getIntent().getStringExtra("departid");//部门id
 //                registerId = getIntent().getStringExtra("registerId");//门诊id
@@ -294,9 +303,9 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
                     return;
                 }
 
-                Intent inquiryIntent = new Intent(this, InquiryListActivity.class);
-                inquiryIntent.putExtra("doctorId", doctorInfo.getDoctorid());
-                startActivity(inquiryIntent);
+                mIntent = new Intent(this, InquiryListActivity.class);
+                mIntent.putExtra("doctorId", doctorInfo.getDoctorid());
+                startActivity(mIntent);
 
                 break;
 
@@ -307,14 +316,24 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
                     return;
                 }
 
-                Intent videoIntent = new Intent(this, VideoListActivity.class);
-                videoIntent.putExtra("doctorId", doctorInfo.getDoctorid());
-                startActivity(videoIntent);
+                mIntent = new Intent(this, VideoListActivity.class);
+                mIntent.putExtra("doctorId", doctorInfo.getDoctorid());
+                startActivity(mIntent);
 
                 break;
 
             case R.id.tvAttention://关注
                 iDoctorDetailPres.clickAttention();
+                break;
+
+            case R.id.tvhospitaldesc://医院详细介绍
+                mIntent = new Intent(this, WebviewActivity.class);
+                mIntent.putExtra("title", "医院详细介绍");
+                if (doctorInfo != null) {
+                    String url = ApiService.WEB_ROOT + ApiService.HOSPITAL_DETAIL + "?id=" + doctorInfo.getHospitalid();
+                    mIntent.putExtra("url", url);
+                }
+                startActivity(mIntent);
                 break;
         }
     }
@@ -330,7 +349,10 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
         tvHospitalName.setText(data.getHospiatlname());
         tvIntroduce.setText(data.getAcademicdesc());
         tvdoctordesc.setText(data.getAdeptdesc());
-        tvhospitaldesc.setText(Html.fromHtml(data.getHosdesc()));
+
+        String content = "<font color=\"#767676\">" + data.getIntroduction() + "</font>"
+                + "<font color=\"#33a9fa\">" + "[详细介绍]" + "</font>";
+        tvhospitaldesc.setText(Html.fromHtml(content));
 
         //是否关注
         tvAttention.setText("1".equals(data.getIscollect()) ? "已关注" : "未关注");
@@ -414,7 +436,6 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
     @Override
     public void addAttention(String doctorid) {
         iCollectionPres.setId(doctorid);
-
         iCollectionPres.addCollection((String) SaveUtils.get(this, SpValue.TOKEN, ""), "5");
     }
 
@@ -444,19 +465,25 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
         tvvideoprice.setText(String.valueOf(price) + "元/次");
     }
 
+    /**
+     * @param price       价格
+     * @param outdepartid 门诊id
+     */
     @Override
-    public void setRegisterPrice(double price) {
+    public void setRegisterPrice(double price, String outdepartid) {
         registerPrice = price;
         llregister.setVisibility(View.VISIBLE);
         tvregisterprice.setText(String.valueOf(price) + "元/次");
+        menzhenId = outdepartid;
     }
 
-    private CommComListEntry.DataBean currentPersion;
+    private CommComListEntry.DataBean currentPerson;
 
     //点击关注、取消关注 评论人
     public void personAttention(CommComListEntry.DataBean dataBean) {
+
         //收藏(关注)类型  1-直播 2-资讯 3-讲堂 4-帖子 5-医生6-病友 7-文章
-        currentPersion = dataBean;
+        currentPerson = dataBean;
 
         iCollectionPres.setId(dataBean.getEvaluateid());
 
@@ -479,8 +506,7 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
             tvAttention.setText("已关注");
         } else if ("6".equals(type)) {
             //病友
-            currentPersion.setIsfollow("1");
-            showErr("关注成功");
+            currentPerson.setIsfollow("1");
             if (evaluateAdapter != null)
                 evaluateAdapter.notifyDataSetChanged();
 
@@ -498,8 +524,7 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
             tvAttention.setText("未关注");
         } else if ("6".equals(type)) {
             //病友
-            currentPersion.setIsfollow("0");
-            showErr("取消关注成功");
+            currentPerson.setIsfollow("0");
             if (evaluateAdapter != null)
                 evaluateAdapter.notifyDataSetChanged();
         }

@@ -54,6 +54,16 @@ public class HospitalInfoEntry extends Basebean {
         private String presidentname;
         private String provincename;
         private String supportel;
+        private String introduction;
+
+
+        public String getIntroduction() {
+            return introduction;
+        }
+
+        public void setIntroduction(String introduction) {
+            this.introduction = introduction;
+        }
 
         public String getAddress() {
             return address;
@@ -167,6 +177,9 @@ public class HospitalInfoEntry extends Basebean {
             this.supportel = supportel;
         }
 
+        public DataBean() {
+        }
+
         @Override
         public int describeContents() {
             return 0;
@@ -188,9 +201,7 @@ public class HospitalInfoEntry extends Basebean {
             dest.writeString(this.presidentname);
             dest.writeString(this.provincename);
             dest.writeString(this.supportel);
-        }
-
-        public DataBean() {
+            dest.writeString(this.introduction);
         }
 
         protected DataBean(Parcel in) {
@@ -208,6 +219,7 @@ public class HospitalInfoEntry extends Basebean {
             this.presidentname = in.readString();
             this.provincename = in.readString();
             this.supportel = in.readString();
+            this.introduction = in.readString();
         }
 
         public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
@@ -223,6 +235,9 @@ public class HospitalInfoEntry extends Basebean {
         };
     }
 
+    public HospitalInfoEntry() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -234,9 +249,6 @@ public class HospitalInfoEntry extends Basebean {
         dest.writeParcelable(this.data, flags);
         dest.writeString(this.startTime);
         dest.writeString(this.token);
-    }
-
-    public HospitalInfoEntry() {
     }
 
     protected HospitalInfoEntry(Parcel in) {

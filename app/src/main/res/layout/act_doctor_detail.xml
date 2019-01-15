@@ -15,18 +15,16 @@
         custom:mTitleBarText="医生详情"
         custom:mTitleLeft="@mipmap/ic_arrow_left" />
 
+    <include layout="@layout/line_gray" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <include layout="@layout/line_gray" />
 
             <RelativeLayout
                 android:id="@+id/rldoctor"
@@ -149,7 +147,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/x80"
-                android:padding="@dimen/x15"
+                android:paddingBottom="@dimen/x15"
+                android:paddingLeft="@dimen/x15"
+                android:paddingRight="@dimen/x15"
                 android:textColor="@color/txt_color_light9"
                 android:textSize="@dimen/textsize_15sp" />
 
@@ -360,7 +360,8 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text=""
-                    android:textColor="@color/txt_color_light76" />
+                    android:textColor="@color/txt_color_light76"
+                    android:textSize="@dimen/textsize_15sp" />
 
                 <TextView
                     android:id="@+id/tvregister"

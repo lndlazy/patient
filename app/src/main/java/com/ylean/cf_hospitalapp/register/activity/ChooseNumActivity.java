@@ -42,7 +42,6 @@ import java.util.Map;
 
 public class ChooseNumActivity extends BaseActivity implements IChooseNumView, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
-
     private static final int DATE_REQUEST_CODE = 0x1023;
     private static final int DATE_RESULT_CODE = 0x1024;
     private HospitalListEntry.DataBean hospitalInfo;
@@ -366,6 +365,7 @@ public class ChooseNumActivity extends BaseActivity implements IChooseNumView, S
             @Override
             public void onItemClick(RecyclerView.ViewHolder holder, int p) {
 
+                //挂号
                 registerOrder(p, pmRegisterList, 2);
             }
 
@@ -380,6 +380,7 @@ public class ChooseNumActivity extends BaseActivity implements IChooseNumView, S
             public void onItemClick(RecyclerView.ViewHolder holder, int i) {
 
 //                Logger.d("");
+                //挂号
                 registerOrder(i, amRegisterList, 1);
 
             }

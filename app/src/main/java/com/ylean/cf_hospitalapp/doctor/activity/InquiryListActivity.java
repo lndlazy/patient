@@ -188,7 +188,7 @@ public class InquiryListActivity extends BaseActivity implements SwipeRefreshLay
     }
 
     @Override
-    public void setRegisterPrice(double price) {
+    public void setRegisterPrice(double price, String outdepartid) {
 
     }
 

@@ -78,7 +78,6 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
         return view;
     }
 
-
     @Override
     public void onResume() {
         super.onResume();

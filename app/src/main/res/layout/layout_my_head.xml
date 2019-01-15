@@ -51,7 +51,7 @@
         android:layout_marginLeft="@dimen/x15"
         android:layout_marginTop="@dimen/x60"
         android:layout_toRightOf="@id/sdvImg"
-        android:text="周元方"
+        android:text=""
         android:textColor="@android:color/white"
         android:textSize="@dimen/textsize_20sp" />
 

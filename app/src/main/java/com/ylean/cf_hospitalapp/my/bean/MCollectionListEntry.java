@@ -147,6 +147,62 @@ public class MCollectionListEntry extends Basebean{
         private String titlename;
         private String type;
 
+        private String age;
+        private String createtime;
+        private String createtimetr;
+        private String patientname;
+        private String sex;
+        private String userid;
+
+
+        public String getAge() {
+            return age;
+        }
+
+        public void setAge(String age) {
+            this.age = age;
+        }
+
+        public String getCreatetime() {
+            return createtime;
+        }
+
+        public void setCreatetime(String createtime) {
+            this.createtime = createtime;
+        }
+
+        public String getCreatetimetr() {
+            return createtimetr;
+        }
+
+        public void setCreatetimetr(String createtimetr) {
+            this.createtimetr = createtimetr;
+        }
+
+        public String getPatientname() {
+            return patientname;
+        }
+
+        public void setPatientname(String patientname) {
+            this.patientname = patientname;
+        }
+
+        public String getSex() {
+            return sex;
+        }
+
+        public void setSex(String sex) {
+            this.sex = sex;
+        }
+
+        public String getUserid() {
+            return userid;
+        }
+
+        public void setUserid(String userid) {
+            this.userid = userid;
+        }
+
         public String getInformationid() {
             return informationid;
         }
@@ -283,6 +339,12 @@ public class MCollectionListEntry extends Basebean{
             dest.writeString(this.informationid);
             dest.writeString(this.titlename);
             dest.writeString(this.type);
+            dest.writeString(this.age);
+            dest.writeString(this.createtime);
+            dest.writeString(this.createtimetr);
+            dest.writeString(this.patientname);
+            dest.writeString(this.sex);
+            dest.writeString(this.userid);
         }
 
         protected DataBean(Parcel in) {
@@ -300,6 +362,12 @@ public class MCollectionListEntry extends Basebean{
             this.informationid = in.readString();
             this.titlename = in.readString();
             this.type = in.readString();
+            this.age = in.readString();
+            this.createtime = in.readString();
+            this.createtimetr = in.readString();
+            this.patientname = in.readString();
+            this.sex = in.readString();
+            this.userid = in.readString();
         }
 
         public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
@@ -313,6 +381,9 @@ public class MCollectionListEntry extends Basebean{
                 return new DataBean[size];
             }
         };
+    }
+
+    public MCollectionListEntry() {
     }
 
     @Override
@@ -333,9 +404,6 @@ public class MCollectionListEntry extends Basebean{
         dest.writeString(this.token);
         dest.writeInt(this.totalmoney);
         dest.writeTypedList(this.data);
-    }
-
-    public MCollectionListEntry() {
     }
 
     protected MCollectionListEntry(Parcel in) {

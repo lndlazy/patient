@@ -17,6 +17,10 @@ import com.ylean.cf_hospitalapp.home.FragmentOne;
 import com.ylean.cf_hospitalapp.my.FragmentFour;
 import com.ylean.cf_hospitalapp.popular.FragmentTwo;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 @SuppressLint("Registered")
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
@@ -50,9 +54,25 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_home);
         initBottomView();
         initFragment();
-
+        EventBus.getDefault().register(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        EventBus.getDefault().unregister(this);
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
+    public void onDataSynEvent(String action) {
+
+        if ("exit".equals(action)) {
+            exit();
+        }
+
+    }
 
     private void initFragment() {
 
@@ -293,8 +313,15 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             mPressedTime = mNowTime;
 
         } else {//退出程序
-            System.exit(0);
+            exit();
         }
     }
+
+
+    private void exit() {
+        finish();
+        System.exit(0);
+    }
+
 
 }

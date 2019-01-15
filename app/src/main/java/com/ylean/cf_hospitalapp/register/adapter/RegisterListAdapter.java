@@ -42,8 +42,26 @@ public class RegisterListAdapter extends RecyclerView.Adapter<RegisterListAdapte
         holder.sdvImg.setImageURI(Uri.parse(ApiService.WEB_ROOT + registerList.get(position).getImgurl()));
         holder.tvHospitalName.setText(registerList.get(position).getHospitalname());
         holder.tvDepartmentName.setText(registerList.get(position).getDepartname());
-        holder.tvDoctorName.setText(registerList.get(position).getDoctorname() + "  "
-                + registerList.get(position).getDoctitle() + "  " + registerList.get(position).getDocdocteachname());
+
+        switch (registerList.get(position).getAppointtype()) {
+
+            case "0"://普通医生门诊
+                holder.tvDoctorName.setText(registerList.get(position).getDoctorname() + "  "
+                        + registerList.get(position).getDoctitle() + "  " + registerList.get(position).getDocdocteachname());
+                break;
+
+            case "1":
+                holder.tvDoctorName.setText("普通门诊 " + registerList.get(position).getDoctorname() + "  "
+                        + registerList.get(position).getDoctitle() + "  " + registerList.get(position).getDocdocteachname());
+                break;
+
+            case "2":
+                holder.tvDoctorName.setText("专家门诊 " + registerList.get(position).getDoctorname() + "  "
+                        + registerList.get(position).getDoctitle() + "  " + registerList.get(position).getDocdocteachname());
+                break;
+
+        }
+
         holder.tvDate.setText(registerList.get(position).getAppointtime());
         holder.tvPatient.setText(registerList.get(position).getFolkname());
         switch (registerList.get(position).getStatus()) {

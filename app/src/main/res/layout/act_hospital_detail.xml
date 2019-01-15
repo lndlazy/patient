@@ -93,7 +93,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/x50"
-                android:padding="@dimen/x15" />
+                android:padding="@dimen/x15"
+                android:textSize="@dimen/textsize_15sp" />
 
             <include layout="@layout/item_bg_home" />
 

@@ -107,7 +107,7 @@ public class AreaSelectAct extends BaseActivity {
                     m.putExtra("areaCode", areaList.get(position).getCode());
                     m.putExtra("areaName", areaList.get(position).getName());
                     startActivity(m);
-                }else {
+                } else {
                     Intent m = new Intent(AreaSelectAct.this, AddFamilyNumActivity.class);
                     m.putExtra("provinceCode", provinceCode);
                     m.putExtra("provinceName", provinceName);

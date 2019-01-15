@@ -196,7 +196,7 @@ public class VideoListActivity extends BaseActivity implements SwipeRefreshLayou
     }
 
     @Override
-    public void setRegisterPrice(double price) {
+    public void setRegisterPrice(double price, String outdepartid) {
 
     }
 

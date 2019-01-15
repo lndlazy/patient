@@ -14,6 +14,7 @@ import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.bean.Basebean;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
 import com.ylean.cf_hospitalapp.home.activity.ArtDetailAct;
+import com.ylean.cf_hospitalapp.home.activity.VideoSpeechActivity;
 import com.ylean.cf_hospitalapp.my.adapter.MyCommentAdapter;
 import com.ylean.cf_hospitalapp.my.bean.CommentListEntry;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
@@ -33,7 +34,6 @@ import java.util.List;
 
 public class MyCommentActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
-    private com.ylean.cf_hospitalapp.widget.TitleBackBarView tbv;
     private android.support.v7.widget.RecyclerView recyclerView;
     private int mPicFirstVisibleItemPosition;
     private int mPicLastVisibleItemPosition;
@@ -54,34 +54,32 @@ public class MyCommentActivity extends BaseActivity implements SwipeRefreshLayou
 
     public void commentList(final boolean isRefush) {
 
-        RetrofitHttpUtil
-                .getInstance()
-                .commentList(
-                        new BaseNoTObserver<CommentListEntry>() {
-                            @Override
-                            public void onHandleSuccess(CommentListEntry commentListEntry) {
+        RetrofitHttpUtil.getInstance()
+                .commentList(new BaseNoTObserver<CommentListEntry>() {
+                    @Override
+                    public void onHandleSuccess(CommentListEntry commentListEntry) {
 
-                                swipeRefreshLayout.setRefreshing(false);
+                        swipeRefreshLayout.setRefreshing(false);
 
-                                if (commentListEntry != null && commentListEntry.getData() != null) {
+                        if (commentListEntry != null && commentListEntry.getData() != null) {
 
-                                    if (isRefush)
-                                        commentList.clear();
-                                    commentList.addAll(commentListEntry.getData());
+                            if (isRefush)
+                                commentList.clear();
+                            commentList.addAll(commentListEntry.getData());
 
-                                    if (commentAdapter != null)
-                                        commentAdapter.notifyDataSetChanged();
-                                }
+                            if (commentAdapter != null)
+                                commentAdapter.notifyDataSetChanged();
+                        }
 
-                            }
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                swipeRefreshLayout.setRefreshing(false);
-                                showErr(message);
-                            }
+                    @Override
+                    public void onHandleError(String message) {
+                        swipeRefreshLayout.setRefreshing(false);
+                        showErr(message);
+                    }
 
-                        }, SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, ""), page, SpValue.PAGE_SIZE);
+                }, SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, ""), page, SpValue.PAGE_SIZE);
 
     }
 
@@ -89,7 +87,7 @@ public class MyCommentActivity extends BaseActivity implements SwipeRefreshLayou
 
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        this.tbv = (TitleBackBarView) findViewById(R.id.tbv);
+        TitleBackBarView tbv = (TitleBackBarView) findViewById(R.id.tbv);
         tbv.setOnLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,7 +151,10 @@ public class MyCommentActivity extends BaseActivity implements SwipeRefreshLayou
                         m.putExtra("id", commentList.get(position).getRelateid());
                         startActivity(m);
                         break;
-                    case "6":
+                    case "6"://视频
+                        m = new Intent(MyCommentActivity.this, VideoSpeechActivity.class);
+                        m.putExtra("id", commentList.get(position).getRelateid());
+                        startActivity(m);
                         break;
                     case "7":
                         break;

@@ -42,6 +42,7 @@ import com.ylean.cf_hospitalapp.my.bean.MCollectionListEntry;
 import com.ylean.cf_hospitalapp.my.bean.MyAskReusltList;
 import com.ylean.cf_hospitalapp.my.bean.MyDoctorListEntry;
 import com.ylean.cf_hospitalapp.my.bean.MyInfoEntry;
+import com.ylean.cf_hospitalapp.my.bean.MyReuqestListEntry;
 import com.ylean.cf_hospitalapp.my.bean.NewsListEntry;
 import com.ylean.cf_hospitalapp.my.bean.OrderInquiryDetailEntry;
 import com.ylean.cf_hospitalapp.my.bean.PointsDetailEntry;
@@ -705,13 +706,11 @@ public interface ApiService {
     @POST("/api/app/patient/getjrbyuid")
     Observable<FamilyDetailEntry> familyDetail(@Field("ch") String ch, @Field("token") String token, @Field("id") String id);
 
-
     //我的申请列表
     @FormUrlEncoded
     @POST("/api/app/patient/getapplylist")
-    Observable<Basebean> requestList(@Field("ch") String ch, @Field("token") String token, @Field("status") String status
+    Observable<MyReuqestListEntry> requestList(@Field("ch") String ch, @Field("token") String token, @Field("status") String status
             , @Field("page") int page, @Field("size") String size);
-
 
     //添加收货地址
     @FormUrlEncoded
@@ -755,6 +754,14 @@ public interface ApiService {
     @POST("/api/app/patient/hosxqpjlist")
     Observable<CommComListEntry> hospitalCommentList(@Field("ch") String ch, @Field("token") String token
             , @Field("hospitalid") String hospitalid, @Field("page") int page, @Field("size") String size);
+
+
+    //申请免费接送
+    @FormUrlEncoded
+    @POST("/api/app/patient/addfreeshuttle")
+    Observable<Basebean> freeTransfer(@Field("ch") String ch, @Field("token") String token
+            , @Field("name") String name, @Field("peoplecount") String peoplecount, @Field("phone") String phone
+            , @Field("address") String address, @Field("shuttletime") String shuttletime, @Field("hospitalid") String hospitalid);
 
 
 //    //删除地址

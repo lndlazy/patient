@@ -23,7 +23,7 @@
         android:gravity="center_vertical"
         android:maxWidth="@dimen/x80"
         android:singleLine="true"
-        android:text="尹接上官的"
+        android:text=""
         android:textSize="@dimen/textsize_18sp"
         android:textStyle="bold" />
 
@@ -35,7 +35,7 @@
         android:layout_toLeftOf="@id/tvMoney"
         android:layout_toRightOf="@id/tvName"
         android:gravity="bottom"
-        android:text="副主任医师"
+        android:text=""
         android:textStyle="bold" />
 
     <TextView
@@ -49,7 +49,7 @@
         android:gravity="center_vertical"
         android:maxLines="2"
         android:minHeight="@dimen/x30"
-        android:text="长期从事外科临床工作，具有杂事的基科临床工作，具有杂事的基科临床工作，具有杂事的基科临床工作，具有杂事的基科临床工作，具有杂事的基科临床工作，具有杂事的基科临床工作，具有杂事的基科临床工作，具有杂事的基本技能和熟练的外科操"
+        android:text=""
         android:textColor="@color/txt_color_light76"
         android:textSize="@dimen/textsize_15sp" />
 
@@ -71,7 +71,7 @@
         android:layout_toLeftOf="@id/tvOrder"
         android:gravity="center_vertical"
         android:padding="@dimen/x2"
-        android:text="¥60.00"
+        android:text="¥"
         android:textColor="@color/color_1b"
         android:textSize="@dimen/textsize_15sp" />
 

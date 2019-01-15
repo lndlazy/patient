@@ -26,7 +26,7 @@ public interface IDoctorDetailView extends BaseView{
 
     void setVideoPrice(double price);
 
-    void setRegisterPrice(double price);
+    void setRegisterPrice(double price, String outdepartid);
 
     void setInquiryData(List<InquiryListEntry.DataBean> data);
 

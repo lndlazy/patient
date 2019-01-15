@@ -17,12 +17,55 @@
 
     <include layout="@layout/line_gray" />
 
+    <!--<LinearLayout-->
+        <!--android:layout_width="@dimen/x240"-->
+        <!--android:layout_height="@dimen/x40"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:layout_marginBottom="@dimen/x2"-->
+        <!--android:layout_marginTop="@dimen/x2"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:paddingLeft="@dimen/x30"-->
+        <!--android:paddingRight="@dimen/x30">-->
 
-    <TextView
+        <!--<TextView-->
+            <!--android:id="@+id/tvattention"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="@dimen/x30"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/shape_left_circle_blue"-->
+            <!--android:gravity="center"-->
+            <!--android:text="关注"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textSize="@dimen/textsize_14sp" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvfans"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="@dimen/x30"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/shape_right_white_circle"-->
+            <!--android:gravity="center"-->
+            <!--android:text="粉丝"-->
+            <!--android:textColor="@color/tab_colorf9"-->
+            <!--android:textSize="@dimen/textsize_14sp" />-->
+
+    <!--</LinearLayout>-->
+
+
+    <!--<include layout="@layout/line_gray" />-->
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/x20"
-        android:text="开发中"
-        android:textSize="@dimen/textsize_20sp" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>

@@ -31,8 +31,6 @@ import io.reactivex.disposables.Disposable;
 
 public class RegisterPayActivity extends BaseActivity implements View.OnClickListener {
 
-    private android.widget.ImageView i1;
-
     private android.widget.TextView tvName;
     private android.widget.TextView tvIdCard;
     private android.widget.TextView tvAge;
@@ -121,7 +119,22 @@ public class RegisterPayActivity extends BaseActivity implements View.OnClickLis
         tvNum.setText(orderInfo.getCode());//挂号号码
         tvHospitalName.setText(orderInfo.getHospitalname());
         tvDepartmentName.setText(orderInfo.getDepartname());
-        tvDoctorName.setText(orderInfo.getDoctorname() + "  " + orderInfo.getDoctitle() + " " + orderInfo.getDocdocteachname());
+
+        switch (mOrderInfo.getAppointtype()) {
+
+            case "0"://普通医生门诊
+                tvDoctorName.setText(orderInfo.getDoctorname() + "  " + orderInfo.getDoctitle() + " " + orderInfo.getDocdocteachname());
+                break;
+
+            case "1":
+                tvDoctorName.setText("普通门诊 " + orderInfo.getDoctorname() + "  " + orderInfo.getDoctitle() + " " + orderInfo.getDocdocteachname());
+                break;
+
+            case "2":
+                tvDoctorName.setText("专家门诊 " + orderInfo.getDoctorname() + "  " + orderInfo.getDoctitle() + " " + orderInfo.getDocdocteachname());
+                break;
+        }
+
         tvMoney.setText(orderInfo.getPrice() + "元");
         tvDate.setText(orderInfo.getAppointtime());
 
@@ -223,7 +236,6 @@ public class RegisterPayActivity extends BaseActivity implements View.OnClickLis
         tvStatus = findViewById(R.id.tvStatus);
         tvNext = findViewById(R.id.tvNext);
 
-        this.i1 = (ImageView) findViewById(R.id.i1);
         TitleBackBarView tbv = (TitleBackBarView) findViewById(R.id.tbv);
         tbv.setOnLeftClickListener(new View.OnClickListener() {
             @Override
@@ -261,6 +273,9 @@ public class RegisterPayActivity extends BaseActivity implements View.OnClickLis
 
                         Intent m = new Intent(this, PayRegiserActivity.class);
                         m.putExtra("orderNum", mOrderInfo.getCode());
+
+//                        mOrderInfo.get
+
                         m.putExtra("doctorId", mOrderInfo.getDoctorid());
                         m.putExtra("doctorName", mOrderInfo.getDoctorname());
                         m.putExtra("type", "问诊订单");

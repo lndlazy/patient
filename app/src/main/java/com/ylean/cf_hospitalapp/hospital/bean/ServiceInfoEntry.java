@@ -12,14 +12,13 @@ import java.util.List;
 
 public class ServiceInfoEntry extends Basebean {
 
-
     /**
-     * data : [{"appointid":0,"asktype":1,"desc":"图文问诊","price":0.01,"timedesc":""},{"appointid":0,"asktype":2,"desc":"电话问诊","price":0.02,"timedesc":""},{"appointid":0,"asktype":3,"desc":"视频问诊","price":0.03,"timedesc":""},{"appointid":716,"asktype":4,"desc":"门诊挂号","price":0.01,"timedesc":"2019-01-12 星期六 上午"}]
+     * data : [{"appointid":0,"asktype":1,"departid":0,"desc":"图文问诊","outdepartid":0,"price":0.01,"timedesc":""},{"appointid":0,"asktype":2,"departid":0,"desc":"电话问诊","outdepartid":0,"price":0.02,"timedesc":""},{"appointid":0,"asktype":3,"departid":0,"desc":"视频问诊","outdepartid":0,"price":0.03,"timedesc":""},{"appointid":737,"asktype":4,"departid":37,"desc":"门诊挂号","outdepartid":14,"price":0.01,"timedesc":"2019-01-15 星期二 上午"}]
      * maxRow : 0
      * page : 0
      * pageIndex : 0
      * pageSize : 0
-     * startTime : 2019-01-11 13:48:09
+     * startTime : 2019-01-14 17:37:45
      * sum : 0
      * titleList :
      * token :
@@ -121,14 +120,18 @@ public class ServiceInfoEntry extends Basebean {
         /**
          * appointid : 0
          * asktype : 1
+         * departid : 0
          * desc : 图文问诊
+         * outdepartid : 0
          * price : 0.01
          * timedesc :
          */
 
         private String appointid;
         private String asktype;
+        private String departid;
         private String desc;
+        private String outdepartid;
         private double price;
         private String timedesc;
 
@@ -156,6 +159,21 @@ public class ServiceInfoEntry extends Basebean {
             this.asktype = asktype;
         }
 
+        public String getDepartid() {
+            return departid;
+        }
+
+        public void setDepartid(String departid) {
+            this.departid = departid;
+        }
+
+        public String getOutdepartid() {
+            return outdepartid;
+        }
+
+        public void setOutdepartid(String outdepartid) {
+            this.outdepartid = outdepartid;
+        }
 
         public double getPrice() {
             return price;
@@ -182,7 +200,9 @@ public class ServiceInfoEntry extends Basebean {
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeString(this.appointid);
             dest.writeString(this.asktype);
+            dest.writeString(this.departid);
             dest.writeString(this.desc);
+            dest.writeString(this.outdepartid);
             dest.writeDouble(this.price);
             dest.writeString(this.timedesc);
         }
@@ -193,7 +213,9 @@ public class ServiceInfoEntry extends Basebean {
         protected DataBean(Parcel in) {
             this.appointid = in.readString();
             this.asktype = in.readString();
+            this.departid = in.readString();
             this.desc = in.readString();
+            this.outdepartid = in.readString();
             this.price = in.readDouble();
             this.timedesc = in.readString();
         }

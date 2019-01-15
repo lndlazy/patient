@@ -94,6 +94,15 @@ public class DoctorDetailEntry extends Basebean {
         private String imgurl;
         private String iscollect;
         private String phone;
+        private String introduction;
+
+        public String getIntroduction() {
+            return introduction;
+        }
+
+        public void setIntroduction(String introduction) {
+            this.introduction = introduction;
+        }
 
         public String getAcademicdesc() {
             return academicdesc;
@@ -215,6 +224,9 @@ public class DoctorDetailEntry extends Basebean {
             this.phone = phone;
         }
 
+        public DataBean() {
+        }
+
         @Override
         public int describeContents() {
             return 0;
@@ -237,9 +249,7 @@ public class DoctorDetailEntry extends Basebean {
             dest.writeString(this.imgurl);
             dest.writeString(this.iscollect);
             dest.writeString(this.phone);
-        }
-
-        public DataBean() {
+            dest.writeString(this.introduction);
         }
 
         protected DataBean(Parcel in) {
@@ -258,6 +268,7 @@ public class DoctorDetailEntry extends Basebean {
             this.imgurl = in.readString();
             this.iscollect = in.readString();
             this.phone = in.readString();
+            this.introduction = in.readString();
         }
 
         public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
@@ -273,6 +284,9 @@ public class DoctorDetailEntry extends Basebean {
         };
     }
 
+    public DoctorDetailEntry() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -284,9 +298,6 @@ public class DoctorDetailEntry extends Basebean {
         dest.writeParcelable(this.data, flags);
         dest.writeString(this.startTime);
         dest.writeString(this.token);
-    }
-
-    public DoctorDetailEntry() {
     }
 
     protected DoctorDetailEntry(Parcel in) {

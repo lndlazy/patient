@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/x15">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdvImg"
+        android:layout_width="@dimen/x30"
+        android:layout_height="@dimen/x30"
+        android:layout_centerVertical="true"
+        fresco:failureImage="@mipmap/ic_default_headpic"
+        fresco:placeholderImage="@mipmap/ic_default_headpic"
+        fresco:placeholderImageScaleType="fitXY"
+        fresco:roundAsCircle="true" />
+
+    <TextView
+        android:id="@+id/tvname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x8"
+        android:layout_toRightOf="@id/sdvImg"
+        android:minHeight="@dimen/x20"
+        android:text="姓名"
+        android:textColor="@color/txt_color_ma3"
+        android:textSize="@dimen/textsize_15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvname"
+        android:layout_marginLeft="@dimen/x8"
+        android:layout_toRightOf="@id/sdvImg"
+        android:minHeight="@dimen/x20"
+        android:text="岁  男"
+        android:textColor="@color/txt_color_light9"
+        android:textSize="@dimen/textsize_15sp" />
+
+    <TextView
+        android:id="@+id/tvattention"
+        android:layout_width="@dimen/x60"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/shape_bg_blue_big"
+        android:gravity="center"
+        android:minHeight="@dimen/x20"
+        android:text="已关注"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/textsize_12sp" />
+
+    <TextView
+        android:id="@+id/tvtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tvattention"
+        android:gravity="center"
+        android:minHeight="@dimen/x20"
+        android:text="2018-19-19"
+        android:textColor="@color/txt_color_light9" />
+
+</RelativeLayout>
+
+

@@ -1,17 +1,12 @@
 package com.ylean.cf_hospitalapp.register.adapter;
 
-import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.inquiry.FragmentThree;
 import com.ylean.cf_hospitalapp.register.activity.ChooseNumActivity;
 import com.ylean.cf_hospitalapp.register.bean.DoctorTypeEntry;
-import com.ylean.cf_hospitalapp.register.pres.IChooseNumPres;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

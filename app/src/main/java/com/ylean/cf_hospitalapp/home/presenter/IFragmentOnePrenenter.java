@@ -168,8 +168,7 @@ public class IFragmentOnePrenenter {
 
     public void getLastInfo() {
         if (!TextUtils.isEmpty((String) SaveUtils.get(context, SpValue.LAT, ""))) {
-            getHospital(
-                    (String) SaveUtils.get(context, SpValue.LAT, "")
+            getHospital((String) SaveUtils.get(context, SpValue.LAT, "")
                     , (String) SaveUtils.get(context, SpValue.LON, ""));
         } else {
             iFragmentOneView.showErr("未获取到位置信息");

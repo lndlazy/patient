@@ -1,7 +1,9 @@
 package com.ylean.cf_hospitalapp.my.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,18 +14,25 @@ import android.widget.TextView;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.bean.Basebean;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.my.adapter.RequestListAdapter;
+import com.ylean.cf_hospitalapp.my.bean.MyReuqestListEntry;
+import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
+import com.ylean.cf_hospitalapp.widget.swipe.OnItemClickListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 我的申请
  * Created by linaidao on 2019/1/8.
  */
 
-public class MyRequestListActivity extends BaseActivity implements View.OnClickListener {
+public class MyRequestListActivity extends BaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private com.ylean.cf_hospitalapp.widget.TitleBackBarView tbv;
     private android.widget.TextView tvAll;
@@ -41,9 +50,11 @@ public class MyRequestListActivity extends BaseActivity implements View.OnClickL
     private static final String STATUS_USED = "2";
     private static final String STATUS_CHECK_REFUSED = "3";
     private static final String STATUS_TIME_OUT = "4";
-
+    private List<MyReuqestListEntry.DataBean> requestList = new ArrayList<>();
     private String currentType = "";
     private int currentPage = 1;
+    private RequestListAdapter requestListAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +65,7 @@ public class MyRequestListActivity extends BaseActivity implements View.OnClickL
         currentPage = 1;
         currentType = STATUS_ALL;
         initView();
-        requestList();
+        requestList(true);
     }
 
     private void initView() {
@@ -64,6 +75,9 @@ public class MyRequestListActivity extends BaseActivity implements View.OnClickL
         this.tvWaitUse = (TextView) findViewById(R.id.tvWaitUse);
         this.tvAll = (TextView) findViewById(R.id.tvAll);
         this.tbv = (TitleBackBarView) findViewById(R.id.tbv);
+
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         tbv.setOnLeftClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +99,25 @@ public class MyRequestListActivity extends BaseActivity implements View.OnClickL
         DividerItemDecoration divider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         divider.setDrawable(ContextCompat.getDrawable(this, R.drawable.shape_home_divider));
         recyclerView.addItemDecoration(divider);
+        requestListAdapter = new RequestListAdapter(this, requestList);
+        recyclerView.setAdapter(requestListAdapter);
 
+        recyclerView.addOnItemTouchListener(new OnItemClickListener(recyclerView) {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
+
+                Intent mIntent = new Intent(MyRequestListActivity.this, WebviewActivity.class);
+                mIntent.putExtra("title", "医院详细介绍");
+                String url = ApiService.WEB_ROOT + ApiService.HOSPITAL_DETAIL + "?id=" + requestList.get(position).getHospitalid();
+                mIntent.putExtra("url", url);
+                startActivity(mIntent);
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
@@ -99,13 +131,11 @@ public class MyRequestListActivity extends BaseActivity implements View.OnClickL
                     mPicFirstVisibleItemPosition = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
                 }
 
-//                currentPage++;
-
-
-//                if (picAskAdapter != null && newState == RecyclerView.SCROLL_STATE_IDLE
-//                        && mPicLastVisibleItemPosition + 1 == picAskAdapter.getItemCount() && mPicFirstVisibleItemPosition > 0) {
-//                    iFragPicPres.nextPage(SpValue.ASK_TYPE_PIC, (String) SaveUtils.get(getActivity(), SpValue.TOKEN, ""));
-//                }
+                if (requestListAdapter != null && newState == RecyclerView.SCROLL_STATE_IDLE
+                        && mPicLastVisibleItemPosition + 1 == requestListAdapter.getItemCount() && mPicFirstVisibleItemPosition > 0) {
+                    currentPage++;
+                    requestList(false);
+                }
 
             }
 
@@ -120,25 +150,29 @@ public class MyRequestListActivity extends BaseActivity implements View.OnClickL
             case R.id.tvAll://全部
                 tvAll.setSelected(true);
                 currentType = STATUS_ALL;
-                requestList();
+                currentPage = 1;
+                requestList(true);
                 break;
 
             case R.id.tvUsed://已使用
                 tvUsed.setSelected(true);
                 currentType = STATUS_USED;
-                requestList();
+                currentPage = 1;
+                requestList(true);
                 break;
 
             case R.id.tvTimeOut://已过期
                 tvTimeOut.setSelected(true);
                 currentType = STATUS_TIME_OUT;
-                requestList();
+                currentPage = 1;
+                requestList(true);
                 break;
 
             case R.id.tvWaitUse://等待使用
                 tvWaitUse.setSelected(true);
                 currentType = STATUS_NO_USE;
-                requestList();
+                currentPage = 1;
+                requestList(true);
                 break;
 
         }
@@ -153,26 +187,44 @@ public class MyRequestListActivity extends BaseActivity implements View.OnClickL
     }
 
     //我的申请
-    private void requestList() {
+    private void requestList(boolean refush) {
 
         RetrofitHttpUtil.getInstance()
                 .requestList(
-                        new BaseNoTObserver<Basebean>() {
+                        new BaseNoTObserver<MyReuqestListEntry>() {
                             @Override
-                            public void onHandleSuccess(Basebean basebean) {
+                            public void onHandleSuccess(MyReuqestListEntry basebean) {
+
+                                swipeRefreshLayout.setRefreshing(false);
+
+                                if (basebean == null || basebean.getData() == null)
+                                    return;
+
+                                if (currentPage == 1 || refush)
+                                    requestList.clear();
+
+                                requestList.addAll(basebean.getData());
+
+                                if (requestListAdapter != null)
+                                    requestListAdapter.notifyDataSetChanged();
 
                             }
 
                             @Override
                             public void onHandleError(String message) {
                                 showErr(message);
+                                swipeRefreshLayout.setRefreshing(false);
                             }
 
-
-                        }
-                        , SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, ""), currentType, currentPage, SpValue.PAGE_SIZE);
-
+                        }, SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, "")
+                        , currentType, currentPage, SpValue.PAGE_SIZE);
 
     }
 
+    @Override
+    public void onRefresh() {
+
+        currentPage = 1;
+        requestList(true);
+    }
 }

@@ -30,12 +30,17 @@ import com.ylean.cf_hospitalapp.hospital.adapter.NearbyAdapter;
 import com.ylean.cf_hospitalapp.hospital.bean.HospDepartListEntry;
 import com.ylean.cf_hospitalapp.hospital.presenter.IHospitalDetailPres;
 import com.ylean.cf_hospitalapp.hospital.view.IHospitalDetailView;
+import com.ylean.cf_hospitalapp.my.activity.WebviewActivity;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.register.activity.DepartmentChooseActivity;
 import com.ylean.cf_hospitalapp.register.bean.HospitalInfoEntry;
 import com.ylean.cf_hospitalapp.register.bean.HospitalListEntry;
+import com.ylean.cf_hospitalapp.utils.CommonUtils;
+import com.ylean.cf_hospitalapp.utils.LngLat;
+import com.ylean.cf_hospitalapp.utils.OpenLocalMapUtil;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
+import com.ylean.cf_hospitalapp.widget.ActionSheetDialog;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 import com.ylean.cf_hospitalapp.widget.swipe.OnItemClickListener;
 
@@ -70,6 +75,7 @@ public class HospitalDetailActivity extends BaseActivity implements IHospitalDet
 
     //点赞
     private IGoodPres iGoodPres = new IGoodPres(this);
+    private Intent mIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +107,10 @@ public class HospitalDetailActivity extends BaseActivity implements IHospitalDet
 
         sdvPic.setImageURI(Uri.parse(ApiService.WEB_ROOT + data.getImgurl()));
         tel.setText(data.getSupportel());
-        tvContent.setText(Html.fromHtml(data.getDescription()));
+
+        String content = "<font color=\"#767676\">" + data.getIntroduction() + "</font>"
+                + "<font color=\"#33a9fa\">" + "[详细介绍]" + "</font>";
+        tvContent.setText(Html.fromHtml(content));
 
     }
 
@@ -126,7 +135,6 @@ public class HospitalDetailActivity extends BaseActivity implements IHospitalDet
 
     private void initView() {
 
-        this.tvContent = (TextView) findViewById(R.id.tvContent);
         tel = (TextView) findViewById(R.id.tel);
         tvAddress = (TextView) findViewById(R.id.tvAddress);
         tvHospitalName = (TextView) findViewById(R.id.tvHospitalName);
@@ -139,7 +147,6 @@ public class HospitalDetailActivity extends BaseActivity implements IHospitalDet
         this.arroundRecyclerview = (RecyclerView) findViewById(R.id.arroundRecyclerview);
         this.departmentRecyclerview = (RecyclerView) findViewById(R.id.departmentRecyclerview);
         this.tvContent = (TextView) findViewById(R.id.tvContent);
-
         tbv.setOnLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,6 +168,8 @@ public class HospitalDetailActivity extends BaseActivity implements IHospitalDet
 
         viewRegister.setOnClickListener(this);
         llcomment.setOnClickListener(this);
+        tvContent.setOnClickListener(this);
+
     }
 
     private void initCommentRecyclerView() {
@@ -206,19 +215,27 @@ public class HospitalDetailActivity extends BaseActivity implements IHospitalDet
 
                     case 0://免费接送
 
-
-                        nextActivity(TransferActivity.class);
+                        mIntent = new Intent(HospitalDetailActivity.this, TransferActivity.class);
+                        if (hospitalInfo != null)
+                            mIntent.putExtra("hospitalId", hospitalInfo.getHospitalid());
+                        startActivity(mIntent);
 
                         break;
                     case 1://来院路线
+                        roteNavi("导航");
                         break;
-                    case 2://院内导航
+                    case 2://院内导航 TODO
+
+
                         break;
                     case 3://周边停车
+                        roteNavi("停车场");
                         break;
                     case 4://附近酒店
+                        roteNavi("酒店");
                         break;
                     case 5://周边景点
+                        roteNavi("景点");
                         break;
                 }
 
@@ -231,6 +248,142 @@ public class HospitalDetailActivity extends BaseActivity implements IHospitalDet
         });
 
     }
+
+    //来院路线
+    private void roteNavi(String type) {
+
+        if (hospitalInfo == null) {
+            showErr("数据错误");
+            return;
+        }
+
+        new ActionSheetDialog(this)
+                .builder()
+                .setCancelable(true)
+                .setCanceledOnTouchOutside(true)
+                .addSheetItem("高德地图", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+
+                                if (!CommonUtils.isAvilible(HospitalDetailActivity.this, "com.autonavi.minimap")) {
+                                    showErr("请先安装高德地图");
+                                    return;
+                                }
+
+                                LngLat lngLat = new LngLat(Double.parseDouble(hospitalInfo.getLongitude()), Double.parseDouble(hospitalInfo.getLatitude()));
+                                LngLat bdDecrypt = CommonUtils.bd_decrypt(lngLat);
+
+                                switch (type) {
+
+                                    case "导航":
+                                        openGaoDeMap(bdDecrypt.getLantitude(), bdDecrypt.getLongitude(), hospitalInfo.getHospitalname());
+                                        break;
+
+                                    default:
+                                        Intent intent = new Intent();
+                                        intent.setAction(Intent.ACTION_VIEW);
+                                        intent.addCategory(Intent.CATEGORY_DEFAULT);
+
+                                        //将功能Scheme以URI的方式传入data
+                                        Uri uri = Uri.parse("androidamap://arroundpoi?sourceApplication=" + getResources().getString(R.string.app_name)
+                                                + "&keywords=" + type + "&lat=" + bdDecrypt.getLantitude() + "&lon=" + bdDecrypt.getLongitude() + "&dev=0");
+                                        intent.setData(uri);
+
+                                        //启动该页面即可
+                                        startActivity(intent);
+                                        break;
+                                }
+
+
+                            }
+
+                        })
+                .addSheetItem("百度地图", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+
+                                if (!CommonUtils.isAvilible(HospitalDetailActivity.this, "com.baidu.BaiduMap")) {
+                                    showErr("请先安装百度地图");
+                                    return;
+                                }
+
+                                switch (type) {
+                                    case "导航":
+
+                                        openBaiduMap(
+                                                Double.parseDouble((String) SaveUtils.get(HospitalDetailActivity.this, SpValue.LAT, ""))
+                                                , Double.parseDouble((String) SaveUtils.get(HospitalDetailActivity.this, SpValue.LON, ""))
+                                                , "", Double.parseDouble(hospitalInfo.getLatitude()), Double.parseDouble(hospitalInfo.getLongitude())
+                                                , hospitalInfo.getHospitalname(), (String) SaveUtils.get(HospitalDetailActivity.this, SpValue.CITY, ""));
+
+                                        break;
+
+                                    default:
+                                        Intent i1 = new Intent();
+                                        i1.setData(Uri.parse("baidumap://map/place/search?query=" + type
+                                                + "&region=&location=" + hospitalInfo.getLatitude()
+                                                + "," + hospitalInfo.getLongitude() + "&radius=5000&bounds=&src=andr.baidu.openAPIdemo"));
+                                        startActivity(i1);
+
+                                        break;
+                                }
+
+
+                            }
+                        }).show();
+
+
+    }
+
+
+    /**
+     * 打开百度地图
+     *
+     * @param slat  开始地点 维度
+     * @param slon  开始地点 经度
+     * @param sname 开始地点 名字
+     * @param dlat  终点地点 维度
+     * @param dlon  终点地点 经度
+     * @param dname 终点名字
+     * @param city  所在城市- 动态获取 （例如：北京市）
+     * @author jack
+     * created at 2017/8/2 15:01
+     */
+    private void openBaiduMap(double slat, double slon, String sname,
+                              double dlat, double dlon, String dname, String city) {
+        try {
+            String uri = OpenLocalMapUtil.getBaiduMapUri(String.valueOf(slat), String.valueOf(slon), sname,
+                    String.valueOf(dlat), String.valueOf(dlon), dname, city, "");
+            Intent intent = Intent.parseUri(uri, 0);
+            startActivity(intent); //启动调用
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 打开高德地图
+     *
+     * @author jack
+     * created at 2017/8/2 15:01
+     */
+    private void openGaoDeMap(double dlat, double dlon, String dname) {
+        try {
+            // APP_NAME  自己应用的名字
+            String uri = OpenLocalMapUtil.getGdMapUri(getResources().getString(R.string.app_name), "", "", ""
+                    , String.valueOf(dlat), String.valueOf(dlon), dname);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setPackage("com.autonavi.minimap");
+            intent.setData(Uri.parse(uri));
+            startActivity(intent); //启动调用
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void sickRecycler() {
 
@@ -358,7 +511,7 @@ public class HospitalDetailActivity extends BaseActivity implements IHospitalDet
 
             case R.id.llcomment://评价
 
-                Intent mIntent = new Intent(this, CommentActivity.class);
+                mIntent = new Intent(this, CommentActivity.class);
                 mIntent.putExtra("with_pic", true);
 
                 if (hospitalInfo != null)
@@ -371,12 +524,22 @@ public class HospitalDetailActivity extends BaseActivity implements IHospitalDet
 
             case R.id.viewRegister://挂号
 
-                Intent m = new Intent(this, DepartmentChooseActivity.class);
-                m.putExtra("hospitalInfo", hospitalInfo);
-                startActivity(m);
+                mIntent = new Intent(this, DepartmentChooseActivity.class);
+                mIntent.putExtra("hospitalInfo", hospitalInfo);
+                startActivity(mIntent);
 
                 break;
 
+            case R.id.tvContent://医院详情
+
+                mIntent = new Intent(this, WebviewActivity.class);
+                mIntent.putExtra("title", "医院详细介绍");
+                if (hospitalInfo != null) {
+                    String url = ApiService.WEB_ROOT + ApiService.HOSPITAL_DETAIL + "?id=" + hospitalInfo.getHospitalid();
+                    mIntent.putExtra("url", url);
+                }
+                startActivity(mIntent);
+                break;
         }
     }
 

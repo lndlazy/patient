@@ -49,7 +49,7 @@ public class PayRegiserActivity extends BaseActivity implements View.OnClickList
 
     private android.widget.ImageView ivAlipay;
     private String doctorName;
-    private String doctorId;
+//    private String doctorId;
     private String type;
     private TextView tvSureOrder;
     private IWXAPI wxapi;
@@ -61,7 +61,7 @@ public class PayRegiserActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.activity_pay_service);
 
         orderNum = getIntent().getStringExtra("orderNum");
-        doctorId = getIntent().getStringExtra("doctorId");
+//        doctorId = getIntent().getStringExtra("doctorId");
         doctorName = getIntent().getStringExtra("doctorName");
         type = getIntent().getStringExtra("type");//图片问诊， 视频问诊，挂号
         price = getIntent().getDoubleExtra("price", 0.00);

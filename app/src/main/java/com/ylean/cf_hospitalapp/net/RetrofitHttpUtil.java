@@ -1252,6 +1252,17 @@ public class RetrofitHttpUtil {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 添加免费接送预约信息
+     */
+    public void freeTransfer(Observer subscriber, String ch, String token
+            , String name, String peoplecount, String phone, String address, String shuttletime, String hospitalid) {
+        getService().freeTransfer(ch, token, name, peoplecount, phone, address
+                , shuttletime, hospitalid)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+    }
+
 
 //
 //    /**

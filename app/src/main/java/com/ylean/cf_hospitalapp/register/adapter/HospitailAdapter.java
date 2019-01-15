@@ -55,13 +55,6 @@ public class HospitailAdapter extends RecyclerView.Adapter<HospitailAdapter.MyVi
                 m.putExtra("hospitalInfo", hospitailList.get(position));
                 context.startActivity(m);
 
-//                Intent m = new Intent(context, WebviewActivity.class);
-//                m.putExtra("title", "医院详细介绍");
-//                String url = ApiService.WEB_ROOT + ApiService.HOSPITAL_DETAIL + "?id=" + hospitailList.get(position).getHospitalid();
-//                m.putExtra("url", url);
-//                context.startActivity(m);
-
-
             }
         });
         holder.tvRegister.setOnClickListener(new View.OnClickListener() {

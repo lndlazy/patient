@@ -12,6 +12,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.register.bean.NumListEntry;
+import com.ylean.cf_hospitalapp.utils.SpValue;
 
 import java.util.List;
 
@@ -39,9 +40,33 @@ public class NumRegisterAdapter extends RecyclerView.Adapter<NumRegisterAdapter.
     @Override
     public void onBindViewHolder(NumRegisterAdapter.MyViewHolder holder, int position) {
 
-        holder.sdvImg.setImageURI(Uri.parse(ApiService.WEB_ROOT + numRegisterList.get(position).getDocimg()));
-        holder.tvName.setText(numRegisterList.get(position).getDocname());
-        holder.tvjobTitle.setText(numRegisterList.get(position).getDoctitle());
+
+        String reserveType = numRegisterList.get(position).getReserveType();
+
+        //1-普通门诊 2-专家门诊 3-针对医生的门诊
+        switch (reserveType) {
+
+            case "1"://普通门诊
+                holder.tvName.setText(numRegisterList.get(position).getDepartname());
+                holder.tvjobTitle.setText("普通号");
+                holder.sdvImg.setImageURI(Uri.parse(SpValue.FRESCO_RES + context.getPackageName() + "/" + R.mipmap.ic_hospital));
+
+                break;
+            case "2"://专家门诊
+                holder.tvName.setText(numRegisterList.get(position).getDepartname());
+                holder.tvjobTitle.setText("专家号");
+                holder.sdvImg.setImageURI(Uri.parse(SpValue.FRESCO_RES + context.getPackageName() + "/" + R.mipmap.ic_hospital));
+
+                break;
+            case "3"://针对医生的门诊
+                holder.tvName.setText(numRegisterList.get(position).getDocname());
+                holder.tvjobTitle.setText(numRegisterList.get(position).getDoctitle());
+                holder.sdvImg.setImageURI(Uri.parse(ApiService.WEB_ROOT + numRegisterList.get(position).getDocimg()));
+
+                break;
+        }
+
+
         holder.tvContent.setText(numRegisterList.get(position).getDescription());
 
         //未约满-0 已约满-1

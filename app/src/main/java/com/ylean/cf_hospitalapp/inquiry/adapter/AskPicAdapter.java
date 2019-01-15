@@ -43,7 +43,7 @@ public class AskPicAdapter extends RecyclerView.Adapter<AskPicAdapter.MyViewHold
     @Override
     public void onBindViewHolder(AskPicAdapter.MyViewHolder holder, final int position) {
 
-        holder.sdvImg.setImageURI(Uri.parse(SpValue.FRESCO_LOCAL + images.get(position).path));
+        holder.sdvImg.setImageURI(Uri.parse(SpValue.FRESCO_LOCAL +images.get(position).path));
 
         holder.ivDelete.setOnClickListener(new View.OnClickListener() {
             @Override
