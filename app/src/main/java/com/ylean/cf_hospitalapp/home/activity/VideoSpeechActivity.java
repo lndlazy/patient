@@ -19,6 +19,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.Presenter.ICollectionPres;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
@@ -31,9 +32,12 @@ import com.ylean.cf_hospitalapp.doctor.bean.CommComListEntry;
 import com.ylean.cf_hospitalapp.home.bean.VideoSpeechDetailEntry;
 import com.ylean.cf_hospitalapp.home.presenter.IVideoSpeechPres;
 import com.ylean.cf_hospitalapp.home.view.IVideoSpeechView;
+import com.ylean.cf_hospitalapp.my.activity.SettingActivity;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
+import com.ylean.cf_hospitalapp.utils.ShareUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
+import com.ylean.cf_hospitalapp.widget.ActionSheetDialog;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 
 import java.util.ArrayList;
@@ -66,6 +70,9 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
     private TextView tvlike;
     private ImageView ivlike;
     private ImageView ivgood;
+    //当前点击病友信息
+    private CommComListEntry.DataBean commentInfo;
+
 
     //视频的presenter
     private IVideoSpeechPres iVideoSpeechPres = new IVideoSpeechPres(this);
@@ -82,6 +89,7 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
     private String type;
     private RecyclerView recyclerView;
     private CommentCommAdapter commAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,12 +163,85 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
             @Override
             public void onClick(View v) {
                 //分享 TODO
+
+                if (videoInfo == null) {
+                    showErr("数据错误");
+                    return;
+                }
+
+                chooseProferm();
+
             }
         });
     }
 
+    private void chooseProferm() {
+
+        new ActionSheetDialog(this)
+                .builder()
+                .setCancelable(true)
+                .setCanceledOnTouchOutside(true)
+                .addSheetItem("微信好友", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                share(SHARE_MEDIA.WEIXIN);
+
+                            }
+
+                        })
+                .addSheetItem("微信朋友圈", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                share(SHARE_MEDIA.WEIXIN_CIRCLE);
+
+                            }
+                        })
+                .addSheetItem("QQ", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+
+                                share(SHARE_MEDIA.QQ);
+
+                            }
+                        })
+                .addSheetItem("QQ空间", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+
+                                share(SHARE_MEDIA.QZONE);
+                            }
+                        })
+                .addSheetItem("微博", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+
+                                share(SHARE_MEDIA.SINA);
+                            }
+                        })
+
+                .show();
+
+    }
+
+    private void share(SHARE_MEDIA perform) {
+
+        ShareUtils.shareWeb(VideoSpeechActivity.this, videoInfo.getVideourl()
+                , videoInfo.getDoctorname(), videoInfo.getTitle()
+                , ApiService.WEB_ROOT + videoInfo.getDoctorimg(), -1, perform);
+    }
+
+
+    private VideoSpeechDetailEntry.DataBean videoInfo;
+
     @Override
     public void setInfo(VideoSpeechDetailEntry.DataBean data) {
+
+        videoInfo = data;
 
         //播放视频
         videoPlay(data);
@@ -213,6 +294,7 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
 
     //播放视频
     private void videoPlay(VideoSpeechDetailEntry.DataBean data) {
+
         videoPlayer.setUp(data.getVideourl(), true, "");
         //设置返回键
         videoPlayer.getBackButton().setVisibility(View.INVISIBLE);
@@ -356,9 +438,6 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
             commAdapter.notifyDataSetChanged();
 
     }
-
-    //当前点击病友信息
-    private CommComListEntry.DataBean commentInfo;
 
     //点击关注
     public void attentionAction(CommComListEntry.DataBean dataBean) {

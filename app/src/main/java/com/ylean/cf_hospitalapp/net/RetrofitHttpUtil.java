@@ -705,6 +705,17 @@ public class RetrofitHttpUtil {
 
     }
 
+
+    /**
+     * 我的未读消息数量
+     */
+    public void unreadMsg(Observer subscriber, String ch, String token) {
+        getService().unreadMsg(ch, token)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
     /**
      * 我的收藏列表
      */

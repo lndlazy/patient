@@ -37,6 +37,9 @@ import com.ylean.cf_hospitalapp.my.activity.MyNewsListActivity;
 import com.ylean.cf_hospitalapp.my.activity.MyRequestListActivity;
 import com.ylean.cf_hospitalapp.my.activity.MyTopicActivity;
 import com.ylean.cf_hospitalapp.my.activity.ServiceOrderListActivity;
+import com.ylean.cf_hospitalapp.my.bean.UnreadMsgEntry;
+import com.ylean.cf_hospitalapp.my.presenter.IReadMsgPres;
+import com.ylean.cf_hospitalapp.my.view.IReadMsgView;
 import com.ylean.cf_hospitalapp.register.activity.MyRegisterListActivity;
 import com.ylean.cf_hospitalapp.my.activity.PointsDetailActivity;
 import com.ylean.cf_hospitalapp.mall.acitity.PointsMallAct;
@@ -55,9 +58,8 @@ import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.GridViewForScrollView;
 import com.ylean.cf_hospitalapp.widget.MyItemView;
 
-public class FragmentFour extends BaseFragment implements View.OnClickListener, IMyFragmentView {
+public class FragmentFour extends BaseFragment implements View.OnClickListener, IMyFragmentView, IReadMsgView {
 
-    private IMyFragmentPres iMyFragmentPres = new IMyFragmentPres(this);
     private SimpleDraweeView sdvImg;
     private TextView tvName;
     private TextView tvUsbableIntegral;
@@ -66,6 +68,12 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
     public static final int REQUEST_PERMISSION_CALL_CODE = 0x14;
     private Intent m;
     private TextView tvLevel;
+
+    // 我的presenter
+    private IMyFragmentPres iMyFragmentPres = new IMyFragmentPres(this);
+    //我的消息个数
+    private IReadMsgPres iReadMsgPres = new IReadMsgPres(this);
+    private ImageView ivNewMsg;
 
     @Nullable
     @Override
@@ -83,6 +91,7 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
         super.onResume();
 
         iMyFragmentPres.myInfo((String) SaveUtils.get(getActivity(), SpValue.TOKEN, ""));
+        iReadMsgPres.unreadMsg((String) SaveUtils.get(getActivity(), SpValue.TOKEN, ""));
     }
 
     private void initView(View view) {
@@ -92,7 +101,7 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
         sdvImg = view.findViewById(R.id.sdvImg);
         ImageView ivSet = view.findViewById(R.id.ivSet);
         ImageView ivMsg = view.findViewById(R.id.ivMsg);
-        ImageView ivNewMsg = view.findViewById(R.id.ivNewMsg);
+        ivNewMsg = view.findViewById(R.id.ivNewMsg);
 
         tvName = view.findViewById(R.id.tvName);
         tvLevel = view.findViewById(R.id.tvLevel);
@@ -333,5 +342,13 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
         tvUsbableIntegral.setText(myInfoEntry.getData().getPoints());
         tvTotalIntegral.setText(myInfoEntry.getData().getTotalPoints());
         tvLevel.setText(myInfoEntry.getData().getLevel());
+    }
+
+    @Override
+    public void setUnRead(UnreadMsgEntry.DataBean data) {
+
+        //总消息个数
+        ivNewMsg.setVisibility(data.getZcount() == 0 ? View.INVISIBLE : View.VISIBLE);
+
     }
 }

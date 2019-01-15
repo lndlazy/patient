@@ -48,6 +48,7 @@ import com.ylean.cf_hospitalapp.my.bean.OrderInquiryDetailEntry;
 import com.ylean.cf_hospitalapp.my.bean.PointsDetailEntry;
 import com.ylean.cf_hospitalapp.my.bean.PointsEntry;
 import com.ylean.cf_hospitalapp.my.bean.ProvinceEntry;
+import com.ylean.cf_hospitalapp.my.bean.UnreadMsgEntry;
 import com.ylean.cf_hospitalapp.popular.bean.DiseaseListEntry;
 import com.ylean.cf_hospitalapp.popular.bean.ExpertEntry;
 import com.ylean.cf_hospitalapp.register.bean.DoctorTypeEntry;
@@ -425,6 +426,10 @@ public interface ApiService {
     @POST("/api/app/patient/getpatientinfo")
     Observable<MyInfoEntry> patientInfo(@Field("ch") String ch, @Field("token") String token);
 
+    // 我的未读消息的数量
+    @FormUrlEncoded
+    @POST("/api/app/patient/mymessagesum")
+    Observable<UnreadMsgEntry> unreadMsg(@Field("ch") String ch, @Field("token") String token);
 
     //我的收藏列表
     @FormUrlEncoded
