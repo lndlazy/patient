@@ -16,9 +16,9 @@
             android:id="@+id/sdvImg"
             android:layout_width="@dimen/x45"
             android:layout_height="@dimen/x45"
-            android:src="@mipmap/ic_doctor"
-            fresco:failureImage="@mipmap/ic_doctor"
-            fresco:placeholderImage="@mipmap/ic_doctor"
+            android:src="@mipmap/ic_default_headpic"
+            fresco:failureImage="@mipmap/ic_default_headpic"
+            fresco:placeholderImage="@mipmap/ic_default_headpic"
             fresco:roundAsCircle="true" />
 
         <TextView

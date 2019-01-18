@@ -21,8 +21,8 @@
             android:layout_width="@dimen/x50"
             android:layout_height="@dimen/x50"
             android:layout_marginTop="@dimen/x10"
-            fresco:failureImage="@mipmap/ic_my_hpic"
-            fresco:placeholderImage="@mipmap/ic_my_hpic" />
+            fresco:failureImage="@mipmap/ic_default_headpic"
+            fresco:placeholderImage="@mipmap/ic_default_headpic" />
 
         <RelativeLayout
             android:layout_width="0dp"

@@ -11,8 +11,8 @@
         android:layout_height="@dimen/x50"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/x15"
-        fresco:failureImage="@mipmap/ic_my_hpic"
-        fresco:placeholderImage="@mipmap/ic_my_hpic" />
+        fresco:failureImage="@mipmap/ic_default_headpic"
+        fresco:placeholderImage="@mipmap/ic_default_headpic" />
 
     <TextView
         android:id="@+id/tvName"
