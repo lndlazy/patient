@@ -8,7 +8,7 @@
 
     <include layout="@layout/layout_homo_viewpager" />
 
-    <include layout="@layout/layout_home_choose" />
+    <!--<include layout="@layout/layout_home_choose" />-->
 
     <TextView
         android:layout_width="match_parent"

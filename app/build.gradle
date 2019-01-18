@@ -78,7 +78,7 @@ dependencies {
     //    implementation 'com.github.zaaach:CityPicker:2.0.3'
     //    implementation 'com.android.support:recyclerview-v7:26.0.0'
     implementation project(':citypicker')
-    implementation files('libs/BaiduLBS_Android.jar')
+//    implementation files('libs/BaiduLBS_Android.jar')
     implementation 'com.lzy.widget:imagepicker:0.6.1'
     implementation 'com.bigkoo:pickerview:2.1.1'
     implementation 'com.squareup.picasso:picasso:2.5.2'

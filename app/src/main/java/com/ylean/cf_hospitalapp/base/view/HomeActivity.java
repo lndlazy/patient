@@ -63,9 +63,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         initFragment();
         EventBus.getDefault().register(this);
 
-
-
-
         iHxPresenter.loginHx((String) SaveUtils.get(this, SpValue.HX_NAME, ""));
     }
 

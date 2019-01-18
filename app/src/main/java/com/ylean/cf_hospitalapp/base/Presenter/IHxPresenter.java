@@ -21,11 +21,10 @@ public class IHxPresenter {
     }
 
     public void loginHx(String username) {
-
-
-//        if(EMClient.getInstance().isLoggedInBefore()){
-//            return;
-//        }
+        
+        if(EMClient.getInstance().isLoggedInBefore()){
+            return;
+        }
 
         //login
         EMClient.getInstance().login(username, "123456", new EMCallBack() {

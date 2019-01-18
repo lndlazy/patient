@@ -12,6 +12,7 @@ import com.ylean.cf_hospitalapp.home.bean.SearchListEntry;
 import com.ylean.cf_hospitalapp.home.bean.VideoSpeechDetailEntry;
 import com.ylean.cf_hospitalapp.hospital.bean.HospDepartListEntry;
 import com.ylean.cf_hospitalapp.hospital.bean.ServiceInfoEntry;
+import com.ylean.cf_hospitalapp.hx.bean.GroupListEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.AlipayEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.ChatEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.CommentDisBean;
@@ -345,6 +346,11 @@ public interface ApiService {
     @POST("/api/app/sms/send")
     Observable<Basebean> smsCode(@Field("ch") String ch, @Field("ph") String ph
             , @Field("smsType") String smsType);
+
+    //发送短信验证码
+    @FormUrlEncoded
+    @POST("/api/app/chat/getchatuser")
+    Observable<GroupListEntry> groupList(@Field("ch") String ch, @Field("roomid") String roomid);
 
     //注册
     @FormUrlEncoded

@@ -321,7 +321,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
         TextView tvAnswer;
 
         ViewPager viewPager;
-        LinearLayout llPoint;
+//        LinearLayout llPoint;
         LinearLayout llTestSelf;
         LinearLayout llFree;
         LinearLayout llCharge;
@@ -336,7 +336,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                 case TYPE_HEAD:
 
                     viewPager = view.findViewById(R.id.viewPager);
-                    llPoint = view.findViewById(R.id.llPoint);
+//                    llPoint = view.findViewById(R.id.llPoint);
                     llTestSelf = view.findViewById(R.id.llTestSelf);
                     llFree = view.findViewById(R.id.llFree);
                     llCharge = view.findViewById(R.id.llCharge);

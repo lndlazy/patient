@@ -687,13 +687,6 @@
             <!--</intent-filter>-->
         </service>
 
-
-        <!--微信开放平台-->
-        <!--haoyiwuyou@126.com-->
-        <!--m317503765-->
-        <!--appid：wx938a108ab5898c2e-->
-        <!--appsecret：58e66b8d1ff6c2f4bdb440cae4d6a5dc-->
-
         <!--百度定位-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

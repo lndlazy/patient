@@ -565,6 +565,16 @@ public class RetrofitHttpUtil {
     }
 
     /**
+     * 获取验证码
+     */
+    public void groupList(Observer subscriber, String ch, String roomid) {
+        getService().groupList(ch, roomid)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
      * 注册
      */
     public void registerInfo(Observer subscriber, String ch, String mobile, String sms, String password

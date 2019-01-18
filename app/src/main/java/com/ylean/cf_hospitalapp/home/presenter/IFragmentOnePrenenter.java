@@ -3,8 +3,8 @@ package com.ylean.cf_hospitalapp.home.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.orhanobut.logger.Logger;
@@ -71,6 +71,13 @@ public class IFragmentOnePrenenter {
      */
     public void startLocation(Context context) {
 
+
+//        this.context = context;
+//        getHospital((String) SaveUtils.get(context, SpValue.LAT, "")
+//                , (String) SaveUtils.get(context, SpValue.LON, ""));
+// TODO
+
+
         this.context = context;
         //定位服务的客户端。宿主程序在客户端声明此类，并调用，目前只支持在主线程中启动
         locationClient = new LocationClient(context.getApplicationContext());
@@ -118,15 +125,15 @@ public class IFragmentOnePrenenter {
     /**
      * 实现定位回调
      */
-    public class MyLocationListener extends BDAbstractLocationListener {
+    public class MyLocationListener implements BDLocationListener {
 
-        @Override
-        public void onLocDiagnosticMessage(int i, int i1, String s) {
-            super.onLocDiagnosticMessage(i, i1, s);
-
-            Logger.d("错误信息::" + s);
-
-        }
+//        @Override
+//        public void onLocDiagnosticMessage(int i, int i1, String s) {
+//            super.onLocDiagnosticMessage(i, i1, s);
+//
+//            Logger.d("错误信息::" + s);
+//
+//        }
 
         @Override
         public void onReceiveLocation(BDLocation location) {
