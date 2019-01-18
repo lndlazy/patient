@@ -11,8 +11,8 @@
         android:layout_width="@dimen/x35"
         android:layout_height="@dimen/x35"
         android:layout_marginTop="@dimen/x10"
-        fresco:failureImage="@mipmap/ic_hospital"
-        fresco:placeholderImage="@mipmap/ic_hospital"
+        fresco:failureImage="@mipmap/ic_default_headpic"
+        fresco:placeholderImage="@mipmap/ic_default_headpic"
         fresco:roundAsCircle="true" />
 
     <TextView
