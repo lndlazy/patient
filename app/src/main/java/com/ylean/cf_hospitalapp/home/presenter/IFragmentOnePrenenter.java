@@ -71,12 +71,10 @@ public class IFragmentOnePrenenter {
      */
     public void startLocation(Context context) {
 
-
 //        this.context = context;
 //        getHospital((String) SaveUtils.get(context, SpValue.LAT, "")
 //                , (String) SaveUtils.get(context, SpValue.LON, ""));
 //// TODO
-
 
         this.context = context;
         //定位服务的客户端。宿主程序在客户端声明此类，并调用，目前只支持在主线程中启动

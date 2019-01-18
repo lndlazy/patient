@@ -591,7 +591,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void exitSuccess() {
-
+        finish();
         EventBus.getDefault().post("exit");
     }
 

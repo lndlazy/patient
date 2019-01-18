@@ -42,15 +42,38 @@ public class Mapplication extends Application {
         super.onCreate();
 
         /////////////////////////////  测试  /////////////////////////////////////////
-        initLogger(TAG, true);
+//        initLogger(TAG, true);
+//        Fresco.initialize(this);
+////        Logger.d("sha1值::" + sHA1(this));
+//        instance = this;
+//        initPicChoose();
+//        /**
+//         * 友盟
+//         * */
+//        Config.DEBUG = true;
+//        UMShareAPI.get(this);//初始化sdk
+//        //三方登录
+//        PlatformConfig.setWeixin(SpValue.WX_APP_ID, SpValue.WX_APP_SECRET);
+//        PlatformConfig.setQQZone(SpValue.QQ_APP_ID, SpValue.QQ_APP_KEY);
+//        PlatformConfig.setSinaWeibo(SpValue.WB_APP_ID, SpValue.WB_APP_SECRET, "https://sns.whalecloud.com/sina2/callback");
+//
+//        EMOptions options = new EMOptions();
+////        // 默认添加好友时，是不需要验证的，改成需要验证
+////        options.setAcceptInvitationAlways(false);
+//        EaseUI.getInstance().init(this, options);
+//        EMClient.getInstance().setDebugMode(true);
+
+
+        /////////////////////////////  正式  /////////////////////////////////////////
+        initLogger(TAG, false);
         Fresco.initialize(this);
 //        Logger.d("sha1值::" + sHA1(this));
-        instance = this;
+
         initPicChoose();
-        /**
+        /*
          * 友盟
          * */
-        Config.DEBUG = true;
+        Config.DEBUG = false;
         UMShareAPI.get(this);//初始化sdk
         //三方登录
         PlatformConfig.setWeixin(SpValue.WX_APP_ID, SpValue.WX_APP_SECRET);
@@ -61,22 +84,7 @@ public class Mapplication extends Application {
 //        // 默认添加好友时，是不需要验证的，改成需要验证
 //        options.setAcceptInvitationAlways(false);
         EaseUI.getInstance().init(this, options);
-        EMClient.getInstance().setDebugMode(true);
-        /////////////////////////////  正式  /////////////////////////////////////////
-//        initLogger(TAG, false);
-//        Fresco.initialize(this);
-////        Logger.d("sha1值::" + sHA1(this));
-//
-//        initPicChoose();
-//        /**
-//         * 友盟
-//         * */
-//        Config.DEBUG = false;
-//        UMShareAPI.get(this);//初始化sdk
-//        //三方登录
-//        PlatformConfig.setWeixin(SpValue.WX_APP_ID, SpValue.WX_APP_SECRET);
-//        PlatformConfig.setQQZone(SpValue.QQ_APP_ID, SpValue.QQ_APP_KEY);
-//        PlatformConfig.setSinaWeibo(SpValue.WB_APP_ID, SpValue.WB_APP_SECRET, "https://sns.whalecloud.com/sina2/callback");
+        EMClient.getInstance().setDebugMode(false);
 
 
 //        RetrofitHttpUtil.getInstance().loginIn(new BaseNoTObserver<LoginEntry>() {
