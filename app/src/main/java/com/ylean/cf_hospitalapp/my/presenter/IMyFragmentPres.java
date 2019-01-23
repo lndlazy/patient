@@ -21,24 +21,22 @@ public class IMyFragmentPres {
 
     public void myInfo(String token) {
 
-        RetrofitHttpUtil
-                .getInstance()
-                .patientInfo(
-                        new BaseNoTObserver<MyInfoEntry>() {
-                            @Override
-                            public void onHandleSuccess(MyInfoEntry myInfoEntry) {
+        RetrofitHttpUtil.getInstance().patientInfo(
+                new BaseNoTObserver<MyInfoEntry>() {
+                    @Override
+                    public void onHandleSuccess(MyInfoEntry myInfoEntry) {
 
-                                if (myInfoEntry != null)
-                                    iMyFragmentView.setInfo(myInfoEntry);
+                        if (myInfoEntry != null)
+                            iMyFragmentView.setInfo(myInfoEntry);
 
-                            }
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                iMyFragmentView.showErr(message);
-                            }
+                    @Override
+                    public void onHandleError(String message) {
+                        iMyFragmentView.showErr(message);
+                    }
 
-                        }, SpValue.CH, token);
+                }, SpValue.CH, token);
 
     }
 

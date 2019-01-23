@@ -21,9 +21,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.j256.ormlite.stmt.query.In;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.inquiry.activity.AskPeopleActivity;
 import com.ylean.cf_hospitalapp.base.view.BaseFragment;
+import com.ylean.cf_hospitalapp.mall.acitity.GoodsOrderListActivity;
 import com.ylean.cf_hospitalapp.my.activity.CustomerService;
 import com.ylean.cf_hospitalapp.my.activity.DoctorListActivity;
 import com.ylean.cf_hospitalapp.my.activity.EarnPointsActivity;
@@ -36,7 +38,8 @@ import com.ylean.cf_hospitalapp.my.activity.MyHelpActivity;
 import com.ylean.cf_hospitalapp.my.activity.MyNewsListActivity;
 import com.ylean.cf_hospitalapp.my.activity.MyRequestListActivity;
 import com.ylean.cf_hospitalapp.my.activity.MyTopicActivity;
-import com.ylean.cf_hospitalapp.my.activity.ServiceOrderListActivity;
+import com.ylean.cf_hospitalapp.mall.acitity.ServiceOrderListActivity;
+import com.ylean.cf_hospitalapp.my.activity.RecommandActivity;
 import com.ylean.cf_hospitalapp.my.bean.UnreadMsgEntry;
 import com.ylean.cf_hospitalapp.my.presenter.IReadMsgPres;
 import com.ylean.cf_hospitalapp.my.view.IReadMsgView;
@@ -242,6 +245,9 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
                 break;
 
             case R.id.llGoodsOrder://商品订单
+
+                nextActivity(GoodsOrderListActivity.class);
+
                 break;
 
             case R.id.llServiceOrder://服务订单
@@ -278,6 +284,7 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
 
             case R.id.mivRecommadFriend://推荐给朋友
 
+                nextActivity(RecommandActivity.class);
                 break;
 
             case R.id.mivCustomer://联系客服
@@ -342,6 +349,10 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
         tvUsbableIntegral.setText(myInfoEntry.getData().getPoints());
         tvTotalIntegral.setText(myInfoEntry.getData().getTotalPoints());
         tvLevel.setText(myInfoEntry.getData().getLevel());
+
+        //userid，推荐给好友 使用
+        SaveUtils.put(getActivity(), SpValue.USER_ID, "");
+
     }
 
     @Override

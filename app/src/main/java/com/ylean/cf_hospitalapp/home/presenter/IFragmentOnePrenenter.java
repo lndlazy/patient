@@ -8,7 +8,6 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.orhanobut.logger.Logger;
-import com.ylean.cf_hospitalapp.base.bean.Basebean;
 import com.ylean.cf_hospitalapp.home.bean.BannerBean;
 import com.ylean.cf_hospitalapp.inquiry.bean.HospitalEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.RecommendEntry;
@@ -71,11 +70,6 @@ public class IFragmentOnePrenenter {
      */
     public void startLocation(Context context) {
 
-//        this.context = context;
-//        getHospital((String) SaveUtils.get(context, SpValue.LAT, "")
-//                , (String) SaveUtils.get(context, SpValue.LON, ""));
-//// TODO
-
         this.context = context;
         //定位服务的客户端。宿主程序在客户端声明此类，并调用，目前只支持在主线程中启动
         locationClient = new LocationClient(context.getApplicationContext());
@@ -89,7 +83,7 @@ public class IFragmentOnePrenenter {
         //可选，默认gcj02，设置返回的定位结果坐标系，如果配合百度地图使用，建议设置为bd09ll;
         locationOption.setCoorType("bd09ll");
         //可选，默认0，即仅定位一次，设置发起连续定位请求的间隔需要大于等于1000ms才是有效的 设置扫描间隔，单位是毫秒 当<1000(1s)时，定时定位无效
-        locationOption.setScanSpan(100);
+//        locationOption.setScanSpan(100);
         //可选，设置是否需要地址信息，默认不需要
         locationOption.setIsNeedAddress(true);
         //可选，设置是否需要地址描述

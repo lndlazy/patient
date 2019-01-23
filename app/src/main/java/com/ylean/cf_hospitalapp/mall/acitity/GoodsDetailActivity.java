@@ -81,11 +81,12 @@ public class GoodsDetailActivity extends BaseActivity {
 
                 Logger.d("拦截::" + url);
 
-//                //拦截url地址
-//                Intent m = new Intent(GoodsDetailActivity.this, OrderConfirmActivity.class);
-//                startActivity(m);
+                //拦截url地址
+                Intent m = new Intent(GoodsDetailActivity.this, OrderConfirmActivity.class);
+                m.putExtra("id", goodsInfo.getId());
+                startActivity(m);
 
-                showErr("暂未开发");
+//                showErr("暂未开发");
 
             } else {
                 view.loadUrl(url);

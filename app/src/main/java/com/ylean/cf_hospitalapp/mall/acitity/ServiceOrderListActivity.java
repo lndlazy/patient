@@ -1,4 +1,4 @@
-package com.ylean.cf_hospitalapp.my.activity;
+package com.ylean.cf_hospitalapp.mall.acitity;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -11,20 +11,24 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.bean.Basebean;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
-import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
-import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
+import com.ylean.cf_hospitalapp.mall.adapter.OrderAdapter;
+import com.ylean.cf_hospitalapp.mall.pres.IOrderListPres;
+import com.ylean.cf_hospitalapp.mall.bean.MallOrderEntry;
+import com.ylean.cf_hospitalapp.mall.view.IOrderListView;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 服务列表订单
  * Created by linaidao on 2019/1/8.
  */
 
-public class ServiceOrderListActivity extends BaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class ServiceOrderListActivity extends BaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, IOrderListView {
 
     private com.ylean.cf_hospitalapp.widget.TitleBackBarView tbv;
     private android.widget.TextView tv1;
@@ -35,7 +39,7 @@ public class ServiceOrderListActivity extends BaseActivity implements View.OnCli
     private int mPicLastVisibleItemPosition;
     private android.support.v7.widget.RecyclerView recyclerView;
     private String status;
-    private int page = 1;
+    private List<MallOrderEntry.DataBean> orderList = new ArrayList<>();
 
 
 //    全部（不传）， 待付款0， 待发货 1，待收货2  ,待使用3，已完成 4)
@@ -45,6 +49,9 @@ public class ServiceOrderListActivity extends BaseActivity implements View.OnCli
     private static final String STATUS_WAIT_USE = "3";
     private static final String STATUS_DONE = "4";
     private SwipeRefreshLayout swipeRefreshLayout;
+
+    private IOrderListPres iOrderListPres = new IOrderListPres(this);
+    private OrderAdapter orderAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,41 +63,19 @@ public class ServiceOrderListActivity extends BaseActivity implements View.OnCli
 
         tv1.setSelected(true);
         status = STATUS_ALL;
-        serviceOrder(true);
+
+        iOrderListPres.setPage(1);
+        getData(true);
 
     }
 
-    private void serviceOrder(final boolean b) {
-
-        RetrofitHttpUtil.getInstance()
-                .serviceList(
-                        new BaseNoTObserver<Basebean>() {
-                            @Override
-                            public void onHandleSuccess(Basebean basebean) {
-                                swipeRefreshLayout.setRefreshing(false);
-
-                                if (b) {
-
-                                }
-                            }
-
-                            @Override
-                            public void onHandleError(String message) {
-                                swipeRefreshLayout.setRefreshing(false);
-                                showErr(message);
-                            }
-
-                        }, SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, ""), status
-                        , SpValue.ORDER_LIST_TYPE_SERVICE, page, SpValue.PAGE_SIZE);
-
-    }
 
     private void initView() {
-        this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        this.recyclerView = findViewById(R.id.recyclerView);
 
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(this);
-        this.tv4 = (TextView) findViewById(R.id.tv4);
+        this.tv4 = findViewById(R.id.tv4);
         this.tv3 = (TextView) findViewById(R.id.tv3);
         this.tv2 = (TextView) findViewById(R.id.tv2);
         this.tv1 = (TextView) findViewById(R.id.tv1);
@@ -115,6 +100,9 @@ public class ServiceOrderListActivity extends BaseActivity implements View.OnCli
         tv3.setOnClickListener(this);
         tv4.setOnClickListener(this);
 
+        orderAdapter = new OrderAdapter(this, orderList);
+        recyclerView.setAdapter(orderAdapter);
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
@@ -128,10 +116,13 @@ public class ServiceOrderListActivity extends BaseActivity implements View.OnCli
                     mPicFirstVisibleItemPosition = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
                 }
 
-//                if (picAskAdapter != null && newState == RecyclerView.SCROLL_STATE_IDLE
-//                        && mPicLastVisibleItemPosition + 1 == picAskAdapter.getItemCount() && mPicFirstVisibleItemPosition > 0) {
-//                    iFragPicPres.nextPage(SpValue.ASK_TYPE_PIC, (String) SaveUtils.get(getActivity(), SpValue.TOKEN, ""));
-//                }
+                if (orderAdapter != null && newState == RecyclerView.SCROLL_STATE_IDLE
+                        && mPicLastVisibleItemPosition + 1 == orderAdapter.getItemCount() && mPicFirstVisibleItemPosition > 0) {
+
+                    iOrderListPres.setPage(iOrderListPres.getPage() + 1);
+                    getData(false);
+
+                }
 
             }
 
@@ -178,6 +169,11 @@ public class ServiceOrderListActivity extends BaseActivity implements View.OnCli
         }
     }
 
+    //获取数据
+    private void getData(boolean refush) {
+        iOrderListPres.serviceOrder((String) SaveUtils.get(this, SpValue.TOKEN, "")
+                , status, refush, iOrderListPres.getPage(), SpValue.ORDER_LIST_TYPE_SERVICE);
+    }
 
     private void setAllGray() {
 
@@ -186,12 +182,30 @@ public class ServiceOrderListActivity extends BaseActivity implements View.OnCli
         tv3.setSelected(false);
         tv4.setSelected(false);
 
-
     }
 
     @Override
     public void onRefresh() {
-        page = 1;
-        serviceOrder(true);
+        iOrderListPres.setPage(1);
+        getData(true);
+    }
+
+    @Override
+    public void stopRefush() {
+
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void setOrderList(List<MallOrderEntry.DataBean> data, boolean refush) {
+
+        if (refush)
+            orderList.clear();
+
+        orderList.addAll(data);
+
+        if (orderAdapter != null)
+            orderAdapter.notifyDataSetChanged();
+
     }
 }

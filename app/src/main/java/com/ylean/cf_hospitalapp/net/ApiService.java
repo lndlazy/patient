@@ -30,7 +30,10 @@ import com.ylean.cf_hospitalapp.inquiry.bean.PicAskResutEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.RecommendEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.WxPayInfoEntry;
 import com.ylean.cf_hospitalapp.login.bean.RegisterResultEntry;
+import com.ylean.cf_hospitalapp.mall.bean.FreightPriceEntry;
 import com.ylean.cf_hospitalapp.mall.bean.AddressListEntry;
+import com.ylean.cf_hospitalapp.mall.bean.GoodsInfoEntry;
+import com.ylean.cf_hospitalapp.mall.bean.MallOrderEntry;
 import com.ylean.cf_hospitalapp.my.bean.AreaEntry;
 import com.ylean.cf_hospitalapp.my.bean.BindEntry;
 import com.ylean.cf_hospitalapp.my.bean.CityEntry;
@@ -40,6 +43,7 @@ import com.ylean.cf_hospitalapp.my.bean.EvalListEntry;
 import com.ylean.cf_hospitalapp.my.bean.FamilyDetailEntry;
 import com.ylean.cf_hospitalapp.my.bean.GoodsListEntry;
 import com.ylean.cf_hospitalapp.my.bean.HelpEntry;
+import com.ylean.cf_hospitalapp.my.bean.InviteListEntry;
 import com.ylean.cf_hospitalapp.my.bean.MCollectionListEntry;
 import com.ylean.cf_hospitalapp.my.bean.MyAskReusltList;
 import com.ylean.cf_hospitalapp.my.bean.MyDoctorListEntry;
@@ -82,6 +86,7 @@ public interface ApiService {
 
     //    String WEB_ROOT = "http://cfyy.yl-mall.cn";
     String WEB_ROOT = "http://cfnew.yl-mall.cn";
+    //    String WEB_ROOT = "http://yx.yl-mall.cn";
     String WEB_ROOT_ADDRESS = "http://api.map.baidu.com";
 
     //咨询h5页面
@@ -92,7 +97,11 @@ public interface ApiService {
     //疾病详情
     String DISEASE_DETAIL = "/api/app/art/diseaseinfo";
 
+    //服务协议
     String SERVICE_XIEYI = "/api/app/art/getnewsbytype?ch=1&ctype=99";
+
+    //邀请好友
+    String SERVICE_INVITE = "/api/app/art/getnewsbytype?ch=1&ctype=777";
 
     String DEPARTMEN_INTRODUCE = "/api/app/hospital/departdetail";//科室介绍
 
@@ -286,6 +295,13 @@ public interface ApiService {
             , @Field("groupnum") String groupnum);
 
 
+    //积分商品 微信支付数据获取
+    @FormUrlEncoded
+    @POST("/api/app/pro/wechatpay")
+    Observable<WxPayInfoEntry> wxGoodsPayInfo(@Field("token") String token, @Field("ch") String ch
+            , @Field("groupnum") String groupnum);
+
+
     //医生详细详细
     @FormUrlEncoded
     @POST("/api/app/hospital/getdoctordetail")
@@ -316,12 +332,27 @@ public interface ApiService {
     @POST("/api/app/doctor/getserverlist")
     Observable<ServiceInfoEntry> serviceInfo(@Field("ch") String ch, @Field("doctorid") String doctorid);
 
-
     //支付宝支付数据获取
     @FormUrlEncoded
     @POST("/api/app/consultation/getalipayconfig")
     Observable<AlipayEntry> aliPayInfo(@Field("token") String token, @Field("ch") String ch
             , @Field("groupnum") String groupnum);
+
+    //支付宝商品支付数据获取
+    @FormUrlEncoded
+    @POST("/api/app/pro/getalipayconfig")
+    Observable<AlipayEntry> aliPayGoodsInfo(@Field("token") String token, @Field("ch") String ch
+            , @Field("groupnum") String groupnum);
+
+    //获取运费信息
+    @FormUrlEncoded
+    @POST("/api/app/pro/getconfigset")
+    Observable<FreightPriceEntry> freightInfo(@Field("token") String token, @Field("ch") String ch);
+
+    //商品确认订单页 获取商品详情
+    @FormUrlEncoded
+    @POST("/api/app/pro/prodeatil")
+    Observable<GoodsInfoEntry> goodsInfo(@Field("token") String token, @Field("ch") String ch, @Field("id") String id);
 
     //挂号 支付宝支付数据获取
     @FormUrlEncoded
@@ -407,7 +438,7 @@ public interface ApiService {
     // 商品 跟  服务订单列表
     @FormUrlEncoded
     @POST("/api/app/pro/getorderlist")
-    Observable<Basebean> serviceList(@Field("ch") String ch, @Field("token") String token, @Field("status") String status
+    Observable<MallOrderEntry> serviceList(@Field("ch") String ch, @Field("token") String token, @Field("status") String status
             , @Field("type") String type, @Field("page") int page, @Field("size") String size);
 
     //回复对话
@@ -702,6 +733,14 @@ public interface ApiService {
             , @Field("id") String id, @Field("status") String status, @Field("reason") String reason, @Field("imgs") String imgs);
 
 
+    //商品申请退款
+    @FormUrlEncoded
+    @POST("/api/app/pro/afterreturn")
+    Observable<Basebean> goodsRefund(@Field("ch") String ch, @Field("token") String token
+            , @Field("orderid") String orderid, @Field("reason") String reason, @Field("imgs") String imgs
+            , @Field("type") String type);
+
+
     //查询全部收货地址
     @FormUrlEncoded
     @POST("/api/app/receiver/selectAddrByUserId")
@@ -773,12 +812,28 @@ public interface ApiService {
             , @Field("hospitalid") String hospitalid, @Field("page") int page, @Field("size") String size);
 
 
+    //我邀请的用户列表
+    @FormUrlEncoded
+    @POST("/api/app/patient/myinvitationlist")
+    Observable<InviteListEntry> inviteList(@Field("ch") String ch, @Field("token") String token
+            , @Field("page") int page, @Field("size") String size);
+
+
     //申请免费接送
     @FormUrlEncoded
     @POST("/api/app/patient/addfreeshuttle")
     Observable<Basebean> freeTransfer(@Field("ch") String ch, @Field("token") String token
             , @Field("name") String name, @Field("peoplecount") String peoplecount, @Field("phone") String phone
             , @Field("address") String address, @Field("shuttletime") String shuttletime, @Field("hospitalid") String hospitalid);
+
+    //添加商品订单
+    @FormUrlEncoded
+    @POST("/api/app/pro/addorder")
+    Observable<PicAskResutEntry> goodsOrder(@Field("ch") String ch, @Field("token") String token
+            , @Field("addrid") String addrid, @Field("totalmoney") String totalmoney, @Field("freightmoney") String freightmoney
+            , @Field("usepoints") String usepoints, @Field("skuid") String skuid, @Field("skuprice") String skuprice
+            , @Field("points") String points, @Field("skutype") String skutype, @Field("skucount") String skucount
+            , @Field("remark") String remark);
 
 
 //    //删除地址

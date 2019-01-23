@@ -35,7 +35,7 @@ public class RetrofitHttpUtil {
 
             //OkHttp配置
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-//            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);//log日志
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);//log日志
             OkHttpClient client = new OkHttpClient().newBuilder()
                     .addInterceptor(interceptor)
                     .retryOnConnectionFailure(true)//错误重连
@@ -455,10 +455,20 @@ public class RetrofitHttpUtil {
     }
 
     /**
-     * 微信支付信息
+     * 问诊 微信支付信息
      */
     public void wxPayInfo(Observer subscriber, String token, String ch, String groupnum) {
         getService().wxPayInfo(token, ch, groupnum)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 商品 微信支付信息
+     */
+    public void wxGoodsPayInfo(Observer subscriber, String token, String ch, String groupnum) {
+        getService().wxGoodsPayInfo(token, ch, groupnum)
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
 
@@ -519,6 +529,36 @@ public class RetrofitHttpUtil {
      */
     public void aliPayInfo(Observer subscriber, String token, String ch, String groupnum) {
         getService().aliPayInfo(token, ch, groupnum)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 支付宝商品支付信息
+     */
+    public void aliPayGoodsInfo(Observer subscriber, String token, String ch, String groupnum) {
+        getService().aliPayGoodsInfo(token, ch, groupnum)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 获取运费信息
+     */
+    public void freightInfo(Observer subscriber, String token, String ch) {
+        getService().freightInfo(token, ch)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 获取运费信息
+     */
+    public void goodsInfo(Observer subscriber, String token, String ch, String id) {
+        getService().goodsInfo(token, ch, id)
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
 
@@ -1170,6 +1210,17 @@ public class RetrofitHttpUtil {
     }
 
     /**
+     * 商品 申请退款
+     */
+    public void goodsRefund(Observer subscriber, String ch, String token
+            , String orderid, String reason, String imgs, String type) {
+        getService().goodsRefund(ch, token, orderid, reason, imgs, type)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
      * 查询全部收货地址
      */
     public void allAddress(Observer subscriber, String ch, String token) {
@@ -1282,6 +1333,15 @@ public class RetrofitHttpUtil {
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
     }
+    /**
+     * 医院评论列表
+     */
+    public void inviteList(Observer subscriber, String ch, String token
+            ,int page, String size) {
+        getService().inviteList(ch, token, page, size)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+    }
 
     /**
      * 添加免费接送预约信息
@@ -1290,6 +1350,19 @@ public class RetrofitHttpUtil {
             , String name, String peoplecount, String phone, String address, String shuttletime, String hospitalid) {
         getService().freeTransfer(ch, token, name, peoplecount, phone, address
                 , shuttletime, hospitalid)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+    }
+
+
+    /**
+     * 添加商品订单
+     */
+    public void goodsOrder(Observer subscriber, String ch, String token
+            , String addrid, String totalmoney, String freightmoney, String usepoints, String skuid, String skuprice
+            , String points, String skutype, String skucount, String remark) {
+        getService().goodsOrder(ch, token, addrid, totalmoney, freightmoney, usepoints
+                , skuid, skuprice, points,skutype, skucount, remark)
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
     }

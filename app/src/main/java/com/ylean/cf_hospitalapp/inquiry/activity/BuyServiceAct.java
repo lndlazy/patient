@@ -1,10 +1,6 @@
 package com.ylean.cf_hospitalapp.inquiry.activity;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -12,20 +8,16 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alipay.sdk.app.AuthTask;
-import com.alipay.sdk.app.EnvUtils;
-import com.alipay.sdk.app.PayTask;
 import com.orhanobut.logger.Logger;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.ylean.cf_hospitalapp.R;
+import com.ylean.cf_hospitalapp.base.view.BaseActivity;
 import com.ylean.cf_hospitalapp.inquiry.bean.AlipayEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.WxPayInfoEntry;
-import com.ylean.cf_hospitalapp.base.bean.Basebean;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
-import com.ylean.cf_hospitalapp.register.activity.PayRegiserActivity;
 import com.ylean.cf_hospitalapp.utils.CommonUtils;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
@@ -151,11 +143,8 @@ public class BuyServiceAct extends BaseActivity implements View.OnClickListener 
     private void sureOrder() {
 
         if (ivAlipay.isSelected()) {
-
             aliPay();
-
         } else if (ivWeixin.isSelected()) {
-
             weixinPay();
         } else {
             showErr("请选择支付方式");

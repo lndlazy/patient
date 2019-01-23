@@ -236,6 +236,11 @@ public class PointsMallAct extends BaseActivity implements IPointsView, SwipeRef
     @Override
     public void onRefresh() {
         iPointsMallPres.setCurrentPage(1);
-        iPointsMallPres.goodsList(linePointsList.get(currentPagePosition).getId());
+        try {
+            iPointsMallPres.goodsList(linePointsList.get(currentPagePosition).getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
     }
 }

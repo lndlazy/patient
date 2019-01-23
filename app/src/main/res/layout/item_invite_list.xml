@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/x45">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdvImg"
+        android:layout_width="@dimen/x30"
+        android:layout_height="@dimen/x30"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x15"
+        fresco:failureImage="@mipmap/ic_default_headpic"
+        fresco:placeholderImage="@mipmap/ic_default_headpic"
+        fresco:roundAsCircle="true" />
+
+    <TextView
+        android:id="@+id/tvname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/x20"
+        android:layout_marginLeft="@dimen/x8"
+        android:layout_toRightOf="@id/sdvImg"
+        android:gravity="center_vertical"
+        android:text=""
+        android:textSize="@dimen/textsize_16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvtel"
+        android:layout_width="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/x20"
+        android:layout_below="@id/tvname"
+        android:layout_marginLeft="@dimen/x8"
+        android:layout_toRightOf="@id/sdvImg"
+        android:text=""
+        android:textSize="@dimen/textsize_14sp" />
+
+</RelativeLayout>

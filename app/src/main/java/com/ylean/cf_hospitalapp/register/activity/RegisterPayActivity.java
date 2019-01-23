@@ -25,7 +25,7 @@ import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 import io.reactivex.disposables.Disposable;
 
 /**
- * 预约挂号支付页面
+ * 预约挂号详情页面
  * Created by linaidao on 2019/1/5.
  */
 
@@ -331,8 +331,7 @@ public class RegisterPayActivity extends BaseActivity implements View.OnClickLis
                                 showErr(message);
                             }
 
-                        }
-                        , SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, "")
+                        }, SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, "")
                         , id, PayStatus.STATUS_WAIT_PAY, "取消订单");
 
     }

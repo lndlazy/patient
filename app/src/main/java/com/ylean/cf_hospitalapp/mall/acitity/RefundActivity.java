@@ -1,7 +1,6 @@
-package com.ylean.cf_hospitalapp.register.activity;
+package com.ylean.cf_hospitalapp.mall.acitity;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -16,6 +15,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -30,94 +30,105 @@ import com.ylean.cf_hospitalapp.base.view.DataUploadView;
 import com.ylean.cf_hospitalapp.inquiry.adapter.AskPicAdapter;
 import com.ylean.cf_hospitalapp.inquiry.bean.DataUploadResultEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.MImageItem;
+import com.ylean.cf_hospitalapp.mall.bean.MallOrderEntry;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
-import com.ylean.cf_hospitalapp.register.PayStatus;
-import com.ylean.cf_hospitalapp.register.bean.OrderInfoEntry;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
+import com.ylean.cf_hospitalapp.widget.ActionSheetDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 售后申请 申请退款
- * Created by linaidao on 2019/1/7.
+ * 申请退款
+ * Created by linaidao on 2019/1/21.
  */
 
-public class PayBackActivity extends BaseActivity implements View.OnClickListener, DataUploadView {
+public class RefundActivity extends BaseActivity implements View.OnClickListener, DataUploadView {
 
     private android.widget.TextView tvLeft;
     private com.facebook.drawee.view.SimpleDraweeView sdvImg;
-    private android.widget.TextView tvName;
-    private android.widget.TextView tvDepartment;
-    private android.widget.TextView tvHospitalName;
-    private android.widget.TextView tvIntroduce;
+    private android.widget.TextView tvTitle;
+    private android.widget.TextView tvPP;
     private android.widget.TextView tvType;
-    private android.widget.TextView tvPrice;
+    //    private android.widget.TextView tvPrice;
     private android.widget.EditText etDesc;
     private android.support.v7.widget.RecyclerView picRecyclerView;
     private android.widget.ImageView tvUploadPic;
     private android.widget.TextView tvNext;
-    private OrderInfoEntry.DataBean mOrderInfo;
+
+    private AskPicAdapter askPicAdapter;
+    private MallOrderEntry.DataBean orderInfo;
+    private List<MImageItem> images = new ArrayList<>();
     private static final int CAMER_PERMISSION_CODE = 0x304;
     private static final int IMAGE_PICKER = 0x305;
     private List<ImageItem> imageItems;//上传的图片集合
-    private IPicPresenter iPicPresenter = new IPicPresenter(this);
-    private List<MImageItem> images = new ArrayList<>();
 
+    private IPicPresenter iPicPresenter = new IPicPresenter(this);
     private String type;
-    private AskPicAdapter askPicAdapter;
+    private TextView tvstyle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.act_pay_back);
+        setContentView(R.layout.act_good_refund);
 
-//        n.putExtra("id", mOrderInfo.getId());
-//        n.putExtra("type", "挂号订单");
-//        n.putExtra("mOrderInfo", mOrderInfo);
-        mOrderInfo = getIntent().getParcelableExtra("mOrderInfo");
+        orderInfo = getIntent().getParcelableExtra("orderInfo");
 
+        //订单退货退款(2),订单换货(5)
         type = getIntent().getStringExtra("type");
-        initView();
+
+        init();
+
+        if (orderInfo == null) {
+            showErr("数据错误");
+            finish();
+        }
 
     }
 
-    private void initView() {
+    private void init() {
 
         this.tvNext = (TextView) findViewById(R.id.tvNext);
         this.tvUploadPic = (ImageView) findViewById(R.id.tvUploadPic);
         this.picRecyclerView = (RecyclerView) findViewById(R.id.picRecyclerView);
         this.etDesc = (EditText) findViewById(R.id.etDesc);
-        this.tvPrice = (TextView) findViewById(R.id.tvPrice);
+//        this.tvPrice = (TextView) findViewById(R.id.tvPrice);
         this.tvType = (TextView) findViewById(R.id.tvType);
-        this.tvIntroduce = (TextView) findViewById(R.id.tvIntroduce);
-        this.tvHospitalName = (TextView) findViewById(R.id.tvHospitalName);
-        this.tvDepartment = (TextView) findViewById(R.id.tvDepartment);
-        this.tvName = (TextView) findViewById(R.id.tvName);
+        this.tvPP = (TextView) findViewById(R.id.tvPP);
+        this.tvTitle = (TextView) findViewById(R.id.tvTitle);
         this.sdvImg = (SimpleDraweeView) findViewById(R.id.sdvImg);
         this.tvLeft = (TextView) findViewById(R.id.tvLeft);
+
+        ImageView ivr = findViewById(R.id.ivr);
+        tvstyle = findViewById(R.id.tvstyle);
+        RelativeLayout rlstyle = findViewById(R.id.rlstyle);
 
         picRecycler();
 
         tvLeft.setOnClickListener(this);
-        tvNext.setOnClickListener(this);
         tvUploadPic.setOnClickListener(this);
+        tvNext.setOnClickListener(this);
 
-        if (mOrderInfo == null)
-            return;
+        sdvImg.setImageURI(Uri.parse(ApiService.WEB_ROOT + orderInfo.getSkuimg()));
+        tvTitle.setText(orderInfo.getSkuname());
+        tvPP.setText(orderInfo.getPoints() + "积分+" + orderInfo.getPrice() + "元");
+//        tvPrice.setText();
 
-        sdvImg.setImageURI(Uri.parse(ApiService.WEB_ROOT + mOrderInfo.getDoctorimg()));
-        tvName.setText(mOrderInfo.getDoctorname());
-        tvDepartment.setText(mOrderInfo.getDepartname() + " " + mOrderInfo.getDocdocteachname());
-        tvHospitalName.setText(mOrderInfo.getHospitalname());
-//        tvIntroduce.setText(mOrderInfo.get);
+        if ("1".equals(orderInfo.getOrdertype())) {
+            //商品订单
+            tvstyle.setText("");
+            tvstyle.setHint("请选择售后方式");
+            rlstyle.setOnClickListener(this);
+        } else {
+            tvstyle.setText("退款申请");
+            ivr.setVisibility(View.INVISIBLE);
+        }
 
-        tvType.setText(type);
-        tvPrice.setText("¥" + mOrderInfo.getPrice());
     }
 
     private void picRecycler() {
@@ -142,41 +153,57 @@ public class PayBackActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
 
             case R.id.tvLeft:
                 finish();
                 break;
-
             case R.id.tvUploadPic://上传图片
                 choosePic();
                 break;
-
-            case R.id.tvNext://提交退款申请
-
-                if (TextUtils.isEmpty(etDesc.getText().toString())) {
-                    showErr("请输入退款原因");
-                    return;
-                }
-
-                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this, R.style.AlertDialogCustom);
-
-                builder.setTitle("提示").setMessage("您确定要取消挂号吗").setPositiveButton("取消挂号", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        payBack();
-                    }
-                }).show();
-
+            case R.id.tvNext:
+                refundGoods();
                 break;
+
+            case R.id.rlstyle://选择售后方式， 退款or换货
+
+                showStyle();
+                break;
+
         }
+    }
+
+    private void showStyle() {
+
+        new ActionSheetDialog(this)
+                .builder()
+                .setCancelable(true)
+                .setCanceledOnTouchOutside(true)
+                .addSheetItem("换货", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                //订单退货退款(2),订单换货(5)
+                                tvstyle.setText("换货");
+                                type = "2";
+                            }
+
+                        })
+                .addSheetItem("退货", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                tvstyle.setText("退货");
+                                type = "5";
+
+                            }
+                        })
+
+                .show();
 
     }
 
-    //退款申请
-    private void payBack() {
+    private void refundGoods() {
 
         String img = "";
         if (images != null && images.size() > 0) {
@@ -188,12 +215,14 @@ public class PayBackActivity extends BaseActivity implements View.OnClickListene
         if (!TextUtils.isEmpty(img))
             img = img.substring(0, img.length() - 1);
 
-        RetrofitHttpUtil.getInstance().payBack(
+
+        RetrofitHttpUtil.getInstance().goodsRefund(
                 new BaseNoTObserver<Basebean>() {
                     @Override
                     public void onHandleSuccess(Basebean basebean) {
+
                         showErr("申请成功");
-                        nextActivity(MyRegisterListActivity.class);
+                        finish();
                     }
 
                     @Override
@@ -201,9 +230,8 @@ public class PayBackActivity extends BaseActivity implements View.OnClickListene
                         showErr(message);
                     }
 
-                }
-                , SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, "")
-                , mOrderInfo.getId(), PayStatus.STATUS_WAIT_USE, etDesc.getText().toString(), img);
+                }, SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, "")
+                , orderInfo.getOrderid(), etDesc.getText().toString(), img, type);
 
     }
 
@@ -242,7 +270,7 @@ public class PayBackActivity extends BaseActivity implements View.OnClickListene
 
         switch (requestCode) {
 
-            case CAMER_PERMISSION_CODE:
+            case CAMER_PERMISSION_CODE://定位权限
 
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
