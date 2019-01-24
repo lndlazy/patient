@@ -66,6 +66,15 @@ public class OrderInfoEntry extends Basebean {
         private double price;
         private String sex;
         private String status;
+        private String iscommend;
+
+        public String getIscommend() {
+            return iscommend;
+        }
+
+        public void setIscommend(String iscommend) {
+            this.iscommend = iscommend;
+        }
 
         public String getAppointtime() {
             return appointtime;
@@ -275,6 +284,9 @@ public class OrderInfoEntry extends Basebean {
             this.status = status;
         }
 
+        public DataBean() {
+        }
+
         @Override
         public int describeContents() {
             return 0;
@@ -308,9 +320,7 @@ public class OrderInfoEntry extends Basebean {
             dest.writeDouble(this.price);
             dest.writeString(this.sex);
             dest.writeString(this.status);
-        }
-
-        public DataBean() {
+            dest.writeString(this.iscommend);
         }
 
         protected DataBean(Parcel in) {
@@ -340,6 +350,7 @@ public class OrderInfoEntry extends Basebean {
             this.price = in.readDouble();
             this.sex = in.readString();
             this.status = in.readString();
+            this.iscommend = in.readString();
         }
 
         public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
@@ -355,6 +366,9 @@ public class OrderInfoEntry extends Basebean {
         };
     }
 
+    public OrderInfoEntry() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -366,9 +380,6 @@ public class OrderInfoEntry extends Basebean {
         dest.writeParcelable(this.data, flags);
         dest.writeString(this.startTime);
         dest.writeString(this.token);
-    }
-
-    public OrderInfoEntry() {
     }
 
     protected OrderInfoEntry(Parcel in) {

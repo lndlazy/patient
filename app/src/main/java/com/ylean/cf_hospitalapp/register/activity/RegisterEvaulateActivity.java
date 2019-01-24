@@ -1,4 +1,4 @@
-package com.ylean.cf_hospitalapp.my.activity;
+package com.ylean.cf_hospitalapp.register.activity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -29,6 +29,7 @@ import com.ylean.cf_hospitalapp.inquiry.adapter.AskPicAdapter;
 import com.ylean.cf_hospitalapp.inquiry.bean.DataUploadResultEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.MImageItem;
 import com.ylean.cf_hospitalapp.inquiry.bean.PicAskDetailEntry;
+import com.ylean.cf_hospitalapp.my.activity.InquiryEvaulateDoctorActivity;
 import com.ylean.cf_hospitalapp.my.adapter.PicViewAdapter;
 import com.ylean.cf_hospitalapp.my.bean.EvalDetailEntry;
 import com.ylean.cf_hospitalapp.my.presenter.IEvaluatePres;
@@ -36,6 +37,7 @@ import com.ylean.cf_hospitalapp.my.view.IEvaluateView;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
+import com.ylean.cf_hospitalapp.register.bean.OrderInfoEntry;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
@@ -47,16 +49,17 @@ import java.util.List;
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 /**
- * 评价医生页面
+ * 挂号评价页面
+ * Created by linaidao on 2019/1/24.
  */
-public class EvaulateDoctorActivity extends BaseActivity implements IEvaluateView, View.OnClickListener, DataUploadView {
+
+public class RegisterEvaulateActivity extends BaseActivity implements IEvaluateView, View.OnClickListener, DataUploadView {
 
     private IEvaluatePres iEvaluatePres = new IEvaluatePres(this);
 
-    private PicAskDetailEntry.DataBean inquiryInfo;
-    private String hospitalName;
-    private String consultaid;
-    private int askType;
+//    private PicAskDetailEntry.DataBean inquiryInfo;
+//    private String hospitalName;
+
     private MaterialRatingBar rb1;
     private MaterialRatingBar rb2;
     private MaterialRatingBar rb3;
@@ -66,7 +69,7 @@ public class EvaulateDoctorActivity extends BaseActivity implements IEvaluateVie
     private static final int IMAGE_PICKER = 0x105;
     private List<MImageItem> images = new ArrayList<>();
     private AskPicAdapter picAdapter;
-    private boolean noedit;
+    //    private boolean noedit;
     private TextView tvCommit;
     private SimpleDraweeView sdvImg;
     private TextView tvName;
@@ -77,45 +80,28 @@ public class EvaulateDoctorActivity extends BaseActivity implements IEvaluateVie
     private TextView tvCompany;
     private ImageView iv_add_pic;
 
-    //评价id
-    private String evaluteId;
+    private OrderInfoEntry.DataBean mOrderInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mOrderInfo = getIntent().getParcelableExtra("mOrderInfo");
         setContentView(R.layout.activity_argement);
 
-        //用于获取评价详情的id
-        consultaid = getIntent().getStringExtra("consultaid");
-
-        hospitalName = getIntent().getStringExtra("hospitalName");
-
-        //问诊过来的数据
-        inquiryInfo = getIntent().getParcelableExtra("inquiryInfo");
-
-//        !!!!!!!!!!!问诊订单和挂号订单评论的是 医生，所以传医生id  商品订单和服务订单 relateid 传 商品id
-        if (inquiryInfo != null)
-            evaluteId = inquiryInfo.getDoctorid();//评论的id
-
-        //是否 是无法编辑模式，只是查看
-        noedit = getIntent().getBooleanExtra("noedit", false);
-
-        //问诊类型
-        askType = getIntent().getIntExtra("askType", -1);//1图文问诊，2电话，3视频
+        if (mOrderInfo == null) {
+            showErr("数据错误");
+            finish();
+        }
         initWidget();
         checkPermisson();
-
         setInfo();
 
-        //无法编辑模式
-        if (noedit)
+        if ("1".equals(mOrderInfo.getIscommend())) {
+            //无法编辑模式  已评价, 获取评价详情
             noEditable();
-
-        if (noedit)
-            //获取评价详情
             commandInfo();
-
+        }
     }
 
     private void noEditable() {
@@ -133,7 +119,7 @@ public class EvaulateDoctorActivity extends BaseActivity implements IEvaluateVie
     private void commandInfo() {
 
         RetrofitHttpUtil.getInstance()
-                .commandInfo(new BaseNoTObserver<EvalDetailEntry>() {
+                .registerCommentDetail(new BaseNoTObserver<EvalDetailEntry>() {
                     @Override
                     public void onHandleSuccess(EvalDetailEntry evalDetailEntry) {
 
@@ -148,7 +134,7 @@ public class EvaulateDoctorActivity extends BaseActivity implements IEvaluateVie
                         showErr(message);
                     }
 
-                }, SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, ""), consultaid);
+                }, SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, ""), mOrderInfo.getCode());
 
     }
 
@@ -189,7 +175,7 @@ public class EvaulateDoctorActivity extends BaseActivity implements IEvaluateVie
                 @Override
                 public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 
-                    Intent m = new Intent(EvaulateDoctorActivity.this, PicDetailAc.class);
+                    Intent m = new Intent(RegisterEvaulateActivity.this, PicDetailAc.class);
                     m.putExtra("picUrl", ApiService.WEB_ROOT + imgs.get(position));
                     startActivity(m);
                 }
@@ -259,34 +245,19 @@ public class EvaulateDoctorActivity extends BaseActivity implements IEvaluateVie
         tvCommit.setOnClickListener(this);
         iv_add_pic.setOnClickListener(this);
 
+        tvType.setText("挂号订单");
     }
 
     private void setInfo() {
 
-        if (inquiryInfo == null)
+        if (mOrderInfo == null)
             return;
 
-        sdvImg.setImageURI(Uri.parse(ApiService.WEB_ROOT + inquiryInfo.getDocimg()));
-        tvName.setText(inquiryInfo.getDoctorname());
-        tvJob.setText(inquiryInfo.getDepartname() + "   " + inquiryInfo.getDoctitlename());
-        tvInfo.setText(inquiryInfo.getAdeptdesc());
-        tvPirce.setText("¥" + inquiryInfo.getPrice());
-        tvCompany.setText(hospitalName);//医院名称
-
-        switch (askType) {
-
-            case 1://图文问诊
-                tvType.setText("图文问诊");
-                break;
-            case 2://电话问诊
-                tvType.setText("电话问诊");
-                break;
-            case 3://视频问诊
-                tvType.setText("视频问诊");
-            case 4://免费义诊
-                tvType.setText("免费问诊");
-                break;
-        }
+        sdvImg.setImageURI(Uri.parse(ApiService.WEB_ROOT + mOrderInfo.getDoctorimg()));
+        tvName.setText(mOrderInfo.getDoctorname());
+        tvJob.setText(mOrderInfo.getDepartname() + "   " + mOrderInfo.getDoctitle());
+        tvPirce.setText("¥" + mOrderInfo.getPrice());
+        tvCompany.setText(mOrderInfo.getHospitalname());//医院名称
     }
 
 
@@ -336,14 +307,13 @@ public class EvaulateDoctorActivity extends BaseActivity implements IEvaluateVie
 
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
 
             case R.id.tvCommit:
 
-                if (inquiryInfo == null) {
+                if (mOrderInfo == null) {
                     showErr("数据错误");
                     return;
                 }
@@ -375,9 +345,9 @@ public class EvaulateDoctorActivity extends BaseActivity implements IEvaluateVie
 
                 iEvaluatePres.addEvaluate(
                         (String) SaveUtils.get(this, SpValue.TOKEN, "")
-                        , evaluteId, inquiryInfo.getCode(), etConent.getText().toString()
+                        , mOrderInfo.getDoctorid(), mOrderInfo.getCode(), etConent.getText().toString()
                         , rating2 + "", rating1 + "", rating3 + ""
-                        , "3", img, askType + "");
+                        , "3", img, "4");
 
                 break;
 
@@ -432,6 +402,7 @@ public class EvaulateDoctorActivity extends BaseActivity implements IEvaluateVie
     @Override
     public void evaluateSuccess() {
 
+        showErr("评价成功");
         //评价成功
         setResult(0x003);
         finish();

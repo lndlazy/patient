@@ -1084,6 +1084,26 @@ public class RetrofitHttpUtil {
     }
 
     /**
+     * 挂号订单评价详情
+     */
+    public void registerCommentDetail(Observer subscriber, String ch, String token, String code) {
+        getService().registerCommentDetail(ch, token, code)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 删除挂号订单
+     */
+    public void deleteRegisterOrder(Observer subscriber, String ch, String token, String orderid) {
+        getService().deleteRegisterOrder(ch, token, orderid)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
      * 查询绑定信息
      */
     public void bindInfo(Observer subscriber, String token) {

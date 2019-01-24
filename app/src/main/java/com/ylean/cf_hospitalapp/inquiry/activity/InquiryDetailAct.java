@@ -40,7 +40,7 @@ import com.ylean.cf_hospitalapp.audio.MediaRecordManager;
 import com.ylean.cf_hospitalapp.base.IPicPresenter;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
 import com.ylean.cf_hospitalapp.inquiry.view.IInquiryView;
-import com.ylean.cf_hospitalapp.my.activity.EvaulateDoctorActivity;
+import com.ylean.cf_hospitalapp.my.activity.InquiryEvaulateDoctorActivity;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
@@ -411,7 +411,7 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
                     return;
                 }
 
-                Intent m = new Intent(this, EvaulateDoctorActivity.class);
+                Intent m = new Intent(this, InquiryEvaulateDoctorActivity.class);
                 m.putExtra("consultaid", consultaid);
                 m.putExtra("hospitalName", hospitalName);
                 m.putExtra("inquiryInfo", inquiryInfo);

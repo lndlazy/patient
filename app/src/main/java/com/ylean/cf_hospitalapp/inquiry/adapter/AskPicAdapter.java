@@ -14,9 +14,10 @@ import com.ylean.cf_hospitalapp.inquiry.bean.MImageItem;
 import com.ylean.cf_hospitalapp.inquiry.activity.PayTWActivity;
 import com.ylean.cf_hospitalapp.mall.acitity.GoodsCommandActivity;
 import com.ylean.cf_hospitalapp.mall.acitity.RefundActivity;
-import com.ylean.cf_hospitalapp.my.activity.EvaulateDoctorActivity;
+import com.ylean.cf_hospitalapp.my.activity.InquiryEvaulateDoctorActivity;
 import com.ylean.cf_hospitalapp.register.activity.PayBackActivity;
 import com.ylean.cf_hospitalapp.register.activity.RegisterConfirmActivity;
+import com.ylean.cf_hospitalapp.register.activity.RegisterEvaulateActivity;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 
 import java.util.List;
@@ -66,8 +67,8 @@ public class AskPicAdapter extends RecyclerView.Adapter<AskPicAdapter.MyViewHold
                     payBackActivity.removePic(position);
                 }
 
-                if (context instanceof EvaulateDoctorActivity) {
-                    EvaulateDoctorActivity evaluateActivity = (EvaulateDoctorActivity) context;
+                if (context instanceof InquiryEvaulateDoctorActivity) {
+                    InquiryEvaulateDoctorActivity evaluateActivity = (InquiryEvaulateDoctorActivity) context;
                     evaluateActivity.removePic(position);
                 }
 
@@ -79,6 +80,11 @@ public class AskPicAdapter extends RecyclerView.Adapter<AskPicAdapter.MyViewHold
                 if (context instanceof GoodsCommandActivity) {
                     GoodsCommandActivity gcActivity = (GoodsCommandActivity) context;
                     gcActivity.removePic(position);
+                }
+
+                if (context instanceof RegisterEvaulateActivity) {
+                    RegisterEvaulateActivity rActivity = (RegisterEvaulateActivity) context;
+                    rActivity.removePic(position);
                 }
 
             }

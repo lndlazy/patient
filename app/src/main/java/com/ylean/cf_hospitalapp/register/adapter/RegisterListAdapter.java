@@ -107,6 +107,12 @@ public class RegisterListAdapter extends RecyclerView.Adapter<RegisterListAdapte
 
                 break;
 
+            case PayStatus.STATUS_TIME_OUT://已过期
+                holder.tvStatus.setText("已过期");
+                holder.tvStatus.setTextColor(context.getResources().getColor(R.color.txt_color_light9));
+
+                break;
+
         }
 
     }

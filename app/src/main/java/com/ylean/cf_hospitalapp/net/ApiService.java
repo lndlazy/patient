@@ -676,6 +676,16 @@ public interface ApiService {
     @POST("/api/app/appointment/getdetail")
     Observable<OrderInfoEntry> orderInfo(@Field("ch") String ch, @Field("token") String token, @Field("id") String id);
 
+    //挂号订单评价详情
+    @FormUrlEncoded
+    @POST("/api/app/appointment/commentdetail")
+    Observable<EvalDetailEntry> registerCommentDetail(@Field("ch") String ch, @Field("token") String token, @Field("code") String code);
+
+    //删除挂号订单
+    @FormUrlEncoded
+    @POST("/api/app/appointment/delorder")
+    Observable<Basebean> deleteRegisterOrder(@Field("ch") String ch, @Field("token") String token, @Field("orderid") String orderid);
+
     //查询绑定信息
     @FormUrlEncoded
     @POST("/api/app/patient/bundinfo")

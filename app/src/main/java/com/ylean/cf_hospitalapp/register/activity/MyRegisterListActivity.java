@@ -45,7 +45,7 @@ public class MyRegisterListActivity extends BaseActivity {
 
         initView();
 
-        reigsterOrderList();
+//        reigsterOrderList();
 
     }
 
@@ -58,34 +58,32 @@ public class MyRegisterListActivity extends BaseActivity {
 
     private void reigsterOrderList() {
 
-        RetrofitHttpUtil
-                .getInstance()
-                .registerOrderList(
-                        new BaseNoTObserver<RegisterOrderEntry>() {
-                            @Override
-                            public void onHandleSuccess(RegisterOrderEntry orderEntry) {
+        RetrofitHttpUtil.getInstance().registerOrderList(
+                new BaseNoTObserver<RegisterOrderEntry>() {
+                    @Override
+                    public void onHandleSuccess(RegisterOrderEntry orderEntry) {
 
-                                if (orderEntry != null && orderEntry.getData() != null) {
+                        if (orderEntry != null && orderEntry.getData() != null) {
 
 //                                    if (isrefush)
-                                    swipeRefreshLayout.setRefreshing(false);
+                            swipeRefreshLayout.setRefreshing(false);
 
-                                    registerList.clear();
+                            registerList.clear();
 
-                                    registerList.addAll(orderEntry.getData());
-                                    if (registerOrderAdapter != null)
-                                        registerOrderAdapter.notifyDataSetChanged();
-                                }
+                            registerList.addAll(orderEntry.getData());
+                            if (registerOrderAdapter != null)
+                                registerOrderAdapter.notifyDataSetChanged();
+                        }
 
-                            }
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                swipeRefreshLayout.setRefreshing(false);
-                                showErr(message);
-                            }
+                    @Override
+                    public void onHandleError(String message) {
+                        swipeRefreshLayout.setRefreshing(false);
+                        showErr(message);
+                    }
 
-                        }, SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, ""));
+                }, SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, ""));
 
     }
 
@@ -125,7 +123,7 @@ public class MyRegisterListActivity extends BaseActivity {
             @Override
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 
-                m = new Intent(MyRegisterListActivity.this, RegisterPayActivity.class);
+                m = new Intent(MyRegisterListActivity.this, RegisterDetailActivity.class);
                 m.putExtra("id", registerList.get(position).getId());
                 startActivity(m);
 

@@ -127,7 +127,7 @@ public class MyEvaluationActivity extends BaseActivity implements SwipeRefreshLa
 
                     case SpValue.COMMIT_TYPE_DOCTOR://"【医生】"
 
-                        Intent m = new Intent(MyEvaluationActivity.this, EvaulateDoctorActivity.class);
+                        Intent m = new Intent(MyEvaluationActivity.this, InquiryEvaulateDoctorActivity.class);
                         m.putExtra("noedit", true);
                         m.putExtra("consultaid", commandList.get(position).getId());
                         startActivity(m);

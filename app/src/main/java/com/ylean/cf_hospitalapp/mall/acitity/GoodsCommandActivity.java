@@ -29,7 +29,6 @@ import com.ylean.cf_hospitalapp.inquiry.adapter.AskPicAdapter;
 import com.ylean.cf_hospitalapp.inquiry.bean.DataUploadResultEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.MImageItem;
 import com.ylean.cf_hospitalapp.mall.bean.GoodsOrderInfoEntry;
-import com.ylean.cf_hospitalapp.my.activity.EvaulateDoctorActivity;
 import com.ylean.cf_hospitalapp.my.adapter.PicViewAdapter;
 import com.ylean.cf_hospitalapp.my.bean.EvalDetailEntry;
 import com.ylean.cf_hospitalapp.my.presenter.IEvaluatePres;
