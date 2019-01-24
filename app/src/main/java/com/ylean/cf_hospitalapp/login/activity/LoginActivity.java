@@ -1,4 +1,4 @@
-package com.ylean.cf_hospitalapp.login.view;
+package com.ylean.cf_hospitalapp.login.activity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -21,7 +21,7 @@ import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.base.view.HomeActivity;
 import com.ylean.cf_hospitalapp.home.bean.LoginEntry;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;

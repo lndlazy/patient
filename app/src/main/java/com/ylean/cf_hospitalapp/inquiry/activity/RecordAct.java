@@ -20,7 +20,7 @@ import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.inquiry.bean.DataUploadResultEntry;
 import com.ylean.cf_hospitalapp.audio.MediaRecordManager;
 import com.ylean.cf_hospitalapp.base.IPicPresenter;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.base.view.DataUploadView;
 import com.ylean.cf_hospitalapp.widget.TalkView;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;

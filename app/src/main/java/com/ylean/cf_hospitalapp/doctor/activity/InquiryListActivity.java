@@ -11,7 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.doctor.adapter.InquiryItemAdapter;
 import com.ylean.cf_hospitalapp.doctor.bean.CommComListEntry;
 import com.ylean.cf_hospitalapp.doctor.bean.InquiryListEntry;

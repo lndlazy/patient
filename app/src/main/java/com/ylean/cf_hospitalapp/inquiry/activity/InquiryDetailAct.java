@@ -38,7 +38,7 @@ import com.ylean.cf_hospitalapp.inquiry.adapter.ChatAdapter;
 import com.ylean.cf_hospitalapp.inquiry.utils.ChatType;
 import com.ylean.cf_hospitalapp.audio.MediaRecordManager;
 import com.ylean.cf_hospitalapp.base.IPicPresenter;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.inquiry.view.IInquiryView;
 import com.ylean.cf_hospitalapp.my.activity.InquiryEvaulateDoctorActivity;
 import com.ylean.cf_hospitalapp.net.ApiService;

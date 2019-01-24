@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.my.activity.WebviewActivity;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.register.adapter.DoctorTypeAdapter;

@@ -1,4 +1,4 @@
-package com.ylean.cf_hospitalapp.login.view;
+package com.ylean.cf_hospitalapp.login.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.bean.Basebean;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.login.bean.RegisterResultEntry;
 import com.ylean.cf_hospitalapp.my.activity.WebviewActivity;
 import com.ylean.cf_hospitalapp.net.ApiService;

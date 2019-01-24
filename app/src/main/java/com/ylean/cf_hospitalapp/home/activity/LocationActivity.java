@@ -4,8 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
-import com.ylean.cf_hospitalapp.utils.Constant;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.zaaach.citypicker.CityPicker;

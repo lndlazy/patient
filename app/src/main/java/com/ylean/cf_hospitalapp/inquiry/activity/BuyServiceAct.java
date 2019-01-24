@@ -13,7 +13,7 @@ import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.inquiry.bean.AlipayEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.WxPayInfoEntry;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;

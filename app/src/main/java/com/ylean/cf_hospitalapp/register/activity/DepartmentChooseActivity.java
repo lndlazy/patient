@@ -13,9 +13,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.bean.Basebean;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
-import com.ylean.cf_hospitalapp.home.bean.SearchListEntry;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.my.adapter.RegisterLeftAdapter;
 import com.ylean.cf_hospitalapp.my.adapter.RegisterRightAdapter;
 import com.ylean.cf_hospitalapp.net.ApiService;

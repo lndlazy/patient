@@ -114,4 +114,5 @@ public interface SpValue {
     String WB_APP_ID = "483287855";
     String WB_APP_SECRET = "602e5b9e35ab5e06be29cbdd9ad1a254";
 
+    String IS_FIRST = "is_first";//是否是第一次登陆
 }

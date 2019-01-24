@@ -11,7 +11,7 @@ import android.webkit.WebViewClient;
 
 import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;

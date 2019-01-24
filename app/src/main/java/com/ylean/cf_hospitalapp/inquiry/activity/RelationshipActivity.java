@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.inquiry.adapter.RelationshipAdapter;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 import com.ylean.cf_hospitalapp.widget.swipe.OnItemClickListener;
 

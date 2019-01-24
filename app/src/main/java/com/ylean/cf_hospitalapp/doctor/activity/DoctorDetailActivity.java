@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.Presenter.ICollectionPres;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.base.view.ICollectionView;
 import com.ylean.cf_hospitalapp.doctor.adapter.EvaluateAdapter;
 import com.ylean.cf_hospitalapp.doctor.adapter.InquiryItemAdapter;

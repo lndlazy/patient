@@ -17,7 +17,7 @@ import com.yanzhenjie.recyclerview.swipe.SwipeMenuItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.bean.Basebean;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.inquiry.bean.PeopleEntry;
 import com.ylean.cf_hospitalapp.home.adapter.FamilyNumsAdapter;
 import com.ylean.cf_hospitalapp.my.activity.FamilyDetailActivity;

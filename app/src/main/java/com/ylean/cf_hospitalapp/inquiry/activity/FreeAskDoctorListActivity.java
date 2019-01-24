@@ -29,7 +29,7 @@ import com.ylean.cf_hospitalapp.inquiry.adapter.FreeAskDoctorAdapter;
 import com.ylean.cf_hospitalapp.inquiry.adapter.HospitalLevelAdapter;
 import com.ylean.cf_hospitalapp.inquiry.presenter.IPayPresenter;
 import com.ylean.cf_hospitalapp.inquiry.adapter.RoomRightAdapter;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.inquiry.view.IPayView;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;

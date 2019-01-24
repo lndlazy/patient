@@ -1,13 +1,11 @@
 package com.ylean.cf_hospitalapp.inquiry.activity;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 
 import me.panpf.sketch.SketchImageView;

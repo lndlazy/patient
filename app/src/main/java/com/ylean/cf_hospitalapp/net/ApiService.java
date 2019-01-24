@@ -318,6 +318,12 @@ public interface ApiService {
             , @Field("groupnum") String groupnum);
 
 
+    //splish页面图片获取
+    @FormUrlEncoded
+    @POST("/api/app/getImg")
+    Observable<Basebean> getSplishPage(@Field("type") String type, @Field("ch") String ch);
+
+
     //医生详细详细
     @FormUrlEncoded
     @POST("/api/app/hospital/getdoctordetail")

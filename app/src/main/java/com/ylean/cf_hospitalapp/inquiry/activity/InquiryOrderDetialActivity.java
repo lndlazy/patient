@@ -12,13 +12,9 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.bean.Basebean;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
-import com.ylean.cf_hospitalapp.inquiry.activity.BuyServiceAct;
-import com.ylean.cf_hospitalapp.inquiry.bean.PicAskDetailEntry;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.inquiry.presenter.IInquiryOrderPers;
 import com.ylean.cf_hospitalapp.inquiry.view.IInquiryOrderView;
-import com.ylean.cf_hospitalapp.mall.acitity.GoodsOrderListActivity;
 import com.ylean.cf_hospitalapp.my.activity.CustomerService;
 import com.ylean.cf_hospitalapp.my.bean.OrderInquiryDetailEntry;
 import com.ylean.cf_hospitalapp.net.ApiService;

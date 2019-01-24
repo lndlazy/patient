@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -14,8 +13,7 @@ import android.widget.TextView;
 import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.bean.Basebean;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
-import com.ylean.cf_hospitalapp.inquiry.bean.AddressBean;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.my.activity.ModifySexActivity;
 import com.ylean.cf_hospitalapp.my.activity.SelectProvinceAct;
 import com.ylean.cf_hospitalapp.my.bean.FamilyDetailEntry;
@@ -27,10 +25,6 @@ import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.MyDatePicker;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Calendar;
 import java.util.Date;

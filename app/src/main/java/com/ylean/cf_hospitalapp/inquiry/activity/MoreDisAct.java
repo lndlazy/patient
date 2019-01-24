@@ -14,7 +14,7 @@ import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.inquiry.bean.DisEntry;
 import com.ylean.cf_hospitalapp.inquiry.adapter.DisLeftAdapter;
 import com.ylean.cf_hospitalapp.inquiry.adapter.DisRightAdapter;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
 import com.ylean.cf_hospitalapp.utils.SpValue;

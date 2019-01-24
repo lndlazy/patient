@@ -1,7 +1,6 @@
 package com.ylean.cf_hospitalapp.base.view;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 import com.hyphenate.chat.EMClient;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.Presenter.IHxPresenter;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.inquiry.FragmentThree;
 import com.ylean.cf_hospitalapp.home.FragmentOne;
 import com.ylean.cf_hospitalapp.my.FragmentFour;

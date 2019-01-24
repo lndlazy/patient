@@ -3,7 +3,7 @@ package com.ylean.cf_hospitalapp.my.activity;
 import android.os.Bundle;
 
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 
 /**
  * 我的话题

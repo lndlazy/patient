@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.mall.bean.AddressListEntry;
 import com.ylean.cf_hospitalapp.mall.bean.GoodsInfoEntry;
 import com.ylean.cf_hospitalapp.mall.pres.IOrderConfirmPer;

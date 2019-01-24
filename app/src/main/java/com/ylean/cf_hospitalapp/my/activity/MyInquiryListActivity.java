@@ -10,17 +10,15 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.view.HomeActivity;
-import com.ylean.cf_hospitalapp.inquiry.activity.InquiryOrderDetialActivity;
 import com.ylean.cf_hospitalapp.inquiry.activity.InquiryRefundActivity;
 import com.ylean.cf_hospitalapp.inquiry.bean.OrderEntry;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.inquiry.presenter.IInquiryOrderPers;
 import com.ylean.cf_hospitalapp.inquiry.view.IInquiryOrderView;
 import com.ylean.cf_hospitalapp.my.bean.OrderInquiryDetailEntry;
@@ -30,7 +28,6 @@ import com.ylean.cf_hospitalapp.my.view.IMyRegisteredView;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
-import com.ylean.cf_hospitalapp.widget.swipe.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;

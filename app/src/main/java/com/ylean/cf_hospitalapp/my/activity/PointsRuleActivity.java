@@ -1,12 +1,11 @@
 package com.ylean.cf_hospitalapp.my.activity;
 
 import android.os.Bundle;
-import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 
 /**

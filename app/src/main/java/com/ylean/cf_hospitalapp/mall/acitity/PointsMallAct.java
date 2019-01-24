@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.my.adapter.ClassifyAdapter;
 import com.ylean.cf_hospitalapp.my.adapter.GoodsAdapter;
 import com.ylean.cf_hospitalapp.my.bean.GoodsListEntry;

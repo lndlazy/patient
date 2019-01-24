@@ -1,4 +1,4 @@
-package com.ylean.cf_hospitalapp.base.view;
+package com.ylean.cf_hospitalapp.base.activity;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.Mapplication;
+import com.ylean.cf_hospitalapp.base.view.BaseView;
 import com.ylean.cf_hospitalapp.utils.Constant;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 

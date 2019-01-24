@@ -8,16 +8,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.comm.pres.IReplyPres;
 import com.ylean.cf_hospitalapp.comm.view.IReplyView;
 import com.ylean.cf_hospitalapp.doctor.bean.CommComListEntry;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 回复

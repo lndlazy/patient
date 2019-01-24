@@ -25,7 +25,7 @@ import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.IPicPresenter;
 import com.ylean.cf_hospitalapp.base.bean.Basebean;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.base.view.DataUploadView;
 import com.ylean.cf_hospitalapp.inquiry.adapter.AskPicAdapter;
 import com.ylean.cf_hospitalapp.inquiry.bean.DataUploadResultEntry;

@@ -12,13 +12,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.audio.UPlayer;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.inquiry.adapter.PicAdapter;
 import com.ylean.cf_hospitalapp.inquiry.bean.ChatEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.DataUploadResultEntry;

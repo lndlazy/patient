@@ -11,8 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.bean.Basebean;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.home.activity.ArtDetailAct;
 import com.ylean.cf_hospitalapp.home.activity.VideoSpeechActivity;
 import com.ylean.cf_hospitalapp.my.adapter.MyCommentAdapter;

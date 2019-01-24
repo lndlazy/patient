@@ -93,17 +93,26 @@
 
         </provider>
 
-        <activity
-            android:name=".login.view.LoginActivity"
+
+        <activity android:name=".login.activity.SplishActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:theme="@style/DefaultCityPickerTheme">
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".login.activity.LoginActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefaultCityPickerTheme">
+
+
 
         </activity>
 
@@ -244,7 +253,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".login.view.RegisterAct"
+            android:name=".login.activity.RegisterAct"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
 
@@ -372,7 +381,7 @@
         <!--</activity>-->
 
         <activity
-            android:name=".login.view.ForgetPwdAct"
+            android:name=".login.activity.ForgetPwdAct"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
 

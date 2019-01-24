@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 
 /**

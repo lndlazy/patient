@@ -4,9 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.register.bean.TimeEntry;
 import com.ylean.cf_hospitalapp.timesquare.CalendarPickerView;
 import com.ylean.cf_hospitalapp.utils.IDateUtils;

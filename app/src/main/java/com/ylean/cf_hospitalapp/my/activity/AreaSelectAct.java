@@ -11,8 +11,7 @@ import android.view.View;
 
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.inquiry.activity.AddFamilyNumActivity;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
-import com.ylean.cf_hospitalapp.inquiry.bean.AddressBean;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.mall.acitity.AddAddressActivity;
 import com.ylean.cf_hospitalapp.my.bean.AreaEntry;
 import com.ylean.cf_hospitalapp.my.adapter.AreaAdapter;
@@ -22,8 +21,6 @@ import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 import com.ylean.cf_hospitalapp.widget.swipe.OnItemClickListener;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;

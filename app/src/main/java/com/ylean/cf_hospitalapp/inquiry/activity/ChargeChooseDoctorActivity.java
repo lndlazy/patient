@@ -17,7 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.inquiry.bean.DepartmentListEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.DoctorLevelListBean;
 import com.ylean.cf_hospitalapp.inquiry.bean.DoctorListEntry;

@@ -8,8 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.bean.Basebean;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.mall.adapter.LogisticsAdapter;
 import com.ylean.cf_hospitalapp.mall.bean.LogisticEntry;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;

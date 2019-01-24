@@ -10,7 +10,7 @@
         android:id="@+id/sdvImg"
         android:layout_width="@dimen/x120"
         android:layout_height="wrap_content"
-        fresco:failureImage="@mipmap/ic_load_fail"
+        fresco:failureImage="@mipmap/ic_hospital"
         fresco:placeholderImage="@mipmap/ic_hospital"
         fresco:viewAspectRatio="1.33" />
 

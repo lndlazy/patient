@@ -495,6 +495,17 @@ public class RetrofitHttpUtil {
 
     }
 
+
+    /**
+     * splish页面
+     */
+    public void getSplishPage(Observer subscriber, String token, String ch) {
+        getService().getSplishPage(token, ch)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
     /**
      * 医生详情
      */

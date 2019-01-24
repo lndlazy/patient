@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.comm.pres.IGoodsInfoPres;
 import com.ylean.cf_hospitalapp.comm.view.IGoodsinfoView;
 import com.ylean.cf_hospitalapp.mall.GoodsStatus;

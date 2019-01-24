@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.home.bean.SearchListEntry;
 import com.ylean.cf_hospitalapp.home.presenter.ISearchPres;
 import com.ylean.cf_hospitalapp.home.view.ISearchView;
