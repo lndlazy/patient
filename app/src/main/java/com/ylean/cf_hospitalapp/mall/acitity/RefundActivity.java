@@ -31,6 +31,7 @@ import com.ylean.cf_hospitalapp.inquiry.adapter.AskPicAdapter;
 import com.ylean.cf_hospitalapp.inquiry.bean.DataUploadResultEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.MImageItem;
 import com.ylean.cf_hospitalapp.mall.bean.MallOrderEntry;
+import com.ylean.cf_hospitalapp.mall.bean.RefundAddressEntry;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
@@ -67,8 +68,12 @@ public class RefundActivity extends BaseActivity implements View.OnClickListener
     private List<ImageItem> imageItems;//上传的图片集合
 
     private IPicPresenter iPicPresenter = new IPicPresenter(this);
-    private String type;
+    private String type = "";//订单退货退款(2),订单换货(5)
     private TextView tvstyle;
+    private TextView tname;
+    private TextView taddress;
+    private TextView ttel;
+    private RelativeLayout rladdressinfo;
 
 
     @Override
@@ -78,9 +83,9 @@ public class RefundActivity extends BaseActivity implements View.OnClickListener
         setContentView(R.layout.act_good_refund);
 
         orderInfo = getIntent().getParcelableExtra("orderInfo");
-
+        type = "";
         //订单退货退款(2),订单换货(5)
-        type = getIntent().getStringExtra("type");
+//        type = getIntent().getStringExtra("type");
 
         init();
 
@@ -88,6 +93,40 @@ public class RefundActivity extends BaseActivity implements View.OnClickListener
             showErr("数据错误");
             finish();
         }
+
+        if ("1".equals(orderInfo.getOrdertype())) {
+            //实物地址， 获取寄回地址
+            refundAddress();
+            rladdressinfo.setVisibility(View.VISIBLE);
+        } else
+            //服务订单不需要地址
+            rladdressinfo.setVisibility(View.INVISIBLE);
+
+    }
+
+    private void refundAddress() {
+
+        RetrofitHttpUtil.getInstance().refundAddress(
+                new BaseNoTObserver<RefundAddressEntry>() {
+                    @Override
+                    public void onHandleSuccess(RefundAddressEntry basebean) {
+
+                        if (basebean != null && basebean.getData() != null) {
+
+                            tname.setText(basebean.getData().getShopname());
+                            taddress.setText(basebean.getData().getAddress());
+                            ttel.setText(basebean.getData().getTelphone());
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onHandleError(String message) {
+                        showErr(message);
+                    }
+
+                });
 
     }
 
@@ -103,6 +142,12 @@ public class RefundActivity extends BaseActivity implements View.OnClickListener
         this.tvTitle = (TextView) findViewById(R.id.tvTitle);
         this.sdvImg = (SimpleDraweeView) findViewById(R.id.sdvImg);
         this.tvLeft = (TextView) findViewById(R.id.tvLeft);
+
+        tname = findViewById(R.id.tname);
+        taddress = findViewById(R.id.taddress);
+        ttel = findViewById(R.id.ttel);
+
+        rladdressinfo = findViewById(R.id.rladdressinfo);
 
         ImageView ivr = findViewById(R.id.ivr);
         tvstyle = findViewById(R.id.tvstyle);
@@ -215,6 +260,11 @@ public class RefundActivity extends BaseActivity implements View.OnClickListener
         if (!TextUtils.isEmpty(img))
             img = img.substring(0, img.length() - 1);
 
+        //实物订单 需选择售后类型
+        if ("1".equals(orderInfo.getOrdertype()) && TextUtils.isEmpty(type)) {
+            showErr("请选择售后类型");
+            return;
+        }
 
         RetrofitHttpUtil.getInstance().goodsRefund(
                 new BaseNoTObserver<Basebean>() {

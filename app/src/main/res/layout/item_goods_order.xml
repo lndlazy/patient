@@ -83,17 +83,55 @@
         android:layout_height="1dp"
         android:background="@color/line_colore5" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/x60"
+        android:layout_gravity="right"
         android:layout_marginTop="@dimen/x8"
-        android:gravity="center_vertical">
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="@dimen/x65"
+            android:layout_height="@dimen/x22"
+            android:layout_marginRight="@dimen/x10"
+            android:background="@drawable/shape_stroke_blue"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/tab_colorf9"
+            android:textSize="@dimen/textsize_12sp" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="@dimen/x65"
+            android:layout_height="@dimen/x22"
+            android:layout_marginRight="@dimen/x10"
+            android:background="@drawable/shape_stroke_blue"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/tab_colorf9"
+            android:textSize="@dimen/textsize_12sp" />
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="@dimen/x65"
+            android:layout_height="@dimen/x22"
+            android:layout_marginRight="@dimen/x10"
+            android:background="@drawable/shape_stroke_blue"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/tab_colorf9"
+            android:textSize="@dimen/textsize_12sp" />
 
         <TextView
             android:id="@+id/tvright"
             android:layout_width="@dimen/x65"
-            android:layout_height="@dimen/x20"
+            android:layout_height="@dimen/x22"
             android:layout_alignParentRight="true"
             android:background="@drawable/shape_stroke_blue"
             android:gravity="center"
@@ -101,18 +139,7 @@
             android:textColor="@color/tab_colorf9"
             android:textSize="@dimen/textsize_12sp" />
 
-        <TextView
-            android:id="@+id/tvleft"
-            android:layout_width="@dimen/x65"
-            android:layout_height="@dimen/x20"
-            android:layout_marginRight="@dimen/x10"
-            android:layout_toLeftOf="@id/tvright"
-            android:background="@drawable/shape_stroke_blue"
-            android:gravity="center"
-            android:text="评价"
-            android:textColor="@color/tab_colorf9"
-            android:textSize="@dimen/textsize_12sp" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

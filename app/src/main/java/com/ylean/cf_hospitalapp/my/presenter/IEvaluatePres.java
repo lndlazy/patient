@@ -35,22 +35,20 @@ public class IEvaluatePres {
             , String content, String stardepict, String starservice, String starperformance
             , String type, String imgs, String ordertype) {
 
-        RetrofitHttpUtil
-                .getInstance()
-                .addEvaluation(
-                        new BaseNoTObserver<Basebean>() {
-                            @Override
-                            public void onHandleSuccess(Basebean basebean) {
-                                iEvaluateView.evaluateSuccess();
-                            }
+        RetrofitHttpUtil.getInstance().addEvaluation(
+                new BaseNoTObserver<Basebean>() {
+                    @Override
+                    public void onHandleSuccess(Basebean basebean) {
+                        iEvaluateView.evaluateSuccess();
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                iEvaluateView.showErr(message);
-                            }
+                    @Override
+                    public void onHandleError(String message) {
+                        iEvaluateView.showErr(message);
+                    }
 
-                        }, SpValue.CH, token, relateid, ordercode
-                        , content, stardepict, starservice, starperformance, type, imgs, ordertype);
+                }, SpValue.CH, token, relateid, ordercode
+                , content, stardepict, starservice, starperformance, type, imgs, ordertype);
 
     }
 

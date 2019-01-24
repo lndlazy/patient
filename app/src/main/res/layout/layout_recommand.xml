@@ -23,6 +23,7 @@ stars 星星总数-->
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv1"
             android:layout_width="@dimen/x80"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/x15"
@@ -49,6 +50,7 @@ stars 星星总数-->
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv2"
             android:layout_width="@dimen/x80"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/x15"

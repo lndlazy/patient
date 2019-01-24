@@ -68,71 +68,90 @@
                     app:cardElevation="@dimen/x5">
 
                     <RelativeLayout
-                        android:id="@+id/rlPatient"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/white"
                         android:padding="@dimen/x15">
 
-                        <com.facebook.drawee.view.SimpleDraweeView
-                            android:id="@+id/sdvImg"
-                            android:layout_width="@dimen/x35"
-                            android:layout_height="@dimen/x35"
-                            android:layout_marginTop="@dimen/x10"
-                            fresco:roundAsCircle="true" />
-
-                        <TextView
-                            android:id="@+id/tvName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/x30"
-                            android:layout_marginLeft="@dimen/x5"
-                            android:layout_toRightOf="@id/sdvImg"
-                            android:gravity="center_vertical"
-                            android:maxWidth="@dimen/x70"
-                            android:singleLine="true"
-                            android:text="医生姓名"
-                            android:textColor="@color/txt_color_ma3"
-                            android:textSize="@dimen/textsize_16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvDepartment"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/x30"
-                            android:layout_marginLeft="@dimen/x5"
-                            android:layout_toRightOf="@id/tvName"
-                            android:gravity="center_vertical"
-                            android:text="科室 医生职称"
-                            android:textColor="@color/txt_color_ma3"
-                            android:textSize="@dimen/textsize_14sp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:id="@+id/tvHospitalName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/x30"
-                            android:layout_below="@id/tvName"
-                            android:layout_marginLeft="@dimen/x5"
-                            android:layout_toRightOf="@id/sdvImg"
-                            android:gravity="center_vertical"
-                            android:text="医院名称"
-                            android:textColor="@color/line_color9b"
-                            android:textSize="@dimen/textsize_15sp" />
-
-                        <TextView
-                            android:id="@+id/tvIntroduce"
+                        <LinearLayout
+                            android:id="@+id/llservicecode"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/tvHospitalName"
-                            android:layout_marginLeft="@dimen/x5"
-                            android:layout_toRightOf="@id/sdvImg"
-                            android:ellipsize="end"
-                            android:lines="2"
-                            android:minHeight="@dimen/x30"
-                            android:text="医生介绍"
-                            android:textColor="@color/txt_color_light76"
-                            android:textSize="@dimen/textsize_14sp" />
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="服务码"
+                                android:textColor="@color/txt_color_ma3"
+                                android:textSize="@dimen/textsize_16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvservicecode"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text=""
+                                android:textColor="@color/txt_color_ma3"
+                                android:textSize="@dimen/textsize_15sp" />
+
+                            <TextView
+                                android:id="@+id/tvcopy"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="@dimen/x5"
+                                android:gravity="center_vertical"
+                                android:text="复制"
+                                android:textColor="@color/tab_colorf9"
+                                android:textSize="@dimen/textsize_15sp" />
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/tvName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/x30"
+                                android:gravity="center_vertical"
+                                android:text="姓名"
+                                android:textColor="@color/txt_color_ma3"
+                                android:textSize="@dimen/textsize_15sp"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:id="@+id/tvTel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/x30"
+                                android:layout_marginLeft="@dimen/x5"
+                                android:layout_toRightOf="@id/tvName"
+                                android:gravity="center_vertical"
+                                android:text="122222222"
+                                android:textColor="@color/txt_color_ma3"
+                                android:textSize="@dimen/textsize_13sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvAddressDetail"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/x30"
+                                android:layout_below="@id/tvName"
+                                android:drawableLeft="@mipmap/ic_location_gray"
+                                android:drawablePadding="@dimen/x3"
+                                android:gravity="center_vertical"
+                                android:singleLine="true"
+                                android:text="地址"
+                                android:textColor="@color/txt_color_light9" />
+
+                        </RelativeLayout>
+
 
                     </RelativeLayout>
 
@@ -142,63 +161,40 @@
 
 
             <RelativeLayout
-                android:id="@+id/rlNum"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x40">
+                android:layout_height="wrap_content"
+                android:padding="@dimen/x15">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/sdvImg"
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/x80"
+                    fresco:roundedCornerRadius="@dimen/x5" />
 
                 <TextView
-                    android:id="@+id/tvType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/x40"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/x15"
-                    android:text="问诊类型"
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:layout_toRightOf="@id/sdvImg"
+                    android:maxLines="2"
+                    android:text="产品说明"
                     android:textColor="@color/txt_color_ma3"
-                    android:textSize="@dimen/textsize_15sp" />
+                    android:textSize="@dimen/textsize_16sp" />
 
                 <TextView
-                    android:id="@+id/tvCopy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/x40"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/x5"
-                    android:paddingRight="@dimen/x20"
+                    android:id="@+id/tvPP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/sdvImg"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:layout_toRightOf="@id/sdvImg"
+                    android:singleLine="true"
                     android:text="价格"
-                    android:textColor="@color/color_36"
-                    android:textSize="@dimen/textsize_15sp" />
-
-
+                    android:textColor="@color/color_28"
+                    android:textSize="@dimen/textsize_16sp" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rlTime"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x40">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/x40"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/x15"
-                    android:text="预约时间"
-                    android:textColor="@color/txt_color_ma3"
-                    android:textSize="@dimen/textsize_15sp" />
-
-                <TextView
-                    android:id="@+id/tvTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/x40"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/x5"
-                    android:paddingRight="@dimen/x20"
-                    android:text="2011-10-10"
-                    android:textColor="@color/txt_color_ma3"
-                    android:textSize="@dimen/textsize_15sp" />
-
-
-            </RelativeLayout>
 
             <ImageView
                 android:layout_width="match_parent"
@@ -288,7 +284,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/x30"
                     android:gravity="center_vertical"
-                    android:text="需付金额"
+                    android:text="支付金额"
                     android:textColor="@color/line_color9b"
                     android:textSize="@dimen/textsize_15sp" />
 
@@ -306,7 +302,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/llCancleTime"
+                android:id="@+id/llpaytime"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x30"
                 android:layout_marginLeft="@dimen/x15"
@@ -317,48 +313,92 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/x30"
                     android:gravity="center_vertical"
-                    android:text="取消时间"
+                    android:text="支付时间"
                     android:textColor="@color/line_color9b"
                     android:textSize="@dimen/textsize_15sp" />
 
                 <TextView
-                    android:id="@+id/tvMoney"
+                    android:id="@+id/tvtime"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x30"
                     android:layout_marginLeft="@dimen/x15"
                     android:gravity="right"
                     android:text=""
-                    android:textColor="@color/color_3d"
+                    android:textColor="@color/txt_color_ma3"
                     android:textSize="@dimen/textsize_16sp" />
 
             </LinearLayout>
 
 
-            <LinearLayout
+            <include layout="@layout/line_gray" />
+
+            <RelativeLayout
+                android:id="@+id/rlfreight"
+                android:visibility="invisible"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x40"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/x10">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x5"
+                android:paddingLeft="@dimen/x15">
+
 
                 <ImageView
+                    android:id="@+id/ii2"
                     android:layout_width="@dimen/x30"
                     android:layout_height="@dimen/x30"
-                    android:layout_gravity="center_vertical"
-                    android:padding="@dimen/x8"
-                    android:src="@mipmap/ic_recommand" />
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/x10"
+                    android:src="@mipmap/ic_choose_arrow" />
+
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:id="@+id/t1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x20"
+
                     android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/x5"
-                    android:text="关于订单情况请联系客服"
-                    android:textColor="@color/line_color9b"
-                    android:textSize="@dimen/textsize_13sp" />
+                    android:text="配送方式"
+                    android:textColor="@color/txt_color_light9"
+                    android:textSize="@dimen/textsize_15sp" />
 
-            </LinearLayout>
 
-            <include layout="@layout/layout_custom" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x20"
+                    android:layout_below="@id/t1"
+
+                    android:gravity="center_vertical"
+                    android:text="运单号"
+                    android:textColor="@color/txt_color_light9"
+                    android:textSize="@dimen/textsize_15sp" />
+
+
+                <TextView
+                    android:id="@+id/tvcompany"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x20"
+
+                    android:layout_toLeftOf="@id/ii2"
+                    android:gravity="center_vertical"
+                    android:text="快递公司"
+                    android:textColor="@color/txt_color_light9"
+                    android:textSize="@dimen/textsize_15sp" />
+
+
+                <TextView
+                    android:id="@+id/tvfreightcode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x20"
+
+                    android:layout_below="@id/t1"
+                    android:layout_toLeftOf="@id/ii2"
+                    android:gravity="center_vertical"
+                    android:text="快递单号"
+                    android:textColor="@color/txt_color_light9"
+                    android:textSize="@dimen/textsize_15sp" />
+
+
+            </RelativeLayout>
 
 
             <LinearLayout
@@ -380,6 +420,18 @@
                     android:textSize="@dimen/textsize_18sp" />
 
                 <TextView
+                    android:id="@+id/tvmiddle"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/x40"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_middle_white"
+                    android:gravity="center"
+                    android:text="评价"
+                    android:textColor="@color/tab_colorf9"
+                    android:textSize="@dimen/textsize_18sp" />
+
+                <TextView
                     android:id="@+id/tvNext"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/x40"
@@ -393,8 +445,6 @@
                     android:textSize="@dimen/textsize_18sp" />
 
             </LinearLayout>
-
-
 
 
         </LinearLayout>

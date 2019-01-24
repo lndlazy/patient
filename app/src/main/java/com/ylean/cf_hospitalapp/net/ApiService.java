@@ -33,7 +33,10 @@ import com.ylean.cf_hospitalapp.login.bean.RegisterResultEntry;
 import com.ylean.cf_hospitalapp.mall.bean.FreightPriceEntry;
 import com.ylean.cf_hospitalapp.mall.bean.AddressListEntry;
 import com.ylean.cf_hospitalapp.mall.bean.GoodsInfoEntry;
+import com.ylean.cf_hospitalapp.mall.bean.GoodsOrderInfoEntry;
+import com.ylean.cf_hospitalapp.mall.bean.LogisticEntry;
 import com.ylean.cf_hospitalapp.mall.bean.MallOrderEntry;
+import com.ylean.cf_hospitalapp.mall.bean.RefundAddressEntry;
 import com.ylean.cf_hospitalapp.my.bean.AreaEntry;
 import com.ylean.cf_hospitalapp.my.bean.BindEntry;
 import com.ylean.cf_hospitalapp.my.bean.CityEntry;
@@ -86,7 +89,7 @@ public interface ApiService {
 
     //    String WEB_ROOT = "http://cfyy.yl-mall.cn";
     String WEB_ROOT = "http://cfnew.yl-mall.cn";
-    //    String WEB_ROOT = "http://yx.yl-mall.cn";
+    //        String WEB_ROOT = "http://yx.yl-mall.cn";
     String WEB_ROOT_ADDRESS = "http://api.map.baidu.com";
 
     //咨询h5页面
@@ -520,10 +523,40 @@ public interface ApiService {
     @POST("/api/app/patient/getpjlist")
     Observable<EvalListEntry> commandList(@Field("ch") String ch, @Field("token") String token, @Field("page") int page, @Field("size") String size);
 
-    //评价详情
+    //我的评价详情
     @FormUrlEncoded
     @POST("/api/app/patient/commentdetail")
     Observable<EvalDetailEntry> commandInfo(@Field("ch") String ch, @Field("token") String token, @Field("id") String id);
+
+
+
+    //商品 服务 评价详情
+    @FormUrlEncoded
+    @POST("/api/app/pro/commentdetail")
+    Observable<EvalDetailEntry> goodsCommandInfo(@Field("ch") String ch, @Field("token") String token, @Field("code") String code);
+
+
+
+
+    //删除订单
+    @FormUrlEncoded
+    @POST("/api/app/pro/delorder")
+    Observable<EvalDetailEntry> deleteGoodsOrder(@Field("ch") String ch, @Field("token") String token, @Field("id") String id);
+
+    //确认收货
+    @FormUrlEncoded
+    @POST("/api/app/pro/comfirmreceive")
+    Observable<Basebean> confirmReceive(@Field("ch") String ch, @Field("token") String token, @Field("orderid") String orderid);
+
+    //查看物流
+    @FormUrlEncoded
+    @POST("/api/app/pro/getlogistic")
+    Observable<LogisticEntry> getLogistic(@Field("ch") String ch, @Field("token") String token, @Field("orderid") String orderid);
+
+    //服务订单使用
+    @FormUrlEncoded
+    @POST("/api/app/pro/useservice")
+    Observable<LogisticEntry> useServiceOrder(@Field("ch") String ch, @Field("token") String token, @Field("orderid") String orderid);
 
     //添加收藏，关注
     @FormUrlEncoded
@@ -703,28 +736,28 @@ public interface ApiService {
     Observable<Basebean> reply(@Field("ch") String ch, @Field("token") String token
             , @Field("id") String id, @Field("content") String content);
 
-//    //评论
-//    @FormUrlEncoded
-//    @POST("/api/app/patient/evaluate")
-//    Observable<Basebean> evaluate(@Field("ch") String ch, @Field("token") String token
-//            , @Field("relateid") String relateid, @Field("ordercode") String ordercode
-//            , @Field("content") String content, @Field("stardepict") String stardepict
-//            , @Field("starservice") String starservice, @Field("starperformance") String starperformance
-//            , @Field("type") String type, @Field("imgs") String imgs
-//            , @Field("ordertype") String ordertype);
-
     //添加回复
     @FormUrlEncoded
     @POST("/api/app/patient/getpllist")
     Observable<com.ylean.cf_hospitalapp.my.bean.CommentListEntry> commentList(@Field("ch") String ch, @Field("token") String token
             , @Field("page") int page, @Field("size") String size);
 
-    //取消订单
+    //取消挂号订单
     @FormUrlEncoded
     @POST("/api/app/appointment/cancel")
     Observable<Basebean> cancleOrder(@Field("ch") String ch, @Field("token") String token
             , @Field("id") String id, @Field("status") String status, @Field("reason") String reason);
 
+    //取消商品订单
+    @FormUrlEncoded
+    @POST("/api/app/pro/cancel")
+    Observable<Basebean> cancleGoodsOrder(@Field("ch") String ch, @Field("token") String token
+            , @Field("orderid") String orderid, @Field("status") String status, @Field("reason") String reason);
+
+
+    //获取售后寄回地址
+    @GET("/api/app/pro/getreturnadd")
+    Observable<RefundAddressEntry> refundAddress();
 
     //申请退款
     @FormUrlEncoded
@@ -817,6 +850,13 @@ public interface ApiService {
     @POST("/api/app/patient/myinvitationlist")
     Observable<InviteListEntry> inviteList(@Field("ch") String ch, @Field("token") String token
             , @Field("page") int page, @Field("size") String size);
+
+
+    //我邀请的用户列表
+    @FormUrlEncoded
+    @POST("/api/app/pro/orderdetail")
+    Observable<GoodsOrderInfoEntry> goodsOrderInfo(@Field("ch") String ch, @Field("token") String token
+            , @Field("orderid") String orderid);
 
 
     //申请免费接送

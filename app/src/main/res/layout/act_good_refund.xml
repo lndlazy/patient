@@ -174,6 +174,98 @@
                 android:layout_marginTop="@dimen/x10"
                 android:src="@mipmap/ic_upload_pic" />
 
+
+            <RelativeLayout
+                android:id="@+id/rladdressinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/x15">
+
+
+                <TextView
+                    android:id="@+id/t1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x30"
+                    android:gravity="center_vertical"
+                    android:text="寄回地址"
+                    android:textColor="@color/txt_color_ma3"
+                    android:textSize="@dimen/textsize_15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/t2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x25"
+                    android:layout_below="@id/t1"
+                    android:gravity="center_vertical"
+                    android:text="门店名称："
+                    android:textColor="@color/txt_color_light6"
+                    android:textSize="@dimen/textsize_15sp" />
+
+                <TextView
+                    android:id="@+id/tname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x25"
+                    android:layout_below="@id/t1"
+                    android:layout_marginLeft="@dimen/x2"
+                    android:layout_toRightOf="@id/t2"
+                    android:gravity="center_vertical"
+                    android:text="名称"
+                    android:textColor="@color/txt_color_light6"
+                    android:textSize="@dimen/textsize_15sp" />
+
+
+                <TextView
+                    android:id="@+id/t3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x25"
+                    android:layout_below="@id/t2"
+                    android:gravity="center_vertical"
+                    android:text="寄回地址："
+                    android:textColor="@color/txt_color_light6"
+                    android:textSize="@dimen/textsize_15sp" />
+
+                <TextView
+                    android:id="@+id/taddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/x25"
+                    android:layout_below="@id/t2"
+                    android:layout_marginLeft="@dimen/x2"
+                    android:layout_toRightOf="@id/t3"
+                    android:gravity="center_vertical"
+                    android:text="地址"
+                    android:textColor="@color/txt_color_light6"
+                    android:textSize="@dimen/textsize_15sp" />
+
+
+                <TextView
+                    android:id="@+id/t4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x25"
+                    android:layout_below="@id/taddress"
+                    android:gravity="center_vertical"
+                    android:text="联系电话："
+                    android:textColor="@color/txt_color_light6"
+                    android:textSize="@dimen/textsize_15sp" />
+
+                <TextView
+                    android:id="@+id/ttel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/x25"
+                    android:layout_below="@id/taddress"
+                    android:layout_marginLeft="@dimen/x2"
+                    android:layout_toRightOf="@id/t3"
+                    android:gravity="center_vertical"
+                    android:text="电话"
+                    android:textColor="@color/txt_color_light6"
+                    android:textSize="@dimen/textsize_15sp" />
+
+
+            </RelativeLayout>
+
+
             <TextView
                 android:id="@+id/tvNext"
                 android:layout_width="match_parent"

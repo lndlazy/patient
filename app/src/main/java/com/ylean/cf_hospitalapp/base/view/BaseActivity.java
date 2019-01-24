@@ -181,6 +181,7 @@ public class BaseActivity extends FragmentActivity implements BaseView {
     public void showLoading(String msg) {
         showDialog = ProgressDialog.show(this, "", msg);
         showDialog.setCancelable(true);
+        showDialog.setCanceledOnTouchOutside(false);
 //        showAlertInfo.setCancelable(true);
 //        Log.e("baseavtivity", " 显示 loading ： " + msg);
     }

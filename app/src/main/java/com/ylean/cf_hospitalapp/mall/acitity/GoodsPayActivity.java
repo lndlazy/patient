@@ -55,7 +55,7 @@ public class GoodsPayActivity extends BaseActivity implements View.OnClickListen
         //订单号
         orderCode = getIntent().getStringExtra("orderCode");
         //运费
-        freightPrice = getIntent().getDoubleExtra("freightPrice", -1);
+        freightPrice = getIntent().getDoubleExtra("freightPrice", -1.00d);
 
         if (goodsInfo == null) {
             showErr("订单信息错误");

@@ -724,14 +724,6 @@ public class RetrofitHttpUtil {
 
     }
 
-
-    /*
-    @Field("relateid") String relateid
-    ,@Field("ordercode") String ordercode, @Field("content") String content, @Field("stardepict") String stardepict
-    ,@Field("starservice") String starservice, @Field("starperformance") String starperformance, @Field("type") String type
-    ,@Field("imgs") String imgs, @Field("ordertype") String ordertype
-     */
-
     /**
      * 添加回复
      */
@@ -833,10 +825,60 @@ public class RetrofitHttpUtil {
     }
 
     /**
-     * 评价详情
+     * 我的评价详情
      */
     public void commandInfo(Observer subscriber, String ch, String token, String id) {
         getService().commandInfo(ch, token, id)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 商品 服务 评价详情
+     */
+    public void goodsCommandInfo(Observer subscriber, String ch, String token, String code) {
+        getService().goodsCommandInfo(ch, token, code)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 删除商品，服务订单
+     */
+    public void deleteGoodsOrder(Observer subscriber, String ch, String token, String id) {
+        getService().deleteGoodsOrder(ch, token, id)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 确认收货
+     */
+    public void confirmReceive(Observer subscriber, String ch, String token, String orderid) {
+        getService().confirmReceive(ch, token, orderid)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 查看物流
+     */
+    public void getLogistic(Observer subscriber, String ch, String token, String orderid) {
+        getService().getLogistic(ch, token, orderid)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 服务订单使用
+     */
+    public void useServiceOrder(Observer subscriber, String ch, String token, String orderid) {
+        getService().useServiceOrder(ch, token, orderid)
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
 
@@ -1188,11 +1230,32 @@ public class RetrofitHttpUtil {
     }
 
     /**
-     * 取消订单
+     * 取消挂号订单
      */
     public void cancleOrder(Observer subscriber, String ch, String token
             , String id, String status, String reason) {
         getService().cancleOrder(ch, token, id, status, reason)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 取消商品，服务订单
+     */
+    public void cancleGoodsOrder(Observer subscriber, String ch, String token
+            , String orderid, String status, String reason) {
+        getService().cancleGoodsOrder(ch, token, orderid, status, reason)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 售后寄回地址
+     */
+    public void refundAddress(Observer subscriber) {
+        getService().refundAddress()
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
 
@@ -1333,12 +1396,25 @@ public class RetrofitHttpUtil {
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
     }
+
+
     /**
-     * 医院评论列表
+     * 邀请列表
      */
     public void inviteList(Observer subscriber, String ch, String token
-            ,int page, String size) {
+            , int page, String size) {
         getService().inviteList(ch, token, page, size)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+    }
+
+
+    /**
+     * 订单详情
+     */
+    public void goodsOrderInfo(Observer subscriber, String ch, String token
+            , String orderId) {
+        getService().goodsOrderInfo(ch, token, orderId)
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
     }
@@ -1362,7 +1438,7 @@ public class RetrofitHttpUtil {
             , String addrid, String totalmoney, String freightmoney, String usepoints, String skuid, String skuprice
             , String points, String skutype, String skucount, String remark) {
         getService().goodsOrder(ch, token, addrid, totalmoney, freightmoney, usepoints
-                , skuid, skuprice, points,skutype, skucount, remark)
+                , skuid, skuprice, points, skutype, skucount, remark)
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
     }

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x45"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="查看物流"
+        custom:mTitleLeft="@mipmap/ic_arrow_left" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tbv"
+        android:background="@color/gray_bg_eb" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/x15">
+
+        <TextView
+            android:id="@+id/t1"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x30"
+            android:gravity="center_vertical"
+            android:text="配送方式:"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_15sp" />
+
+        <TextView
+            android:id="@+id/tkd"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x30"
+            android:layout_marginLeft="@dimen/x5"
+            android:layout_toRightOf="@id/t1"
+            android:gravity="center_vertical"
+            android:text="快递公司"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_15sp" />
+
+        <TextView
+            android:id="@+id/t2"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x30"
+            android:layout_below="@id/t1"
+            android:gravity="center_vertical"
+            android:text="运单号:"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_15sp" />
+
+        <TextView
+            android:id="@+id/tvcode"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x30"
+            android:layout_below="@id/t1"
+            android:layout_marginLeft="@dimen/x5"
+            android:layout_toRightOf="@id/t1"
+            android:gravity="center_vertical"
+            android:text="运单号"
+            android:textColor="@color/txt_color_ma3"
+            android:textSize="@dimen/textsize_15sp" />
+
+
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

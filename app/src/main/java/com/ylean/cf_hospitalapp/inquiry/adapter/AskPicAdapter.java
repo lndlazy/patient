@@ -12,6 +12,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.inquiry.bean.MImageItem;
 import com.ylean.cf_hospitalapp.inquiry.activity.PayTWActivity;
+import com.ylean.cf_hospitalapp.mall.acitity.GoodsCommandActivity;
 import com.ylean.cf_hospitalapp.mall.acitity.RefundActivity;
 import com.ylean.cf_hospitalapp.my.activity.EvaulateDoctorActivity;
 import com.ylean.cf_hospitalapp.register.activity.PayBackActivity;
@@ -73,6 +74,11 @@ public class AskPicAdapter extends RecyclerView.Adapter<AskPicAdapter.MyViewHold
                 if (context instanceof RefundActivity) {
                     RefundActivity refundActivity = (RefundActivity) context;
                     refundActivity.removePic(position);
+                }
+
+                if (context instanceof GoodsCommandActivity) {
+                    GoodsCommandActivity gcActivity = (GoodsCommandActivity) context;
+                    gcActivity.removePic(position);
                 }
 
             }

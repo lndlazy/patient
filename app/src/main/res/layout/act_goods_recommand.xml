@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <com.ylean.cf_hospitalapp.widget.TitleBackBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x50"
+        custom:mTitleBarColor="@color/tab_colorf9"
+        custom:mTitleBarText="@string/argument"
+        custom:mTitleLeft="@mipmap/ic_arrow_left" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/line_gray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/x15">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/sdvImg"
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/x80"
+                    fresco:roundedCornerRadius="@dimen/x5" />
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@+id/sdvImg"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:layout_toRightOf="@id/sdvImg"
+                    android:maxLines="2"
+                    android:text="产品说明"
+                    android:textColor="@color/txt_color_ma3"
+                    android:textSize="@dimen/textsize_16sp" />
+
+                <TextView
+                    android:id="@+id/tvPP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/sdvImg"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:layout_toRightOf="@id/sdvImg"
+                    android:singleLine="true"
+                    android:text="价格"
+                    android:textColor="@color/color_28"
+                    android:textSize="@dimen/textsize_16sp" />
+            </RelativeLayout>
+
+            <include layout="@layout/line_gray" />
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x10"
+                android:background="@color/bg_home" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x40"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/x15"
+                android:text="商品信息"
+                android:textSize="@dimen/textsize_15sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line_colore5" />
+
+            <include layout="@layout/layout_recommand" />
+
+            <EditText
+                android:id="@+id/etConent"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x80"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginRight="@dimen/x15"
+                android:background="@color/color_fb"
+                android:gravity="start"
+                android:hint="请输入评价信息"
+                android:padding="@dimen/x10"
+                android:textColor="@color/txt_color_light9"
+                android:textColorHint="@color/txt_color_light9"
+                android:textSize="@dimen/textsize_14sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/picRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x10" />
+
+            <ImageView
+                android:id="@+id/iv_add_pic"
+                android:layout_width="@dimen/x80"
+                android:layout_height="@dimen/x80"
+                android:layout_margin="@dimen/x15"
+                android:src="@mipmap/ic_upload_pic" />
+
+            <TextView
+                android:id="@+id/tvCommit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x40"
+                android:background="@color/tab_colorf9"
+                android:gravity="center"
+                android:text="提交评价"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_18sp" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

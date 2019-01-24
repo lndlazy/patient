@@ -98,9 +98,7 @@ public class RegisterPayActivity extends BaseActivity implements View.OnClickLis
                                 hideLoading();
                             }
 
-                        }, SpValue.CH
-                        , (String) SaveUtils.get(this, SpValue.TOKEN, "")
-                        , id);
+                        }, SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, ""), id);
 
     }
 
@@ -316,23 +314,21 @@ public class RegisterPayActivity extends BaseActivity implements View.OnClickLis
     //取消订单
     private void cancleOrder() {
 
-        RetrofitHttpUtil
-                .getInstance()
-                .cancleOrder(
-                        new BaseNoTObserver<Basebean>() {
-                            @Override
-                            public void onHandleSuccess(Basebean basebean) {
-                                showErr("取消成功");
-                                finish();
-                            }
+        RetrofitHttpUtil.getInstance().cancleOrder(
+                new BaseNoTObserver<Basebean>() {
+                    @Override
+                    public void onHandleSuccess(Basebean basebean) {
+                        showErr("取消成功");
+                        finish();
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                showErr(message);
-                            }
+                    @Override
+                    public void onHandleError(String message) {
+                        showErr(message);
+                    }
 
-                        }, SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, "")
-                        , id, PayStatus.STATUS_WAIT_PAY, "取消订单");
+                }, SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, "")
+                , id, PayStatus.STATUS_WAIT_PAY, "取消订单");
 
     }
 
