@@ -110,44 +110,68 @@
         android:layout_marginLeft="@dimen/x60"
         android:background="@color/line_colore5" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/x60"
         android:layout_marginTop="@dimen/x8"
+        android:orientation="horizontal"
         android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/tvMoney"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="$ 9.00"
             android:textSize="@dimen/textsize_14sp" />
 
         <TextView
-            android:id="@+id/tvDetail"
-            android:layout_width="@dimen/x70"
-            android:layout_height="@dimen/x23"
+            android:id="@+id/tv1"
+            android:layout_width="@dimen/x55"
+
+            android:layout_marginRight="@dimen/x5"
+            android:layout_height="@dimen/x22"
             android:layout_alignParentRight="true"
             android:background="@drawable/shape_stroke_blue"
             android:gravity="center"
-            android:text="查看订单"
+            android:text=""
             android:textColor="@color/tab_colorf9"
             android:textSize="@dimen/textsize_12sp" />
 
         <TextView
-            android:id="@+id/tvCommit"
-            android:layout_width="@dimen/x70"
-            android:layout_height="@dimen/x23"
-            android:layout_marginRight="@dimen/x10"
-            android:layout_toLeftOf="@id/tvDetail"
+            android:id="@+id/tv2"
+            android:layout_width="@dimen/x55"
+            android:layout_marginRight="@dimen/x5"
+            android:layout_height="@dimen/x22"
+            android:layout_alignParentRight="true"
             android:background="@drawable/shape_stroke_blue"
             android:gravity="center"
-            android:text="评价"
+            android:text=""
             android:textColor="@color/tab_colorf9"
             android:textSize="@dimen/textsize_12sp" />
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="@dimen/x55"
+            android:layout_height="@dimen/x23"
+            android:layout_marginRight="@dimen/x10"
+            android:background="@drawable/shape_stroke_blue"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/tab_colorf9"
+            android:textSize="@dimen/textsize_12sp" />
+
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="@dimen/x55"
+            android:layout_height="@dimen/x22"
+            android:background="@drawable/shape_stroke_blue"
+            android:gravity="center"
+            android:text="查看详情"
+            android:textColor="@color/tab_colorf9"
+            android:textSize="@dimen/textsize_12sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

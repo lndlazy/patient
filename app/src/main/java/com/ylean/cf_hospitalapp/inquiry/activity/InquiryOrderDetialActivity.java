@@ -1,5 +1,6 @@
-package com.ylean.cf_hospitalapp.my.activity;
+package com.ylean.cf_hospitalapp.inquiry.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,10 @@ import com.ylean.cf_hospitalapp.base.bean.Basebean;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
 import com.ylean.cf_hospitalapp.inquiry.activity.BuyServiceAct;
 import com.ylean.cf_hospitalapp.inquiry.bean.PicAskDetailEntry;
+import com.ylean.cf_hospitalapp.inquiry.presenter.IInquiryOrderPers;
+import com.ylean.cf_hospitalapp.inquiry.view.IInquiryOrderView;
+import com.ylean.cf_hospitalapp.mall.acitity.GoodsOrderListActivity;
+import com.ylean.cf_hospitalapp.my.activity.CustomerService;
 import com.ylean.cf_hospitalapp.my.bean.OrderInquiryDetailEntry;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
@@ -26,11 +31,11 @@ import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 import io.reactivex.disposables.Disposable;
 
 /**
- * 图文支付页面
+ * 问诊订单详情页面
  * Created by linaidao on 2019/1/8.
  */
 
-public class PicPayActivity extends BaseActivity implements View.OnClickListener {
+public class InquiryOrderDetialActivity extends BaseActivity implements View.OnClickListener, IInquiryOrderView {
 
     private android.widget.ImageView i1;
     private android.widget.TextView tvStatus;
@@ -50,13 +55,18 @@ public class PicPayActivity extends BaseActivity implements View.OnClickListener
     private android.widget.TextView tvprice;
     private android.widget.TextView tvMoney;
     private android.widget.LinearLayout llCancleTime;
-    private android.widget.TextView tvcancle;
-    private android.widget.TextView tvNext;
+    private android.widget.TextView tv1;
+    private android.widget.TextView tv2;
+    private android.widget.TextView tv3;
     private android.widget.LinearLayout rlBottom;
     private String id;
     private String type;
     private OrderInquiryDetailEntry.DataBean orderInfo;
-    private LinearLayout llneedpay;
+
+
+    private IInquiryOrderPers iInquiryOrderPers = new IInquiryOrderPers(this);
+    private RelativeLayout rlcontact;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +86,11 @@ public class PicPayActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void initView() {
-        llneedpay = findViewById(R.id.llneedpay);
+
         this.rlBottom = (LinearLayout) findViewById(R.id.rlBottom);
-        this.tvNext = (TextView) findViewById(R.id.tvNext);
-        this.tvcancle = (TextView) findViewById(R.id.tvcancle);
+        tv2 = (TextView) findViewById(R.id.tv2);
+        tv3 = (TextView) findViewById(R.id.tv3);
+        tv1 = (TextView) findViewById(R.id.tv1);
         this.llCancleTime = (LinearLayout) findViewById(R.id.llCancleTime);
         this.tvMoney = (TextView) findViewById(R.id.tvMoney);
         this.tvprice = (TextView) findViewById(R.id.tvprice);
@@ -100,6 +111,9 @@ public class PicPayActivity extends BaseActivity implements View.OnClickListener
         this.i1 = (ImageView) findViewById(R.id.i1);
         TitleBackBarView tbv = (TitleBackBarView) findViewById(R.id.tbv);
 
+        rlcontact = findViewById(R.id.rlcontact);
+
+
         tbv.setOnLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,14 +121,16 @@ public class PicPayActivity extends BaseActivity implements View.OnClickListener
             }
         });
 
-        tvNext.setOnClickListener(this);
-        tvcancle.setOnClickListener(this);
+        tv1.setOnClickListener(this);
+        tv2.setOnClickListener(this);
+        tv3.setOnClickListener(this);
+        rlcontact.setOnClickListener(this);
     }
 
     private void orderDetail() {
 
-        RetrofitHttpUtil.getInstance()
-                .askOrderDetail(new BaseNoTObserver<OrderInquiryDetailEntry>() {
+        RetrofitHttpUtil.getInstance().askOrderDetail(
+                new BaseNoTObserver<OrderInquiryDetailEntry>() {
 
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -156,7 +172,7 @@ public class PicPayActivity extends BaseActivity implements View.OnClickListener
         tvprice.setText("¥" + data.getPrice());
         tvCopy.setText("¥" + data.getPrice());
         tvcode.setText(data.getCode());
-        llneedpay.setVisibility(View.GONE);
+
         llCancleTime.setVisibility(View.GONE);
         tvMoney.setText(data.getCancletime());//取消时间
 
@@ -164,72 +180,117 @@ public class PicPayActivity extends BaseActivity implements View.OnClickListener
 
             case SpValue.ASK_STATUS_WAIT_PAY://待付款
 
-                tvcancle.setText("取消订单");
-                tvNext.setText("去支付");
-                rlBottom.setVisibility(View.VISIBLE);
                 tvStatus.setText("待支付");
                 tvpaystatus.setText("待支付");
-                llneedpay.setVisibility(View.VISIBLE);
+
+                tv1.setVisibility(View.VISIBLE);
+                tv2.setVisibility(View.GONE);
+                tv3.setVisibility(View.VISIBLE);
+                tv1.setText("取消订单");
+                tv3.setText("去支付");
 
                 break;
 
             case SpValue.ASK_STATUS_OVER_TIME://已过期
 
-                rlBottom.setVisibility(View.INVISIBLE);
                 tvStatus.setText("已过期");
                 tvpaystatus.setText("已过期");
 
+                tv1.setVisibility(View.VISIBLE);
+                tv2.setVisibility(View.GONE);
+                tv3.setVisibility(View.GONE);
+                tv1.setText("删除订单");
+
+                i1.setImageResource(R.mipmap.ic_order_cancled);
                 break;
 
             case SpValue.ASK_STATUS_WAIT_SURE://待确认
-                rlBottom.setVisibility(View.INVISIBLE);
+
                 tvStatus.setText("待确认");
                 tvpaystatus.setText("待确认");
+
+                rlBottom.setVisibility(View.INVISIBLE);
 
                 break;
 
             case SpValue.ASK_STATUS_WAIT_COMPLY://待完成
-                rlBottom.setVisibility(View.INVISIBLE);
+
                 tvStatus.setText("待完成");
                 tvpaystatus.setText("待完成");
+
+                rlBottom.setVisibility(View.INVISIBLE);
 
                 break;
 
             case SpValue.ASK_STATUS_COMPLY://已完成
 
-                tvcancle.setVisibility(View.INVISIBLE);
-                tvNext.setText("去评价");
-                rlBottom.setVisibility(View.VISIBLE);
                 tvStatus.setText("已完成");
                 tvpaystatus.setText("已完成");
+
+                tv1.setVisibility(View.VISIBLE);
+                tv2.setVisibility(View.VISIBLE);
+                tv3.setVisibility(View.VISIBLE);
+
+                tv1.setText("删除订单");
+                tv2.setText("申请售后");
+                tv3.setText("1".equals(data.getIscomment()) ? "已评价" : "评价");
+
+                i1.setImageResource(R.mipmap.ic_order_finish);
 
                 break;
 
             case SpValue.ASK_STATUS_CANCLED://已取消
-                rlBottom.setVisibility(View.INVISIBLE);
+
                 tvStatus.setText("已取消");
                 tvpaystatus.setText("已取消");
                 llCancleTime.setVisibility(View.VISIBLE);
 
+                tv1.setVisibility(View.VISIBLE);
+                tv2.setVisibility(View.GONE);
+                tv3.setVisibility(View.GONE);
+
+                i1.setImageResource(R.mipmap.ic_order_cancled);
+
+                tv1.setText("删除订单");
+
                 break;
 
             case SpValue.ASK_STATUS_REFUND://申请退款中
-                rlBottom.setVisibility(View.INVISIBLE);
+
                 tvStatus.setText("申请退款中");
                 tvpaystatus.setText("申请退款中");
+
+                rlBottom.setVisibility(View.INVISIBLE);
+
+                i1.setImageResource(R.mipmap.ic_refund);
 
                 break;
 
             case SpValue.ASK_STATUS_REFUND_OK://已退款
-                rlBottom.setVisibility(View.INVISIBLE);
+
                 tvStatus.setText("已退款");
+                tvpaystatus.setText("已退款");
+
+                tv1.setVisibility(View.VISIBLE);
+                tv2.setVisibility(View.GONE);
+                tv3.setVisibility(View.GONE);
+                i1.setImageResource(R.mipmap.ic_refund);
+
+                tv1.setText("删除订单");
 
                 break;
 
             case SpValue.ASK_STATUS_REFUND_FAIL://退款不通过
-                rlBottom.setVisibility(View.INVISIBLE);
+
                 tvStatus.setText("退款不通过");
                 tvpaystatus.setText("退款不通过");
+
+                tv1.setVisibility(View.VISIBLE);
+                tv2.setVisibility(View.GONE);
+                tv3.setVisibility(View.GONE);
+                i1.setImageResource(R.mipmap.ic_order_cancled);
+
+                tv1.setText("删除订单");
 
                 break;
 
@@ -263,25 +324,58 @@ public class PicPayActivity extends BaseActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.tvNext://
+            case R.id.tv1://
 
                 switch (orderInfo.getStatus()) {
 
-                    case SpValue.ASK_STATUS_WAIT_PAY://未支付 去支付
+                    case SpValue.ASK_STATUS_WAIT_PAY://未支付
+                        //取消订单
+                        cancleAction();
+                        break;
 
-                        Intent m = new Intent(this, BuyServiceAct.class);
-                        m.putExtra("orderNum", orderInfo.getCode());
-                        m.putExtra("doctorId", orderInfo.getDoctorid());
-                        m.putExtra("doctorName", orderInfo.getDoctorname());
-                        m.putExtra("type", "图片问诊");
-                        m.putExtra("price", orderInfo.getPrice());
+                    case SpValue.ASK_STATUS_OVER_TIME://已过期
+                    case SpValue.ASK_STATUS_COMPLY://已完成
+                    case SpValue.ASK_STATUS_CANCLED://已取消
+                    case SpValue.ASK_STATUS_REFUND_OK://已退款
+                    case SpValue.ASK_STATUS_REFUND_FAIL://退款不通过
 
-                        startActivity(m);
+                        //删除订单
+                        deleteAction();
+                        break;
 
+                }
+
+                break;
+
+            case R.id.tv2:
+
+                switch (orderInfo.getStatus()) {
+
+                    case SpValue.ASK_STATUS_COMPLY://已完成
+                        // 申请售后
+                        Intent m = new Intent(this, InquiryRefundActivity.class);
+                        m.putExtra("orderInfo", orderInfo);
+                        startActivityForResult(m, 0x0023);
+                        break;
+
+                }
+
+                break;
+            case R.id.tv3:
+
+                switch (orderInfo.getStatus()) {
+
+                    case SpValue.ASK_STATUS_WAIT_PAY://未支付
+                        //去支付
+                        go2pay();
                         break;
 
                     case SpValue.ASK_STATUS_COMPLY://已完成去评价
 
+                        // 评价
+                        Intent m = new Intent(this, InquiryEvaulateActivity.class);
+                        m.putExtra("orderInfo", orderInfo);
+                        startActivity(m);
 
                         break;
 
@@ -289,12 +383,87 @@ public class PicPayActivity extends BaseActivity implements View.OnClickListener
 
                 break;
 
-            case R.id.tvcancle:
-                //取消订单
 
-
+            case R.id.rlcontact:
+                //联系客服
+                Intent s = new Intent(this, CustomerService.class);
+                startActivity(s);
                 break;
-
         }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 0x0023 && resultCode == 0x0024) {
+            //申请退款成功
+            finish();
+        }
+    }
+
+    //删除订单
+    private void deleteAction() {
+
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this, R.style.AlertDialogCustom);
+
+        builder.setTitle("提示").setMessage("您确定要删除该订单吗").setPositiveButton("删除订单", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if (orderInfo == null) {
+                    showErr("数据错误");
+                    return;
+                }
+
+                //删除订单
+                iInquiryOrderPers.deleteInquiryOrder((String) SaveUtils.get(InquiryOrderDetialActivity.this, SpValue.TOKEN, "")
+                        , orderInfo.getOrderid());
+            }
+        }).setNegativeButton("取消", null).show();
+    }
+
+    //取消订单
+    private void cancleAction() {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this, R.style.AlertDialogCustom);
+
+        builder.setTitle("提示").setMessage("您确定要取消该订单吗").setPositiveButton("取消订单", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if (orderInfo == null) {
+                    showErr("数据错误");
+                    return;
+                }
+
+                //取消订单
+                iInquiryOrderPers.cancleInquiryOrder((String) SaveUtils.get(InquiryOrderDetialActivity.this, SpValue.TOKEN, "")
+                        , orderInfo.getOrderid(), orderInfo.getStatus());
+            }
+        }).setNegativeButton("暂不取消", null).show();
+    }
+
+    private void go2pay() {
+        Intent m = new Intent(this, BuyServiceAct.class);
+        m.putExtra("orderNum", orderInfo.getCode());
+        m.putExtra("doctorId", orderInfo.getDoctorid());
+        m.putExtra("doctorName", orderInfo.getDoctorname());
+        m.putExtra("type", "图片问诊");
+        m.putExtra("price", orderInfo.getPrice());
+        startActivity(m);
+    }
+
+    //取消订单成功
+    @Override
+    public void cancleSuccess() {
+        showErr("取消订单成功");
+        finish();
+    }
+
+    @Override
+    public void deleteSuccess() {
+        showErr("删除订单成功");
+        finish();
     }
 }

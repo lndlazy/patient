@@ -203,7 +203,6 @@ public class GoodsOrderListActivity extends BaseActivity implements View.OnClick
         }
     }
 
-
     private void setAllGray() {
 
         tv1.setSelected(false);

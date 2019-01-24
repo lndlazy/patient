@@ -552,7 +552,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".my.activity.PicPayActivity"
+            android:name=".inquiry.activity.InquiryOrderDetialActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
 
@@ -711,8 +711,26 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name=".mall.acitity.LogisticActivity" />
-        <activity android:name=".register.activity.RegisterEvaulateActivity" />
+
+        <activity android:name=".mall.acitity.LogisticActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+
+        <activity android:name=".register.activity.RegisterEvaulateActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+
+        <activity android:name=".inquiry.activity.InquiryRefundActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+
+        <activity android:name=".inquiry.activity.InquiryEvaulateActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
 
 
         <!--<activity android:name=".register.activity.HospitalDetailActivity" />-->

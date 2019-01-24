@@ -38,50 +38,44 @@ public class IMyRegisterP {
     }
 
     //我的问诊 currentType 当前问诊类型  图片，视频，电话
-    public void myInquiry(final String currentType) {
+    public void myInquiry(final String currentType, boolean refush) {
 
-        RetrofitHttpUtil
-                .getInstance()
-                .myInquiry(
-                        new BaseNoTObserver<OrderEntry>() {
+        RetrofitHttpUtil.getInstance().myInquiry(
+                new BaseNoTObserver<OrderEntry>() {
 
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                                super.onSubscribe(d);
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.onSubscribe(d);
 
-                                iMyRegisteredView.showLoading("获取中...");
+                        iMyRegisteredView.showLoading("获取中...");
 
+                    }
+
+                    @Override
+                    public void onHandleSuccess(OrderEntry orderEntry) {
+
+                        iMyRegisteredView.hideLoading();
+
+                        if (orderEntry != null && orderEntry.getData() != null) {
+                            List<OrderEntry.DataBean> orderEntryList = orderEntry.getData();
+
+                            for (int i = 0; i < orderEntryList.size(); i++) {
+                                orderEntryList.get(i).setType(currentType);
                             }
 
-                            @Override
-                            public void onHandleSuccess(OrderEntry orderEntry) {
 
-                                iMyRegisteredView.hideLoading();
-
-                                if (orderEntry != null && orderEntry.getData()!=null) {
-                                    List<OrderEntry.DataBean> orderEntryList = orderEntry.getData();
-
-                                    for (int i = 0; i < orderEntryList.size(); i++) {
-                                        orderEntryList.get(i).setType(currentType);
-                                    }
-
-                                    iMyRegisteredView.setOrderInfo(orderEntryList, currentType);
-                                }
-
-                            }
-
-                            @Override
-                            public void onHandleError(String message) {
-                                iMyRegisteredView.hideLoading();
-                                iMyRegisteredView.showErr(message);
-                            }
+                            iMyRegisteredView.setOrderInfo(orderEntryList, currentType, refush);
                         }
-                        , (String) SaveUtils.get(iMyRegisteredView.getContext(), SpValue.TOKEN, "")
-                        , SpValue.CH
-                        , type
-                        , status
-                        , page
-                        , SpValue.PAGE_SIZE);
+
+                    }
+
+                    @Override
+                    public void onHandleError(String message) {
+                        iMyRegisteredView.hideLoading();
+                        iMyRegisteredView.showErr(message);
+                    }
+                }, (String) SaveUtils.get(iMyRegisteredView.getContext(), SpValue.TOKEN, "")
+                , SpValue.CH, type, status, page, SpValue.PAGE_SIZE);
 
     }
 

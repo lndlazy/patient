@@ -1,6 +1,7 @@
 package com.ylean.cf_hospitalapp.my.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -16,11 +17,17 @@ import android.widget.TextView;
 
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.view.HomeActivity;
+import com.ylean.cf_hospitalapp.inquiry.activity.InquiryOrderDetialActivity;
+import com.ylean.cf_hospitalapp.inquiry.activity.InquiryRefundActivity;
 import com.ylean.cf_hospitalapp.inquiry.bean.OrderEntry;
 import com.ylean.cf_hospitalapp.base.view.BaseActivity;
+import com.ylean.cf_hospitalapp.inquiry.presenter.IInquiryOrderPers;
+import com.ylean.cf_hospitalapp.inquiry.view.IInquiryOrderView;
+import com.ylean.cf_hospitalapp.my.bean.OrderInquiryDetailEntry;
 import com.ylean.cf_hospitalapp.my.presenter.IMyRegisterP;
 import com.ylean.cf_hospitalapp.my.adapter.OrderListAdapter;
 import com.ylean.cf_hospitalapp.my.view.IMyRegisteredView;
+import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 import com.ylean.cf_hospitalapp.widget.swipe.OnItemClickListener;
@@ -33,7 +40,7 @@ import java.util.List;
  * Created by linaidao on 2018/12/23.
  */
 
-public class MyInquiryListActivity extends BaseActivity implements IMyRegisteredView, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class MyInquiryListActivity extends BaseActivity implements IMyRegisteredView, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, IInquiryOrderView {
 
     private android.widget.TextView tvPic;
     private android.widget.TextView tvTel;
@@ -44,7 +51,8 @@ public class MyInquiryListActivity extends BaseActivity implements IMyRegistered
     private android.widget.TextView tvDone;
     private android.widget.TextView tvCancled;
     private android.support.v7.widget.RecyclerView recyclerView;
-
+    private int mPicFirstVisibleItemPosition;
+    private int mPicLastVisibleItemPosition;
     private IMyRegisterP iMyRegisterP = new IMyRegisterP(this);
     private TextView tvWaitSure;
     private ImageView ivWaitSure;
@@ -64,11 +72,10 @@ public class MyInquiryListActivity extends BaseActivity implements IMyRegistered
         currentType = SpValue.ASK_TYPE_PIC;
 
         initView();
-        iMyRegisterP.myInquiry(currentType);
+        iMyRegisterP.myInquiry(currentType, true);
     }
 
     private void initView() {
-
 
         this.recyclerView = findViewById(R.id.recyclerView);
         this.tvCancled = findViewById(R.id.tvCancled);
@@ -119,61 +126,55 @@ public class MyInquiryListActivity extends BaseActivity implements IMyRegistered
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
-                if (newState == 0 && !recyclerView.canScrollVertically(1)) {
+                RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+                if (layoutManager instanceof LinearLayoutManager) {
+                    mPicLastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+                    mPicFirstVisibleItemPosition = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
+                }
 
+                if (orderListAdapter != null && newState == RecyclerView.SCROLL_STATE_IDLE
+                        && mPicLastVisibleItemPosition + 1 == orderListAdapter.getItemCount() && mPicFirstVisibleItemPosition > 0) {
                     iMyRegisterP.pagePlus();
-                    iMyRegisterP.myInquiry(currentType);
-
+                    iMyRegisterP.myInquiry(currentType, false);
                 }
 
             }
 
+        });
+
+//        recyclerView.addOnItemTouchListener(new OnItemClickListener(recyclerView) {
 //            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
+//            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 //
-//                if (isSlideToBottom(recyclerView)) {
-//                    iMyRegisterP.pagePlus();
-//                    iMyRegisterP.myInquiry();
+//                if (orderEntryList.get(position) == null || TextUtils.isEmpty(orderEntryList.get(position).getType()))
+//                    return;
+//
+//                switch (orderEntryList.get(position).getType()) {
+//
+//                    case SpValue.ASK_TYPE_PIC://图文详情
+//
+//                        Intent m = new Intent(MyInquiryListActivity.this, InquiryOrderDetialActivity.class);
+//                        m.putExtra("type", orderEntryList.get(position).getType());
+//                        m.putExtra("id", orderEntryList.get(position).getOrderid());
+//                        startActivity(m);
+//
+//                        break;
+//
+//                    case SpValue.ASK_TYPE_TEL:
+//                        break;
+//
+//                    case SpValue.ASK_TYPE_VIDEO:
+//                        break;
+//
 //                }
 //
 //            }
-        });
-
-        recyclerView.addOnItemTouchListener(new OnItemClickListener(recyclerView) {
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
-
-                if (orderEntryList.get(position) == null || TextUtils.isEmpty(orderEntryList.get(position).getType()))
-                    return;
-
-                switch (orderEntryList.get(position).getType()) {
-
-                    case SpValue.ASK_TYPE_PIC://图文详情
-
-                        Intent m = new Intent(MyInquiryListActivity.this, PicPayActivity.class);
-                        m.putExtra("type", orderEntryList.get(position).getType());
-                        m.putExtra("id", orderEntryList.get(position).getOrderid());
-                        startActivity(m);
-
-                        break;
-
-                    case SpValue.ASK_TYPE_TEL:
-                        break;
-
-                    case SpValue.ASK_TYPE_VIDEO:
-                        break;
-
-                }
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
-
+//
+//            @Override
+//            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+//
+//            }
+//        });
 
     }
 
@@ -249,9 +250,12 @@ public class MyInquiryListActivity extends BaseActivity implements IMyRegistered
     }
 
     @Override
-    public void setOrderInfo(List<OrderEntry.DataBean> orderEntryList, String currentType) {
+    public void setOrderInfo(List<OrderEntry.DataBean> orderEntryList, String currentType, boolean refush) {
 
         swipView.setRefreshing(false);
+
+        if (refush)
+            this.orderEntryList.clear();
 
         this.orderEntryList.addAll(orderEntryList);
 
@@ -308,8 +312,7 @@ public class MyInquiryListActivity extends BaseActivity implements IMyRegistered
                 break;
         }
 
-        orderEntryList.clear();
-        iMyRegisterP.myInquiry(currentType);
+        iMyRegisterP.myInquiry(currentType, true);
 
     }
 
@@ -373,28 +376,111 @@ public class MyInquiryListActivity extends BaseActivity implements IMyRegistered
 
         }
 
-        orderEntryList.clear();
+
         if (orderListAdapter != null)
             orderListAdapter.setType(type);
 
         iMyRegisterP.setPage(1);
         iMyRegisterP.setStatus(SpValue.ORDER_ALL);
-        iMyRegisterP.myInquiry(currentType);
+        iMyRegisterP.myInquiry(currentType, true);
 
     }
 
     @Override
     public void onRefresh() {
-        orderEntryList.clear();
-        iMyRegisterP.setPage(1);
-        iMyRegisterP.myInquiry(currentType);
+
+        refushCurrent();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
         nextActivity(HomeActivity.class);
+    }
 
+
+    private IInquiryOrderPers iInquiryOrderPers = new IInquiryOrderPers(this);
+
+
+    //删除订单
+    public void deleteAction(OrderEntry.DataBean dataBean) {
+
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this, R.style.AlertDialogCustom);
+
+        builder.setTitle("提示").setMessage("您确定要删除该订单吗").setPositiveButton("删除订单", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if (dataBean == null) {
+                    showErr("数据错误");
+                    return;
+                }
+
+                //删除订单
+                iInquiryOrderPers.deleteInquiryOrder((String) SaveUtils.get(MyInquiryListActivity.this, SpValue.TOKEN, "")
+                        , dataBean.getOrderid());
+            }
+        }).setNegativeButton("取消", null).show();
+    }
+
+
+    //取消订单
+    public void cancleAction(OrderEntry.DataBean dataBean) {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this, R.style.AlertDialogCustom);
+
+        builder.setTitle("提示").setMessage("您确定要取消该订单吗").setPositiveButton("取消订单", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if (dataBean == null) {
+                    showErr("数据错误");
+                    return;
+                }
+
+                //取消订单
+                iInquiryOrderPers.cancleInquiryOrder((String) SaveUtils.get(MyInquiryListActivity.this, SpValue.TOKEN, "")
+                        , dataBean.getOrderid(), dataBean.getStatus());
+            }
+        }).setNegativeButton("暂不取消", null).show();
+    }
+
+
+
+    public void refund(OrderEntry.DataBean dataBean) {
+        if (dataBean==null)
+            return;
+
+        Intent m = new Intent(this, InquiryRefundActivity.class);
+
+        OrderInquiryDetailEntry.DataBean orderInfo = new OrderInquiryDetailEntry.DataBean();
+        orderInfo.setDoctorimgurl(dataBean.getDoctorimgurl());
+        orderInfo.setDepartname(dataBean.getDoctorname());
+        orderInfo.setDepartname(dataBean.getDepartname());
+        orderInfo.setTitlename(dataBean.getTitlename());
+        orderInfo.setHospitalname(dataBean.getHospitalname());
+        orderInfo.setAdeptdesc(dataBean.getAdeptdesc());
+        orderInfo.setPrice(dataBean.getPrice());
+        orderInfo.setOrderid(dataBean.getOrderid());
+        orderInfo.setStatus(dataBean.getStatus());
+
+        m.putExtra("orderInfo", orderInfo);
+        startActivityForResult(m, 0x0023);
+    }
+
+    @Override
+    public void cancleSuccess() {
+        refushCurrent();
+    }
+
+    @Override
+    public void deleteSuccess() {
+        refushCurrent();
+
+    }
+
+    //刷新当前状态
+    private void refushCurrent() {
+        iMyRegisterP.setPage(1);
+        iMyRegisterP.myInquiry(currentType, true);
     }
 }

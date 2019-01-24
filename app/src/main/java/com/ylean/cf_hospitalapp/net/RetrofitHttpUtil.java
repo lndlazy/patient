@@ -343,6 +343,27 @@ public class RetrofitHttpUtil {
     }
 
     /**
+     * 取消问诊订单
+     */
+    public void cancleInquiryOrder(Observer subscriber, String token, String ch, String orderid
+            , String status, String reason) {
+        getService().cancleInquiryOrder(token, ch, orderid, status, reason)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 删除问诊订单
+     */
+    public void deleteInquiryOrder(Observer subscriber, String token, String ch, String orderid) {
+        getService().deleteInquiryOrder(token, ch, orderid)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
      * 我的问诊订单列表
      */
     public void myInquiry(Observer subscriber, String token, String ch, String type
@@ -1094,6 +1115,16 @@ public class RetrofitHttpUtil {
     }
 
     /**
+     * 问诊订单评价详情
+     */
+    public void inquiryCommentDetail(Observer subscriber, String ch, String token, String code) {
+        getService().inquiryCommentDetail(ch, token, code)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
      * 删除挂号订单
      */
     public void deleteRegisterOrder(Observer subscriber, String ch, String token, String orderid) {
@@ -1282,11 +1313,22 @@ public class RetrofitHttpUtil {
     }
 
     /**
-     * 申请退款
+     * 挂号申请退款
      */
     public void payBack(Observer subscriber, String ch, String token
             , String id, String status, String reason, String imgs) {
         getService().payBack(ch, token, id, status, reason, imgs)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+
+    }
+
+    /**
+     * 问诊申请退款
+     */
+    public void inquiryRefund(Observer subscriber, String ch, String token
+            , String orderId, String status, String reason, String imgs) {
+        getService().inquiryRefund(ch, token, orderId, status, reason, imgs)
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
 

@@ -1,4 +1,4 @@
-package com.ylean.cf_hospitalapp.register.activity;
+package com.ylean.cf_hospitalapp.inquiry.activity;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -30,10 +30,12 @@ import com.ylean.cf_hospitalapp.base.view.DataUploadView;
 import com.ylean.cf_hospitalapp.inquiry.adapter.AskPicAdapter;
 import com.ylean.cf_hospitalapp.inquiry.bean.DataUploadResultEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.MImageItem;
+import com.ylean.cf_hospitalapp.my.bean.OrderInquiryDetailEntry;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
 import com.ylean.cf_hospitalapp.register.PayStatus;
+import com.ylean.cf_hospitalapp.register.activity.MyRegisterListActivity;
 import com.ylean.cf_hospitalapp.register.bean.OrderInfoEntry;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
@@ -42,11 +44,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 挂号 售后申请 申请退款
- * Created by linaidao on 2019/1/7.
+ * 问诊 申请售后页面
+ * Created by linaidao on 2019/1/25.
  */
 
-public class PayBackActivity extends BaseActivity implements View.OnClickListener, DataUploadView {
+public class InquiryRefundActivity extends BaseActivity implements View.OnClickListener, DataUploadView {
 
     private android.widget.TextView tvLeft;
     private com.facebook.drawee.view.SimpleDraweeView sdvImg;
@@ -60,15 +62,17 @@ public class PayBackActivity extends BaseActivity implements View.OnClickListene
     private android.support.v7.widget.RecyclerView picRecyclerView;
     private android.widget.ImageView tvUploadPic;
     private android.widget.TextView tvNext;
-    private OrderInfoEntry.DataBean mOrderInfo;
+
     private static final int CAMER_PERMISSION_CODE = 0x304;
     private static final int IMAGE_PICKER = 0x305;
     private List<ImageItem> imageItems;//上传的图片集合
     private IPicPresenter iPicPresenter = new IPicPresenter(this);
     private List<MImageItem> images = new ArrayList<>();
 
-    private String type;
     private AskPicAdapter askPicAdapter;
+
+    private OrderInquiryDetailEntry.DataBean orderInfo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +80,8 @@ public class PayBackActivity extends BaseActivity implements View.OnClickListene
 
         setContentView(R.layout.act_pay_back);
 
-        mOrderInfo = getIntent().getParcelableExtra("mOrderInfo");
+        orderInfo = getIntent().getParcelableExtra("orderInfo");
 
-        type = getIntent().getStringExtra("type");
         initView();
 
     }
@@ -104,17 +107,17 @@ public class PayBackActivity extends BaseActivity implements View.OnClickListene
         tvNext.setOnClickListener(this);
         tvUploadPic.setOnClickListener(this);
 
-        if (mOrderInfo == null)
+        if (orderInfo == null)
             return;
 
-        sdvImg.setImageURI(Uri.parse(ApiService.WEB_ROOT + mOrderInfo.getDoctorimg()));
-        tvName.setText(mOrderInfo.getDoctorname());
-        tvDepartment.setText(mOrderInfo.getDepartname() + " " + mOrderInfo.getDocdocteachname());
-        tvHospitalName.setText(mOrderInfo.getHospitalname());
-//        tvIntroduce.setText(mOrderInfo.get);
+        sdvImg.setImageURI(Uri.parse(ApiService.WEB_ROOT + orderInfo.getDoctorimgurl()));
+        tvName.setText(orderInfo.getDoctorname());
+        tvDepartment.setText(orderInfo.getDepartname() + " " + orderInfo.getTitlename());
+        tvHospitalName.setText(orderInfo.getHospitalname());
+        tvIntroduce.setText(orderInfo.getAdeptdesc());
 
-        tvType.setText(type);
-        tvPrice.setText("¥" + mOrderInfo.getPrice());
+        tvType.setText("问诊订单");
+        tvPrice.setText("¥" + orderInfo.getPrice());
     }
 
     private void picRecycler() {
@@ -165,7 +168,7 @@ public class PayBackActivity extends BaseActivity implements View.OnClickListene
 
                         payBack();
                     }
-                }).show();
+                }).setNegativeButton("暂不取消", null).show();
 
                 break;
         }
@@ -185,12 +188,14 @@ public class PayBackActivity extends BaseActivity implements View.OnClickListene
         if (!TextUtils.isEmpty(img))
             img = img.substring(0, img.length() - 1);
 
-        RetrofitHttpUtil.getInstance().payBack(
+        RetrofitHttpUtil.getInstance().inquiryRefund(
                 new BaseNoTObserver<Basebean>() {
                     @Override
                     public void onHandleSuccess(Basebean basebean) {
                         showErr("申请成功");
-                        nextActivity(MyRegisterListActivity.class);
+
+                        setResult(0x0024);
+                        finish();
                     }
 
                     @Override
@@ -198,8 +203,9 @@ public class PayBackActivity extends BaseActivity implements View.OnClickListene
                         showErr(message);
                     }
 
-                }, SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, "")
-                , mOrderInfo.getId(), mOrderInfo.getStatus(), etDesc.getText().toString(), img);
+                }
+                , SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, "")
+                , orderInfo.getOrderid(), orderInfo.getStatus(), etDesc.getText().toString(), img);
 
     }
 

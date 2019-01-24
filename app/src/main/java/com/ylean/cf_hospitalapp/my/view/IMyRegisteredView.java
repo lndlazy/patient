@@ -15,5 +15,5 @@ public interface IMyRegisteredView extends BaseView {
 
     Context getContext();
 
-    void setOrderInfo(List<OrderEntry.DataBean> orderEntryList, String currentType);
+    void setOrderInfo(List<OrderEntry.DataBean> orderEntryList, String currentType, boolean refush);
 }

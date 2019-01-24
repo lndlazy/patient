@@ -283,6 +283,19 @@ public interface ApiService {
     Observable<MyAskReusltList> askList(@Field("token") String token, @Field("ch") String ch, @Field("type") String type
             , @Field("page") int page, @Field("size") String size);
 
+
+    //取消问诊订单
+    @FormUrlEncoded
+    @POST("/api/app/consultation/cancel")
+    Observable<Basebean> cancleInquiryOrder(@Field("token") String token, @Field("ch") String ch, @Field("orderid") String orderid
+            , @Field("status") String status, @Field("reason") String reason);
+
+
+    //删除问诊订单
+    @FormUrlEncoded
+    @POST("/api/app/consultation/delorder")
+    Observable<Basebean> deleteInquiryOrder(@Field("token") String token, @Field("ch") String ch, @Field("orderid") String orderid);
+
     //我的问诊列表
     @FormUrlEncoded
     @POST("/api/app/consultation/getorderlist")
@@ -529,13 +542,10 @@ public interface ApiService {
     Observable<EvalDetailEntry> commandInfo(@Field("ch") String ch, @Field("token") String token, @Field("id") String id);
 
 
-
     //商品 服务 评价详情
     @FormUrlEncoded
     @POST("/api/app/pro/commentdetail")
     Observable<EvalDetailEntry> goodsCommandInfo(@Field("ch") String ch, @Field("token") String token, @Field("code") String code);
-
-
 
 
     //删除订单
@@ -681,6 +691,11 @@ public interface ApiService {
     @POST("/api/app/appointment/commentdetail")
     Observable<EvalDetailEntry> registerCommentDetail(@Field("ch") String ch, @Field("token") String token, @Field("code") String code);
 
+    //问诊订单评价详情
+    @FormUrlEncoded
+    @POST("/api/app/consultation/commentdetail")
+    Observable<EvalDetailEntry> inquiryCommentDetail(@Field("ch") String ch, @Field("token") String token, @Field("code") String code);
+
     //删除挂号订单
     @FormUrlEncoded
     @POST("/api/app/appointment/delorder")
@@ -769,11 +784,18 @@ public interface ApiService {
     @GET("/api/app/pro/getreturnadd")
     Observable<RefundAddressEntry> refundAddress();
 
-    //申请退款
+    //挂号订单申请退款
     @FormUrlEncoded
     @POST("/api/app/appointment/afterreturn")
     Observable<Basebean> payBack(@Field("ch") String ch, @Field("token") String token
             , @Field("id") String id, @Field("status") String status, @Field("reason") String reason, @Field("imgs") String imgs);
+
+
+    //问诊订单 申请退款
+    @FormUrlEncoded
+    @POST("/api/app/consultation/afterreturn")
+    Observable<Basebean> inquiryRefund(@Field("ch") String ch, @Field("token") String token
+            , @Field("orderid") String orderid, @Field("status") String status, @Field("reason") String reason, @Field("imgs") String imgs);
 
 
     //商品申请退款

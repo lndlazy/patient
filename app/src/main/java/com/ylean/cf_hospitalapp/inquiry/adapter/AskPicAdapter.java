@@ -10,6 +10,8 @@ import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
+import com.ylean.cf_hospitalapp.inquiry.activity.InquiryEvaulateActivity;
+import com.ylean.cf_hospitalapp.inquiry.activity.InquiryRefundActivity;
 import com.ylean.cf_hospitalapp.inquiry.bean.MImageItem;
 import com.ylean.cf_hospitalapp.inquiry.activity.PayTWActivity;
 import com.ylean.cf_hospitalapp.mall.acitity.GoodsCommandActivity;
@@ -85,6 +87,16 @@ public class AskPicAdapter extends RecyclerView.Adapter<AskPicAdapter.MyViewHold
                 if (context instanceof RegisterEvaulateActivity) {
                     RegisterEvaulateActivity rActivity = (RegisterEvaulateActivity) context;
                     rActivity.removePic(position);
+                }
+
+                if (context instanceof InquiryRefundActivity) {
+                    InquiryRefundActivity iActivity = (InquiryRefundActivity) context;
+                    iActivity.removePic(position);
+                }
+
+                if (context instanceof InquiryEvaulateActivity) {
+                    InquiryEvaulateActivity iActivity = (InquiryEvaulateActivity) context;
+                    iActivity.removePic(position);
                 }
 
             }
