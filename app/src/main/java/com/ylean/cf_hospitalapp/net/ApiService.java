@@ -30,6 +30,7 @@ import com.ylean.cf_hospitalapp.inquiry.bean.PicAskResutEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.RecommendEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.WxPayInfoEntry;
 import com.ylean.cf_hospitalapp.login.bean.RegisterResultEntry;
+import com.ylean.cf_hospitalapp.login.bean.SplishEntry;
 import com.ylean.cf_hospitalapp.mall.bean.FreightPriceEntry;
 import com.ylean.cf_hospitalapp.mall.bean.AddressListEntry;
 import com.ylean.cf_hospitalapp.mall.bean.GoodsInfoEntry;
@@ -321,7 +322,7 @@ public interface ApiService {
     //splish页面图片获取
     @FormUrlEncoded
     @POST("/api/app/getImg")
-    Observable<Basebean> getSplishPage(@Field("type") String type, @Field("ch") String ch);
+    Observable<SplishEntry> getSplishPage(@Field("type") String type, @Field("ch") String ch);
 
 
     //医生详细详细

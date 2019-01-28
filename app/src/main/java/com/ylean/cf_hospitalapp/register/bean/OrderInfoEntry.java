@@ -67,6 +67,15 @@ public class OrderInfoEntry extends Basebean {
         private String sex;
         private String status;
         private String iscommend;
+        private String adeptdesc;
+
+        public String getAdeptdesc() {
+            return adeptdesc;
+        }
+
+        public void setAdeptdesc(String adeptdesc) {
+            this.adeptdesc = adeptdesc;
+        }
 
         public String getIscommend() {
             return iscommend;
@@ -321,6 +330,7 @@ public class OrderInfoEntry extends Basebean {
             dest.writeString(this.sex);
             dest.writeString(this.status);
             dest.writeString(this.iscommend);
+            dest.writeString(this.adeptdesc);
         }
 
         protected DataBean(Parcel in) {
@@ -351,6 +361,7 @@ public class OrderInfoEntry extends Basebean {
             this.sex = in.readString();
             this.status = in.readString();
             this.iscommend = in.readString();
+            this.adeptdesc = in.readString();
         }
 
         public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {

@@ -1,5 +1,16 @@
 apply plugin: 'com.android.application'
 
+
+//repositories {
+//    maven {
+//        url "https://s3.amazonaws.com/repo.commonsware.com"
+//    }
+//    jcenter()
+//    mavenCentral()
+//    maven { url "https://jitpack.io" }
+//}
+
+
 android {
     compileSdkVersion 26
     buildToolsVersion '28.0.3'

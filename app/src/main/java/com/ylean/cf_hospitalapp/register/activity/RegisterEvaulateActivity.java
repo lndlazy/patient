@@ -256,6 +256,7 @@ public class RegisterEvaulateActivity extends BaseActivity implements IEvaluateV
         tvJob.setText(mOrderInfo.getDepartname() + "   " + mOrderInfo.getDoctitle());
         tvPirce.setText("¥" + mOrderInfo.getPrice());
         tvCompany.setText(mOrderInfo.getHospitalname());//医院名称
+        tvInfo.setText(mOrderInfo.getAdeptdesc());
     }
 
 

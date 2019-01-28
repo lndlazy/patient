@@ -393,6 +393,7 @@ public class RegisterDetailActivity extends BaseActivity implements View.OnClick
 
     }
 
+    //去支付
     private void go2pay() {
 
         if (mOrderInfo == null) {

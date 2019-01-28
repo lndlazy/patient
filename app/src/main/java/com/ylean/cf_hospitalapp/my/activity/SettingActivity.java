@@ -126,6 +126,10 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             bindTel.setRightTxt(myInfoEntryData.getMobile());
             tvnickname.setRightTxt(myInfoEntryData.getRealname());
         }
+
+        boolean isnotice = (boolean) SaveUtils.get(this, SpValue.IS_NOTICE, true);
+        ivNotice.setSelected(isnotice);
+
     }
 
     @Override
@@ -143,12 +147,22 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 break;
 
             case R.id.aboutUs:
+
+                Intent a =new Intent(this, WebviewActivity.class);
+                a.putExtra("title", "关于我们");
+                a.putExtra("url", "http://cfnew.yl-mall.cn/api/app/art/getnewsbytype?ch=1&ctype=999");
+//                title = getIntent().getStringExtra("title");
+//                url = getIntent().getStringExtra("url");
+
+                startActivity(a);
                 break;
 
             case R.id.update:
                 break;
 
-            case R.id.rlNotice:
+            case R.id.rlNotice://TODO 通知
+                ivNotice.setSelected(!ivNotice.isSelected());
+                SaveUtils.put(this, SpValue.IS_NOTICE, ivNotice.isSelected());
                 break;
 
             case R.id.modifyPwd://修改密码

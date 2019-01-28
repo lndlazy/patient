@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.SystemClock;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.hyphenate.chat.EMClient;
@@ -19,6 +21,12 @@ import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareConfig;
+import com.ylean.cf_hospitalapp.login.activity.LoginActivity;
+import com.ylean.cf_hospitalapp.login.bean.SplishEntry;
+import com.ylean.cf_hospitalapp.net.ApiService;
+import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
+import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
+import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.PicassoImageLoader;
 
@@ -42,6 +50,7 @@ public class Mapplication extends Application {
         super.onCreate();
 
         /////////////////////////////  测试  /////////////////////////////////////////
+//        getImg();
         initLogger(TAG, true);
         Fresco.initialize(this);
 //        Logger.d("sha1值::" + sHA1(this));
@@ -63,6 +72,7 @@ public class Mapplication extends Application {
 
 
         /////////////////////////////  正式  /////////////////////////////////////////
+//        getImg();
 //        initLogger(TAG, false);
 //        Fresco.initialize(this);
 ////        Logger.d("sha1值::" + sHA1(this));
@@ -170,4 +180,30 @@ public class Mapplication extends Application {
 //        Logger.addLogAdapter(new DiskLogAdapter(formatStrategy));
 //        Logger.addLogAdapter(new DiskLogAdapter());
     }
+
+
+
+
+
+//    private void getImg() {
+//
+//        RetrofitHttpUtil.getInstance().getSplishPage(
+//                new BaseNoTObserver<SplishEntry>() {
+//                    @Override
+//                    public void onHandleSuccess(SplishEntry basebean) {
+//
+//                        if (basebean == null || basebean.getData() == null)
+//                            return;
+//
+//                        SaveUtils.put(getApplicationContext(), SpValue.SPLISH_PIC_URL, ApiService.WEB_ROOT + basebean.getData().getImg());
+//
+//                    }
+//
+//                    @Override
+//                    public void onHandleError(String message) {
+//
+//                    }
+//
+//                }, "0", SpValue.CH);
+//    }
 }
