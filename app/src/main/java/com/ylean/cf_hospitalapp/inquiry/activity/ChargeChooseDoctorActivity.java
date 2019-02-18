@@ -60,7 +60,7 @@ public class ChargeChooseDoctorActivity extends BaseActivity implements View.OnC
     private String hosgradid = "";//医院等级id
     private String asktype = "";//问诊方式 1-图文 2-电话 3-视频
     private String sorttype = "";//排序方式
-    private int page = 0;//
+    private int page = 1;//
     private String size = "15";//
 
     //医生adapter

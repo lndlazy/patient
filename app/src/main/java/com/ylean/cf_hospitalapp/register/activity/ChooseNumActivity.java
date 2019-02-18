@@ -230,9 +230,14 @@ public class ChooseNumActivity extends BaseActivity implements IChooseNumView, S
 
             case R.id.rlIntrod://科室介绍
 
+                if (hospitalInfo == null) {
+                    showErr("数据错误");
+                    return;
+                }
+
                 Intent m = new Intent(this, WebviewActivity.class);
-                String url = ApiService.WEB_ROOT + ApiService.DEPARTMEN_INTRODUCE + "?id=" + departid;
-                Logger.d("url:::" + url);
+                String url = ApiService.WEB_ROOT + ApiService.DEPARTMEN_INTRODUCE + "?id=" + departid + "&hospitalid=" + hospitalInfo.getHospitalid();
+//                Logger.d("url:::" + url);
                 m.putExtra("url", url);
                 m.putExtra("title", departname);
                 startActivity(m);

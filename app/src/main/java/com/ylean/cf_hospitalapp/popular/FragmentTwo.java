@@ -98,6 +98,16 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
         SpeechAdapter speechAdapter = new SpeechAdapter(getActivity(), viewList);
         mViewPager.setAdapter(speechAdapter);
 
+        iFragTwoPres.setSearchContent("");
+        iFragTwoPres.setCurrentPage(1);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+
+        cacheList.clear();
     }
 
     private TabLayout.OnTabSelectedListener listener = new TabLayout.OnTabSelectedListener() {
@@ -116,27 +126,27 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
 
             switch (currentPosition) {
 
-                case 0://专家直播
-
-                    iFragTwoPres.expertInfo(SpValue.EXPERT_VIDEO, (String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""), currentPosition);
-
-                    break;
-
-                case 1://专家讲堂
+                case 0://专家讲堂
 
                     iFragTwoPres.expertInfo(SpValue.EXPERT_SPEECH, (String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""), currentPosition);
 
                     break;
 
-                case 2://图文资讯
+                case 1://图文资讯
 
                     iFragTwoPres.picNewsList((String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""));
 
                     break;
 
-                case 3://疾病百科
+                case 2://疾病百科
 
                     iFragTwoPres.diseaseList();
+
+                    break;
+
+                case 3://专家直播
+
+                    iFragTwoPres.expertInfo(SpValue.EXPERT_VIDEO, (String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""), currentPosition);
 
                     break;
 
@@ -164,30 +174,29 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
 
         switch (currentPosition) {
 
-            case 0://直播
-
-                iFragTwoPres.expertInfo(SpValue.EXPERT_VIDEO, (String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""), currentPosition);
-
-                break;
-
-            case 1://讲堂
+            case 0://讲堂
 
                 iFragTwoPres.expertInfo(SpValue.EXPERT_SPEECH, (String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""), currentPosition);
 
                 break;
 
-            case 2://图文资讯
+            case 1://图文资讯
 
                 iFragTwoPres.picNewsList((String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""));
 
                 break;
 
-            case 3://疾病百科
+            case 2://疾病百科
 
                 iFragTwoPres.diseaseList();
 
                 break;
 
+            case 3://直播
+
+                iFragTwoPres.expertInfo(SpValue.EXPERT_VIDEO, (String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""), currentPosition);
+
+                break;
 
         }
 
@@ -360,7 +369,7 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
     @Override
     public void setNewsInfo(List<ExpertEntry.DataBean> data) {
 
-        if (cacheList.contains(2) && newsAdapter != null) {
+        if (cacheList.contains(1) && newsAdapter != null) {
             //加载过当前页面数据，则直接添加并刷新
             if (iFragTwoPres.getCurrentPage() == 1)
                 newsList.clear();
@@ -370,7 +379,7 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
             return;
         }
 
-        View view = viewList.get(2);
+        View view = viewList.get(1);
         newsRecyclerView = view.findViewById(R.id.recyclerView);
         newsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         newsRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -432,7 +441,7 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
     @Override
     public void setDiseaseInfo(List<DiseaseListEntry.DataBean> data) {
 
-        if (cacheList.contains(3) && diseaseListAdapter != null) {
+        if (cacheList.contains(2) && diseaseListAdapter != null) {
             //加载过当前页面数据，则直接添加并刷新
             if (iFragTwoPres.getCurrentPage() == 1)
                 diseaseList.clear();
@@ -442,7 +451,7 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
             return;
         }
 
-        View view = viewList.get(3);
+        View view = viewList.get(2);
         disRecyclerView = view.findViewById(R.id.recyclerView);
         disRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         disRecyclerView.setItemAnimator(new DefaultItemAnimator());

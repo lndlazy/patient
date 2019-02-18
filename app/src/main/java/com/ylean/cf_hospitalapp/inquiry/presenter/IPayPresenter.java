@@ -25,37 +25,31 @@ public class IPayPresenter {
     public void doctorList(Context context, String searchname, String departid, String doctitleid
             , String hosgradid, String asktype, String sorttype, int page, String size) {
 
-        RetrofitHttpUtil.getInstance()
-                .getDoctorList(new BaseNoTObserver<DoctorListEntry>() {
+        RetrofitHttpUtil.getInstance().getDoctorList(
+                new BaseNoTObserver<DoctorListEntry>() {
 
-                                   @Override
-                                   public void onSubscribe(Disposable d) {
-                                       super.onSubscribe(d);
-                                       iPayView.showLoading("获取中...");
-                                   }
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.onSubscribe(d);
+                        iPayView.showLoading("获取中...");
+                    }
 
-                                   @Override
-                                   public void onHandleSuccess(DoctorListEntry doctorListEntry) {
-                                       iPayView.hideLoading();
-                                       iPayView.defalutInfo(doctorListEntry);
-                                   }
+                    @Override
+                    public void onHandleSuccess(DoctorListEntry doctorListEntry) {
+                        iPayView.hideLoading();
+                        iPayView.defalutInfo(doctorListEntry);
+                    }
 
-                                   @Override
-                                   public void onHandleError(String message) {
-                                       iPayView.hideLoading();
-                                       iPayView.showInfo(message);
-                                   }
+                    @Override
+                    public void onHandleError(String message) {
+                        iPayView.hideLoading();
+                        iPayView.showInfo(message);
+                    }
 
-                               }, SpValue.CH
-                        , (String) SaveUtils.get(context.getApplicationContext(), SpValue.HOSPITAL_ID, "")
-                        , searchname
-                        , departid
-                        , doctitleid
-                        , hosgradid
-                        , asktype
-                        , sorttype
-                        , page
-                        , size);
+                }, SpValue.CH
+                , (String) SaveUtils.get(context.getApplicationContext(), SpValue.HOSPITAL_ID, "")
+                , searchname, departid, doctitleid, hosgradid
+                , asktype, sorttype, page, size);
 
     }
 

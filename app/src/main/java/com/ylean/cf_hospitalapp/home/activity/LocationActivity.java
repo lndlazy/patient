@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
+import com.ylean.cf_hospitalapp.base.activity.HomeActivity;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.zaaach.citypicker.CityPicker;
@@ -44,8 +45,9 @@ public class LocationActivity extends BaseActivity {
                 .setOnPickListener(new OnPickListener() {
                     @Override
                     public void onPick(int position, City data) {
-//                        showErr(data.getName());
 
+                        //选择城市
+                        HomeActivity.isHandChooseLocation = true;
                         Intent d = new Intent();
                         d.putExtra("cityName", data.getName());
                         d.putExtra("cityCode", data.getCode());
@@ -60,10 +62,11 @@ public class LocationActivity extends BaseActivity {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
+
                                 //定位完成之后更新数据
-                                cityPicker.locateComplete(new LocatedCity((String) SaveUtils.get(getApplicationContext(), SpValue.CITY, "北京")
-                                        , (String) SaveUtils.get(getApplicationContext(), SpValue.CITY, "北京")
-                                        , (String) SaveUtils.get(getApplicationContext(), SpValue.CITY_CODE, "131")), LocateState.SUCCESS);
+                                cityPicker.locateComplete(new LocatedCity((String) SaveUtils.get(getApplicationContext(), SpValue.LOCATION_CITY, "北京")
+                                        , (String) SaveUtils.get(getApplicationContext(), SpValue.LOCATION_CITY, "北京")
+                                        , (String) SaveUtils.get(getApplicationContext(), SpValue.LOCATION_CITY_CODE, "131")), LocateState.SUCCESS);
 
 //                                cityPicker.locateComplete(new LocatedCity("深圳", "广东", "101280601"), LocateState.SUCCESS);
                             }

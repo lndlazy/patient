@@ -24,7 +24,7 @@ import java.util.List;
 public class SpeechAdapter extends PagerAdapter {
 
     private List<View> viewList;
-    private String[] strs = {"专家直播", "专家讲堂", "图文资讯", "疾病百科"};
+    private String[] strs = {"专家讲堂", "图文资讯", "疾病百科", "专家直播"};
     private Context context;
     private int page;
     private String input_name;

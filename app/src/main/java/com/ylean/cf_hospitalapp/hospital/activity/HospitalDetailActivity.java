@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.Presenter.ICollectionPres;
 import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
@@ -124,7 +125,7 @@ public class HospitalDetailActivity extends BaseActivity implements IHospitalDet
 
     }
 
-    //科室列表
+    //评论信息
     @Override
     public void setCommentInfo(List<CommComListEntry.DataBean> data) {
 
@@ -396,6 +397,31 @@ public class HospitalDetailActivity extends BaseActivity implements IHospitalDet
         departmentRecyclerview.setNestedScrollingEnabled(false);
         hdAdapter = new HospitalDepartmentAdapter(this, departmentList);
         departmentRecyclerview.setAdapter(hdAdapter);
+
+        departmentRecyclerview.addOnItemTouchListener(new OnItemClickListener(departmentRecyclerview) {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
+
+                if (hospitalInfo == null) {
+                    showErr("数据错误");
+                    return;
+                }
+
+                Intent m = new Intent(HospitalDetailActivity.this, WebviewActivity.class);
+                String url = ApiService.WEB_ROOT + ApiService.DEPARTMEN_INTRODUCE + "?id=" + departmentList.get(position).getDepartmentid()
+                        + "&hospitalid=" + hospitalInfo.getHospitalid();
+                Logger.d("url:::" + url);
+                m.putExtra("url", url);
+                m.putExtra("title", departmentList.get(position).getName());
+                startActivity(m);
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
 
     }
 

@@ -71,8 +71,8 @@ public class Mapplication extends Application {
 //        EMClient.getInstance().setDebugMode(true);
 
 
-        /////////////////////////////  正式  /////////////////////////////////////////
-//        getImg();
+//        /////////////////////////////  正式  /////////////////////////////////////////
+////        getImg();
 //        initLogger(TAG, false);
 //        Fresco.initialize(this);
 ////        Logger.d("sha1值::" + sHA1(this));
@@ -92,7 +92,7 @@ public class Mapplication extends Application {
 ////        // 默认添加好友时，是不需要验证的，改成需要验证
 ////        options.setAcceptInvitationAlways(false);
 //        EaseUI.getInstance().init(this, options);
-//        EMClient.getInstance().setDebugMode(false);
+////        EMClient.getInstance().setDebugMode(false);
 
 
 //        RetrofitHttpUtil.getInstance().loginIn(new BaseNoTObserver<LoginEntry>() {

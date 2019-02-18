@@ -26,6 +26,12 @@ public interface SpValue {
     String PROVINCE = "province";
     String CITY_CODE = "city_code";
 
+    String LOCATION_LAT = "location_lat";
+    String LOCATION_LON = "location_lon";
+    String LOCATION_CITY = "location_city";
+    String LOCATION_PROVINCE = "location_province";
+    String LOCATION_CITY_CODE = "location_city_code";
+
 
     //我的家人
     String SEX = "sex";//sex：0 女 1 男

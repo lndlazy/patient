@@ -8,6 +8,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.orhanobut.logger.Logger;
+import com.ylean.cf_hospitalapp.base.activity.HomeActivity;
 import com.ylean.cf_hospitalapp.home.bean.BannerBean;
 import com.ylean.cf_hospitalapp.inquiry.bean.HospitalEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.RecommendEntry;
@@ -135,9 +136,19 @@ public class IFragmentOnePrenenter {
 
 //            Logger.d("==onReceiveLocation==" + (location == null));
 
-            if (location == null) {
+            if (location == null || HomeActivity.isHandChooseLocation) {
                 //没有返回结果
                 getLastInfo();
+                iFragmentOneView.setCity((String) SaveUtils.get(context, SpValue.CITY, "未知"));
+
+                if (HomeActivity.isHandChooseLocation) {
+                    SaveUtils.put(context, SpValue.LOCATION_CITY, location.getCity());
+                    SaveUtils.put(context, SpValue.LOCATION_CITY_CODE, location.getCityCode());
+                    SaveUtils.put(context, SpValue.LOCATION_LAT, location.getLatitude() + "");
+                    SaveUtils.put(context, SpValue.LOCATION_LON, location.getLongitude() + "");
+                    SaveUtils.put(context, SpValue.LOCATION_PROVINCE, location.getProvince());
+                }
+
                 return;
             }
 
@@ -155,9 +166,8 @@ public class IFragmentOnePrenenter {
 
                 Logger.d("定位城市::" + location.getCity());
 
-                getHospital(location.getLatitude() + "", location.getLongitude() + "");
+                getHospital(location.getLatitude() + "", location.getLongitude() + "", false);
             } else {
-
                 getLastInfo();
             }
 
@@ -168,7 +178,7 @@ public class IFragmentOnePrenenter {
     public void getLastInfo() {
         if (!TextUtils.isEmpty((String) SaveUtils.get(context, SpValue.LAT, ""))) {
             getHospital((String) SaveUtils.get(context, SpValue.LAT, "")
-                    , (String) SaveUtils.get(context, SpValue.LON, ""));
+                    , (String) SaveUtils.get(context, SpValue.LON, ""), false);
         } else {
             iFragmentOneView.showErr("未获取到位置信息");
             iFragmentOneView.stopRefush();
@@ -177,7 +187,7 @@ public class IFragmentOnePrenenter {
     }
 
     //获取附近的医院
-    private void getHospital(String latitude, String longitude) {
+    public void getHospital(String latitude, String longitude, boolean refush) {
 
         RetrofitHttpUtil.getInstance()
                 .getHospital(new BaseNoTObserver<HospitalEntry>() {
@@ -195,7 +205,7 @@ public class IFragmentOnePrenenter {
                         //获取banner图
                         getBanner("1", hospitalEntry.getData().getHospitalid());
 
-                        getDataInfo(hospitalEntry.getData().getHospitalid());
+                        getDataInfo(hospitalEntry.getData().getHospitalid(), refush);
 
                     }
 
@@ -211,7 +221,7 @@ public class IFragmentOnePrenenter {
 
     }
 
-    public void getDataInfo(String hospitalid) {
+    public void getDataInfo(String hospitalid, boolean refush) {
 
         Logger.d("当前选择的position" + iFragmentOneView.getCurrentPosition());
 
@@ -219,19 +229,19 @@ public class IFragmentOnePrenenter {
 
             case 0: //获取首页 综合推荐
 
-                getRecommand(hospitalid, iFragmentOneView.getPageOne(),
+                getRecommand(hospitalid, refush ? 1 : iFragmentOneView.getPageOne(),
                         (String) SaveUtils.get(context, SpValue.TOKEN, ""));
                 break;
             case 1://精彩问诊
-                hotConsult(hospitalid, iFragmentOneView.getPageTwo());
+                hotConsult(hospitalid, refush ? 1 : iFragmentOneView.getPageTwo());
                 break;
 
             case 2://专家讲堂
-                speechInfo(hospitalid, iFragmentOneView.getPageThree());
+                speechInfo(hospitalid, refush ? 1 : iFragmentOneView.getPageThree());
                 break;
 
             default:
-                getRecommand(hospitalid, iFragmentOneView.getPageOne(),
+                getRecommand(hospitalid, refush ? 1 : iFragmentOneView.getPageOne(),
                         (String) SaveUtils.get(context, SpValue.TOKEN, ""));
                 break;
         }

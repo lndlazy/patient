@@ -14,7 +14,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
-import com.ylean.cf_hospitalapp.base.view.HomeActivity;
+import com.ylean.cf_hospitalapp.base.activity.HomeActivity;
 import com.ylean.cf_hospitalapp.my.activity.MyInquiryListActivity;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;

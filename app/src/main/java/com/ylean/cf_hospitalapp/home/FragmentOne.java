@@ -251,7 +251,7 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
                             break;
 
                     }
-                    iOnePrenenter.getDataInfo((String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""));
+                    iOnePrenenter.getDataInfo((String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""), false);
 
                 }
 
@@ -389,6 +389,11 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
                         SaveUtils.put(getActivity(), SpValue.LAT, location.getLat() + "");
                         SaveUtils.put(getActivity(), SpValue.LON, location.getLng() + "");
 
+
+                        //重新加载数据
+                        iOnePrenenter.getHospital(location.getLat() + "", location.getLng() + "", true);
+
+
                     }
 
                     @Override
@@ -494,7 +499,7 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
         if (TextUtils.isEmpty((String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, "")))
             iOnePrenenter.getLastInfo();
         else
-            iOnePrenenter.getDataInfo((String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""));
+            iOnePrenenter.getDataInfo((String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""), false);
 
 //        }
 //        loadedPosition.add(position);
@@ -514,7 +519,6 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
         pageOne = 1;
         pageTwo = 1;
         pageThree = 1;
-
 
     }
 }

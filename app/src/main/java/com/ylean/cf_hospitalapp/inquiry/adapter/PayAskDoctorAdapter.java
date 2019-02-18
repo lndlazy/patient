@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ylean.cf_hospitalapp.R;
+import com.ylean.cf_hospitalapp.doctor.activity.DoctorDetailActivity;
 import com.ylean.cf_hospitalapp.inquiry.bean.DoctorListEntry;
 import com.ylean.cf_hospitalapp.inquiry.activity.PayTWActivity;
 import com.ylean.cf_hospitalapp.net.ApiService;
@@ -72,6 +73,16 @@ public class PayAskDoctorAdapter extends RecyclerView.Adapter<PayAskDoctorAdapte
                 nextPage(position, context, SpValue.ASK_TYPE_VIDEO);
             }
         });
+
+        //医生详情
+        holder.llconent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, DoctorDetailActivity.class);
+                i.putExtra("doctorId", doctorInfoList.get(holder.getAdapterPosition()).getDoctorid());
+                context.startActivity(i);
+            }
+        });
     }
 
     private void nextPage(int position, Context context, String askType) {
@@ -119,6 +130,7 @@ public class PayAskDoctorAdapter extends RecyclerView.Adapter<PayAskDoctorAdapte
         LinearLayout llTel;
         LinearLayout llVideo;
         LinearLayout llPrice;
+        LinearLayout llconent;
 
         MyViewHolder(View view) {
             super(view);
@@ -135,6 +147,7 @@ public class PayAskDoctorAdapter extends RecyclerView.Adapter<PayAskDoctorAdapte
             llTel = view.findViewById(R.id.llTel);
             llVideo = view.findViewById(R.id.llVideo);
             llPrice = view.findViewById(R.id.llPrice);
+            llconent = view.findViewById(R.id.llconent);
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.ylean.cf_hospitalapp.net;
 
+import com.orhanobut.logger.Logger;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -684,6 +686,7 @@ public class RetrofitHttpUtil {
      */
     public void picNewsList(Observer subscriber, String ch, String hospitalid, String name, String type
             , int page, String size) {
+
         getService().picNewsList(ch, hospitalid, name, type, page, size)
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
@@ -695,6 +698,7 @@ public class RetrofitHttpUtil {
      */
     public void diseaseList(Observer subscriber, String ch, String name
             , int page, String size) {
+
         getService().diseaseList(ch, name, page, size)
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);

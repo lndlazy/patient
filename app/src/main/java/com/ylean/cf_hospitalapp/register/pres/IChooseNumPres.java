@@ -109,82 +109,79 @@ public class IChooseNumPres {
     //查询号源
     public void getNumInfo(final String timeType, final NumRegisterAdapter mAdapter, final List<NumListEntry.DataBean> registerList) {
 
-        RetrofitHttpUtil
-                .getInstance()
-                .orderNumList(new BaseNoTObserver<NumListEntry>() {
+        RetrofitHttpUtil.getInstance().orderNumList(
+                new BaseNoTObserver<NumListEntry>() {
 
-                                  @Override
-                                  public void onSubscribe(Disposable d) {
-                                      super.onSubscribe(d);
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.onSubscribe(d);
 
-                                      if ("1".equals(timeType))
-                                          iChooseNumView.showLoading("获取中...");
-                                  }
+                        if ("1".equals(timeType))
+                            iChooseNumView.showLoading("获取中...");
+                    }
 
-                                  @Override
-                                  public void onHandleSuccess(NumListEntry numListEntry) {
+                    @Override
+                    public void onHandleSuccess(NumListEntry numListEntry) {
 
-                                      if ("2".equals(timeType))
-                                          iChooseNumView.hideLoading();
+                        if ("2".equals(timeType))
+                            iChooseNumView.hideLoading();
 
-                                      if (numListEntry == null || numListEntry.getData() == null)
-                                          return;
+                        if (numListEntry == null || numListEntry.getData() == null)
+                            return;
 
-                                      if (registerList != null) {
-                                          registerList.clear();
-                                          registerList.addAll(numListEntry.getData());
-                                      }
+                        if (registerList != null) {
+                            registerList.clear();
+                            registerList.addAll(numListEntry.getData());
+                        }
 
-                                      if (mAdapter != null)
-                                          mAdapter.notifyDataSetChanged();
+                        if (mAdapter != null)
+                            mAdapter.notifyDataSetChanged();
 
-                                      iChooseNumView.stopRefush();
+                        iChooseNumView.stopRefush();
 
-                                  }
+                    }
 
-                                  @Override
-                                  public void onHandleError(String message) {
-                                      if ("2".equals(timeType))
-                                          iChooseNumView.hideLoading();
+                    @Override
+                    public void onHandleError(String message) {
+                        if ("2".equals(timeType))
+                            iChooseNumView.hideLoading();
 
-                                      iChooseNumView.showErr(message);
-                                      iChooseNumView.stopRefush();
-                                  }
+                        iChooseNumView.showErr(message);
+                        iChooseNumView.stopRefush();
+                    }
 
-                              }, SpValue.CH  , hospitalId , departId , menzhenid
-                        , timeEntry == null ? IDateUtils.formatDateTime(new Date(), IDateUtils.DF_YYYY_MM_DD) : timeEntry.getTimeDesc()
-                        , timeType , doctypeid , doctorid);
+                }, SpValue.CH, hospitalId, departId, menzhenid
+                , timeEntry == null ? IDateUtils.formatDateTime(new Date(), IDateUtils.DF_YYYY_MM_DD) : timeEntry.getTimeDesc()
+                , timeType, doctypeid, doctorid);
 
     }
 
     //获取医生类型列表
     public void getHospitalType() {
 
-        RetrofitHttpUtil
-                .getInstance()
-                .doctorTypeList(
-                        new BaseNoTObserver<DoctorTypeEntry>() {
-                            @Override
-                            public void onHandleSuccess(DoctorTypeEntry doctorTypeEntry) {
+        RetrofitHttpUtil.getInstance().doctorTypeList(
+                new BaseNoTObserver<DoctorTypeEntry>() {
+                    @Override
+                    public void onHandleSuccess(DoctorTypeEntry doctorTypeEntry) {
 
-                                if (doctorTypeEntry == null || doctorTypeEntry.getData() == null)
-                                    return;
+                        if (doctorTypeEntry == null || doctorTypeEntry.getData() == null)
+                            return;
 
-                                List<DoctorTypeEntry.DataBean> data = doctorTypeEntry.getData();
+                        List<DoctorTypeEntry.DataBean> data = doctorTypeEntry.getData();
 
-                                DoctorTypeEntry.DataBean dataBean = new DoctorTypeEntry.DataBean();
-                                dataBean.setDoctitle("");
-                                dataBean.setDoctitle("全部");
-                                data.add(0, dataBean);
-                                iChooseNumView.doctorTypeInfo(data);
+                        DoctorTypeEntry.DataBean dataBean = new DoctorTypeEntry.DataBean();
+                        dataBean.setDoctitle("");
+                        dataBean.setDoctitle("全部");
+                        data.add(0, dataBean);
+                        iChooseNumView.doctorTypeInfo(data);
 
-                            }
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                iChooseNumView.showErr(message);
-                            }
-                        }, SpValue.CH);
+                    @Override
+                    public void onHandleError(String message) {
+                        iChooseNumView.showErr(message);
+                    }
+                }, SpValue.CH);
 
     }
 }

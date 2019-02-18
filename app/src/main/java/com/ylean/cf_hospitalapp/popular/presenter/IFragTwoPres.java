@@ -42,47 +42,45 @@ public class IFragTwoPres {
 
     //专家讲堂， 专家直播
     public void expertInfo(final String expertInfo, String hospitalId, final int currentPosition) {
-        RetrofitHttpUtil
-                .getInstance()
-                .expertTeach(
-                        new BaseNoTObserver<ExpertEntry>() {
-                            @Override
-                            public void onHandleSuccess(ExpertEntry expertEntry) {
+        RetrofitHttpUtil.getInstance().expertTeach(
+                new BaseNoTObserver<ExpertEntry>() {
+                    @Override
+                    public void onHandleSuccess(ExpertEntry expertEntry) {
 
-                                iFragTwoView.stopRefush();
+                        iFragTwoView.stopRefush();
 
-                                if (expertEntry == null || expertEntry.getData() == null)
+                        if (expertEntry == null || expertEntry.getData() == null)
 //                                    if (expertEntry == null || expertEntry.getData() == null ||
 //                                        expertEntry.getData().size() < 1)
-                                    return;
+                            return;
 
-                                switch (expertInfo) {
+                        switch (expertInfo) {
 
-                                    case SpValue.EXPERT_VIDEO://专家直播
+                            case SpValue.EXPERT_VIDEO://专家直播
 
-                                        iFragTwoView.setExpertVideoInfo(expertEntry.getData(), currentPosition);
+                                iFragTwoView.setExpertVideoInfo(expertEntry.getData(), currentPosition);
 
-                                        break;
+                                break;
 
-                                    case SpValue.EXPERT_SPEECH://专家讲堂
+                            case SpValue.EXPERT_SPEECH://专家讲堂
 
-                                        iFragTwoView.setExpertSpeechInfo(expertEntry.getData(), currentPosition);
+                                iFragTwoView.setExpertSpeechInfo(expertEntry.getData(), currentPosition);
 
-                                        break;
+                                break;
 
-                                }
+                        }
 
-                            }
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                iFragTwoView.stopRefush();
+                    @Override
+                    public void onHandleError(String message) {
+                        iFragTwoView.stopRefush();
 
-                                iFragTwoView.showErr(message);
-                            }
+                        iFragTwoView.showErr(message);
+                    }
 
-                        }, SpValue.CH, hospitalId, searchContent
-                        , expertInfo, currentPage, SpValue.PAGE_SIZE);
+                }, SpValue.CH, hospitalId, searchContent
+                , expertInfo, currentPage, SpValue.PAGE_SIZE);
     }
 
 
@@ -90,26 +88,25 @@ public class IFragTwoPres {
     public void picNewsList(String hospitalId) {
 
         RetrofitHttpUtil.getInstance()
-                .picNewsList(
-                        new BaseNoTObserver<ExpertEntry>() {
-                            @Override
-                            public void onHandleSuccess(ExpertEntry newsListEntry) {
-                                iFragTwoView.stopRefush();
+                .picNewsList(new BaseNoTObserver<ExpertEntry>() {
+                    @Override
+                    public void onHandleSuccess(ExpertEntry newsListEntry) {
+                        iFragTwoView.stopRefush();
 
-                                if (newsListEntry == null || newsListEntry.getData() == null)
-                                    return;
+                        if (newsListEntry == null || newsListEntry.getData() == null)
+                            return;
 //                                List<ExpertEntry.DataBean> data = newsListEntry.getData();
-                                iFragTwoView.setNewsInfo(newsListEntry.getData());
+                        iFragTwoView.setNewsInfo(newsListEntry.getData());
 
-                            }
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                iFragTwoView.stopRefush();
-                                iFragTwoView.showErr(message);
-                            }
+                    @Override
+                    public void onHandleError(String message) {
+                        iFragTwoView.stopRefush();
+                        iFragTwoView.showErr(message);
+                    }
 
-                        }, SpValue.CH, hospitalId, searchContent, "1", currentPage, SpValue.PAGE_SIZE);
+                }, SpValue.CH, hospitalId, searchContent, "1", currentPage, SpValue.PAGE_SIZE);
     }
 
 
@@ -123,7 +120,7 @@ public class IFragTwoPres {
                             public void onHandleSuccess(DiseaseListEntry diseaseListEntry) {
                                 iFragTwoView.stopRefush();
 
-                                if (diseaseListEntry==null || diseaseListEntry.getData() ==null)
+                                if (diseaseListEntry == null || diseaseListEntry.getData() == null)
                                     return;
 
                                 iFragTwoView.setDiseaseInfo(diseaseListEntry.getData());

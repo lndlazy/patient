@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ylean.cf_hospitalapp.R;
-import com.ylean.cf_hospitalapp.base.view.HomeActivity;
+import com.ylean.cf_hospitalapp.base.activity.HomeActivity;
 import com.ylean.cf_hospitalapp.inquiry.activity.InquiryRefundActivity;
 import com.ylean.cf_hospitalapp.inquiry.bean.OrderEntry;
 import com.ylean.cf_hospitalapp.base.activity.BaseActivity;

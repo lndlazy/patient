@@ -40,6 +40,7 @@ import com.ylean.cf_hospitalapp.my.activity.MyRequestListActivity;
 import com.ylean.cf_hospitalapp.my.activity.MyTopicActivity;
 import com.ylean.cf_hospitalapp.mall.acitity.ServiceOrderListActivity;
 import com.ylean.cf_hospitalapp.my.activity.RecommandActivity;
+import com.ylean.cf_hospitalapp.my.activity.WebviewActivity;
 import com.ylean.cf_hospitalapp.my.bean.UnreadMsgEntry;
 import com.ylean.cf_hospitalapp.my.presenter.IReadMsgPres;
 import com.ylean.cf_hospitalapp.my.view.IReadMsgView;
@@ -47,7 +48,6 @@ import com.ylean.cf_hospitalapp.register.activity.MyRegisterListActivity;
 import com.ylean.cf_hospitalapp.my.activity.PointsDetailActivity;
 import com.ylean.cf_hospitalapp.mall.acitity.PointsMallAct;
 import com.ylean.cf_hospitalapp.my.activity.SettingActivity;
-import com.ylean.cf_hospitalapp.my.activity.VipRoueActivity;
 import com.ylean.cf_hospitalapp.my.adapter.GroupMyAdapter;
 import com.ylean.cf_hospitalapp.my.activity.MyFreeAskAct;
 import com.ylean.cf_hospitalapp.my.activity.MyInquiryListActivity;
@@ -219,7 +219,10 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
 
             case R.id.tvVipRule://会员规则
 
-                nextActivity(VipRoueActivity.class);
+                Intent mm = new Intent(getActivity(), WebviewActivity.class);
+                mm.putExtra("title", "会员规则");
+                mm.putExtra("url", ApiService.WEB_ROOT + ApiService.H5_WEB_VIP_ROUE);
+                startActivity(mm);
 
                 break;
 

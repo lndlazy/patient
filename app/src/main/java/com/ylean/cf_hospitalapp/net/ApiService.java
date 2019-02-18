@@ -93,6 +93,8 @@ public interface ApiService {
     //        String WEB_ROOT = "http://yx.yl-mall.cn";
     String WEB_ROOT_ADDRESS = "http://api.map.baidu.com";
 
+    String  H5_BASE_WEB = "/api/app/art/getnewsbytype";
+
     //咨询h5页面
     String H5_NEWS = "/api/app/art/newsinfo";
     //商品详情
@@ -101,11 +103,14 @@ public interface ApiService {
     //疾病详情
     String DISEASE_DETAIL = "/api/app/art/diseaseinfo";
 
+    //会员规则
+    String H5_WEB_VIP_ROUE = H5_BASE_WEB + "?ch=1&ctype=888";
+
     //服务协议
-    String SERVICE_XIEYI = "/api/app/art/getnewsbytype?ch=1&ctype=99";
+    String SERVICE_XIEYI = H5_BASE_WEB + "?ch=1&ctype=99";
 
     //邀请好友
-    String SERVICE_INVITE = "/api/app/art/getnewsbytype?ch=1&ctype=777";
+    String SERVICE_INVITE = H5_BASE_WEB + "?ch=1&ctype=777";
 
     String DEPARTMEN_INTRODUCE = "/api/app/hospital/departdetail";//科室介绍
 

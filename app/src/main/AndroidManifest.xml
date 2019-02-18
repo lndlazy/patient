@@ -68,7 +68,7 @@
         <!--</activity>-->
 
         <activity
-            android:name=".base.view.HomeActivity"
+            android:name=".base.activity.HomeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
@@ -425,10 +425,10 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name=".my.activity.VipRoueActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".my.activity.VipRoueActivity"-->
+            <!--android:configChanges="orientation|screenSize|keyboardHidden"-->
+            <!--android:screenOrientation="portrait" />-->
 
         <activity
             android:name=".mall.acitity.PointsMallAct"

@@ -173,7 +173,7 @@
         android:layout_alignParentBottom="true"
         android:background="@color/tab_colorf9"
         android:gravity="center"
-        android:text="添加新地址"
+        android:text="保存"
         android:textColor="@android:color/white"
         android:textSize="@dimen/textsize_18sp" />
 

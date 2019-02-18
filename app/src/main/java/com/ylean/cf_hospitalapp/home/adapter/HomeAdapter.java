@@ -3,17 +3,21 @@ package com.ylean.cf_hospitalapp.home.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.SystemClock;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.orhanobut.logger.Logger;
+import com.squareup.picasso.Picasso;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.home.FragmentOne;
 import com.ylean.cf_hospitalapp.inquiry.activity.ChargeChooseDoctorActivity;
@@ -24,10 +28,12 @@ import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.register.activity.OrderRegisterActivity;
 import com.ylean.cf_hospitalapp.self.view.SelfTestActivity;
 import com.ylean.cf_hospitalapp.utils.SpValue;
+import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
+import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> implements View.OnClickListener {
 
@@ -190,8 +196,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
         if (bannerList.size() == 0)
             picList.add(View.inflate(context, R.layout.item_viewpager, null));
 
-        HomePagerAdapter homePagerAdapter = new HomePagerAdapter(context, picList, bannerList);
-        holder.viewPager.setAdapter(homePagerAdapter);
+//        HomePagerAdapter homePagerAdapter = new HomePagerAdapter(context, picList, bannerList);
+//        holder.viewPager.setAdapter(homePagerAdapter);
 
         holder.llCharge.setOnClickListener(this);
         holder.llFree.setOnClickListener(this);
@@ -200,7 +206,54 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
 
         holder.tablayout.addOnTabSelectedListener(listener);
 
-//        holder.viewPager.
+        //设置图片加载器
+        holder. banner.setImageLoader(new GlideImageLoader());
+        //设置图片集合
+        List<String> images = new ArrayList<>();
+        for (int i = 0; i <bannerList.size(); i++) {
+            images.add(ApiService.WEB_ROOT +  bannerList.get(i).getImgurl()) ;
+        }
+        holder. banner.setImages(images);
+
+        holder.banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+
+            }
+        });
+        //banner设置方法全部调用完毕时最后调用
+        holder. banner.start();
+    }
+
+
+    public class GlideImageLoader extends ImageLoader {
+        @Override
+        public void displayImage(Context context, Object path, ImageView imageView) {
+            /**
+             注意：
+             1.图片加载器由自己选择，这里不限制，只是提供几种使用方法
+             2.返回的图片路径为Object类型，由于不能确定你到底使用的那种图片加载器，
+             传输的到的是什么格式，那么这种就使用Object接收和返回，你只需要强转成你传输的类型就行，
+             切记不要胡乱强转！
+             */
+            //Glide 加载图片简单用法
+            Glide.with(context).load(path).into(imageView);
+
+//            //Picasso 加载图片简单用法
+//            Picasso.with(context).load(path).into(imageView);
+
+            //用fresco加载图片简单用法，记得要写下面的createImageView方法
+//            Uri uri = Uri.parse((String) path);
+            imageView.setImageURI(Uri.parse((String) path));
+        }
+
+        //提供createImageView 方法，如果不用可以不重写这个方法，主要是方便自定义ImageView的创建
+        @Override
+        public ImageView createImageView(Context context) {
+            //使用fresco，需要创建它提供的ImageView，当然你也可以用自己自定义的具有图片加载功能的ImageView
+            SimpleDraweeView simpleDraweeView=new SimpleDraweeView(context);
+            return simpleDraweeView;
+        }
     }
 
 //    @Override
@@ -320,22 +373,23 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
         TextView tvAsk;
         TextView tvAnswer;
 
-        ViewPager viewPager;
-//        LinearLayout llPoint;
+//        ViewPager viewPager;
+        //        LinearLayout llPoint;
         LinearLayout llTestSelf;
         LinearLayout llFree;
         LinearLayout llCharge;
         LinearLayout llOrder;
         TabLayout tablayout;
-
+        Banner banner;
         MyViewHolder(View view, int viewType) {
             super(view);
 
             switch (viewType) {
 
                 case TYPE_HEAD:
+                    banner = (Banner) view.findViewById(R.id.banner);
 
-                    viewPager = view.findViewById(R.id.viewPager);
+//                    viewPager = view.findViewById(R.id.viewPager);
 //                    llPoint = view.findViewById(R.id.llPoint);
                     llTestSelf = view.findViewById(R.id.llTestSelf);
                     llFree = view.findViewById(R.id.llFree);
@@ -372,7 +426,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                 case TYPE_VIDEO:
                     sdvImg = (SimpleDraweeView) view.findViewById(R.id.sdvImg);
                     sdvPic = (SimpleDraweeView) view.findViewById(R.id.sdvPic);
-
                     tvTitle = (TextView) view.findViewById(R.id.tvTitle);
                     tvName = (TextView) view.findViewById(R.id.tvName);
                     tvTime = (TextView) view.findViewById(R.id.tvTime);

@@ -1,4 +1,4 @@
-package com.ylean.cf_hospitalapp.base.view;
+package com.ylean.cf_hospitalapp.base.activity;
 
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
@@ -15,6 +15,7 @@ import com.hyphenate.chat.EMClient;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.Presenter.IHxPresenter;
 import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
+import com.ylean.cf_hospitalapp.base.view.IHxView;
 import com.ylean.cf_hospitalapp.inquiry.FragmentThree;
 import com.ylean.cf_hospitalapp.home.FragmentOne;
 import com.ylean.cf_hospitalapp.my.FragmentFour;
@@ -51,8 +52,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
 
     private static final int REQUEST_PERMISSION_LOCATION_CODE = 0x13;
 
-
     private IHxPresenter iHxPresenter = new IHxPresenter(this);
+
+    public static boolean isHandChooseLocation = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +68,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         iHxPresenter.loginHx((String) SaveUtils.get(this, SpValue.HX_NAME, ""));
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
         EventBus.getDefault().unregister(this);
     }
-
 
     @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
     public void onDataSynEvent(String action) {

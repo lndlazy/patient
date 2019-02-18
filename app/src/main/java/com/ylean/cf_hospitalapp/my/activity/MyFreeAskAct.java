@@ -12,7 +12,7 @@ import android.view.View;
 
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
-import com.ylean.cf_hospitalapp.base.view.HomeActivity;
+import com.ylean.cf_hospitalapp.base.activity.HomeActivity;
 import com.ylean.cf_hospitalapp.inquiry.activity.InquiryDetailAct;
 import com.ylean.cf_hospitalapp.my.bean.MyAskReusltList;
 import com.ylean.cf_hospitalapp.my.adapter.AskAdapter;

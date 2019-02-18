@@ -38,9 +38,7 @@
             android:textColor="@color/line_color9b"
             android:textSize="@dimen/textsize_15sp" />
 
-
     </LinearLayout>
-
 
     <RelativeLayout
         android:id="@+id/rlAddress"
@@ -58,7 +56,6 @@
             android:textSize="@dimen/textsize_15sp"
             android:textStyle="bold" />
 
-
         <TextView
             android:id="@+id/tvTel"
             android:layout_width="wrap_content"
@@ -66,7 +63,7 @@
             android:layout_marginLeft="@dimen/x5"
             android:layout_toRightOf="@id/tvName"
             android:gravity="center_vertical"
-            android:text="122222222"
+            android:text="电话"
             android:textColor="@color/txt_color_ma3"
             android:textSize="@dimen/textsize_13sp"
             android:textStyle="bold" />
@@ -74,12 +71,12 @@
         <TextView
             android:id="@+id/tvAddressDetail"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x30"
+            android:minHeight="@dimen/x30"
+            android:layout_height="wrap_content"
             android:layout_below="@id/tvName"
             android:drawableLeft="@mipmap/ic_location_gray"
             android:drawablePadding="@dimen/x3"
             android:gravity="center_vertical"
-            android:singleLine="true"
             android:text="地址"
             android:textColor="@color/txt_color_light9" />
 
