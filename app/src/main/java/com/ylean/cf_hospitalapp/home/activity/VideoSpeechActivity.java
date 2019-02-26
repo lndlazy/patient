@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.orhanobut.logger.Logger;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
@@ -71,7 +72,7 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
     private ImageView ivgood;
     //当前点击病友信息
     private CommComListEntry.DataBean commentInfo;
-
+    private String currentType;
 
     //视频的presenter
     private IVideoSpeechPres iVideoSpeechPres = new IVideoSpeechPres(this);
@@ -85,10 +86,9 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
     //评论列表
     private List<CommComListEntry.DataBean> commentList = new ArrayList<>();
 
-    private String type;
+    //    private String type;
     private RecyclerView recyclerView;
     private CommentCommAdapter commAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,14 +97,20 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
         setContentView(R.layout.act_video_speech);
 
         id = getIntent().getStringExtra("id");
-        //类型 直播1 还是 视频3
-//        type = getIntent().getStringExtra("type");
 
         initView();
 
         iVideoSpeechPres.setId(id);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         iVideoSpeechPres.videoSpeechDetail((String) SaveUtils.get(this, SpValue.TOKEN, ""));
         iVideoSpeechPres.videoCommentList((String) SaveUtils.get(this, SpValue.TOKEN, ""));
+
+        videoPlayer.onVideoResume();
     }
 
     private void initView() {
@@ -150,6 +156,8 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
 
         ivlike.setOnClickListener(this);
         llcomment.setOnClickListener(this);
+        ivgood.setOnClickListener(this);
+        tvAttention.setOnClickListener(this);
 
         tbv.setOnLeftClickListener(new View.OnClickListener() {
             @Override
@@ -161,7 +169,6 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
         tbv.setOnRightClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //分享 TODO
 
                 if (videoInfo == null) {
                     showErr("数据错误");
@@ -222,18 +229,24 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
                                 share(SHARE_MEDIA.SINA);
                             }
                         })
-
                 .show();
 
     }
 
     private void share(SHARE_MEDIA perform) {
 
-        ShareUtils.shareWeb(VideoSpeechActivity.this, videoInfo.getVideourl()
+        if (videoInfo == null) {
+            showErr("数据错误");
+            return;
+        }
+
+        String shareUrl = ApiService.WEB_ROOT + "/api/app/art/sharelivedetail?id=" + videoInfo.getId();
+        Logger.d("分享的url：：：" + videoInfo.getVideourl() + ",,,,,===" + shareUrl);
+
+        ShareUtils.shareWeb(VideoSpeechActivity.this, shareUrl
                 , videoInfo.getDoctorname(), videoInfo.getTitle()
                 , ApiService.WEB_ROOT + videoInfo.getDoctorimg(), -1, perform);
     }
-
 
     private VideoSpeechDetailEntry.DataBean videoInfo;
 
@@ -255,7 +268,8 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
         tvtalk.setText(data.getHopedesc());
         tvgoodcount.setText(data.getFabulouscount());
         tvlike.setText(data.getCollectcount());
-        type = data.getType();
+        currentType = data.getType();
+        Logger.d("当前类型type::" + currentType);
 //        tvDate.setText(data.getStartime());
 
         if (!TextUtils.isEmpty(data.getStatus())) {
@@ -277,12 +291,15 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
 
         }
 
-        ivlike.setSelected(!"0".equals(data.getIscollectlive()));
+        ivlike.setSelected("1".equals(data.getIscollectlive()));
+        ivgood.setSelected("1".equals(data.getIsfabulous()));
 
     }
 
     @Override
     public void setCommentData(List<CommComListEntry.DataBean> data) {
+
+        commentList.clear();
 
         commentList.addAll(data);
 
@@ -325,11 +342,6 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
         videoPlayer.onVideoPause();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        videoPlayer.onVideoResume();
-    }
 
     @Override
     protected void onDestroy() {
@@ -356,21 +368,75 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
 
         switch (v.getId()) {
 
-            case R.id.ivlike:
+            case R.id.ivgood://视频点赞
 
-                if ("2".equals(type))//如果是讲堂，收藏type为3
-                    type = "3";
+                //点赞
+                iGoodPres.setToken((String) SaveUtils.get(this, SpValue.TOKEN, ""));
+
+                switch (currentType) {
+
+                    case "1"://直播
+                        iGoodPres.setType("3");
+                        break;
+
+                    case "2"://视频
+                        iGoodPres.setType("4");
+                        break;
+                }
+
+                iGoodPres.setRelateid(videoInfo.getId());
+                if ("1".equals(videoInfo.getIsfabulous())) {
+                    //已经点赞， 取消点赞
+                    iGoodPres.removeGood();
+                } else {
+                    //未点赞， 点击点赞
+                    iGoodPres.good();
+                }
+
+                break;
+
+            case R.id.ivlike://收藏视频
 
                 iCollectionPres.setId(id);
 
+                String mt = "";
+                switch (currentType) {
+
+                    case "1"://直播
+                        mt = "1";
+                        break;
+
+                    case "2"://视频
+                        mt = "3";
+                        break;
+                }
+
                 if (ivlike.isSelected())
                     //取消收藏
-                    iCollectionPres.removeCollection((String) SaveUtils.get(this, SpValue.TOKEN, ""), type);
+                    iCollectionPres.removeCollection((String) SaveUtils.get(this, SpValue.TOKEN, ""), mt);
                 else
                     //添加收藏
-                    iCollectionPres.addCollection((String) SaveUtils.get(this, SpValue.TOKEN, ""), type);
+                    iCollectionPres.addCollection((String) SaveUtils.get(this, SpValue.TOKEN, ""), mt);
 
                 break;
+
+            case R.id.tvAttention://关注医生
+
+                if (videoInfo == null) {
+                    showErr("数据错误");
+                    return;
+                }
+                iCollectionPres.setId(videoInfo.getDoctorid());
+
+                if ("1".equals(videoInfo.getIscollectdoc()))
+                    //已关注 取消关注
+                    iCollectionPres.removeCollection((String) SaveUtils.get(this, SpValue.TOKEN, ""), "5");
+                else
+                    //未关注 添加关注
+                    iCollectionPres.addCollection((String) SaveUtils.get(this, SpValue.TOKEN, ""), "5");
+
+                break;
+
 
             case R.id.llcomment://评论
 
@@ -394,25 +460,13 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
 
     }
 
-    //点击关注病友
+    //点赞评论
     public void goodAction(CommComListEntry.DataBean dataBean) {
 
         commentInfo = dataBean;
 
         iGoodPres.setToken((String) SaveUtils.get(this, SpValue.TOKEN, ""));
 
-        //type 资讯(1),文章(2),直播(3),讲堂(4),帖子(5),评论(6);
-//        switch (type) {
-//
-//            case "1"://直播
-//                iGoodPres.setType("3");
-//                break;
-//
-//            case "3"://视频
-//                iGoodPres.setType("4");
-//                break;
-//
-//        }
         iGoodPres.setType("6");
         iGoodPres.setRelateid(dataBean.getEvaluateid());
         if ("1".equals(dataBean.getIsdz())) {
@@ -428,13 +482,22 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
 
     //点赞成功
     @Override
-    public void goodSuccess() {
+    public void goodSuccess(String type) {
 
-        if (commentInfo != null)
-            commentInfo.setIsdz("1");
+        if ("6".equals(type)) {
+            //评论的点赞
 
-        if (commAdapter != null)
-            commAdapter.notifyDataSetChanged();
+            if (commentInfo != null)
+                commentInfo.setIsdz("1");
+
+            if (commAdapter != null)
+                commAdapter.notifyDataSetChanged();
+        } else {
+            //视频的点赞
+            ivgood.setSelected(true);
+            videoInfo.setIsfabulous("1");
+            tvgoodcount.setText((Integer.valueOf(tvgoodcount.getText().toString()) + 1) + "");
+        }
 
     }
 
@@ -459,13 +522,23 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
 
     //取消点赞
     @Override
-    public void removeSuccess() {
+    public void removeSuccess(String type) {
 
-        if (commentInfo != null)
-            commentInfo.setIsdz("0");
+        if ("6".equals(type)) {
+            //评论的取消点赞
+            if (commentInfo != null)
+                commentInfo.setIsdz("0");
 
-        if (commAdapter != null)
-            commAdapter.notifyDataSetChanged();
+            if (commAdapter != null)
+                commAdapter.notifyDataSetChanged();
+
+        } else {
+            //视频的取消点赞
+            ivgood.setSelected(false);
+            videoInfo.setIsfabulous("0");
+            tvgoodcount.setText((Integer.valueOf(tvgoodcount.getText().toString()) - 1) + "");
+
+        }
 
     }
 
@@ -473,16 +546,22 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
     @Override
     public void collectionSuccess(String type) {
 
-        if (this.type.equals(type)) {
-            //收藏视频
-            ivlike.setSelected(true);
-        } else if ("6".equals(type)) {
+        if ("6".equals(type)) {
             //关注病友
             if (commentInfo != null)
                 commentInfo.setIsfollow("1");
 
             if (commAdapter != null)
                 commAdapter.notifyDataSetChanged();
+        } else if ("5".equals(type)) {
+            //关注医生
+            videoInfo.setIscollectdoc("1");
+            tvAttention.setText("已关注");
+        } else {
+            //收藏视频
+            ivlike.setSelected(true);
+            tvlike.setText((Integer.valueOf(tvlike.getText().toString()) + 1) + "");
+
         }
 
     }
@@ -491,16 +570,21 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
     @Override
     public void removeCollectionSuccess(String type) {
 
-        if (this.type.equals(type)) {
-            //收藏视频
-            ivlike.setSelected(false);
-        } else if ("6".equals(type)) {
+        if ("6".equals(type)) {
             //关注病友
             if (commentInfo != null)
                 commentInfo.setIsfollow("0");
 
             if (commAdapter != null)
                 commAdapter.notifyDataSetChanged();
+        } else if ("5".equals(type)) {
+            //取消关注医生
+            videoInfo.setIscollectdoc("0");
+            tvAttention.setText("未关注");
+
+        } else {
+            tvlike.setText((Integer.valueOf(tvlike.getText().toString()) - 1) + "");
+            ivlike.setSelected(false);
         }
 
     }

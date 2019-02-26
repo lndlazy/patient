@@ -74,7 +74,6 @@ public class AddFamilyNumActivity extends BaseActivity implements View.OnClickLi
         familyNum = getIntent().getParcelableExtra("familyNum");
         initView();
 
-
     }
 
     @Override
@@ -393,10 +392,10 @@ public class AddFamilyNumActivity extends BaseActivity implements View.OnClickLi
             return false;
         }
 
-        if (TextUtils.isEmpty(etHospitalCard.getText().toString())) {
-            showErr("请填写医保卡号");
-            return false;
-        }
+//        if (TextUtils.isEmpty(etHospitalCard.getText().toString())) {
+//            showErr("请填写医保卡号");
+//            return false;
+//        }
 
         return true;
     }

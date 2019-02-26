@@ -45,23 +45,22 @@ public class ICollectionPres {
     //////直播(1),资讯(2),讲堂(3),帖子(4),医生(5),病友(6),文章(7),商品(8)
     public void addCollection(String token, String type) {
 
-        RetrofitHttpUtil.getInstance()
-                .addCollection(
-                        new BaseNoTObserver<Basebean>() {
-                            @Override
-                            public void onHandleSuccess(Basebean basebean) {
+        RetrofitHttpUtil.getInstance().addCollection(
+                new BaseNoTObserver<Basebean>() {
+                    @Override
+                    public void onHandleSuccess(Basebean basebean) {
 
-                                iCollectionView.showErr("操作成功");
-                                iCollectionView.collectionSuccess(type);
-                            }
+                        iCollectionView.showErr("操作成功");
+                        iCollectionView.collectionSuccess(type);
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
+                    @Override
+                    public void onHandleError(String message) {
 
-                                iCollectionView.showErr(message);
-                            }
+                        iCollectionView.showErr(message);
+                    }
 
-                        }, SpValue.CH, token, id, type);
+                }, SpValue.CH, token, id, type);
 
     }
 

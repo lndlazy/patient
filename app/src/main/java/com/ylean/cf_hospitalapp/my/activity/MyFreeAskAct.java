@@ -108,7 +108,7 @@ public class MyFreeAskAct extends BaseActivity implements SwipeRefreshLayout.OnR
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 
                 Intent m = new Intent(MyFreeAskAct.this, InquiryDetailAct.class);
-                m.putExtra("noedit", true);
+//                m.putExtra("noedit", true);
                 m.putExtra("consultaid", myAskResultList.get(position).getConsultaid());
                 m.putExtra("hospitalName", myAskResultList.get(position).getHospitalname());
                 m.putExtra("askType", 1);

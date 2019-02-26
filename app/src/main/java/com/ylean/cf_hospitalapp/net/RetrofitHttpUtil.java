@@ -37,7 +37,7 @@ public class RetrofitHttpUtil {
 
             //OkHttp配置
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);//log日志
+//            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);//log日志
             OkHttpClient client = new OkHttpClient().newBuilder()
                     .addInterceptor(interceptor)
                     .retryOnConnectionFailure(true)//错误重连
@@ -1516,6 +1516,26 @@ public class RetrofitHttpUtil {
             , String points, String skutype, String skucount, String remark) {
         getService().goodsOrder(ch, token, addrid, totalmoney, freightmoney, usepoints
                 , skuid, skuprice, points, skutype, skucount, remark)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+    }
+
+
+    /**
+     * 分享成功后调用 用来增加积分
+     */
+    public void shareSuccessIntegralGress(Observer subscriber, String token) {
+        getService().shareSuccessIntegralGress(token)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+    }
+
+
+    /**
+     * 根据id查询文章资讯标题
+     */
+    public void getShareTileByid(Observer subscriber, String id) {
+        getService().getShareTileByid(id)
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
     }

@@ -50,8 +50,8 @@ public class MyHelpActivity extends BaseActivity implements SwipeRefreshLayout.O
 
     private void helpList() {
 
-        RetrofitHttpUtil.getInstance()
-                .helpList(new BaseNoTObserver<HelpEntry>() {
+        RetrofitHttpUtil.getInstance().helpList(
+                new BaseNoTObserver<HelpEntry>() {
                     @Override
                     public void onHandleSuccess(HelpEntry basebean) {
                         swipeRefreshLayout.setRefreshing(false);

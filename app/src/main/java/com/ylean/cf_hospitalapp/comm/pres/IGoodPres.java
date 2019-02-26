@@ -46,7 +46,7 @@ public class IGoodPres {
                     @Override
                     public void onHandleSuccess(Basebean basebean) {
 
-                        iGoodView.goodSuccess();
+                        iGoodView.goodSuccess(type);
                     }
 
                     @Override
@@ -64,7 +64,7 @@ public class IGoodPres {
                 .removeGood(new BaseNoTObserver<Basebean>() {
                     @Override
                     public void onHandleSuccess(Basebean basebean) {
-                        iGoodView.removeSuccess();
+                        iGoodView.removeSuccess(type);
                     }
 
                     @Override

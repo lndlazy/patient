@@ -9,6 +9,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
@@ -82,6 +83,9 @@ public class RecommandActivity extends BaseActivity implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.tvnext:
+
+                Logger.d("用户userid::" + (String) SaveUtils.get(RecommandActivity.this, SpValue.USER_ID, ""));
+
                 chooseProferm(ApiService.WEB_ROOT + "/api/app/art/shareapplyUser?userid="
                         + (String) SaveUtils.get(RecommandActivity.this, SpValue.USER_ID, "") + "&ch=1");
                 break;
@@ -174,7 +178,7 @@ public class RecommandActivity extends BaseActivity implements View.OnClickListe
     private void share(SHARE_MEDIA perform, String url) {
 
         ShareUtils.shareWeb(RecommandActivity.this, url
-                , getResources().getString(R.string.app_name), getResources().getString(R.string.app_name)
+                , "好医在手健康无忧，邀请好友下载轻松得积分！", "一款专注于血管瘤及脉管畸形的专业APP"
                 , "", R.mipmap.logo, perform);
     }
 

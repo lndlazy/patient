@@ -31,26 +31,24 @@ public class IVideoSpeechPres {
 
     public void videoSpeechDetail(String token) {
 
-        RetrofitHttpUtil.getInstance()
-                .videoSpeechDetail(
-                        new BaseNoTObserver<VideoSpeechDetailEntry>() {
-                            @Override
-                            public void onHandleSuccess(VideoSpeechDetailEntry videoSpeechDetail) {
+        RetrofitHttpUtil.getInstance().videoSpeechDetail(
+                new BaseNoTObserver<VideoSpeechDetailEntry>() {
+                    @Override
+                    public void onHandleSuccess(VideoSpeechDetailEntry videoSpeechDetail) {
 
-                                if (videoSpeechDetail == null || videoSpeechDetail.getData() == null)
-                                    return;
+                        if (videoSpeechDetail == null || videoSpeechDetail.getData() == null)
+                            return;
 
-                                iVideoSpeechView.setInfo(videoSpeechDetail.getData());
+                        iVideoSpeechView.setInfo(videoSpeechDetail.getData());
 
-                            }
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                iVideoSpeechView.showErr(message);
-                            }
+                    @Override
+                    public void onHandleError(String message) {
+                        iVideoSpeechView.showErr(message);
+                    }
 
-                        }, token, SpValue.CH, id);
-
+                }, token, SpValue.CH, id);
 
     }
 

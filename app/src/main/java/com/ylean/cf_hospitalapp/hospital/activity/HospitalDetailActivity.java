@@ -335,9 +335,7 @@ public class HospitalDetailActivity extends BaseActivity implements IHospitalDet
                             }
                         }).show();
 
-
     }
-
 
     /**
      * 打开百度地图
@@ -468,7 +466,7 @@ public class HospitalDetailActivity extends BaseActivity implements IHospitalDet
     }
 
     @Override
-    public void goodSuccess() {
+    public void goodSuccess(String type) {
 
         if (commentInfo != null)
             commentInfo.setIsdz("1");
@@ -479,7 +477,7 @@ public class HospitalDetailActivity extends BaseActivity implements IHospitalDet
     }
 
     @Override
-    public void removeSuccess() {
+    public void removeSuccess(String type) {
 
         if (commentInfo != null)
             commentInfo.setIsdz("0");

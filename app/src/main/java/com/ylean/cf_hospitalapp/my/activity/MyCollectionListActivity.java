@@ -130,7 +130,7 @@ public class MyCollectionListActivity extends BaseActivity implements View.OnCli
                     case "1":
                         m = new Intent(MyCollectionListActivity.this, VideoSpeechActivity.class);
                         m.putExtra("id", collectionList.get(position).getLiveid());
-                        m.putExtra("type", "1");
+//                        m.putExtra("type", "1");
                         startActivity(m);
                         break;
                     case "2":
@@ -141,7 +141,7 @@ public class MyCollectionListActivity extends BaseActivity implements View.OnCli
                     case "3":
                         m = new Intent(MyCollectionListActivity.this, VideoSpeechActivity.class);
                         m.putExtra("id", collectionList.get(position).getLiveid());
-                        m.putExtra("type", "3");
+//                        m.putExtra("type", "3");
                         startActivity(m);
                         break;
                     case "4":

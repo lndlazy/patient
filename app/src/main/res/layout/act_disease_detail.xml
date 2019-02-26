@@ -10,6 +10,7 @@
         android:id="@+id/tbv"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x45"
+        custom:mTitleRight="@mipmap/ic_share"
         custom:mTitleBarColor="@color/tab_colorf9"
         custom:mTitleLeft="@mipmap/ic_arrow_left" />
 

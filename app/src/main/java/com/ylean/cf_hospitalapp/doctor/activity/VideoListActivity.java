@@ -88,7 +88,7 @@ public class VideoListActivity extends BaseActivity implements SwipeRefreshLayou
             @Override
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
                 Intent m = new Intent(VideoListActivity.this, VideoSpeechActivity.class);
-                m.putExtra("type", "3");//1直播 3视频
+//                m.putExtra("type", "3");//1直播 3视频
                 m.putExtra("id", videoList.get(position).getId());
                 startActivity(m);
             }

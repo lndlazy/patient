@@ -192,7 +192,7 @@
                     android:layout_width="@dimen/x30"
                     android:layout_height="@dimen/x30"
                     android:padding="@dimen/x8"
-                    android:src="@mipmap/ic_good" />
+                    android:src="@drawable/select_good" />
 
                 <TextView
                     android:id="@+id/tvgoodcount"

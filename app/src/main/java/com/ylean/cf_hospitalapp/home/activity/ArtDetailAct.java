@@ -10,11 +10,16 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.orhanobut.logger.Logger;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
+import com.ylean.cf_hospitalapp.comm.pres.IShareTitlePreseter;
+import com.ylean.cf_hospitalapp.comm.view.IShareTitleView;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
+import com.ylean.cf_hospitalapp.utils.ShareUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
+import com.ylean.cf_hospitalapp.widget.ActionSheetDialog;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 
 /**
@@ -22,10 +27,15 @@ import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
  * Created by linaidao on 2019/1/1.
  */
 
-public class ArtDetailAct extends BaseActivity {
+public class ArtDetailAct extends BaseActivity implements IShareTitleView {
 
     private WebView wb;
     private String id;
+    private String loadUrl;
+    private IShareTitlePreseter iShareTitlePreseter = new IShareTitlePreseter(this);
+
+    private String shareTitle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +44,11 @@ public class ArtDetailAct extends BaseActivity {
         setContentView(R.layout.act_act_detail);
 
         id = getIntent().getStringExtra("id");
-
+        loadUrl = ApiService.WEB_ROOT + ApiService.ARTICLE_NEWS + "?ch=1&token=" +
+                (String) SaveUtils.get(this, SpValue.TOKEN, "") + "&id=" + id;
         Logger.d("文章id::" + id);
+
+        iShareTitlePreseter.getShareTileByid(id);
         initView();
 //        articleDetail();
     }
@@ -93,8 +106,7 @@ public class ArtDetailAct extends BaseActivity {
         //closeWindow 方法是js端调用的本地的方法
 //        wb.addJavascriptInterface(new JsInterface(), "android");
 
-        Logger.d("加载的url::" + ((ApiService.WEB_ROOT + ApiService.H5_NEWS + "?ch=1&token=" +
-                (String) SaveUtils.get(this, SpValue.TOKEN, "") + "&id=" + id)));
+        Logger.d("加载的url::" + (loadUrl));
         wb.setWebViewClient(client);
 //        wb.loadUrl(ApiService.WEB_ROOT + ApiService.H5_NEWS + "?ch=1&token=" +
 //                (String) SaveUtils.get(this, SpValue.TOKEN, "") + "&id=" + id);
@@ -107,14 +119,84 @@ public class ArtDetailAct extends BaseActivity {
             }
         });
 
+        tbv.setOnRightClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseProferm();
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        wb.loadUrl(ApiService.WEB_ROOT + ApiService.H5_NEWS + "?ch=1&token=" +
-                (String) SaveUtils.get(this, SpValue.TOKEN, "") + "&id=" + id);
+        wb.loadUrl(loadUrl);
+    }
+
+    private void chooseProferm() {
+
+        new ActionSheetDialog(this)
+                .builder()
+                .setCancelable(true)
+                .setCanceledOnTouchOutside(true)
+                .addSheetItem("微信好友", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                share(SHARE_MEDIA.WEIXIN);
+
+                            }
+
+                        })
+                .addSheetItem("微信朋友圈", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                share(SHARE_MEDIA.WEIXIN_CIRCLE);
+
+                            }
+                        })
+                .addSheetItem("QQ", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+
+                                share(SHARE_MEDIA.QQ);
+
+                            }
+                        })
+                .addSheetItem("QQ空间", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+
+                                share(SHARE_MEDIA.QZONE);
+                            }
+                        })
+                .addSheetItem("微博", ActionSheetDialog.SheetItemColor.Blue,
+                        new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+
+                                share(SHARE_MEDIA.SINA);
+                            }
+                        })
+
+                .show();
+
+    }
+
+    private void share(SHARE_MEDIA perform) {
+
+        ShareUtils.shareWeb(ArtDetailAct.this, loadUrl
+                , "好医无忧", shareTitle
+                , "", R.mipmap.logo, perform);
+    }
+
+    @Override
+    public void setShareTitle(String data) {
+        shareTitle = data;
     }
 
     private class MyWebViewClient extends WebViewClient {
@@ -130,7 +212,7 @@ public class ArtDetailAct extends BaseActivity {
                 Intent m = new Intent(ArtDetailAct.this, CommentActivity.class);
                 m.putExtra("with_pic", false);
                 m.putExtra("id", id);
-                m.putExtra("type", "");
+                m.putExtra("type", "5");
                 m.putExtra("ordertype", "");
                 m.putExtra("ordercode", "");
                 startActivity(m);

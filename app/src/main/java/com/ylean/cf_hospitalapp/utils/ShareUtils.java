@@ -10,6 +10,9 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
+import com.ylean.cf_hospitalapp.base.bean.Basebean;
+import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
+import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
 
 /**
  * umeng 分享工具类
@@ -48,7 +51,25 @@ public class ShareUtils {
 //                                if (share_media.name().equals("WEIXIN_FAVORITE")) {
 //                                    Toast.makeText(activity, share_media + " 收藏成功", Toast.LENGTH_SHORT).show();
 //                                } else {
-                                    Toast.makeText(activity, share_media + " 分享成功", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity, share_media + " 分享成功", Toast.LENGTH_SHORT).show();
+
+                                //分享成功调用接口 增加积分
+                                RetrofitHttpUtil.getInstance().shareSuccessIntegralGress(
+                                        new BaseNoTObserver<Basebean>() {
+                                            @Override
+                                            public void onHandleSuccess(Basebean basebean) {
+
+                                            }
+
+                                            @Override
+                                            public void onHandleError(String message) {
+
+
+                                            }
+
+                                        }, (String) SaveUtils.get(activity, SpValue.TOKEN, ""));
+
+
 //                                }
                             }
                         });

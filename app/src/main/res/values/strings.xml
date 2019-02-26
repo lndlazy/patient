@@ -44,8 +44,8 @@
     <string name="pay_ask">付费问诊</string>
     <string name="room_choose">科室选择</string>
     <string name="message_sub">信息提交</string>
-    <string name="enter_question">请输入您想咨询的问题（不少于5个字）例如：血管瘤的治疗方法有哪些？</string>
-    <string name="enter_desc">请简单描述病情（不少于25个字）例如：主要症状、发病时间、治疗过程、病情变化、想得到怎样的帮助</string>
+    <string name="enter_question">请输入您想咨询的问题 例如：血管瘤的治疗方法有哪些？</string>
+    <string name="enter_desc">请简单描述病情 例如：主要症状、发病时间、治疗过程、病情变化、想得到怎样的帮助</string>
     <string name="choose_ask_people">问诊人选择</string>
     <string name="add_family_num">添加家人</string>
     <string name="input_name">请输入姓名</string>
@@ -94,7 +94,6 @@
     <string name="points_detail">积分明细</string>
     <string name="my_points">我的积分</string>
     <string name="points_rule">积分规则</string>
-
 
     <string name="day_name_format">EEE</string>
     <string name="invalid_date">Date must be between %1$s and %2$s.</string>

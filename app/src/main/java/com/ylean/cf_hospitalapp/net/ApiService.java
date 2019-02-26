@@ -3,6 +3,7 @@ package com.ylean.cf_hospitalapp.net;
 
 import com.ylean.cf_hospitalapp.base.bean.AddBean;
 import com.ylean.cf_hospitalapp.base.bean.Basebean;
+import com.ylean.cf_hospitalapp.comm.bean.ShareTitleBean;
 import com.ylean.cf_hospitalapp.doctor.bean.CommComListEntry;
 import com.ylean.cf_hospitalapp.doctor.bean.InquiryListEntry;
 import com.ylean.cf_hospitalapp.doctor.bean.VideoListEntry;
@@ -97,6 +98,8 @@ public interface ApiService {
 
     //咨询h5页面
     String H5_NEWS = "/api/app/art/newsinfo";
+    //文章详情
+    String ARTICLE_NEWS = "/api/app/art/articleinfo";
     //商品详情
     String GOODDS_DETAIL = "/api/app/art/proinfo";
 
@@ -918,6 +921,18 @@ public interface ApiService {
             , @Field("usepoints") String usepoints, @Field("skuid") String skuid, @Field("skuprice") String skuprice
             , @Field("points") String points, @Field("skutype") String skutype, @Field("skucount") String skucount
             , @Field("remark") String remark);
+
+
+    //分享成功后调用 用来增加积分
+    @FormUrlEncoded
+    @POST("/api/app/checkin/getsharepoint")
+    Observable<Basebean> shareSuccessIntegralGress(@Field("token") String token);
+
+
+    //根据id查询文章资讯标题
+    @FormUrlEncoded
+    @POST("/api/app/art/getnewtitle")
+    Observable<ShareTitleBean> getShareTileByid(@Field("id") String id);
 
 
 //    //删除地址

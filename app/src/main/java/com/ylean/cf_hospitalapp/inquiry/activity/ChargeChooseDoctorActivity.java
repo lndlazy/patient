@@ -30,6 +30,8 @@ import com.ylean.cf_hospitalapp.inquiry.adapter.PayAskDoctorAdapter;
 import com.ylean.cf_hospitalapp.inquiry.adapter.RoomRightAdapter;
 import com.ylean.cf_hospitalapp.inquiry.view.IPayView;
 import com.ylean.cf_hospitalapp.utils.DensityUtil;
+import com.ylean.cf_hospitalapp.utils.SaveUtils;
+import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.EditPicView;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
 import com.ylean.cf_hospitalapp.widget.swipe.OnItemClickListener;
@@ -61,7 +63,7 @@ public class ChargeChooseDoctorActivity extends BaseActivity implements View.OnC
     private String asktype = "";//问诊方式 1-图文 2-电话 3-视频
     private String sorttype = "";//排序方式
     private int page = 1;//
-    private String size = "15";//
+//    private String size = "15";//
 
     //医生adapter
     private PayAskDoctorAdapter payAskDoctorAdapter;
@@ -131,7 +133,8 @@ public class ChargeChooseDoctorActivity extends BaseActivity implements View.OnC
             return;
         }
 
-//        doctorInfoList.clear();
+        if (page == 1)
+            doctorInfoList.clear();
         doctorInfoList.addAll(doctorListEntry.getData());
 
         if (doctorInfoList.size() == 0)
@@ -144,6 +147,11 @@ public class ChargeChooseDoctorActivity extends BaseActivity implements View.OnC
             payAskDoctorAdapter.notifyDataSetChanged();
 
     }
+
+
+     private int mPicFirstVisibleItemPosition;
+     private int mPicLastVisibleItemPosition;
+
 
     private void initView() {
 
@@ -177,16 +185,27 @@ public class ChargeChooseDoctorActivity extends BaseActivity implements View.OnC
         divider.setDrawable(ContextCompat.getDrawable(this, R.drawable.shape_recyclerview_item_gray));
         recyclerView.addItemDecoration(divider);
 
+
+        payAskDoctorAdapter = new PayAskDoctorAdapter(this, doctorInfoList);
+        recyclerView.setAdapter(payAskDoctorAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
-                if (newState == 0 && !recyclerView.canScrollVertically(1)) {
-                    page++;
-                    getDoctorList();
-                }
+            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+
+            if (layoutManager instanceof LinearLayoutManager) {
+                mPicLastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+                mPicFirstVisibleItemPosition = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
+            }
+
+            if (payAskDoctorAdapter != null && newState == RecyclerView.SCROLL_STATE_IDLE
+                    && mPicLastVisibleItemPosition + 1 == payAskDoctorAdapter.getItemCount() && mPicFirstVisibleItemPosition > 0) {
+                page++;
+                getDoctorList();
+            }
 
             }
 
@@ -201,6 +220,7 @@ public class ChargeChooseDoctorActivity extends BaseActivity implements View.OnC
             public void startSearch(String s) {
 
                 searchname = s;
+                page =1;
                 getDoctorList();
 
             }
@@ -280,6 +300,7 @@ public class ChargeChooseDoctorActivity extends BaseActivity implements View.OnC
             tvCount.setTextColor(getResources().getColor(R.color.tab_colorf9));
         }
 
+        page = 1;
         getDoctorList();
     }
 
@@ -287,8 +308,9 @@ public class ChargeChooseDoctorActivity extends BaseActivity implements View.OnC
         if (choosePopupWindow != null)
             choosePopupWindow.dismiss();
 
-        doctorInfoList.clear();
+//        doctorInfoList.clear();
 
+        page = 1;
         getDoctorList();
     }
 
@@ -410,8 +432,7 @@ public class ChargeChooseDoctorActivity extends BaseActivity implements View.OnC
         roomPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                doctorInfoList.clear();
-                getDoctorList();
+
 
                 tvTwo.setTextColor(getResources().getColor(R.color.txt_color_light6));
                 ivTwo.setSelected(false);
@@ -430,7 +451,14 @@ public class ChargeChooseDoctorActivity extends BaseActivity implements View.OnC
             //取消科室id
             departid = "";
         } else {
-            departid = rightRoomList.get(position).getDepartmentname();
+
+            if (roomPopupWindow != null && roomPopupWindow.isShowing())
+                roomPopupWindow.dismiss();
+
+            page = 1;
+            getDoctorList();
+
+            departid = rightRoomList.get(position).getDepartmentid();
             rightRoomList.get(position).setSelect(true);
         }
         if (roomRightAdapter != null)
@@ -460,6 +488,11 @@ public class ChargeChooseDoctorActivity extends BaseActivity implements View.OnC
             rightRoomList.clear();
             if (departmentList.get(position) != null && departmentList.get(position).getChildlist() != null)
                 rightRoomList.addAll(departmentList.get(position).getChildlist());
+
+            DepartmentListEntry.DataBean.ChildlistBean firstItem = new DepartmentListEntry.DataBean.ChildlistBean();
+            firstItem.setDepartmentid("");
+            firstItem.setDepartmentname("全部");
+            rightRoomList.add(0, firstItem);
             roomRightAdapter.notifyDataSetChanged();
 
         }
@@ -692,12 +725,12 @@ public class ChargeChooseDoctorActivity extends BaseActivity implements View.OnC
 
     public void getDoctorList() {
         iPayPresenter.doctorList(this, searchname, departid, doctitleid, hosgradid, asktype
-                , sorttype, page, size);
+                , sorttype, page, SpValue.PAGE_SIZE);
     }
 
     @Override
     public void onRefresh() {
-        doctorInfoList.clear();
+//        doctorInfoList.clear();
         page = 1;
         //取消刷新
         getDoctorList();

@@ -10,6 +10,19 @@ import com.ylean.cf_hospitalapp.base.bean.Basebean;
 
 public class VideoSpeechDetailEntry extends Basebean {
 
+    /**
+     * data : {"browsecount":31,"collectcount":0,"commentcount":3,"content":"大腿外侧肌腱静脉畸形患者分享","doctorid":1,"doctorimg":"/upload/imgs/80b650ca-9824-4bd8-9785-cd865eac96f0.jpg","doctorname":"王亚飞","doctortitle":"主治医师","eductdesc":"毕业于湖北中医学院","fabulouscount":0,"fileid":"1271550540213841","hopedesc":"用我的爱心点燃您生命之火，用我的医术解除您疾病之苦。","hospitalid":3,"hospitalname":"北京长峰医院","id":274,"imgurl":"/upload/imgs/7a65d636-59cd-4f0b-8846-860cb1a961ba.jpg","iscollectdoc":1,"iscollectlive":0,"isfabulous":0,"looktype":0,"startime":"2019-02-19 09:01:20","startimetr":"2019-02-19 09:01:20","status":2,"timedesc":"2小时前","title":"大腿外侧肌腱静脉畸形患者分享","type":2,"videourl":"https://apd-ef6e399c23807847f2601f3d3a790eb5.v.smtcdns.com/vhot2.qqvideo.tc.qq.com/AHnN91mRJr0o6GT-Y799tqjJfJ-2ZkJzNhIGd_CG5v2o/d0806uj1iyw.mp4?sdtfrom=v1010&guid=a4b403fbc558c8b45fcf4860f559c1a5&vkey=D334169DCC59F1F119737609F211C0A3080F8F71F13DB0BB0293AB021E7E8E995E734611122F9FA3012B9A130FBAEF01D6FFFCAB084113B2936D6F36E40454CDD7061336BB00527BE561A914DE5D4C4C8D6F66FB89E53802D35266FD5888B9642843418DA78F8581606BF8EDED2DB9FF7859BAF6D65A716B"}
+     * maxRow : 0
+     * page : 0
+     * pageIndex : 0
+     * pageSize : 0
+     * startTime : 2019-02-19 11:32:39
+     * sum : 0
+     * titleList :
+     * token :
+     * totalmoney : 0
+     */
+
     private DataBean data;
     private int maxRow;
     private int page;
@@ -102,6 +115,35 @@ public class VideoSpeechDetailEntry extends Basebean {
     }
 
     public static class DataBean implements android.os.Parcelable {
+        /**
+         * browsecount : 31
+         * collectcount : 0
+         * commentcount : 3
+         * content : 大腿外侧肌腱静脉畸形患者分享
+         * doctorid : 1
+         * doctorimg : /upload/imgs/80b650ca-9824-4bd8-9785-cd865eac96f0.jpg
+         * doctorname : 王亚飞
+         * doctortitle : 主治医师
+         * eductdesc : 毕业于湖北中医学院
+         * fabulouscount : 0
+         * fileid : 1271550540213841
+         * hopedesc : 用我的爱心点燃您生命之火，用我的医术解除您疾病之苦。
+         * hospitalid : 3
+         * hospitalname : 北京长峰医院
+         * id : 274
+         * imgurl : /upload/imgs/7a65d636-59cd-4f0b-8846-860cb1a961ba.jpg
+         * iscollectdoc : 1
+         * iscollectlive : 0
+         * isfabulous : 0
+         * looktype : 0
+         * startime : 2019-02-19 09:01:20
+         * startimetr : 2019-02-19 09:01:20
+         * status : 2
+         * timedesc : 2小时前
+         * title : 大腿外侧肌腱静脉畸形患者分享
+         * type : 2
+         * videourl : https://apd-ef6e399c23807847f2601f3d3a790eb5.v.smtcdns.com/vhot2.qqvideo.tc.qq.com/AHnN91mRJr0o6GT-Y799tqjJfJ-2ZkJzNhIGd_CG5v2o/d0806uj1iyw.mp4?sdtfrom=v1010&guid=a4b403fbc558c8b45fcf4860f559c1a5&vkey=D334169DCC59F1F119737609F211C0A3080F8F71F13DB0BB0293AB021E7E8E995E734611122F9FA3012B9A130FBAEF01D6FFFCAB084113B2936D6F36E40454CDD7061336BB00527BE561A914DE5D4C4C8D6F66FB89E53802D35266FD5888B9642843418DA78F8581606BF8EDED2DB9FF7859BAF6D65A716B
+         */
 
         private String browsecount;
         private String collectcount;
@@ -121,6 +163,7 @@ public class VideoSpeechDetailEntry extends Basebean {
         private String imgurl;
         private String iscollectdoc;
         private String iscollectlive;
+        private String isfabulous;
         private String looktype;
         private String startime;
         private String startimetr;
@@ -274,6 +317,14 @@ public class VideoSpeechDetailEntry extends Basebean {
             this.iscollectlive = iscollectlive;
         }
 
+        public String getIsfabulous() {
+            return isfabulous;
+        }
+
+        public void setIsfabulous(String isfabulous) {
+            this.isfabulous = isfabulous;
+        }
+
         public String getLooktype() {
             return looktype;
         }
@@ -363,6 +414,7 @@ public class VideoSpeechDetailEntry extends Basebean {
             dest.writeString(this.imgurl);
             dest.writeString(this.iscollectdoc);
             dest.writeString(this.iscollectlive);
+            dest.writeString(this.isfabulous);
             dest.writeString(this.looktype);
             dest.writeString(this.startime);
             dest.writeString(this.startimetr);
@@ -395,6 +447,7 @@ public class VideoSpeechDetailEntry extends Basebean {
             this.imgurl = in.readString();
             this.iscollectdoc = in.readString();
             this.iscollectlive = in.readString();
+            this.isfabulous = in.readString();
             this.looktype = in.readString();
             this.startime = in.readString();
             this.startimetr = in.readString();

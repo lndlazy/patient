@@ -392,7 +392,7 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
             @Override
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
                 Intent m = new Intent(DoctorDetailActivity.this, VideoSpeechActivity.class);
-                m.putExtra("type", "3");//1直播 3视频
+//                m.putExtra("type", "3");//1直播 3视频
                 m.putExtra("id", data.get(position).getId());
                 startActivity(m);
             }

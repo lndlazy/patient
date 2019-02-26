@@ -31,6 +31,7 @@ public class IPayPresenter {
                     @Override
                     public void onSubscribe(Disposable d) {
                         super.onSubscribe(d);
+//                        iPayView.hideLoading();
                         iPayView.showLoading("获取中...");
                     }
 
@@ -56,36 +57,31 @@ public class IPayPresenter {
     public void freeDoctorList(Context context, String docname, String departid, String doctitleid
             , String hosgradid, int page, String size) {
 
-        RetrofitHttpUtil.getInstance()
-                .getFreeDoctorList(
-                        new BaseNoTObserver<DoctorListEntry>() {
+        RetrofitHttpUtil.getInstance().getFreeDoctorList(
+                new BaseNoTObserver<DoctorListEntry>() {
 
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                                super.onSubscribe(d);
-                                iPayView.showLoading("获取中...");
-                            }
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.onSubscribe(d);
+//                        iPayView.hideLoading();
+                        iPayView.showLoading("获取中...");
+                    }
 
-                            @Override
-                            public void onHandleSuccess(DoctorListEntry doctorListEntry) {
-                                iPayView.hideLoading();
-                                iPayView.defalutInfo(doctorListEntry);
-                            }
+                    @Override
+                    public void onHandleSuccess(DoctorListEntry doctorListEntry) {
+                        iPayView.hideLoading();
+                        iPayView.defalutInfo(doctorListEntry);
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                iPayView.hideLoading();
-                                iPayView.showInfo(message);
-                            }
+                    @Override
+                    public void onHandleError(String message) {
+                        iPayView.hideLoading();
+                        iPayView.showInfo(message);
+                    }
 
-                        }, SpValue.CH
-                        , (String) SaveUtils.get(context.getApplicationContext(), SpValue.HOSPITAL_ID, "")
-                        , departid
-                        , doctitleid
-                        , hosgradid
-                        , docname
-                        , page
-                        , size);
+                }, SpValue.CH
+                , (String) SaveUtils.get(context.getApplicationContext(), SpValue.HOSPITAL_ID, "")
+                , departid, doctitleid, hosgradid, docname, page, size);
 
     }
 

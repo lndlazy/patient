@@ -473,9 +473,9 @@ public class PayTWActivity extends BaseActivity implements View.OnClickListener,
                 img = img + images.get(i).getUrlPath() + ",";
             }
         }
+
         if (!TextUtils.isEmpty(img))
             img = img.substring(0, img.length() - 1);
-
 
         switch (askType) {
 
@@ -556,8 +556,8 @@ public class PayTWActivity extends BaseActivity implements View.OnClickListener,
             return true;
         }
 
-        if (etQues.getText().toString().length() < 5) {
-            showErr("咨询的问题应不少于5个字");
+        if (TextUtils.isEmpty(etQues.getText().toString())) {
+            showErr("请填写咨询的问题");
             return true;
         }
 
@@ -566,8 +566,8 @@ public class PayTWActivity extends BaseActivity implements View.OnClickListener,
             return true;
         }
 
-        if (etDesc.getText().toString().length() < 25) {
-            showErr("问题描述应不少于25个字");
+        if (TextUtils.isEmpty(etDesc.getText().toString())) {
+            showErr("请填写问题描述");
             return true;
         }
 

@@ -353,8 +353,8 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
         tvTotalIntegral.setText(myInfoEntry.getData().getTotalPoints());
         tvLevel.setText(myInfoEntry.getData().getLevel());
 
-        //userid，推荐给好友 使用
-        SaveUtils.put(getActivity(), SpValue.USER_ID, "");
+//        //userid，推荐给好友 使用
+//        SaveUtils.put(getActivity(), SpValue.USER_ID, "");
 
     }
 

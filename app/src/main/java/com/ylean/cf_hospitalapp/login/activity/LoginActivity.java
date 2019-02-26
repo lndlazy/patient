@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.orhanobut.logger.Logger;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -325,8 +326,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         JSONObject objects = (JSONObject) JSONObject.parse(data);
 //        String hxname = objects.getString("hxname");
-//        Logger.d("hxname：：：：" + hxname);
+        Logger.d("hxname：：：：" + objects.getString("hxname") + "，userid::" + objects.getString("userId"));
         SaveUtils.put(getApplicationContext(), SpValue.HX_NAME, objects.getString("hxname"));
+        SaveUtils.put(getApplicationContext(), SpValue.USER_ID, objects.getString("userId"));
         SaveUtils.put(getApplicationContext(), SpValue.TOKEN, loginEntry.getToken());
 
     }
@@ -334,49 +336,48 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     //dtype  0-微信 1-扣扣 2-微博
     private void getThirdLogin(String openid, String type, String name, String gender, String url) {
 
-        RetrofitHttpUtil.getInstance()
-                .thirdLogin(
-                        new Observer<LoginEntry>() {
-                            @Override
-                            public void onSubscribe(Disposable d) {
+        RetrofitHttpUtil.getInstance().thirdLogin(
+                new Observer<LoginEntry>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-                                showLoading("获取中...");
-                            }
+                        showLoading("获取中...");
+                    }
 
-                            @Override
-                            public void onNext(LoginEntry value) {
+                    @Override
+                    public void onNext(LoginEntry value) {
 
-                                hideLoading();
-                                if (value.getCode() == 0) {
+                        hideLoading();
+                        if (value.getCode() == 0) {
 
-                                    saveUserinfo(value);
-                                    nextActivityThenKill(HomeActivity.class);
+                            saveUserinfo(value);
+                            nextActivityThenKill(HomeActivity.class);
 
-                                } else {
+                        } else {
 
-                                    Intent m = new Intent(LoginActivity.this, RegisterAct.class);
-                                    m.putExtra("name", name);
-                                    m.putExtra("gender", gender);
-                                    m.putExtra("type", type);
-                                    m.putExtra("url", url);
-                                    m.putExtra("openid", openid);
-                                    startActivity(m);
+                            Intent m = new Intent(LoginActivity.this, RegisterAct.class);
+                            m.putExtra("name", name);
+                            m.putExtra("gender", gender);
+                            m.putExtra("type", type);
+                            m.putExtra("url", url);
+                            m.putExtra("openid", openid);
+                            startActivity(m);
 
-                                }
+                        }
 
-                            }
+                    }
 
-                            @Override
-                            public void onError(Throwable e) {
-                                hideLoading();
-                                showErr(e.getMessage());
-                            }
+                    @Override
+                    public void onError(Throwable e) {
+                        hideLoading();
+                        showErr(e.getMessage());
+                    }
 
-                            @Override
-                            public void onComplete() {
+                    @Override
+                    public void onComplete() {
 
-                            }
-                        }, openid, type, SpValue.CH);
+                    }
+                }, openid, type, SpValue.CH);
 //                        new BaseNoTObserver<Basebean>() {
 //                            @Override
 //                            public void onHandleSuccess(Basebean basebean) {

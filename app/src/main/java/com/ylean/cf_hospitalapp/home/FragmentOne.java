@@ -195,7 +195,7 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
                             //视频 专家讲堂
                             m = new Intent();
                             m.setClass(getActivity(), VideoSpeechActivity.class);
-                            m.putExtra("type", "3");//1直播 3视频
+//                            m.putExtra("type", "3");//1直播 3视频
                             m.putExtra("id", recommendList.get(position).getId());
                             startActivity(m);
                             break;

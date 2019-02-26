@@ -148,7 +148,8 @@ public class FreeAskDoctorListActivity extends BaseActivity implements View.OnCl
             return;
         }
 
-//        doctorInfoList.clear();
+        if (page == 1)
+            doctorInfoList.clear();
         doctorInfoList.addAll(doctorListEntry.getData());
 
         if (doctorInfoList.size() == 0)
@@ -167,6 +168,10 @@ public class FreeAskDoctorListActivity extends BaseActivity implements View.OnCl
             freeAskDoctorAdapter.notifyDataSetChanged();
 
     }
+
+    private int mPicFirstVisibleItemPosition;
+    private int mPicLastVisibleItemPosition;
+
 
     private void initView() {
 
@@ -233,7 +238,15 @@ public class FreeAskDoctorListActivity extends BaseActivity implements View.OnCl
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
-                if (newState == 0 && !recyclerView.canScrollVertically(1)) {
+                RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+
+                if (layoutManager instanceof LinearLayoutManager) {
+                    mPicLastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+                    mPicFirstVisibleItemPosition = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
+                }
+
+                if (freeAskDoctorAdapter != null && newState == RecyclerView.SCROLL_STATE_IDLE
+                        && mPicLastVisibleItemPosition + 1 == freeAskDoctorAdapter.getItemCount() && mPicFirstVisibleItemPosition > 0) {
                     page++;
                     getDoctorList();
                 }
@@ -250,6 +263,7 @@ public class FreeAskDoctorListActivity extends BaseActivity implements View.OnCl
             @Override
             public void startSearch(String s) {
                 searchname = s;
+                page = 1;
                 getDoctorList();
             }
         });
@@ -310,46 +324,38 @@ public class FreeAskDoctorListActivity extends BaseActivity implements View.OnCl
             return;
         }
 
-        RetrofitHttpUtil
-                .getInstance()
-                .createFreeAsk(
-                        new BaseNoTObserver<PicAskResutEntry>() {
+        RetrofitHttpUtil.getInstance().createFreeAsk(
+                new BaseNoTObserver<PicAskResutEntry>() {
 
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                                super.onSubscribe(d);
-                                showLoading("正在创建...");
-                            }
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.onSubscribe(d);
+                        showLoading("正在创建...");
+                    }
 
-                            @Override
-                            public void onHandleSuccess(PicAskResutEntry resutEntry) {
+                    @Override
+                    public void onHandleSuccess(PicAskResutEntry resutEntry) {
 
-                                hideLoading();
-                                if (resutEntry != null) {
-                                    Intent m = new Intent(FreeAskDoctorListActivity.this, FreeSuccessActivity.class);
-                                    m.putExtra("orderNum", resutEntry.getData());
-                                    startActivity(m);
+                        hideLoading();
+                        if (resutEntry != null) {
+                            Intent m = new Intent(FreeAskDoctorListActivity.this, FreeSuccessActivity.class);
+                            m.putExtra("orderNum", resutEntry.getData());
+                            startActivity(m);
 
-                                }
-                            }
+                        }
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
+                    @Override
+                    public void onHandleError(String message) {
 
-                                hideLoading();
-                                showErr(message);
-                            }
+                        hideLoading();
+                        showErr(message);
+                    }
 
-                        }, (String) SaveUtils.get(this, SpValue.TOKEN, "")
-                        , SpValue.CH
-                        , flokId
-                        , diseaseId
-                        , (String) SaveUtils.get(FreeAskDoctorListActivity.this, SpValue.HOSPITAL_ID, "")
-                        , problem
-                        , describe
-                        , imgs
-                        , voiceurl
-                        , doctorId);
+                }, (String) SaveUtils.get(this, SpValue.TOKEN, "")
+                , SpValue.CH, flokId, diseaseId
+                , (String) SaveUtils.get(FreeAskDoctorListActivity.this, SpValue.HOSPITAL_ID, "")
+                , problem, describe, imgs, voiceurl, doctorId);
 
     }
 
@@ -369,6 +375,7 @@ public class FreeAskDoctorListActivity extends BaseActivity implements View.OnCl
             tvCount.setTextColor(getResources().getColor(R.color.tab_colorf9));
         }
 
+        page = 1;
         getDoctorList();
     }
 
@@ -376,7 +383,7 @@ public class FreeAskDoctorListActivity extends BaseActivity implements View.OnCl
         if (choosePopupWindow != null)
             choosePopupWindow.dismiss();
 
-        doctorInfoList.clear();
+        page = 1;
         getDoctorList();
     }
 
@@ -490,17 +497,13 @@ public class FreeAskDoctorListActivity extends BaseActivity implements View.OnCl
         roomRightAdapter = new RoomRightAdapter(this, rightRoomList);
         this.roomRightRecyclerView.setAdapter(roomRightAdapter);
 
-        roomPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                //条件筛选，先清空列表
-                doctorInfoList.clear();
-                getDoctorList();
-
-                tvTwo.setTextColor(getResources().getColor(R.color.txt_color_light6));
-                ivTwo.setSelected(false);
-            }
-        });
+//        roomPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+//            @Override
+//            public void onDismiss() {
+//                //条件筛选，先清空列表
+//
+//            }
+//        });
     }
 
     private void roomRightChoice(int position) {
@@ -514,8 +517,19 @@ public class FreeAskDoctorListActivity extends BaseActivity implements View.OnCl
             //取消科室id
             departid = "";
         } else {
-            departid = rightRoomList.get(position).getDepartmentname();
+
+            if (roomPopupWindow != null && roomPopupWindow.isShowing())
+                roomPopupWindow.dismiss();
+
+            departid = rightRoomList.get(position).getDepartmentid();
             rightRoomList.get(position).setSelect(true);
+
+            page = 1;
+            getDoctorList();
+
+            tvTwo.setTextColor(getResources().getColor(R.color.txt_color_light6));
+            ivTwo.setSelected(false);
+
         }
         if (roomRightAdapter != null)
             roomRightAdapter.notifyDataSetChanged();
@@ -544,6 +558,11 @@ public class FreeAskDoctorListActivity extends BaseActivity implements View.OnCl
             rightRoomList.clear();
             if (departmentList.get(position) != null && departmentList.get(position).getChildlist() != null)
                 rightRoomList.addAll(departmentList.get(position).getChildlist());
+
+            DepartmentListEntry.DataBean.ChildlistBean firstItem = new DepartmentListEntry.DataBean.ChildlistBean();
+            firstItem.setDepartmentname("全部");
+            firstItem.setDepartmentid("");
+            rightRoomList.add(0, firstItem);
             roomRightAdapter.notifyDataSetChanged();
 
         }
@@ -780,7 +799,7 @@ public class FreeAskDoctorListActivity extends BaseActivity implements View.OnCl
 
     @Override
     public void onRefresh() {
-        doctorInfoList.clear();
+
         page = 1;
         //取消刷新
         getDoctorList();

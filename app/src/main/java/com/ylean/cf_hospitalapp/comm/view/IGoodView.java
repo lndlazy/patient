@@ -9,7 +9,7 @@ import com.ylean.cf_hospitalapp.base.view.BaseView;
 
 public interface IGoodView extends BaseView {
 
-    void goodSuccess();
+    void goodSuccess(String type);
 
-    void removeSuccess();
+    void removeSuccess(String type);
 }

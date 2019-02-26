@@ -12,6 +12,7 @@
         android:layout_height="@dimen/x45"
         custom:mTitleBarColor="@color/tab_colorf9"
         custom:mTitleBarText="详情"
+        custom:mTitleRight="@mipmap/ic_share"
         custom:mTitleLeft="@mipmap/ic_arrow_left" />
 
     <include layout="@layout/line_gray" />

@@ -63,7 +63,6 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
     private SpeechItemAdapter newsAdapter;
     private List<ExpertEntry.DataBean> newsList = new ArrayList<>();//专家讲堂集合
 
-
     private RecyclerView disRecyclerView;
     private DiseaseListAdapter diseaseListAdapter;
     private List<DiseaseListEntry.DataBean> diseaseList = new ArrayList<>();//疾病百科
@@ -244,7 +243,8 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
 
                 Intent m = new Intent(getActivity(), VideoSpeechActivity.class);
                 m.putExtra("id", videoList.get(position).getId());
-                m.putExtra("type", "1");
+                //类型   直播(1), 视频(2),文章(3);
+//                m.putExtra("type", videoList.get(position).getType());
                 startActivity(m);
             }
 
@@ -322,7 +322,8 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
                     m = new Intent();
                     m.setClass(getActivity(), VideoSpeechActivity.class);
                     m.putExtra("id", speechList.get(position).getId());
-                    m.putExtra("type", "3");
+//                    //  //类型   直播(1), 视频(2),文章(3);
+//                    m.putExtra("type", speechList.get(position).getType());
                     startActivity(m);
                 } else if ("3".equals(speechList.get(position).getType())) {
                     //文章
@@ -398,6 +399,7 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
             @Override
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 
+                //图文资讯
                 Intent m = new Intent(getActivity(), NewsActivity.class);
                 m.putExtra("id", newsList.get(position).getId());
                 startActivity(m);
@@ -473,6 +475,7 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
 
                 Intent m = new Intent(getActivity(), DiseaseDetailActivity.class);
                 m.putExtra("id", diseaseList.get(position).getId());
+                m.putExtra("shareTitle", diseaseList.get(position).getName());
                 startActivity(m);
 
             }
