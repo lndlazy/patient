@@ -1,6 +1,8 @@
 package com.ylean.cf_hospitalapp.home.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -189,8 +191,13 @@ public class ArtDetailAct extends BaseActivity implements IShareTitleView {
 
     private void share(SHARE_MEDIA perform) {
 
-        ShareUtils.shareWeb(ArtDetailAct.this, loadUrl
-                , "好医无忧", shareTitle
+        String shareUrl = ApiService.WEB_ROOT + ApiService.ARTICLE_NEWS_SHARE
+                + "?id=" + id;
+
+//        Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.mipmap.logo);
+
+        ShareUtils.shareWeb(ArtDetailAct.this, shareUrl
+                , shareTitle, "好医无忧"
                 , "", R.mipmap.logo, perform);
     }
 

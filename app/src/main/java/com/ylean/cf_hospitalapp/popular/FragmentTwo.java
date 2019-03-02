@@ -99,12 +99,22 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
 
         iFragTwoPres.setSearchContent("");
         iFragTwoPres.setCurrentPage(1);
+
+        epv.setOnSearch(new EditPicView.OnSearch() {
+            @Override
+            public void startSearch(String s) {
+
+                iFragTwoPres.setCurrentPage(1);
+
+                getCurrentInfo();
+
+            }
+        });
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
 
         cacheList.clear();
     }
@@ -123,33 +133,7 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
 
             cacheList.add(currentPosition);
 
-            switch (currentPosition) {
-
-                case 0://专家讲堂
-
-                    iFragTwoPres.expertInfo(SpValue.EXPERT_SPEECH, (String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""), currentPosition);
-
-                    break;
-
-                case 1://图文资讯
-
-                    iFragTwoPres.picNewsList((String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""));
-
-                    break;
-
-                case 2://疾病百科
-
-                    iFragTwoPres.diseaseList();
-
-                    break;
-
-                case 3://专家直播
-
-                    iFragTwoPres.expertInfo(SpValue.EXPERT_VIDEO, (String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""), currentPosition);
-
-                    break;
-
-            }
+            getCurrentInfo();
 
         }
 
@@ -166,14 +150,12 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
         }
     };
 
-    @Override
-    public void onRefresh() {
+    private void getCurrentInfo() {
 
-        iFragTwoPres.setCurrentPage(1);
-
+        iFragTwoPres.setSearchContent(epv.getInputInfo());
         switch (currentPosition) {
 
-            case 0://讲堂
+            case 0://专家讲堂
 
                 iFragTwoPres.expertInfo(SpValue.EXPERT_SPEECH, (String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""), currentPosition);
 
@@ -191,13 +173,21 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
 
                 break;
 
-            case 3://直播
+            case 3://专家直播
 
                 iFragTwoPres.expertInfo(SpValue.EXPERT_VIDEO, (String) SaveUtils.get(getActivity(), SpValue.HOSPITAL_ID, ""), currentPosition);
 
                 break;
 
         }
+    }
+
+    @Override
+    public void onRefresh() {
+
+        iFragTwoPres.setCurrentPage(1);
+
+        getCurrentInfo();
 
     }
 

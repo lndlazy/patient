@@ -34,7 +34,9 @@ import com.ylean.cf_hospitalapp.doctor.presenter.IDoctorDetailPres;
 import com.ylean.cf_hospitalapp.doctor.view.IDoctorDetailView;
 import com.ylean.cf_hospitalapp.net.ApiService;
 import com.ylean.cf_hospitalapp.register.activity.ChooseNumActivity;
+import com.ylean.cf_hospitalapp.register.activity.DoctorEvaulateActivity;
 import com.ylean.cf_hospitalapp.register.bean.HospitalListEntry;
+import com.ylean.cf_hospitalapp.register.bean.OrderInfoEntry;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
@@ -85,6 +87,7 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
 
     private EvaluateAdapter evaluateAdapter;
     private String menzhenId;//门诊id
+    private LinearLayout llcomment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +138,8 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
         this.tvPicPrice = (TextView) findViewById(R.id.tvPicPrice);
         TitleBackBarView tbv = (TitleBackBarView) findViewById(R.id.tbv);
 
+        LinearLayout llcomment = findViewById(R.id.llcomment);
+
         llpic = findViewById(R.id.llpic);
         lltel = findViewById(R.id.lltel);
         llvideo = findViewById(R.id.llvideo);
@@ -170,6 +175,7 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
         tvAttention.setOnClickListener(this);
         rlmorevideo.setOnClickListener(this);
         tvhospitaldesc.setOnClickListener(this);
+        llcomment.setOnClickListener(this);
 
         inuqiryRecyclerView();
         inintVideoRecyclerview();
@@ -334,6 +340,33 @@ public class DoctorDetailActivity extends BaseActivity implements IDoctorDetailV
                     mIntent.putExtra("url", url);
                 }
                 startActivity(mIntent);
+                break;
+
+
+            case R.id.llcomment://评论医生
+
+                if (doctorInfo==null)
+                {
+                    showErr("数据错误");
+                    return;
+                }
+
+                OrderInfoEntry.DataBean mOrderInfo = new OrderInfoEntry.DataBean();
+                mOrderInfo.setIscommend("0");
+                mOrderInfo.setDoctorid(doctorInfo.getDoctorid());
+                mOrderInfo.setDoctorimg(doctorInfo.getImgurl());
+                mOrderInfo.setDoctorname(doctorInfo.getDoctorname());
+                mOrderInfo.setDepartname(doctorInfo.getDepartname());
+                mOrderInfo.setDoctitle(doctorInfo.getDoctortitle());
+                mOrderInfo.setCode("-1");// 医生详情里面 评价的订单编号固定为-1
+//                mOrderInfo.setPrice("");
+                mOrderInfo.setHospitalname(doctorInfo.getHospiatlname());
+                mOrderInfo.setAdeptdesc(doctorInfo.getAdeptdesc());
+
+                Intent m = new Intent(this, DoctorEvaulateActivity.class);
+                m.putExtra("mOrderInfo", mOrderInfo);
+                startActivity(m);
+
                 break;
         }
     }

@@ -10,8 +10,11 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
@@ -77,6 +80,22 @@ public class PointsMallAct extends BaseActivity implements IPointsView, SwipeRef
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        etCommit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
+                    iPointsMallPres.setCurrentPage(1);
+                    iPointsMallPres.setKey(etCommit.getText().toString());
+                    iPointsMallPres.goodsClassify();
+
+                }
+
+                return false;
             }
         });
     }

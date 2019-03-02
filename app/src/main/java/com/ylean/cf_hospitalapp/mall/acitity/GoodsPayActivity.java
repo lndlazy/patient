@@ -1,5 +1,6 @@
 package com.ylean.cf_hospitalapp.mall.acitity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONArray;
 import com.alipay.sdk.app.AuthTask;
 import com.orhanobut.logger.Logger;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -25,6 +27,7 @@ import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.utils.alipay.OrderInfoUtil2_0;
 import com.ylean.cf_hospitalapp.utils.alipay.PayResult;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
+import com.ylean.cf_hospitalapp.wxapi.PayResultActivity;
 
 import java.util.Map;
 
@@ -247,8 +250,8 @@ public class GoodsPayActivity extends BaseActivity implements View.OnClickListen
                         String sign = OrderInfoUtil2_0.getSign(params, privatekey, true);
                         final String orderInfo = orderParam + "&" + sign;
 
-                        Logger.d("params:::" + params);
-                        Logger.d("sign:::" + sign);
+//                        Logger.d("params:::" + params);
+//                        Logger.d("sign:::" + sign);
 
                         new Thread(new Runnable() {
                             @Override
@@ -267,10 +270,13 @@ public class GoodsPayActivity extends BaseActivity implements View.OnClickListen
                                 String resultInfo = payResult.getResult();// 同步返回需要验证的信息
                                 String resultStatus = payResult.getResultStatus();
 
+                                Intent m = new Intent(GoodsPayActivity.this, PayResultActivity.class);
                                 if ("9000".equals(resultStatus)) {
                                     showErr("支付成功");
-                                }
-
+                                    m.putExtra("pay_success", true);
+                                }else
+                                    m.putExtra("pay_success", false);
+                                startActivity(m);
                             }
                         }).start();
 
@@ -281,8 +287,7 @@ public class GoodsPayActivity extends BaseActivity implements View.OnClickListen
                         showErr(message);
                     }
 
-                }, (String) SaveUtils.get(this, SpValue.TOKEN, "")
-                , SpValue.CH, orderCode);
+                }, (String) SaveUtils.get(this, SpValue.TOKEN, ""), SpValue.CH, orderCode);
     }
 
 }

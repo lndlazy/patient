@@ -62,24 +62,23 @@ public class IHospitalPres {
 
     public void hospitalList(String lat, String lon) {
 
-        RetrofitHttpUtil.getInstance()
-                .hospitalList(
-                        new BaseNoTObserver<HospitalListEntry>() {
-                            @Override
-                            public void onHandleSuccess(HospitalListEntry hospitalEntry) {
+        RetrofitHttpUtil.getInstance().hospitalList(
+                new BaseNoTObserver<HospitalListEntry>() {
+                    @Override
+                    public void onHandleSuccess(HospitalListEntry hospitalEntry) {
 
-                                if (hospitalEntry != null && hospitalEntry.getData() != null)
-                                    iHospitalView.setHospitailList(hospitalEntry.getData());
+                        if (hospitalEntry != null && hospitalEntry.getData() != null)
+                            iHospitalView.setHospitailList(hospitalEntry.getData());
 
-                            }
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                iHospitalView.showErr(message);
-                            }
+                    @Override
+                    public void onHandleError(String message) {
+                        iHospitalView.showErr(message);
+                    }
 
-                        }, SpValue.CH, type, hospitalname, lon
-                        , lat, hostype, hosgrade);
+                }, SpValue.CH, type, hospitalname, lon
+                , lat, hostype, hosgrade);
 
     }
 

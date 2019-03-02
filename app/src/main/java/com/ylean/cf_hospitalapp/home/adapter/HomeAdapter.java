@@ -163,7 +163,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
         holder.sdvPic.setImageURI(Uri.parse(ApiService.WEB_ROOT + recommendList.get(i).getImgurl()));
         //标题
         holder.tvTitle.setText(recommendList.get(i).getTitle());
-//        holder.tvContent.setText(recommendList.get(p).get);
+        //内容
+        holder.tvContent.setText(recommendList.get(i).getTabloid());
         //医生头像
         holder.sdvImg.setImageURI(Uri.parse(ApiService.WEB_ROOT + recommendList.get(i).getDocimg()));
         //医生姓名
@@ -176,6 +177,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
         holder.tvReadCount.setText(recommendList.get(i).getBrowsecount() + "");
         //发布时间
         holder.tvTime.setText(recommendList.get(i).getTimedesc());
+
     }
 
     /**

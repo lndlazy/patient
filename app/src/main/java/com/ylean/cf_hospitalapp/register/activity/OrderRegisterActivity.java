@@ -86,7 +86,7 @@ public class OrderRegisterActivity extends BaseActivity implements View.OnClickL
 
     private void getHospitailInfo() {
 
-        if (!TextUtils.isEmpty(etCommit.getText().toString()))
+//        if (!TextUtils.isEmpty(etCommit.getText().toString()))
             iHospitalPres.setHospitalname(etCommit.getText().toString());
         iHospitalPres.hospitalList((String) SaveUtils.get(this, SpValue.LAT, ""),
                 (String) SaveUtils.get(this, SpValue.LON, ""));
@@ -133,7 +133,7 @@ public class OrderRegisterActivity extends BaseActivity implements View.OnClickL
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     getHospitailInfo();
-                    return true;
+                    return false;
                 }
                 return false;
             }

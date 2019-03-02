@@ -370,7 +370,7 @@ public class RegisterDetailActivity extends BaseActivity implements View.OnClick
                     case PayStatus.STATUS_USED://已使用
 
                         //评价
-                        Intent mIntent = new Intent(this, RegisterEvaulateActivity.class);
+                        Intent mIntent = new Intent(this, DoctorEvaulateActivity.class);
                         mIntent.putExtra("mOrderInfo", mOrderInfo);
                         startActivityForResult(mIntent, 0x005);
 

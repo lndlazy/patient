@@ -445,10 +445,10 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name=".my.activity.PointsRuleActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".my.activity.PointsRuleActivity"-->
+            <!--android:configChanges="orientation|screenSize|keyboardHidden"-->
+            <!--android:screenOrientation="portrait" />-->
 
         <activity
             android:name=".register.activity.OrderRegisterActivity"
@@ -726,7 +726,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
 
-        <activity android:name=".register.activity.RegisterEvaulateActivity"
+        <activity android:name=".register.activity.DoctorEvaulateActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
@@ -737,6 +737,12 @@
             android:windowSoftInputMode="stateHidden|adjustResize"/>
 
         <activity android:name=".inquiry.activity.InquiryEvaulateActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+
+
+        <activity android:name=".wxapi.PayResultActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"/>

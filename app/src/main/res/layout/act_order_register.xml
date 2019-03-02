@@ -44,6 +44,7 @@
             android:layout_marginLeft="@dimen/x8"
             android:imeOptions="actionSearch"
             android:background="@null"
+            android:singleLine="true"
             android:gravity="center_vertical"
             android:hint="搜索医院名称"
             android:textColor="@color/line_coloreff"

@@ -30,6 +30,7 @@ import com.ylean.cf_hospitalapp.inquiry.adapter.SearchValueAdapter;
 import com.ylean.cf_hospitalapp.utils.CommonUtils;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
+import com.ylean.cf_hospitalapp.widget.swipe.OnItemClickListener;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -60,7 +61,7 @@ public class SearchingAcivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.act_searching);
-
+        historySet = SaveUtils.getSet(getApplicationContext(), SpValue.SEARCH_HISTORY, null);
         //设置医院id
         iSearchPres.setHospitalId((String) SaveUtils.get(this, SpValue.HOSPITAL_ID, ""));
         iSearchPres.setToken((String) SaveUtils.get(this, SpValue.TOKEN, ""));
@@ -85,7 +86,6 @@ public class SearchingAcivity extends BaseActivity implements View.OnClickListen
         this.etSearchInfo = (EditText) findViewById(R.id.etSearchInfo);
         this.llSearchStyle = (LinearLayout) findViewById(R.id.llSearchStyle);
         this.tvStyle = (TextView) findViewById(R.id.tvStyle);
-
 
         initRecyclerView();
 
@@ -140,7 +140,7 @@ public class SearchingAcivity extends BaseActivity implements View.OnClickListen
                     beginSearch();
                 }
 
-                return false;
+                return true;
 
             }
         });
@@ -148,14 +148,14 @@ public class SearchingAcivity extends BaseActivity implements View.OnClickListen
 
     private void setHistoryInfo() {
 
-        historySet = SaveUtils.getSet(getApplicationContext(), SpValue.SEARCH_HISTORY, null);
+//        historySet = SaveUtils.getSet(getApplicationContext(), SpValue.SEARCH_HISTORY, null);
 
-        if (historySet == null)
-            return;
+//        if (historySet == null)
+//            return;
 
-        for (String value : historySet) {
-            Logger.d("存储的值::" + value);
-        }
+//        for (String value : historySet) {
+//            Logger.d("存储的值::" + value);
+//        }
 
         if (historySet != null) {
             showHistory();
@@ -186,7 +186,7 @@ public class SearchingAcivity extends BaseActivity implements View.OnClickListen
     }
 
     private void isShowHistory() {
-        historySet = SaveUtils.getSet(getApplicationContext(), SpValue.SEARCH_HISTORY, null);
+//        historySet = SaveUtils.getSet(getApplicationContext(), SpValue.SEARCH_HISTORY, null);
 
         if (historySet == null) {
             //没有搜索历史记录
@@ -211,7 +211,34 @@ public class SearchingAcivity extends BaseActivity implements View.OnClickListen
         DividerItemDecoration divider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         divider.setDrawable(ContextCompat.getDrawable(this, R.drawable.shape_recyclerview_item_gray));
         recyclerView.addItemDecoration(divider);
+        recyclerView.addOnItemTouchListener(new OnItemClickListener(recyclerView) {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 
+                String searchHistoryName = "";
+                int i = 0;
+                for (String value : historySet) {
+//                    Logger.d("存储的值::" + value);
+
+                    if (i++ == position) {
+                        searchHistoryName = value;
+                        break;
+                    }
+
+                }
+
+                Logger.d("点击的搜索记录::" + searchHistoryName);
+
+                etSearchInfo.setText(searchHistoryName);
+                beginSearch();
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
     }
 
     @Override
@@ -226,6 +253,7 @@ public class SearchingAcivity extends BaseActivity implements View.OnClickListen
                 break;
 
             case R.id.ivClear://清空当前搜索的关键字
+
                 etSearchInfo.setText("");
                 break;
 
@@ -318,7 +346,7 @@ public class SearchingAcivity extends BaseActivity implements View.OnClickListen
 
     private void beginSearch() {
 
-        historySet = SaveUtils.getSet(getApplicationContext(), SpValue.SEARCH_HISTORY, null);
+//        historySet = SaveUtils.getSet(getApplicationContext(), SpValue.SEARCH_HISTORY, null);
 
         if (historySet == null)
             historySet = new LinkedHashSet<>();

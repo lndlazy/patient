@@ -14,10 +14,12 @@ import android.text.TextUtils;
 import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.base.bean.Basebean;
 import com.ylean.cf_hospitalapp.my.bean.BindEntry;
+import com.ylean.cf_hospitalapp.my.bean.UpdateResultBean;
 import com.ylean.cf_hospitalapp.my.view.ISettingView;
 import com.ylean.cf_hospitalapp.my.view.TakePhotoView;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
+import com.ylean.cf_hospitalapp.utils.CommonUtils;
 import com.ylean.cf_hospitalapp.utils.Constant;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 
@@ -263,23 +265,57 @@ public class ISettingPres {
     //绑定第三方登录
     public void bindThirdLogin(String token, String openId, String type, String name, String gender, String iconurl) {
 
-        RetrofitHttpUtil.getInstance()
-                .bindThirdLogin(
-                        new BaseNoTObserver<Basebean>() {
-                            @Override
-                            public void onHandleSuccess(Basebean basebean) {
+        RetrofitHttpUtil.getInstance().bindThirdLogin(
+                new BaseNoTObserver<Basebean>() {
+                    @Override
+                    public void onHandleSuccess(Basebean basebean) {
 
-                                iSettingView.showErr("绑定成功");
-                                iSettingView.bindSuccess(name, gender, iconurl);
+                        iSettingView.showErr("绑定成功");
+                        iSettingView.bindSuccess(name, gender, iconurl);
 
-                            }
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                iSettingView.showErr(message);
-                            }
-                        }, openId, type, token);
+                    @Override
+                    public void onHandleError(String message) {
+                        iSettingView.showErr(message);
+                    }
+                }, openId, type, token);
 
     }
 
+    /**
+     * 检查更新
+     */
+    public void checkUpdate() {
+
+        RetrofitHttpUtil.getInstance().checkUpdate(
+                new BaseNoTObserver<UpdateResultBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.onSubscribe(d);
+
+                        iSettingView.showLoading("正在检查更新...");
+                    }
+
+                    @Override
+                    public void onHandleSuccess(UpdateResultBean basebean) {
+                        iSettingView.hideLoading();
+
+                        if (basebean==null || basebean.getData() ==null)
+                            return;
+
+                        iSettingView.updateInfo(basebean);
+//                        String version = basebean.getData().getVersion();
+
+                    }
+
+                    @Override
+                    public void onHandleError(String message) {
+                        iSettingView.hideLoading();
+                        iSettingView.showErr(message);
+                    }
+
+                } ,SpValue.CH, "0");
+
+    }
 }

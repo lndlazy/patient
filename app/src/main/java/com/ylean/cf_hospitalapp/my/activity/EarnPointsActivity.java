@@ -1,5 +1,6 @@
 package com.ylean.cf_hospitalapp.my.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,6 +13,18 @@ import android.widget.TextView;
 
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
+import com.ylean.cf_hospitalapp.base.bean.Basebean;
+import com.ylean.cf_hospitalapp.my.adapter.PointEarnAdatper;
+import com.ylean.cf_hospitalapp.my.bean.EarnPointsBean;
+import com.ylean.cf_hospitalapp.net.ApiService;
+import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
+import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
+import com.ylean.cf_hospitalapp.utils.SaveUtils;
+import com.ylean.cf_hospitalapp.utils.SpValue;
+import com.ylean.cf_hospitalapp.widget.swipe.OnItemClickListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 赚取积分
@@ -22,6 +35,9 @@ public class EarnPointsActivity extends BaseActivity implements View.OnClickList
 
     private android.support.v7.widget.RecyclerView recyclerView;
 
+    private List<EarnPointsBean.DataBean> pointsList = new ArrayList<>();
+    private PointEarnAdatper pointEarnAdatper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +45,35 @@ public class EarnPointsActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.act_earn_points);
 
         initView();
+
+        getInfo();
+
+    }
+
+    private void getInfo() {
+
+        RetrofitHttpUtil.getInstance().howGetPoints(
+                new BaseNoTObserver<EarnPointsBean>() {
+                    @Override
+                    public void onHandleSuccess(EarnPointsBean earnPointsBean) {
+
+                        if (earnPointsBean == null || earnPointsBean.getData() == null)
+                            return;
+
+                        pointsList.clear();
+                        pointsList.addAll(earnPointsBean.getData());
+
+                        if (pointEarnAdatper != null)
+                            pointEarnAdatper.notifyDataSetChanged();
+
+                    }
+
+                    @Override
+                    public void onHandleError(String message) {
+                        showErr(message);
+                    }
+
+                }, SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, ""));
 
     }
 
@@ -46,6 +91,44 @@ public class EarnPointsActivity extends BaseActivity implements View.OnClickList
         DividerItemDecoration divider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         divider.setDrawable(ContextCompat.getDrawable(this, R.drawable.shape_recyclerview_item_gray));
         recyclerView.addItemDecoration(divider);
+        pointEarnAdatper = new PointEarnAdatper(this, pointsList);
+        recyclerView.setAdapter(pointEarnAdatper);
+
+        recyclerView.addOnItemTouchListener(new OnItemClickListener(recyclerView) {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
+
+                if ("签到".equals(pointsList.get(position).getName())) {
+                    startCheckIn();
+                }
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
+    }
+
+
+    //签到
+    private void startCheckIn() {
+
+        RetrofitHttpUtil.getInstance().checkIn(
+                new BaseNoTObserver<Basebean>() {
+                    @Override
+                    public void onHandleSuccess(Basebean basebean) {
+                        getInfo();
+                    }
+
+                    @Override
+                    public void onHandleError(String message) {
+
+                        showErr(message);
+                    }
+
+                }, SpValue.CH, (String) SaveUtils.get(this, SpValue.TOKEN, ""));
 
     }
 
@@ -60,7 +143,12 @@ public class EarnPointsActivity extends BaseActivity implements View.OnClickList
 
             case R.id.ivRight://积分规则
 
-                nextActivity(PointsRuleActivity.class);
+                Intent m = new Intent(this, WebviewActivity.class);
+                m.putExtra("title", "积分规则");
+                m.putExtra("url", ApiService.WEB_ROOT + ApiService.H5_BASE_WEB + "?ch=" + SpValue.CH
+                        + "&ctype=8888");
+                startActivity(m);
+
                 break;
 
 

@@ -1,6 +1,8 @@
 package com.ylean.cf_hospitalapp.my.activity;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -28,6 +30,7 @@ import com.ylean.cf_hospitalapp.base.view.DataUploadView;
 import com.ylean.cf_hospitalapp.inquiry.bean.DataUploadResultEntry;
 import com.ylean.cf_hospitalapp.my.bean.BindEntry;
 import com.ylean.cf_hospitalapp.my.bean.MyInfoEntry;
+import com.ylean.cf_hospitalapp.my.bean.UpdateResultBean;
 import com.ylean.cf_hospitalapp.my.presenter.ISettingPres;
 import com.ylean.cf_hospitalapp.my.view.ISettingView;
 import com.ylean.cf_hospitalapp.net.ApiService;
@@ -148,7 +151,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
             case R.id.aboutUs:
 
-                Intent a =new Intent(this, WebviewActivity.class);
+                Intent a = new Intent(this, WebviewActivity.class);
                 a.putExtra("title", "关于我们");
                 a.putExtra("url", "http://cfnew.yl-mall.cn/api/app/art/getnewsbytype?ch=1&ctype=999");
 //                title = getIntent().getStringExtra("title");
@@ -157,7 +160,10 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 startActivity(a);
                 break;
 
-            case R.id.update:
+            case R.id.update://新版本检测
+
+                iSettingPres.checkUpdate();
+
                 break;
 
             case R.id.rlNotice://TODO 通知
@@ -613,6 +619,49 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         if (gender.equals(""))
             iSettingPres.updateInfo((String) SaveUtils.get(SettingActivity.this, SpValue.TOKEN, "")
                     , iconurl, name, "", "男".equals(gender) ? "1" : "2", "", "");
+    }
+
+
+    //更新信息
+    @Override
+    public void updateInfo(UpdateResultBean basebean) {
+
+
+        try {
+            String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+
+            String version = basebean.getData().getVersion();
+
+            if (versionName.equals(version)) {
+                showErr("当前是最新版本");
+            } else {
+                alertUpdate(basebean);
+            }
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void alertUpdate(UpdateResultBean updateResultBean) {
+        AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this, R.style.AlertDialogCustom);
+        builder.setMessage("新版本:" + updateResultBean.getData().getVersion()).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        }).setPositiveButton("更新", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+
+                Uri uri = Uri.parse(ApiService.WEB_ROOT + updateResultBean.getData().getUrl());
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        }).show();
     }
 
 }

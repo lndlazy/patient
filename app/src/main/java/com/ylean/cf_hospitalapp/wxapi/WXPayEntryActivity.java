@@ -90,8 +90,9 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
     public void onResp(BaseResp resp) {
 
         Logger.d("errCode=:" + resp.errCode + ", resp type类型:" + resp.getType() + ", transaction : " + resp.transaction
-
                 + ",resp.errStr:::" + resp.errStr + ",:" + resp.toString());
+
+        Intent m = new Intent(this, PayResultActivity.class);
 
         if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
 
@@ -99,16 +100,21 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 
                 case 0:
                     tvStatus.setText("支付成功");
+                    m.putExtra("pay_success", true);
                     break;
 
                 default:
                     tvStatus.setText("支付失败");
                     tvDesc.setText("订单支付失败:" + resp.errStr);
+                    m.putExtra("pay_success", false);
+
                     break;
 
             }
 
         }
+
+        startActivity(m);
 
     }
 

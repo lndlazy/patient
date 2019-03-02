@@ -89,34 +89,33 @@ public class IDoctorDetailPres {
     //医生详情
     public void doctorDetail() {
 
-        RetrofitHttpUtil.getInstance()
-                .doctorDetail(
-                        new BaseNoTObserver<DoctorDetailEntry>() {
+        RetrofitHttpUtil.getInstance().doctorDetail(
+                new BaseNoTObserver<DoctorDetailEntry>() {
 
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                                super.onSubscribe(d);
-                                iDoctorDetailView.showLoading("获取中...");
-                            }
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.onSubscribe(d);
+                        iDoctorDetailView.showLoading("获取中...");
+                    }
 
-                            @Override
-                            public void onHandleSuccess(DoctorDetailEntry basebean) {
-                                iDoctorDetailView.hideLoading();
+                    @Override
+                    public void onHandleSuccess(DoctorDetailEntry basebean) {
+                        iDoctorDetailView.hideLoading();
 
-                                if (basebean == null || basebean.getData() == null)
-                                    return;
+                        if (basebean == null || basebean.getData() == null)
+                            return;
 
-                                doctorInfo = basebean.getData();
-                                iDoctorDetailView.setDoctorInfo(basebean.getData());
+                        doctorInfo = basebean.getData();
+                        iDoctorDetailView.setDoctorInfo(basebean.getData());
 
-                            }
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                iDoctorDetailView.hideLoading();
-                                iDoctorDetailView.showErr(message);
-                            }
-                        }, token, SpValue.CH, doctorId);
+                    @Override
+                    public void onHandleError(String message) {
+                        iDoctorDetailView.hideLoading();
+                        iDoctorDetailView.showErr(message);
+                    }
+                }, token, SpValue.CH, doctorId);
 
     }
 

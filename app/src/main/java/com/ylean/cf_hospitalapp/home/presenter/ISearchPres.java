@@ -87,6 +87,7 @@ public class ISearchPres {
                 break;
 
             case 3://文章
+
                 searchArticle();
                 break;
 
@@ -101,8 +102,8 @@ public class ISearchPres {
     //搜索医院列表
     private void searchHospital() {
 
-        RetrofitHttpUtil.getInstance()
-                .searchHospital(new BaseNoTObserver<SearchListEntry>() {
+        RetrofitHttpUtil.getInstance().searchHospital(
+                new BaseNoTObserver<SearchListEntry>() {
 
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -131,7 +132,7 @@ public class ISearchPres {
                         iSearchView.hideLoading();
 
                     }
-                }, SpValue.CH, name, page, SpValue.PAGE_SIZE);
+                }, SpValue.CH, name, page, Integer.MAX_VALUE + "");
 
     }
 
@@ -167,7 +168,7 @@ public class ISearchPres {
                         iSearchView.hideLoading();
 
                     }
-                }, SpValue.CH, name, hospitalId, page, SpValue.PAGE_SIZE);
+                }, SpValue.CH, name, hospitalId, page, Integer.MAX_VALUE + "");
     }
 
 
@@ -202,7 +203,7 @@ public class ISearchPres {
                         iSearchView.hideLoading();
 
                     }
-                }, SpValue.CH, name, hospitalId, page, SpValue.PAGE_SIZE);
+                }, SpValue.CH, name, hospitalId, page, Integer.MAX_VALUE + "");
     }
 
 
@@ -237,7 +238,7 @@ public class ISearchPres {
                         iSearchView.hideLoading();
 
                     }
-                }, SpValue.CH, name, hospitalId, page, SpValue.PAGE_SIZE);
+                }, SpValue.CH, name, hospitalId, page, Integer.MAX_VALUE + "");
     }
 
 }

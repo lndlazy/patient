@@ -17,6 +17,7 @@
     <include layout="@layout/line_gray" />
 
     <ImageView
+        android:id="@+id/ivpay"
         android:layout_width="@dimen/x40"
         android:layout_height="@dimen/x40"
         android:layout_gravity="center_horizontal"
@@ -29,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/x10"
-        android:text="@string/sub_success"
+        android:text="支付成功"
         android:textColor="@color/txt_color_light6"
         android:textSize="@dimen/textsize_20sp" />
 
@@ -72,7 +73,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/x8"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:background="@drawable/shape_line_gray"
             android:gravity="center"
             android:text="返回首页"

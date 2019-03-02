@@ -43,6 +43,7 @@ import com.ylean.cf_hospitalapp.my.bean.AreaEntry;
 import com.ylean.cf_hospitalapp.my.bean.BindEntry;
 import com.ylean.cf_hospitalapp.my.bean.CityEntry;
 import com.ylean.cf_hospitalapp.my.bean.DoctorDetailEntry;
+import com.ylean.cf_hospitalapp.my.bean.EarnPointsBean;
 import com.ylean.cf_hospitalapp.my.bean.EvalDetailEntry;
 import com.ylean.cf_hospitalapp.my.bean.EvalListEntry;
 import com.ylean.cf_hospitalapp.my.bean.FamilyDetailEntry;
@@ -60,6 +61,7 @@ import com.ylean.cf_hospitalapp.my.bean.PointsDetailEntry;
 import com.ylean.cf_hospitalapp.my.bean.PointsEntry;
 import com.ylean.cf_hospitalapp.my.bean.ProvinceEntry;
 import com.ylean.cf_hospitalapp.my.bean.UnreadMsgEntry;
+import com.ylean.cf_hospitalapp.my.bean.UpdateResultBean;
 import com.ylean.cf_hospitalapp.popular.bean.DiseaseListEntry;
 import com.ylean.cf_hospitalapp.popular.bean.ExpertEntry;
 import com.ylean.cf_hospitalapp.register.bean.DoctorTypeEntry;
@@ -94,12 +96,16 @@ public interface ApiService {
     //        String WEB_ROOT = "http://yx.yl-mall.cn";
     String WEB_ROOT_ADDRESS = "http://api.map.baidu.com";
 
-    String  H5_BASE_WEB = "/api/app/art/getnewsbytype";
+    String H5_BASE_WEB = "/api/app/art/getnewsbytype";
 
-    //咨询h5页面
+    //资讯h5页面
     String H5_NEWS = "/api/app/art/newsinfo";
+    //资讯h5分享页面
+    String H5_NEWS_SHARE = "/api/app/art/sharenews";
     //文章详情
     String ARTICLE_NEWS = "/api/app/art/articleinfo";
+    //文章分享页面
+    String ARTICLE_NEWS_SHARE = "/api/app/art/sharearticle";
     //商品详情
     String GOODDS_DETAIL = "/api/app/art/proinfo";
 
@@ -941,11 +947,20 @@ public interface ApiService {
 //    Observable<AddressListEntry> deleteAddress(@Field("ch") String ch, @Field("token") String token, @Field("id") String id);
 
 
-//    //如何赚取积分
-//    @FormUrlEncoded
-//    @POST("/api/app/checkin/pointsrule")
-//    Observable<PointsDetailEntry> howGetPoints(@Field("ch") String ch, @Field("token") String token
-//            , @Field("fromtype") String fromtype, @Field("page") int page, @Field("size") String size);
+    //如何赚取积分
+    @FormUrlEncoded
+    @POST("/api/app/checkin/pointsrule")
+    Observable<EarnPointsBean> howGetPoints(@Field("ch") String ch, @Field("token") String token);
+
+    //签到
+    @FormUrlEncoded
+    @POST("/api/app/checkin/addpointrecord")
+    Observable<Basebean> checkIn(@Field("ch") String ch, @Field("token") String token);
+
+    //新版本检测
+    @FormUrlEncoded
+    @POST("/api/app/versionupd/checkVersion")
+    Observable<UpdateResultBean> checkUpdate(@Field("ch") String ch, @Field("type") String type);
 
 
 }

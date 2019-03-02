@@ -150,7 +150,6 @@ public class CommonUtils {
     static double dataDigit(int digit, double in) {
         return new BigDecimal(in).setScale(6, BigDecimal.ROUND_HALF_UP).doubleValue();
 
-
     }
 
     public static String getCommentType(String typeCode) {

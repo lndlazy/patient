@@ -1,6 +1,12 @@
 package com.ylean.cf_hospitalapp.utils;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -10,6 +16,7 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
+import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.bean.Basebean;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
@@ -29,7 +36,7 @@ public class ShareUtils {
         web.setTitle(title);//标题
         web.setDescription(description);//描述
         if (TextUtils.isEmpty(imageUrl)) {
-            web.setThumb(new UMImage(activity, imageID));  //本地缩略图
+            web.setThumb(new UMImage(activity, changeColor(BitmapFactory.decodeResource(activity.getResources(), imageID))));  //本地缩略图
         } else {
             web.setThumb(new UMImage(activity, imageUrl));  //网络缩略图
         }
@@ -109,4 +116,38 @@ public class ShareUtils {
                 .share();*/
     }
 
+
+    //bitmap中的透明色用白色替换
+    public static Bitmap changeColor(Bitmap bitmap) {
+        if (bitmap == null) {
+            return null;
+        }
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
+        int[] colorArray = new int[w * h];
+        int n = 0;
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                int color = getMixtureWhite(bitmap.getPixel(j, i));
+                colorArray[n++] = color;
+            }
+        }
+        return Bitmap.createBitmap(colorArray, w, h, Bitmap.Config.ARGB_8888);
+    }
+
+    //获取和白色混合颜色
+    private static int getMixtureWhite(int color) {
+        int alpha = Color.alpha(color);
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
+        return Color.rgb(getSingleMixtureWhite(red, alpha), getSingleMixtureWhite(green, alpha),
+                getSingleMixtureWhite(blue, alpha));
+    }
+
+    // 获取单色的混合值
+    private static int getSingleMixtureWhite(int color, int alpha) {
+        int newColor = color * alpha / 255 + 255 - alpha;
+        return newColor > 255 ? 255 : newColor;
+    }
 }

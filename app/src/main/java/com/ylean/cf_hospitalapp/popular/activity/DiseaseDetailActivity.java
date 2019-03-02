@@ -148,7 +148,7 @@ public class DiseaseDetailActivity extends BaseActivity {
     private void share(SHARE_MEDIA perform) {
 
         ShareUtils.shareWeb(DiseaseDetailActivity.this, url
-                , "好医无忧", shareTitle
+                , shareTitle,"好医无忧"
                 , "", R.mipmap.logo, perform);
     }
 

@@ -1,5 +1,6 @@
 package com.ylean.cf_hospitalapp.inquiry.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.inquiry.bean.AlipayEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.WxPayInfoEntry;
+import com.ylean.cf_hospitalapp.mall.acitity.GoodsPayActivity;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
 import com.ylean.cf_hospitalapp.utils.CommonUtils;
@@ -24,6 +26,7 @@ import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.utils.alipay.OrderInfoUtil2_0;
 import com.ylean.cf_hospitalapp.utils.alipay.PayResult;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
+import com.ylean.cf_hospitalapp.wxapi.PayResultActivity;
 
 import java.util.Map;
 
@@ -162,46 +165,40 @@ public class BuyServiceAct extends BaseActivity implements View.OnClickListener 
             return;
         }
 
-        RetrofitHttpUtil
-                .getInstance()
-                .wxPayInfo(
-                        new BaseNoTObserver<WxPayInfoEntry>() {
+        RetrofitHttpUtil.getInstance().wxPayInfo(
+                new BaseNoTObserver<WxPayInfoEntry>() {
 
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                                super.onSubscribe(d);
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.onSubscribe(d);
 
-                                showLoading("获取中...");
-                            }
+                        showLoading("获取中...");
+                    }
 
-                            @Override
-                            public void onHandleSuccess(WxPayInfoEntry wxPayInfoEntry) {
+                    @Override
+                    public void onHandleSuccess(WxPayInfoEntry wxPayInfoEntry) {
 
-                                hideLoading();
-                                wxPay(wxPayInfoEntry);
+                        hideLoading();
+                        wxPay(wxPayInfoEntry);
 
-                            }
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
+                    @Override
+                    public void onHandleError(String message) {
 
-                                hideLoading();
-                                showErr(message);
-                            }
+                        hideLoading();
+                        showErr(message);
+                    }
 
-                        }
-                        , (String) SaveUtils.get(this, SpValue.TOKEN, "")
-                        , SpValue.CH
-                        , orderNum);
+                }
+                , (String) SaveUtils.get(this, SpValue.TOKEN, ""), SpValue.CH, orderNum);
     }
 
     private void aliPay() {
 
 //        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
 
-        RetrofitHttpUtil
-                .getInstance()
-                .aliPayInfo(
+        RetrofitHttpUtil .getInstance()  .aliPayInfo(
                         new BaseNoTObserver<AlipayEntry>() {
 
                             @Override
@@ -247,12 +244,13 @@ public class BuyServiceAct extends BaseActivity implements View.OnClickListener 
 
                                         String resultInfo = payResult.getResult();// 同步返回需要验证的信息
                                         String resultStatus = payResult.getResultStatus();
-
+                                        Intent m = new Intent(BuyServiceAct.this, PayResultActivity.class);
                                         if ("9000".equals(resultStatus)) {
                                             showErr("支付成功");
-                                            Logger.d("支付成功");
-                                        }
-
+                                            m.putExtra("pay_success", true);
+                                        }else
+                                            m.putExtra("pay_success", false);
+                                        startActivity(m);
 
                                     }
                                 }).start();

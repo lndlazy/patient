@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -70,6 +71,8 @@ public class SearchResultActivity extends BaseActivity implements View.OnClickLi
         rlHistory.setVisibility(View.GONE);
         tvart.setSelected(true);
 
+
+        etSearchInfo.setText(getIntent().getStringExtra("name"));
 
         iSearchPres.setName(getIntent().getStringExtra("name"));
         iSearchPres.setPage(1);
@@ -170,10 +173,10 @@ public class SearchResultActivity extends BaseActivity implements View.OnClickLi
                 finish();
                 break;
 
-            case R.id.tvInqu://问诊
+            case R.id.tvInqu://
 
-                tvStyle.setText("问诊");
-                setAllFalse(4, true);
+//                tvStyle.setText("问诊");
+//                setAllFalse(2, true);
 
                 break;
             case R.id.tvdoctor://医生
@@ -189,10 +192,12 @@ public class SearchResultActivity extends BaseActivity implements View.OnClickLi
                 setAllFalse(0, true);
 
                 break;
-            case R.id.tvdepartment://科室
+            case R.id.tvdepartment://问诊
 
-                tvStyle.setText("科室");
-                setAllFalse(2, true);
+                tvStyle.setText("问诊");
+                setAllFalse(4, true);
+//                tvStyle.setText("科室");
+//                setAllFalse(2, true);
 
                 break;
             case R.id.tvarticle://文章
@@ -253,6 +258,11 @@ public class SearchResultActivity extends BaseActivity implements View.OnClickLi
 
 
     private void beginSearch() {
+
+        if (TextUtils.isEmpty(etSearchInfo.getText().toString())) {
+            showErr("请输入搜索内容");
+            return;
+        }
 
         historySet = SaveUtils.getSet(getApplicationContext(), SpValue.SEARCH_HISTORY, null);
 

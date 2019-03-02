@@ -30,6 +30,8 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
+import com.ylean.cf_hospitalapp.base.Presenter.ICollectionPres;
+import com.ylean.cf_hospitalapp.base.view.ICollectionView;
 import com.ylean.cf_hospitalapp.inquiry.bean.ChatEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.PicAskDetailEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.DataUploadResultEntry;
@@ -61,7 +63,7 @@ import java.util.List;
  * Created by linaidao on 2018/12/21.
  */
 
-public class InquiryDetailAct extends BaseActivity implements View.OnClickListener, IInquiryView {
+public class InquiryDetailAct extends BaseActivity implements View.OnClickListener, IInquiryView, ICollectionView {
 
     private ImageView ivleft;
     private TextView tvDesc;
@@ -95,6 +97,9 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
     private int askType;//问诊类型。图文，电话，视频
     private TextView tvCommit;
     private PicAskDetailEntry.DataBean inquiryInfo;
+
+
+    private ICollectionPres iCollectionPres = new ICollectionPres(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -323,6 +328,29 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
 
     private MyHandler mHandler = new MyHandler(this);
 
+
+    //关注医生成功
+    @Override
+    public void collectionSuccess(String type) {
+
+        if (inquiryInfo!=null) {
+            inquiryInfo.setIscollect(1);
+            tvAttent.setText("已关注");
+        }
+
+    }
+
+    //取消关注医生成功
+    @Override
+    public void removeCollectionSuccess(String type) {
+
+        if (inquiryInfo!=null) {
+            inquiryInfo.setIscollect(0);
+            tvAttent.setText("未关注");
+        }
+
+    }
+
     private class MyHandler extends Handler {
         private final WeakReference<InquiryDetailAct> mActivity;
 
@@ -421,10 +449,26 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
 
                 break;
 
-//            case R.id.tvAttent://关注 TODO
-//
-//
-//                break;
+            case R.id.tvAttent://关注
+
+                if (inquiryInfo == null) {
+                    showErr("数据错误");
+                    return;
+                }
+
+                iCollectionPres.setId(inquiryInfo.getDoctorid());
+
+                if (inquiryInfo.getIscollect() == 1) {
+                    //已关注， 点击取消关注
+                    iCollectionPres.removeCollection( (String) SaveUtils.get(InquiryDetailAct.this, SpValue.TOKEN, ""), "5");
+                } else {
+
+                    //未关注，点击关注
+                    iCollectionPres.addCollection( (String) SaveUtils.get(InquiryDetailAct.this, SpValue.TOKEN, ""), "5");
+                }
+
+
+                break;
 
             case R.id.tvDesc://详细介绍
 

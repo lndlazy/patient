@@ -141,8 +141,10 @@ public class NewsActivity extends BaseActivity implements IShareTitleView {
 
     private void share(SHARE_MEDIA perform) {
 
-        ShareUtils.shareWeb(NewsActivity.this, url
-                , "好医无忧", shareTile
+        String shareUrl = ApiService.WEB_ROOT + ApiService.H5_NEWS_SHARE
+                + "?id=" + id;
+        ShareUtils.shareWeb(NewsActivity.this, shareUrl
+                , shareTile, "好医无忧"
                 , "", R.mipmap.logo, perform);
     }
 

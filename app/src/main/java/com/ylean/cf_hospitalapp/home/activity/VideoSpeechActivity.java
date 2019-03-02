@@ -244,7 +244,7 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
         Logger.d("分享的url：：：" + videoInfo.getVideourl() + ",,,,,===" + shareUrl);
 
         ShareUtils.shareWeb(VideoSpeechActivity.this, shareUrl
-                , videoInfo.getDoctorname(), videoInfo.getTitle()
+                , videoInfo.getTitle(), videoInfo.getDoctorname()
                 , ApiService.WEB_ROOT + videoInfo.getDoctorimg(), -1, perform);
     }
 

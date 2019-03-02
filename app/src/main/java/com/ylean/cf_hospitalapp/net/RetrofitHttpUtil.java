@@ -1,7 +1,5 @@
 package com.ylean.cf_hospitalapp.net;
 
-import com.orhanobut.logger.Logger;
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -37,7 +35,7 @@ public class RetrofitHttpUtil {
 
             //OkHttp配置
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-//            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);//log日志
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);//log日志
             OkHttpClient client = new OkHttpClient().newBuilder()
                     .addInterceptor(interceptor)
                     .retryOnConnectionFailure(true)//错误重连
@@ -1536,6 +1534,32 @@ public class RetrofitHttpUtil {
      */
     public void getShareTileByid(Observer subscriber, String id) {
         getService().getShareTileByid(id)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 如何赚取积分
+     */
+    public void howGetPoints(Observer subscriber, String ch, String token) {
+        getService().howGetPoints(ch, token)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 签到
+     */
+    public void checkIn(Observer subscriber, String ch, String token) {
+        getService().checkIn(ch, token)
+                .compose(schedulersTransformer())
+                .subscribe(subscriber);
+    }
+    /**
+     * 新版本检测
+     */
+    public void checkUpdate(Observer subscriber, String ch, String type) {
+        getService().checkUpdate(ch, type)
                 .compose(schedulersTransformer())
                 .subscribe(subscriber);
     }

@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -47,11 +48,11 @@ import java.util.List;
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 /**
- * 挂号评价页面
+ * 医生评价页面
  * Created by linaidao on 2019/1/24.
  */
 
-public class RegisterEvaulateActivity extends BaseActivity implements IEvaluateView, View.OnClickListener, DataUploadView {
+public class DoctorEvaulateActivity extends BaseActivity implements IEvaluateView, View.OnClickListener, DataUploadView {
 
     private IEvaluatePres iEvaluatePres = new IEvaluatePres(this);
 
@@ -79,6 +80,7 @@ public class RegisterEvaulateActivity extends BaseActivity implements IEvaluateV
     private ImageView iv_add_pic;
 
     private OrderInfoEntry.DataBean mOrderInfo;
+    private RelativeLayout rlPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +102,11 @@ public class RegisterEvaulateActivity extends BaseActivity implements IEvaluateV
             noEditable();
             commandInfo();
         }
+
+
+        if (mOrderInfo.getPrice() == 0)
+            rlPrice.setVisibility(View.GONE);
+
     }
 
     private void noEditable() {
@@ -173,7 +180,7 @@ public class RegisterEvaulateActivity extends BaseActivity implements IEvaluateV
                 @Override
                 public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 
-                    Intent m = new Intent(RegisterEvaulateActivity.this, PicDetailAc.class);
+                    Intent m = new Intent(DoctorEvaulateActivity.this, PicDetailAc.class);
                     m.putExtra("picUrl", ApiService.WEB_ROOT + imgs.get(position));
                     startActivity(m);
                 }
@@ -209,6 +216,8 @@ public class RegisterEvaulateActivity extends BaseActivity implements IEvaluateV
 
     private void initWidget() {
         TitleBackBarView tbv = findViewById(R.id.tbv);
+
+        rlPrice = findViewById(R.id.rlPrice);
         tbv.setOnLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

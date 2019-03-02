@@ -73,12 +73,10 @@ public class GoodsOrderListActivity extends BaseActivity implements View.OnClick
 
         initView();
 
-
         tv1.setSelected(true);
         status = STATUS_ALL;
 
     }
-
 
     @Override
     protected void onResume() {

@@ -270,7 +270,7 @@ public class FragmentFour extends BaseFragment implements View.OnClickListener, 
                 nextActivity(PointsDetailActivity.class);
                 break;
 
-            case R.id.llEarn://赚钱积分
+            case R.id.llEarn://赚取积分
                 nextActivity(EarnPointsActivity.class);
                 break;
 

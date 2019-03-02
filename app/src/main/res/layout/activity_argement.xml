@@ -34,6 +34,7 @@
             <include layout="@layout/line_gray" />
 
             <RelativeLayout
+                android:id="@+id/rlPrice"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x45"
                 android:background="@android:color/white">

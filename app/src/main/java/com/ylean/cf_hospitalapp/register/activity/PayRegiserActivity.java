@@ -1,5 +1,6 @@
 package com.ylean.cf_hospitalapp.register.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.inquiry.bean.AlipayEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.WxPayInfoEntry;
+import com.ylean.cf_hospitalapp.mall.acitity.GoodsPayActivity;
 import com.ylean.cf_hospitalapp.net.BaseNoTObserver;
 import com.ylean.cf_hospitalapp.net.RetrofitHttpUtil;
 import com.ylean.cf_hospitalapp.utils.CommonUtils;
@@ -24,6 +26,7 @@ import com.ylean.cf_hospitalapp.utils.SpValue;
 import com.ylean.cf_hospitalapp.utils.alipay.OrderInfoUtil2_0;
 import com.ylean.cf_hospitalapp.utils.alipay.PayResult;
 import com.ylean.cf_hospitalapp.widget.TitleBackBarView;
+import com.ylean.cf_hospitalapp.wxapi.PayResultActivity;
 
 import java.util.Map;
 
@@ -47,7 +50,7 @@ public class PayRegiserActivity extends BaseActivity implements View.OnClickList
 
     private android.widget.ImageView ivAlipay;
     private String doctorName;
-//    private String doctorId;
+    //    private String doctorId;
     private String type;
     private TextView tvSureOrder;
     private IWXAPI wxapi;
@@ -161,107 +164,106 @@ public class PayRegiserActivity extends BaseActivity implements View.OnClickList
             return;
         }
 
-        RetrofitHttpUtil
-                .getInstance()
-                .wxRegisterPayInfo(
-                        new BaseNoTObserver<WxPayInfoEntry>() {
+        RetrofitHttpUtil.getInstance().wxRegisterPayInfo(
+                new BaseNoTObserver<WxPayInfoEntry>() {
 
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                                super.onSubscribe(d);
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.onSubscribe(d);
 
-                                showLoading("获取中...");
-                            }
+                        showLoading("获取中...");
+                    }
 
-                            @Override
-                            public void onHandleSuccess(WxPayInfoEntry wxPayInfoEntry) {
+                    @Override
+                    public void onHandleSuccess(WxPayInfoEntry wxPayInfoEntry) {
 
-                                hideLoading();
-                                wxPay(wxPayInfoEntry);
+                        hideLoading();
+                        wxPay(wxPayInfoEntry);
 
-                            }
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
+                    @Override
+                    public void onHandleError(String message) {
 
-                                hideLoading();
-                                showErr(message);
-                            }
+                        hideLoading();
+                        showErr(message);
+                    }
 
-                        }
-                        , (String) SaveUtils.get(this, SpValue.TOKEN, "")
-                        , SpValue.CH
-                        , orderNum);
+                }
+                , (String) SaveUtils.get(this, SpValue.TOKEN, "")
+                , SpValue.CH
+                , orderNum);
     }
 
     private void aliPay() {
-        RetrofitHttpUtil
-                .getInstance()
-                .aliPayRegisterInfo(
-                        new BaseNoTObserver<AlipayEntry>() {
+        RetrofitHttpUtil.getInstance().aliPayRegisterInfo(
+                new BaseNoTObserver<AlipayEntry>() {
 
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                                super.onSubscribe(d);
-                            }
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.onSubscribe(d);
+                    }
 
-                            @Override
-                            public void onHandleSuccess(AlipayEntry alipayEntry) {
-                                if (alipayEntry == null || alipayEntry.getData() == null) {
-                                    showErr("数据错误");
-                                    return;
-                                }
+                    @Override
+                    public void onHandleSuccess(AlipayEntry alipayEntry) {
+                        if (alipayEntry == null || alipayEntry.getData() == null) {
+                            showErr("数据错误");
+                            return;
+                        }
 
-                                String privatekey = alipayEntry.getData().getPrivatekey();
+                        String privatekey = alipayEntry.getData().getPrivatekey();
 //                                Logger.d("私钥::" + privatekey);
-                                Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(
-                                        alipayEntry.getData().getAppid(), "问诊服务"
-                                        , price, "好医无忧问诊", orderNum, alipayEntry.getData().getNotifyurl(), alipayEntry.getData().getSellerid());
-                                String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
+                        Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(
+                                alipayEntry.getData().getAppid(), "问诊服务"
+                                , price, "好医无忧问诊", orderNum, alipayEntry.getData().getNotifyurl(), alipayEntry.getData().getSellerid());
+                        String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
 
 //                                String privateKey = privatekey;
-                                String sign = OrderInfoUtil2_0.getSign(params, privatekey, true);
-                                final String orderInfo = orderParam + "&" + sign;
+                        String sign = OrderInfoUtil2_0.getSign(params, privatekey, true);
+                        final String orderInfo = orderParam + "&" + sign;
 
 //                                Logger.d("params:::" + params);
 //                                Logger.d("sign:::" + sign);
 
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-
-                                        // 构造AuthTask 对象
-                                        AuthTask authTask = new AuthTask(PayRegiserActivity.this);
-                                        // 调用授权接口，获取授权结果
-                                        Map<String, String> result = authTask.authV2(orderInfo, true);
-
-                                        if (result == null)
-                                            return;
-
-                                        PayResult payResult = new PayResult(result);
-
-                                        String resultInfo = payResult.getResult();// 同步返回需要验证的信息
-                                        String resultStatus = payResult.getResultStatus();
-
-                                        if ("9000".equals(resultStatus)) {
-                                            showErr("支付成功");
-                                            Logger.d("支付成功");
-                                        }
-
-                                    }
-                                }).start();
-
-                            }
-
+                        new Thread(new Runnable() {
                             @Override
-                            public void onHandleError(String message) {
+                            public void run() {
+
+                                // 构造AuthTask 对象
+                                AuthTask authTask = new AuthTask(PayRegiserActivity.this);
+                                // 调用授权接口，获取授权结果
+                                Map<String, String> result = authTask.authV2(orderInfo, true);
+
+                                if (result == null)
+                                    return;
+
+                                PayResult payResult = new PayResult(result);
+
+                                String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+                                String resultStatus = payResult.getResultStatus();
+
+                                Intent m = new Intent(PayRegiserActivity.this, PayResultActivity.class);
+                                if ("9000".equals(resultStatus)) {
+                                    showErr("支付成功");
+                                    m.putExtra("pay_success", true);
+                                } else
+                                    m.putExtra("pay_success", false);
+                                startActivity(m);
 
                             }
+                        }).start();
 
-                        }
-                        , (String) SaveUtils.get(this, SpValue.TOKEN, "")
-                        , SpValue.CH
-                        , orderNum);
+                    }
+
+                    @Override
+                    public void onHandleError(String message) {
+
+                    }
+
+                }
+                , (String) SaveUtils.get(this, SpValue.TOKEN, "")
+                , SpValue.CH
+                , orderNum);
     }
 
     private void wxPay(WxPayInfoEntry wxPayInfoEntry) {
