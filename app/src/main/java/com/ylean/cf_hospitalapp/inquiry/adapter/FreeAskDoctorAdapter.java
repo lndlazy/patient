@@ -1,6 +1,7 @@
 package com.ylean.cf_hospitalapp.inquiry.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -8,10 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.j256.ormlite.stmt.query.In;
+import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
+import com.ylean.cf_hospitalapp.doctor.activity.DoctorDetailActivity;
+import com.ylean.cf_hospitalapp.inquiry.activity.FreeAskDoctorListActivity;
 import com.ylean.cf_hospitalapp.inquiry.bean.DoctorListEntry;
 import com.ylean.cf_hospitalapp.net.ApiService;
 
@@ -49,6 +56,31 @@ public class FreeAskDoctorAdapter extends RecyclerView.Adapter<FreeAskDoctorAdap
                 doctorInfoList.get(position).getAdeptdesc());
         holder.ivSelect.setSelected(doctorInfoList.get(position).isSelect());
 
+
+        //选中问诊
+        holder.ivSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (context instanceof FreeAskDoctorListActivity) {
+                    FreeAskDoctorListActivity a = (FreeAskDoctorListActivity) context;
+                    a.onItemClick(position);
+                }
+
+            }
+        });
+
+        //点击进入医生详情页面
+        holder.ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent m = new Intent(context, DoctorDetailActivity.class);
+                m.putExtra("doctorId", doctorInfoList.get(position).getDoctorid());
+                context.startActivity(m);
+            }
+        });
+
+
     }
 
     @Override
@@ -64,6 +96,7 @@ public class FreeAskDoctorAdapter extends RecyclerView.Adapter<FreeAskDoctorAdap
         TextView tvCompany;
         TextView tvInfo;
         ImageView ivSelect;
+        LinearLayout ll;
 
         MyViewHolder(View view) {
             super(view);
@@ -74,6 +107,7 @@ public class FreeAskDoctorAdapter extends RecyclerView.Adapter<FreeAskDoctorAdap
             tvCompany = view.findViewById(R.id.tvCompany);
             tvInfo = view.findViewById(R.id.tvInfo);
             ivSelect = view.findViewById(R.id.ivSelect);
+            ll = view.findViewById(R.id.ll);
 
 
         }

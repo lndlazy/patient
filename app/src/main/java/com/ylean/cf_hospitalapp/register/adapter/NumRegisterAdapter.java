@@ -1,16 +1,21 @@
 package com.ylean.cf_hospitalapp.register.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
+import com.ylean.cf_hospitalapp.doctor.activity.DoctorDetailActivity;
 import com.ylean.cf_hospitalapp.net.ApiService;
+import com.ylean.cf_hospitalapp.register.activity.ChooseNumActivity;
 import com.ylean.cf_hospitalapp.register.bean.NumListEntry;
 import com.ylean.cf_hospitalapp.utils.SpValue;
 
@@ -24,10 +29,13 @@ public class NumRegisterAdapter extends RecyclerView.Adapter<NumRegisterAdapter.
 
     private Context context;
     private List<NumListEntry.DataBean> numRegisterList;
+    private int amOrPm;
 
-    public NumRegisterAdapter(Context context, List<NumListEntry.DataBean> numRegisterList) {
+    //i 上午还是下午 1是上午， 2是下午
+    public NumRegisterAdapter(Context context, List<NumListEntry.DataBean> numRegisterList, int i) {
         this.context = context;
         this.numRegisterList = numRegisterList;
+        amOrPm = i;
     }
 
     @Override
@@ -39,7 +47,6 @@ public class NumRegisterAdapter extends RecyclerView.Adapter<NumRegisterAdapter.
 
     @Override
     public void onBindViewHolder(NumRegisterAdapter.MyViewHolder holder, int position) {
-
 
         String reserveType = numRegisterList.get(position).getReserveType();
 
@@ -88,6 +95,32 @@ public class NumRegisterAdapter extends RecyclerView.Adapter<NumRegisterAdapter.
 
         holder.tvMoney.setText("¥" + numRegisterList.get(position).getPrice());
 
+        holder.rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 进入医生详情
+//                Logger.d("进入医生详情");
+                Intent m = new Intent(context, DoctorDetailActivity.class);
+                m.putExtra("doctorId", numRegisterList.get(position).getDoctorid());
+                context.startActivity(m);
+
+            }
+        });
+
+        holder.tvOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //挂号
+
+                if (context instanceof ChooseNumActivity) {
+                    ChooseNumActivity c = (ChooseNumActivity) context;
+                    c.registerOrder(position, numRegisterList, amOrPm);
+                }
+
+            }
+        });
+
+
     }
 
     @Override
@@ -103,6 +136,7 @@ public class NumRegisterAdapter extends RecyclerView.Adapter<NumRegisterAdapter.
         TextView tvContent;
         TextView tvOrder;
         TextView tvMoney;
+        RelativeLayout rl;
 
         MyViewHolder(View view) {
             super(view);
@@ -112,6 +146,7 @@ public class NumRegisterAdapter extends RecyclerView.Adapter<NumRegisterAdapter.
             tvContent = view.findViewById(R.id.tvContent);
             tvOrder = view.findViewById(R.id.tvOrder);
             tvMoney = view.findViewById(R.id.tvMoney);
+            rl = view.findViewById(R.id.rl);
         }
     }
 }

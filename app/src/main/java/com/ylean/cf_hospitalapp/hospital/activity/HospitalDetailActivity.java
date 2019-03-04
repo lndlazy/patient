@@ -227,7 +227,6 @@ public class HospitalDetailActivity extends BaseActivity implements IHospitalDet
                         break;
                     case 2://院内导航 TODO
 
-
                         break;
                     case 3://周边停车
                         roteNavi("停车场");
@@ -405,6 +404,7 @@ public class HospitalDetailActivity extends BaseActivity implements IHospitalDet
                     return;
                 }
 
+                //科室介绍
                 Intent m = new Intent(HospitalDetailActivity.this, WebviewActivity.class);
                 String url = ApiService.WEB_ROOT + ApiService.DEPARTMEN_INTRODUCE + "?id=" + departmentList.get(position).getDepartmentid()
                         + "&hospitalid=" + hospitalInfo.getHospitalid();

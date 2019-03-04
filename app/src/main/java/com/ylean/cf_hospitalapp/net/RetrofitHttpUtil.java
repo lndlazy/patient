@@ -35,7 +35,7 @@ public class RetrofitHttpUtil {
 
             //OkHttp配置
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);//log日志
+//            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);//log日志
             OkHttpClient client = new OkHttpClient().newBuilder()
                     .addInterceptor(interceptor)
                     .retryOnConnectionFailure(true)//错误重连

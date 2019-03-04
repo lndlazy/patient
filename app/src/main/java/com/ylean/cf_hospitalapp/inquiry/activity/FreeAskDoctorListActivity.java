@@ -209,28 +209,28 @@ public class FreeAskDoctorListActivity extends BaseActivity implements View.OnCl
         freeAskDoctorAdapter = new FreeAskDoctorAdapter(this, doctorInfoList);
         recyclerView.setAdapter(freeAskDoctorAdapter);
 
-        recyclerView.addOnItemTouchListener(new OnItemClickListener(recyclerView) {
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
-
-                boolean select = doctorInfoList.get(position).isSelect();
-
-                for (int i = 0; i < doctorInfoList.size(); i++) {
-                    doctorInfoList.get(i).setSelect(false);
-                }
-                doctorInfoList.get(position).setSelect(!select);
-
-                doctorId = select ? "" : doctorInfoList.get(position).getDoctorid();
-
-                if (freeAskDoctorAdapter != null)
-                    freeAskDoctorAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
+//        recyclerView.addOnItemTouchListener(new OnItemClickListener(recyclerView) {
+//            @Override
+//            public void onItemClick(RecyclerView.ViewHolder holder, int position) {
+//
+//                boolean select = doctorInfoList.get(position).isSelect();
+//
+//                for (int i = 0; i < doctorInfoList.size(); i++) {
+//                    doctorInfoList.get(i).setSelect(false);
+//                }
+//                doctorInfoList.get(position).setSelect(!select);
+//
+//                doctorId = select ? "" : doctorInfoList.get(position).getDoctorid();
+//
+//                if (freeAskDoctorAdapter != null)
+//                    freeAskDoctorAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+//
+//            }
+//        });
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -269,6 +269,31 @@ public class FreeAskDoctorListActivity extends BaseActivity implements View.OnCl
         });
 
     }
+
+    public void onItemClick(int position) {
+
+
+
+
+
+        boolean select = doctorInfoList.get(position).isSelect();
+
+        for (int i = 0; i < doctorInfoList.size(); i++) {
+            doctorInfoList.get(i).setSelect(false);
+        }
+        doctorInfoList.get(position).setSelect(!select);
+
+        doctorId = select ? "" : doctorInfoList.get(position).getDoctorid();
+
+        if (freeAskDoctorAdapter != null)
+            freeAskDoctorAdapter.notifyDataSetChanged();
+
+
+
+
+
+    }
+
 
 
     @Override
@@ -805,4 +830,5 @@ public class FreeAskDoctorListActivity extends BaseActivity implements View.OnCl
         getDoctorList();
 
     }
+
 }

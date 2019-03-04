@@ -337,7 +337,7 @@ public class ChooseNumActivity extends BaseActivity implements IChooseNumView, S
         amRecyclerView.addItemDecoration(divider);
 
         final List<NumListEntry.DataBean> amRegisterList = new ArrayList<>();
-        NumRegisterAdapter amAdapter = new NumRegisterAdapter(this, amRegisterList);
+        NumRegisterAdapter amAdapter = new NumRegisterAdapter(this, amRegisterList, 1);
         amRecyclerView.setAdapter(amAdapter);
 
         amAdapterMap.put(position, amAdapter);
@@ -356,7 +356,7 @@ public class ChooseNumActivity extends BaseActivity implements IChooseNumView, S
         pmRecyclerView.addItemDecoration(ddivider);
 
         final List<NumListEntry.DataBean> pmRegisterList = new ArrayList<>();
-        NumRegisterAdapter pmAdapter = new NumRegisterAdapter(this, pmRegisterList);
+        NumRegisterAdapter pmAdapter = new NumRegisterAdapter(this, pmRegisterList, 2);
         pmRecyclerView.setAdapter(pmAdapter);
 
         pmAdapterMap.put(position, pmAdapter);
@@ -366,39 +366,39 @@ public class ChooseNumActivity extends BaseActivity implements IChooseNumView, S
         iChooseNumPres.getNumInfo("1", amAdapter, amRegisterList);
         iChooseNumPres.getNumInfo("2", pmAdapter, pmRegisterList);
 
-        pmRecyclerView.addOnItemTouchListener(new OnItemClickListener(pmRecyclerView) {
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder holder, int p) {
-
-                //挂号
-                registerOrder(p, pmRegisterList, 2);
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
-
-        amRecyclerView.addOnItemTouchListener(new OnItemClickListener(amRecyclerView) {
-            @Override
-            public void onItemClick(RecyclerView.ViewHolder holder, int i) {
-
-//                Logger.d("");
-                //挂号
-                registerOrder(i, amRegisterList, 1);
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
+//        pmRecyclerView.addOnItemTouchListener(new OnItemClickListener(pmRecyclerView) {
+//            @Override
+//            public void onItemClick(RecyclerView.ViewHolder holder, int p) {
+//
+//                //挂号
+//                registerOrder(p, pmRegisterList, 2);
+//            }
+//
+//            @Override
+//            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+//
+//            }
+//        });
+//
+//        amRecyclerView.addOnItemTouchListener(new OnItemClickListener(amRecyclerView) {
+//            @Override
+//            public void onItemClick(RecyclerView.ViewHolder holder, int i) {
+//
+////                Logger.d("");
+//                //挂号
+//                registerOrder(i, amRegisterList, 1);
+//
+//            }
+//
+//            @Override
+//            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+//
+//            }
+//        });
 
     }
 
-    private void registerOrder(int position, List<NumListEntry.DataBean> registerList, int i) {
+    public void registerOrder(int position, List<NumListEntry.DataBean> registerList, int i) {
 
         Logger.d("position：" + position + "，个数：" + registerList.size() + ",时间段：" + i);
 

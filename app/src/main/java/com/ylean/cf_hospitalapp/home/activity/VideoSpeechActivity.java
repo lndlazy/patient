@@ -34,6 +34,7 @@ import com.ylean.cf_hospitalapp.home.bean.VideoSpeechDetailEntry;
 import com.ylean.cf_hospitalapp.home.presenter.IVideoSpeechPres;
 import com.ylean.cf_hospitalapp.home.view.IVideoSpeechView;
 import com.ylean.cf_hospitalapp.net.ApiService;
+import com.ylean.cf_hospitalapp.utils.LiveUtils;
 import com.ylean.cf_hospitalapp.utils.SaveUtils;
 import com.ylean.cf_hospitalapp.utils.ShareUtils;
 import com.ylean.cf_hospitalapp.utils.SpValue;
@@ -239,8 +240,11 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
             showErr("数据错误");
             return;
         }
-
-        String shareUrl = ApiService.WEB_ROOT + "/api/app/art/sharelivedetail?id=" + videoInfo.getId();
+        String shareUrl = "";
+        if ("1".equals(videoInfo.getStatus())) {
+            shareUrl = LiveUtils.get_url(videoInfo.getFileid());
+        } else
+            shareUrl = ApiService.WEB_ROOT + "/api/app/art/sharelivedetail?id=" + videoInfo.getId();
         Logger.d("分享的url：：：" + videoInfo.getVideourl() + ",,,,,===" + shareUrl);
 
         ShareUtils.shareWeb(VideoSpeechActivity.this, shareUrl
@@ -311,7 +315,13 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
     //播放视频
     private void videoPlay(VideoSpeechDetailEntry.DataBean data) {
 
-        videoPlayer.setUp(data.getVideourl(), true, "");
+        if ("1".equals(data.getStatus())) {
+            //直播，获取直播流
+            videoPlayer.setUp(LiveUtils.get_url(data.getFileid()), true, "");
+        } else {
+            videoPlayer.setUp(data.getVideourl(), true, "");
+        }
+
         //设置返回键
         videoPlayer.getBackButton().setVisibility(View.INVISIBLE);
 
