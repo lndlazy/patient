@@ -1,5 +1,6 @@
 package com.ylean.cf_hospitalapp.my.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
+import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.activity.BaseActivity;

@@ -20,6 +20,7 @@ import com.orhanobut.logger.Logger;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
+import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.Presenter.ICollectionPres;

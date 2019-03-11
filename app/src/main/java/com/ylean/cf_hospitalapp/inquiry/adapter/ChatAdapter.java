@@ -15,7 +15,9 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
+import com.ylean.cf_hospitalapp.inquiry.activity.InquiryIntroAct;
 import com.ylean.cf_hospitalapp.inquiry.bean.ChatEntry;
+import com.ylean.cf_hospitalapp.inquiry.bean.PicAskDetailEntry;
 import com.ylean.cf_hospitalapp.inquiry.utils.ChatType;
 import com.ylean.cf_hospitalapp.inquiry.activity.PicDetailAc;
 import com.ylean.cf_hospitalapp.audio.UPlayer;
@@ -37,10 +39,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
     private List<ChatEntry.DataBean> chatInfoList;
     private boolean isPlaying;
     private UPlayer uPlayer;
+    private String consultaid;
 
     public ChatAdapter(Context context, List<ChatEntry.DataBean> chatInfoList) {
         this.context = context;
         this.chatInfoList = chatInfoList;
+    }
+
+    public void setConsultaid(String consultaid) {
+        this.consultaid = consultaid;
     }
 
     @Override
@@ -190,7 +197,22 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
                 holder.tvConent.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //查看问诊小结
+                        //查看问诊小结 TODO
+
+
+//                        PicAskDetailEntry.DataBean detailInfo = new PicAskDetailEntry.DataBean();
+//                        ChatEntry.DataBean dataBean = chatInfoList.get(i);
+//                        detailInfo.setConsultaid(dataBean.getConsultationid());
+//                        detailInfo.setFlokname(dataBean.getf);
+//                        detailInfo.setIdcard(dataBean.get);
+//                        detailInfo.setAge();
+//                        detailInfo.setSex();
+//                        detailInfo.setMedicalcard();
+//                        detailInfo.setDepartname();
+
+                        Intent m = new Intent(context, InquiryIntroAct.class);
+                        m.putExtra("consultaid", consultaid);
+                        context.startActivity(m);
 
                     }
                 });

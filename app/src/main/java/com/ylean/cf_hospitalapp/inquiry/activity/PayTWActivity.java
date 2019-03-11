@@ -727,7 +727,7 @@ public class PayTWActivity extends BaseActivity implements View.OnClickListener,
         people.setVisibility(View.VISIBLE);
         iv_enter.setVisibility(View.VISIBLE);
 
-        sdvPic.setImageURI(Uri.parse(peopleBean.getImgurl()));
+//        sdvPic.setImageURI(Uri.parse(peopleBean.getImgurl()));
         tvName.setText(peopleBean.getName());
         tvId.setText("身份证    " + peopleBean.getIDcard());
         tvInfo.setText(peopleBean.getAge() + "岁" +

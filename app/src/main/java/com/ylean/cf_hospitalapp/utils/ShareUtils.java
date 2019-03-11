@@ -7,10 +7,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -52,13 +54,15 @@ public class ShareUtils {
 
                     @Override
                     public void onResult(final SHARE_MEDIA share_media) {
+
                         activity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+
 //                                if (share_media.name().equals("WEIXIN_FAVORITE")) {
 //                                    Toast.makeText(activity, share_media + " 收藏成功", Toast.LENGTH_SHORT).show();
 //                                } else {
-                                Toast.makeText(activity, share_media + " 分享成功", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(activity, " 分享成功", Toast.LENGTH_SHORT).show();
 
                                 //分享成功调用接口 增加积分
                                 RetrofitHttpUtil.getInstance().shareSuccessIntegralGress(
@@ -84,13 +88,13 @@ public class ShareUtils {
 
                     @Override
                     public void onError(final SHARE_MEDIA share_media, final Throwable throwable) {
-                        if (throwable != null) {
-                            Log.d("throw", "throw:" + throwable.getMessage());
-                        }
+//                        if (throwable != null) {
+//                            Log.d("throw", "throw:" + throwable.getMessage());
+//                        }
                         activity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(activity, share_media + " 分享失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity, " 分享失败", Toast.LENGTH_SHORT).show();
 
                             }
                         });
@@ -105,8 +109,7 @@ public class ShareUtils {
                             }
                         });
                     }
-                })
-                .share();
+                }).share();
 
         //新浪微博中图文+链接
         /*new ShareAction(activity)

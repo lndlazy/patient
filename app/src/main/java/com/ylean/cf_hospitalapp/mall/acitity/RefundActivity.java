@@ -230,7 +230,7 @@ public class RefundActivity extends BaseActivity implements View.OnClickListener
                             public void onClick(int which) {
                                 //订单退货退款(2),订单换货(5)
                                 tvstyle.setText("换货");
-                                type = "2";
+                                type = "5";
                             }
 
                         })
@@ -239,7 +239,7 @@ public class RefundActivity extends BaseActivity implements View.OnClickListener
                             @Override
                             public void onClick(int which) {
                                 tvstyle.setText("退货");
-                                type = "5";
+                                type = "2";
 
                             }
                         })

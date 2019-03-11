@@ -10,6 +10,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.orhanobut.logger.Logger;
+import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.activity.BaseActivity;

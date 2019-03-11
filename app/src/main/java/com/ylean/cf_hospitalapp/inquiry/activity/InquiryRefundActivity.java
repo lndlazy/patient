@@ -159,7 +159,7 @@ public class InquiryRefundActivity extends BaseActivity implements View.OnClickL
 
                 android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this, R.style.AlertDialogCustom);
 
-                builder.setTitle("提示").setMessage("您确定要取消挂号吗").setPositiveButton("取消挂号", new DialogInterface.OnClickListener() {
+                builder.setTitle("提示").setMessage("您确定要取消吗").setPositiveButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 

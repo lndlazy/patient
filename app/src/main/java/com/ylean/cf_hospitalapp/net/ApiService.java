@@ -24,6 +24,7 @@ import com.ylean.cf_hospitalapp.inquiry.bean.DoctorLevelListBean;
 import com.ylean.cf_hospitalapp.inquiry.bean.DoctorListEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.GradeLevelBean;
 import com.ylean.cf_hospitalapp.inquiry.bean.HospitalEntry;
+import com.ylean.cf_hospitalapp.inquiry.bean.InquiryIntrBean;
 import com.ylean.cf_hospitalapp.inquiry.bean.OrderEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.PeopleEntry;
 import com.ylean.cf_hospitalapp.inquiry.bean.PicAskDetailEntry;
@@ -882,7 +883,7 @@ public interface ApiService {
     //查看问诊小结
     @FormUrlEncoded
     @POST("/api/app/consultation/summarydetail")
-    Observable<Basebean> inquirySummaryReview(@Field("ch") String ch, @Field("token") String token, @Field("consultaid") String consultaid);
+    Observable<InquiryIntrBean> inquirySummaryReview(@Field("ch") String ch, @Field("token") String token, @Field("consultaid") String consultaid);
 
 
     //医院科室列表

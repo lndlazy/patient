@@ -441,8 +441,7 @@ public class MyInquiryListActivity extends BaseActivity implements IMyRegistered
         }).setNegativeButton("暂不取消", null).show();
     }
 
-
-
+    //申请售后
     public void refund(OrderEntry.DataBean dataBean) {
         if (dataBean==null)
             return;

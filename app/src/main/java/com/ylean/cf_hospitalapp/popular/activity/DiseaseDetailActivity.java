@@ -1,5 +1,6 @@
 package com.ylean.cf_hospitalapp.popular.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -8,6 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.orhanobut.logger.Logger;
+import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
@@ -151,7 +153,6 @@ public class DiseaseDetailActivity extends BaseActivity {
                 , shareTitle,"好医无忧"
                 , "", R.mipmap.logo, perform);
     }
-
 
     @Override
     protected void onResume() {

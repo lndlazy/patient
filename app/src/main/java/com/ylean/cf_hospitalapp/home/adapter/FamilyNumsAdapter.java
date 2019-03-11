@@ -37,7 +37,7 @@ public class FamilyNumsAdapter extends RecyclerView.Adapter<FamilyNumsAdapter.My
     public void onBindViewHolder(FamilyNumsAdapter.MyViewHolder holder, int position) {
 
 //        holder.ivSelect.setSelected(familyNumList.get(position).isSelect());
-        holder.sdvPic.setImageURI(Uri.parse(familyNumList.get(position).getImgurl()));
+//        holder.sdvPic.setImageURI(Uri.parse(familyNumList.get(position).getImgurl()));
         holder.tvId.setText("身份证    " + familyNumList.get(position).getIDcard());
         holder.tvInfo.setText(familyNumList.get(position).getAge() + "岁" +
                 (SpValue.SEX_FEMALE.equals(familyNumList.get(position).getSex()) ? "    女" : "  男")
@@ -54,7 +54,7 @@ public class FamilyNumsAdapter extends RecyclerView.Adapter<FamilyNumsAdapter.My
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         //        ImageView ivSelect;
-        SimpleDraweeView sdvPic;
+//        SimpleDraweeView sdvPic;
         TextView tvName;
         TextView tvId;
         TextView tvInfo;
@@ -64,7 +64,7 @@ public class FamilyNumsAdapter extends RecyclerView.Adapter<FamilyNumsAdapter.My
             super(view);
 
 //            ivSelect = view.findViewById(R.id.ivSelect);
-            sdvPic = view.findViewById(R.id.sdvPic);
+//            sdvPic = view.findViewById(R.id.sdvPic);
 
             tvName = view.findViewById(R.id.tvName);
             tvId = view.findViewById(R.id.tvId);

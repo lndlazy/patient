@@ -119,7 +119,7 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
         iInquiryPres.setConsultaid(consultaid);
         iInquiryPres.detailInfo((String) SaveUtils.get(this, SpValue.TOKEN, ""));
         iInquiryPres.chatList((String) SaveUtils.get(this, SpValue.TOKEN, ""), true);
-
+        chatAdapter.setConsultaid(consultaid);
         EventBus.getDefault().register(this);
 
         checkPermisson();

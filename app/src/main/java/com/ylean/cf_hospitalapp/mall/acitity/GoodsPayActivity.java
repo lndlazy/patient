@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONArray;
 import com.alipay.sdk.app.AuthTask;
 import com.orhanobut.logger.Logger;
-import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -46,6 +45,7 @@ public class GoodsPayActivity extends BaseActivity implements View.OnClickListen
     private ImageView ivWeixin;
     private ImageView ivAlipay;
     private IWXAPI wxapi;
+    private String priceTotal = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,25 +89,25 @@ public class GoodsPayActivity extends BaseActivity implements View.OnClickListen
 
         TextView tvPay = findViewById(R.id.tvPay);
 
-        String priceInfo = "";
+
         switch (goodsInfo.getType()) {
 
             case "1"://1-实物商品
 
                 if (freightPrice == 0)
-                    priceInfo = goodsInfo.getPrice() + "";
+                    priceTotal = goodsInfo.getPrice() + "";
                 else
-                    priceInfo = (goodsInfo.getPrice() + freightPrice) + "";
+                    priceTotal = (goodsInfo.getPrice() + freightPrice) + "";
 
                 break;
 
             case "2"://2-服务商品
-                priceInfo = goodsInfo.getPrice() + "";
+                priceTotal = goodsInfo.getPrice() + "";
                 break;
         }
 
         String content = "<font color=\"#333333\">" + "支付金额：¥" + "</font>"
-                + "<font color=\"#000018\" size=\"18\">" + priceInfo + "</font>";
+                + "<font color=\"#000018\" size=\"18\">" + priceTotal + "</font>";
         tvPrice.setText(Html.fromHtml(content));
 
         tvordernum.setText("订单编号：" + orderCode);
@@ -170,7 +170,6 @@ public class GoodsPayActivity extends BaseActivity implements View.OnClickListen
                     @Override
                     public void onSubscribe(Disposable d) {
                         super.onSubscribe(d);
-
                         showLoading("获取中...");
                     }
 
@@ -189,8 +188,7 @@ public class GoodsPayActivity extends BaseActivity implements View.OnClickListen
                         showErr(message);
                     }
 
-                }
-                , (String) SaveUtils.get(this, SpValue.TOKEN, "")
+                }, (String) SaveUtils.get(this, SpValue.TOKEN, "")
                 , SpValue.CH, orderCode);
     }
 
@@ -243,7 +241,7 @@ public class GoodsPayActivity extends BaseActivity implements View.OnClickListen
 //                                Logger.d("私钥::" + privatekey);
                         Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(
                                 alipayEntry.getData().getAppid(), "商品订单"
-                                , goodsInfo.getPrice(), "好医无忧商品订单", orderCode, alipayEntry.getData().getNotifyurl(), alipayEntry.getData().getSellerid());
+                                , Double.parseDouble(priceTotal), "好医无忧商品订单", orderCode, alipayEntry.getData().getNotifyurl(), alipayEntry.getData().getSellerid());
                         String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
 
 //                                String privateKey = privatekey;
@@ -274,7 +272,7 @@ public class GoodsPayActivity extends BaseActivity implements View.OnClickListen
                                 if ("9000".equals(resultStatus)) {
                                     showErr("支付成功");
                                     m.putExtra("pay_success", true);
-                                }else
+                                } else
                                     m.putExtra("pay_success", false);
                                 startActivity(m);
                             }

@@ -58,38 +58,36 @@ public class IInquiryPres {
 
     public void detailInfo(String token) {
 
-        RetrofitHttpUtil
-                .getInstance()
-                .getFreePicAskDetail(
-                        new BaseNoTObserver<PicAskDetailEntry>() {
+        RetrofitHttpUtil.getInstance().getFreePicAskDetail(
+                new BaseNoTObserver<PicAskDetailEntry>() {
 
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                                super.onSubscribe(d);
-                                iInquiryView.showLoading("获取中...");
-                            }
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.onSubscribe(d);
+                        iInquiryView.showLoading("获取中...");
+                    }
 
-                            @Override
-                            public void onHandleSuccess(PicAskDetailEntry detailEntry) {
-                                iInquiryView.hideLoading();
+                    @Override
+                    public void onHandleSuccess(PicAskDetailEntry detailEntry) {
+                        iInquiryView.hideLoading();
 
-                                if (detailEntry == null || detailEntry.getData() == null)
-                                    return;
+                        if (detailEntry == null || detailEntry.getData() == null)
+                            return;
 
-                                iInquiryView.setDetailInfo(detailEntry.getData());
+                        iInquiryView.setDetailInfo(detailEntry.getData());
 
-                            }
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                iInquiryView.hideLoading();
-                                iInquiryView.showErr(message);
-                            }
+                    @Override
+                    public void onHandleError(String message) {
+                        iInquiryView.hideLoading();
+                        iInquiryView.showErr(message);
+                    }
 
-                        }
-                        , SpValue.CH
-                        , token
-                        , consultaid);
+                }
+                , SpValue.CH
+                , token
+                , consultaid);
 
     }
 
