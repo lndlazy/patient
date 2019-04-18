@@ -351,6 +351,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         goodsInfo.setPoints(orderList.get(holder.getAdapterPosition()).getPoints());
         goodsInfo.setSkuprice(orderList.get(holder.getAdapterPosition()).getSkuprice());
         goodsInfo.setOrderid(orderList.get(holder.getAdapterPosition()).getOrderid());
+        //商品id
+        goodsInfo.setSkuid(orderList.get(holder.getAdapterPosition()).getSkuid());
 
         if (context instanceof GoodsOrderListActivity) {
             GoodsOrderListActivity g = (GoodsOrderListActivity) context;

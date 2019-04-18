@@ -180,7 +180,7 @@ public class RecommandActivity extends BaseActivity implements View.OnClickListe
     private void share(SHARE_MEDIA perform, String url) {
 
         ShareUtils.shareWeb(RecommandActivity.this, url
-                , "好医在手健康无忧，邀请好友下载轻松得积分！", "一款专注于血管瘤及脉管畸形的专业APP"
+                , "医事顺百事顺，医百顺邀您下载APP轻松得积分！", "一款倾心为血管瘤及脉管畸形患者服务的APP，更是一款多病种健康分享的APP，身边有就诊需求的朋友请帮忙转发一下，患者早看见，就诊少曲折，医事顺，百事顺！"
                 , "", R.mipmap.logo, perform);
     }
 

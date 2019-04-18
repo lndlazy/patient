@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,10 +35,17 @@ public class FragmentThree extends BaseFragment implements IFreagThreeView {
     private IFragPicPres iFragPicPres = new IFragPicPres(this);
 
     private List<MyAskReusltList.DataBean> picAskList = new ArrayList<>();
+
+
+
     private AskAdapter picAskAdapter;
 //    private SwipeRefreshLayout swipeRefreshLayout;
     private int mPicFirstVisibleItemPosition;
     private int mPicLastVisibleItemPosition;
+    private   View view1;
+    private   View view2;
+    private   View view3;
+
 
     //    private AskAdapter askItemAdapter;
 
@@ -57,7 +63,36 @@ public class FragmentThree extends BaseFragment implements IFreagThreeView {
 
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+
+        Logger.d("====onHiddenChanged===" + hidden);
+
+        if (!hidden) {
+            //fragment显示出来了
+
+
+        }
+
+    }
+
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        Logger.d("====onPause====");
+//    }
+
     private void initView(View view) {
+
+        view1 = View.inflate(getActivity(), R.layout.item_recyclerview, null);
+        view2 = View.inflate(getActivity(), R.layout.item_recyclerview, null);
+        view3 = View.inflate(getActivity(), R.layout.item_recyclerview, null);
+
+        List<View> viewLists = new ArrayList<>();
+        viewLists.add(view1);
+        viewLists.add(view2);
+        viewLists.add(view3);
 
         TabLayout mTabLayout = view.findViewById(R.id.tab_layout);
         ViewPager mViewPager = view.findViewById(R.id.vp_viewpager);
@@ -65,7 +100,7 @@ public class FragmentThree extends BaseFragment implements IFreagThreeView {
         mTabLayout.addOnTabSelectedListener(listener);
         mTabLayout.setupWithViewPager(mViewPager);
 
-        AskPagerAdapter askPagerAdapter = new AskPagerAdapter(getActivity(), this);
+        AskPagerAdapter askPagerAdapter = new AskPagerAdapter(getActivity(), this, viewLists);
         mViewPager.setAdapter(askPagerAdapter);
     }
 
@@ -116,7 +151,7 @@ public class FragmentThree extends BaseFragment implements IFreagThreeView {
     };
 
 
-    public void loadPageOne(View view) {
+    public void loadPageOne() {
 
 //        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
 
@@ -127,7 +162,8 @@ public class FragmentThree extends BaseFragment implements IFreagThreeView {
 //                iFragPicPres.refush(SpValue.ASK_TYPE_PIC, (String) SaveUtils.get(getActivity(), SpValue.TOKEN, ""));
 //            }
 //        });
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+
+        RecyclerView recyclerView = view1.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         //添加自定义分割线
@@ -140,7 +176,7 @@ public class FragmentThree extends BaseFragment implements IFreagThreeView {
         recyclerView.setAdapter(picAskAdapter);
 
         //获取图文问诊信息
-        iFragPicPres.getPicAskInfo(SpValue.ASK_TYPE_PIC, (String) SaveUtils.get(getActivity(), SpValue.TOKEN, ""));
+        iFragPicPres.getAskInfo(SpValue.ASK_TYPE_PIC, (String) SaveUtils.get(getActivity(), SpValue.TOKEN, ""));
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -182,6 +218,24 @@ public class FragmentThree extends BaseFragment implements IFreagThreeView {
         });
 
     }
+
+
+    public void loadPageTwo() {
+
+        RecyclerView recyclerView = view2.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //添加自定义分割线
+        DividerItemDecoration divider = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+        divider.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.shape_recyclerview_item_gray));
+        recyclerView.addItemDecoration(divider);
+
+
+        //获取电话问诊信息
+        iFragPicPres.getAskInfo(SpValue.ASK_TYPE_TEL, (String) SaveUtils.get(getActivity(), SpValue.TOKEN, ""));
+
+    }
+
 
     @Override
     public void setPicAskInfo(List<MyAskReusltList.DataBean> data) {

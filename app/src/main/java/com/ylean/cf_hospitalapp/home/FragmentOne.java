@@ -127,10 +127,12 @@ public class FragmentOne extends BaseFragment implements View.OnClickListener, I
         initView(view);
 
         //检查权限
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //            checkOtherPer();
             checkLocationPer();
-        }
+//        }else {
+//
+//        }
 
         return view;
     }

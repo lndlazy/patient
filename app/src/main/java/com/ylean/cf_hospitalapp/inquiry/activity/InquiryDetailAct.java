@@ -98,7 +98,6 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
     private TextView tvCommit;
     private PicAskDetailEntry.DataBean inquiryInfo;
 
-
     private ICollectionPres iCollectionPres = new ICollectionPres(this);
 
     @Override
@@ -118,7 +117,7 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
         noEdit();
         iInquiryPres.setConsultaid(consultaid);
         iInquiryPres.detailInfo((String) SaveUtils.get(this, SpValue.TOKEN, ""));
-        iInquiryPres.chatList((String) SaveUtils.get(this, SpValue.TOKEN, ""), true);
+        iInquiryPres.chatList((String) SaveUtils.get(this, SpValue.TOKEN, ""), true, true);
         chatAdapter.setConsultaid(consultaid);
         EventBus.getDefault().register(this);
 
@@ -141,7 +140,7 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
 
             if (isLoad && !noedit) {
 
-                iInquiryPres.chatList((String) SaveUtils.get(InquiryDetailAct.this, SpValue.TOKEN, ""), true);
+                iInquiryPres.chatList((String) SaveUtils.get(InquiryDetailAct.this, SpValue.TOKEN, ""), true, false);
 //                mHandler.postDelayed(this, 3000);
             }
 
@@ -333,7 +332,7 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
     @Override
     public void collectionSuccess(String type) {
 
-        if (inquiryInfo!=null) {
+        if (inquiryInfo != null) {
             inquiryInfo.setIscollect(1);
             tvAttent.setText("已关注");
         }
@@ -344,7 +343,7 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
     @Override
     public void removeCollectionSuccess(String type) {
 
-        if (inquiryInfo!=null) {
+        if (inquiryInfo != null) {
             inquiryInfo.setIscollect(0);
             tvAttent.setText("未关注");
         }
@@ -460,11 +459,11 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
 
                 if (inquiryInfo.getIscollect() == 1) {
                     //已关注， 点击取消关注
-                    iCollectionPres.removeCollection( (String) SaveUtils.get(InquiryDetailAct.this, SpValue.TOKEN, ""), "5");
+                    iCollectionPres.removeCollection((String) SaveUtils.get(InquiryDetailAct.this, SpValue.TOKEN, ""), "5");
                 } else {
 
                     //未关注，点击关注
-                    iCollectionPres.addCollection( (String) SaveUtils.get(InquiryDetailAct.this, SpValue.TOKEN, ""), "5");
+                    iCollectionPres.addCollection((String) SaveUtils.get(InquiryDetailAct.this, SpValue.TOKEN, ""), "5");
                 }
 
 
@@ -595,12 +594,12 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
         etInput.setText("");
 
         chatInfoList.clear();
-        iInquiryPres.chatList((String) SaveUtils.get(this, SpValue.TOKEN, ""), false);
+        iInquiryPres.chatList((String) SaveUtils.get(this, SpValue.TOKEN, ""), false, true);
 
     }
 
     @Override
-    public void setChatInfo(List<ChatEntry.DataBean> data, boolean isLoop) {
+    public void setChatInfo(List<ChatEntry.DataBean> data, boolean isLoop, boolean isScrollLastOne) {
 
         chatInfoList.clear();
         chatInfoList.addAll(data);
@@ -608,9 +607,12 @@ public class InquiryDetailAct extends BaseActivity implements View.OnClickListen
         if (chatAdapter != null)
             chatAdapter.notifyDataSetChanged();
 
-        //自动滑动到最后一个条目
-        if (recyclerView != null && chatInfoList != null && chatInfoList.size() > 0)
-            recyclerView.scrollToPosition(chatInfoList.size() - 1);
+        if (isScrollLastOne) {
+            //自动滑动到最后一个条目
+            if (recyclerView != null && chatInfoList != null && chatInfoList.size() > 0)
+                recyclerView.scrollToPosition(chatInfoList.size() - 1);
+        }
+
 
         if (isLoop)
             mHandler.postDelayed(chatListRunable, 3000);

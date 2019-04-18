@@ -267,7 +267,7 @@ public class GoodsCommandActivity extends BaseActivity implements View.OnClickLi
 
         iEvaluatePres.addEvaluate(
                 (String) SaveUtils.get(this, SpValue.TOKEN, "")
-                , goodsInfo.getOrderid(), goodsInfo.getCode(), etConent.getText().toString()
+                , goodsInfo.getSkuid(), goodsInfo.getCode(), etConent.getText().toString()
                 , rating1 + "", rating2 + "", rating3 + ""
                 , goodsInfo.getOrdertype(), img, "");
     }

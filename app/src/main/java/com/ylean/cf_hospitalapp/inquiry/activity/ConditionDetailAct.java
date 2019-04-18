@@ -296,7 +296,7 @@ public class ConditionDetailAct extends BaseActivity implements IInquiryView, Vi
     }
 
     @Override
-    public void setChatInfo(List<ChatEntry.DataBean> data, boolean isLoop) {
+    public void setChatInfo(List<ChatEntry.DataBean> data, boolean isLoop, boolean isScrollLastOne) {
 
     }
 

@@ -48,9 +48,7 @@ public class ServiceOrderListActivity extends BaseActivity implements View.OnCli
     private String status;
     private List<MallOrderEntry.DataBean> orderList = new ArrayList<>();
 
-
 //    全部（不传）， 待付款0， 待发货 1，待收货2  ,待使用3，已完成 4)
-
     private static final String STATUS_ALL = "";
     private static final String STATUS_WAIT_PAY = "0";
     private static final String STATUS_WAIT_USE = "3";
@@ -60,11 +58,8 @@ public class ServiceOrderListActivity extends BaseActivity implements View.OnCli
     private IOrderListPres iOrderListPres = new IOrderListPres(this);
     private OrderAdapter orderAdapter;
 
-
     private IGoodsInfoPres iDeletePres = new IGoodsInfoPres(this);
     private IOrderInfoPres iOrderInfoPres = new IOrderInfoPres(this);
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

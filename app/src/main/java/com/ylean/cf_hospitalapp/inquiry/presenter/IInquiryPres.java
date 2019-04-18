@@ -91,35 +91,29 @@ public class IInquiryPres {
 
     }
 
-    public void chatList(String token, final boolean isLoop) {
+    public void chatList(String token, final boolean isLoop, final boolean isScrollLastOne) {
 
-        RetrofitHttpUtil
-                .getInstance()
-                .getChatInfo(
-                        new BaseNoTObserver<ChatEntry>() {
-                            @Override
-                            public void onHandleSuccess(ChatEntry chatEntry) {
+        RetrofitHttpUtil.getInstance().getChatInfo(
+                new BaseNoTObserver<ChatEntry>() {
+                    @Override
+                    public void onHandleSuccess(ChatEntry chatEntry) {
 
-                                if (chatEntry == null || chatEntry.getData() == null)
-                                    return;
+                        if (chatEntry == null || chatEntry.getData() == null)
+                            return;
 
-                                iInquiryView.setChatInfo(chatEntry.getData(), isLoop);
+                        iInquiryView.setChatInfo(chatEntry.getData(), isLoop, isScrollLastOne);
 
-                            }
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                iInquiryView.showErr(message);
-                            }
+                    @Override
+                    public void onHandleError(String message) {
+                        iInquiryView.showErr(message);
+                    }
 
-                        }
-                        , SpValue.CH
-                        , token
-                        , consultaid
-                );
+                }, SpValue.CH, token, consultaid
+        );
 
     }
-
 
     //聊天回复
     public void chatReply(String content, String token, String type, String userType) {
@@ -138,13 +132,8 @@ public class IInquiryPres {
                                 iInquiryView.showErr(message);
                             }
 
-                        }
-                        , SpValue.CH
-                        , token
-                        , consultaid
-                        , content
-                        , type
-                        , userType);
+                        }, SpValue.CH, token, consultaid
+                        , content, type, userType);
 
     }
 
@@ -210,10 +199,7 @@ public class IInquiryPres {
                                 iInquiryView.showErr(message);
                             }
 
-                        }, SpValue.CH
-                        , token
-                        , consultaid);
-
+                        }, SpValue.CH, token, consultaid);
 
     }
 }

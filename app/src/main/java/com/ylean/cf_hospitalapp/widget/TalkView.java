@@ -57,7 +57,7 @@ public class TalkView extends Button {
         switch (event.getAction()) {
 
             case MotionEvent.ACTION_DOWN://按下
-//                Logger.d("----按下----");
+                Logger.d("----按下----");
 
                 pressY = event.getY();
 
@@ -71,7 +71,7 @@ public class TalkView extends Button {
                             MediaRecordManager.getInstance().startRecordAndFile(getContext());
                         } catch (Exception e) {
                             e.printStackTrace();
-
+                            Logger.d("开始录音失败");
                         }
                     }
                 }).start();
@@ -81,7 +81,7 @@ public class TalkView extends Button {
             case MotionEvent.ACTION_MOVE://手指移动
 
                 chageY = Math.abs(event.getY() - pressY);
-//                Logger.d("----移动----" + chageY);
+                Logger.d("----移动----" + chageY);
                 if (chageY > CHANGE_Y) {
                     //滑动的Y轴方向大于50像素
                     isCancle = true;
@@ -96,7 +96,7 @@ public class TalkView extends Button {
 
             case MotionEvent.ACTION_UP://手指抬起
             case MotionEvent.ACTION_CANCEL:
-//                Logger.d("----抬起----");
+                Logger.d("----抬起----");
 
                 if ((System.currentTimeMillis() - speakTime) < 1000) {//说话时间太短
                     EventBus.getDefault().post(ACTION_UP_SHORT_TIME);

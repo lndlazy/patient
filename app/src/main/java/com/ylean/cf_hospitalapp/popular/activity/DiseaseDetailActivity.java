@@ -150,7 +150,7 @@ public class DiseaseDetailActivity extends BaseActivity {
     private void share(SHARE_MEDIA perform) {
 
         ShareUtils.shareWeb(DiseaseDetailActivity.this, url
-                , shareTitle,"好医无忧"
+                , shareTitle,"医百顺"
                 , "", R.mipmap.logo, perform);
     }
 

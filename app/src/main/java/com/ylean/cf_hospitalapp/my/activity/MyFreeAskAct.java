@@ -123,50 +123,43 @@ public class MyFreeAskAct extends BaseActivity implements SwipeRefreshLayout.OnR
     }
 
     private void askList(final boolean b) {
-        RetrofitHttpUtil
-                .getInstance()
-                .askList(
-                        new BaseNoTObserver<MyAskReusltList>() {
+        RetrofitHttpUtil.getInstance().askList(
+                new BaseNoTObserver<MyAskReusltList>() {
 
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                                super.onSubscribe(d);
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.onSubscribe(d);
 
-                                showLoading("获取中...");
-                            }
+                        showLoading("获取中...");
+                    }
 
-                            @Override
-                            public void onHandleSuccess(MyAskReusltList reusltList) {
+                    @Override
+                    public void onHandleSuccess(MyAskReusltList reusltList) {
 
-                                hideLoading();
-                                swipeRefreshLayout.setRefreshing(false);
+                        hideLoading();
+                        swipeRefreshLayout.setRefreshing(false);
 
-                                if (reusltList == null)
-                                    return;
+                        if (reusltList == null)
+                            return;
 
-                                if (b)
-                                    myAskResultList.clear();
-                                myAskResultList.addAll(reusltList.getData());
+                        if (b)
+                            myAskResultList.clear();
+                        myAskResultList.addAll(reusltList.getData());
 
-                                if (askAdapter != null)
-                                    askAdapter.notifyDataSetChanged();
+                        if (askAdapter != null)
+                            askAdapter.notifyDataSetChanged();
 
-                            }
+                    }
 
-                            @Override
-                            public void onHandleError(String message) {
-                                swipeRefreshLayout.setRefreshing(false);
-                                hideLoading();
-                                showErr(message);
-                            }
+                    @Override
+                    public void onHandleError(String message) {
+                        swipeRefreshLayout.setRefreshing(false);
+                        hideLoading();
+                        showErr(message);
+                    }
 
-
-                        }
-                        , (String) SaveUtils.get(this, SpValue.TOKEN, "")
-                        , SpValue.CH
-                        , SpValue.ASK_TYPE_FREE
-                        , pageNum
-                        , SpValue.PAGE_SIZE);
+                }, (String) SaveUtils.get(this, SpValue.TOKEN, "")
+                , SpValue.CH, SpValue.ASK_TYPE_FREE, pageNum, SpValue.PAGE_SIZE);
     }
 
 

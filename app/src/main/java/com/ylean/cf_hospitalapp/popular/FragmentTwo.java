@@ -271,6 +271,16 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
 
     }
 
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (cacheList != null)
+            cacheList.clear();
+
+    }
+
     //设置专家讲堂
     @Override
     public void setExpertSpeechInfo(List<ExpertEntry.DataBean> data, final int i) {
@@ -290,9 +300,13 @@ public class FragmentTwo extends BaseFragment implements IFragTwoView, SwipeRefr
         speechRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         speechRecyclerView.setItemAnimator(new DefaultItemAnimator());
         //添加自定义分割线
-        DividerItemDecoration divider = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
-        divider.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.shape_recyclerview_item_gray));
-        speechRecyclerView.addItemDecoration(divider);
+        try {
+            DividerItemDecoration divider = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+            divider.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.shape_recyclerview_item_gray));
+            speechRecyclerView.addItemDecoration(divider);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (iFragTwoPres.getCurrentPage() == 1)
             speechList.clear();

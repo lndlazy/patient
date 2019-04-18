@@ -20,17 +20,25 @@ public class SpeechItemAdapter extends RecyclerView.Adapter<SpeechItemAdapter.My
 
     private Context context;
     private List<ExpertEntry.DataBean> expertSpeechList;
+    private LayoutInflater mLayoutInflater;
 
     public SpeechItemAdapter(Context context, List<ExpertEntry.DataBean> expertSpeechList) {
         this.context = context;
+        this.mLayoutInflater = LayoutInflater.from(context);
         this.expertSpeechList = expertSpeechList;
     }
 
     @Override
     public SpeechItemAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new SpeechItemAdapter.MyViewHolder(
-                LayoutInflater.from(context).inflate(R.layout.item_home_video, parent, false));
+//        try {
+            return new SpeechItemAdapter.MyViewHolder(
+                    mLayoutInflater.inflate(R.layout.item_home_video, parent, false));
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return null;
+//        }
+
     }
 
     @Override
@@ -61,7 +69,7 @@ public class SpeechItemAdapter extends RecyclerView.Adapter<SpeechItemAdapter.My
         return expertSpeechList == null ? 0 : expertSpeechList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
 
         SimpleDraweeView sdvImg;
         SimpleDraweeView sdvPic;

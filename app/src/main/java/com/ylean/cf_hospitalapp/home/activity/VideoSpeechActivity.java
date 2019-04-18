@@ -2,6 +2,7 @@ package com.ylean.cf_hospitalapp.home.activity;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.orhanobut.logger.Logger;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
+import com.shuyu.gsyvideoplayer.utils.GSYVideoType;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.umeng.socialize.UMShareAPI;
@@ -325,16 +327,26 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
 
         //设置返回键
         videoPlayer.getBackButton().setVisibility(View.INVISIBLE);
-
+//        GSYVideoType.setShowType(GSYVideoType.SCREEN_TYPE_FULL);
         //设置旋转
         orientationUtils = new OrientationUtils(this, videoPlayer);
-        //设置全屏按键功能,这是使用的是选择屏幕，而不是全屏
+//        //设置全屏按键功能,这是使用的是选择屏幕，而不是全屏
+//        videoPlayer.getFullscreenButton().setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                orientationUtils.resolveByClick();
+//            }
+//        });
+
+        //全屏播放
         videoPlayer.getFullscreenButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                orientationUtils.resolveByClick();
+
+                videoPlayer.startWindowFullscreen(VideoSpeechActivity.this, false, true);
             }
         });
+//        videoPlayer.se
         //是否可以滑动调整
         videoPlayer.setIsTouchWiget(true);
         //设置返回按键功能
@@ -354,6 +366,14 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
     }
 
 
+//    @Override
+//    public void onConfigurationChanged(Configuration newConfig) {
+//        super.onConfigurationChanged(newConfig);
+//
+//        Logger.d("====onConfigurationChanged====" );
+//
+//    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -369,6 +389,11 @@ public class VideoSpeechActivity extends BaseActivity implements IVideoSpeechVie
             videoPlayer.getFullscreenButton().performClick();
             return;
         }
+
+        if (GSYVideoManager.backFromWindowFull(this)) {
+            return;
+        }
+
         //释放所有
         videoPlayer.setVideoAllCallBack(null);
         super.onBackPressed();

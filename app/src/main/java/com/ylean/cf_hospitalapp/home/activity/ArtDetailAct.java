@@ -198,7 +198,7 @@ public class ArtDetailAct extends BaseActivity implements IShareTitleView {
 //        Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.mipmap.logo);
 
         ShareUtils.shareWeb(ArtDetailAct.this, shareUrl
-                , shareTitle, "好医无忧"
+                , shareTitle, "医百顺"
                 , "", R.mipmap.logo, perform);
     }
 

@@ -61,9 +61,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             nextActivityThenKill(HomeActivity.class);
 
         //检查权限
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPer();
-        }
+//        }
     }
 
     private void initView() {

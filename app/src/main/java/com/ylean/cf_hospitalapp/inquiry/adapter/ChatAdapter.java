@@ -124,7 +124,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
                         //录音时长
                         try {
                             MediaPlayer mediaPlayer = new MediaPlayer();
-                            mediaPlayer.setDataSource(chatInfoList.get(i).getUrl());
+                            mediaPlayer.reset();
+                            mediaPlayer.setDataSource(context, Uri.parse(chatInfoList.get(i).getUrl()));
                             mediaPlayer.prepare();
                             mediaPlayer.getDuration();
 

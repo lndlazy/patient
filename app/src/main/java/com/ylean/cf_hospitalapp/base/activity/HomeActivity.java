@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -84,15 +85,25 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
 
     }
 
+    FragmentTransaction transaction = null;
+
     private void initFragment() {
 
         fragmentManager = getSupportFragmentManager();
-//        fragmentManager = getFragmentManager();
+
+        if (fragmentManager != null)
+            transaction = fragmentManager.beginTransaction();
+
+        if (fragmentOne == null)
+            fragmentOne = new FragmentOne();
+
+        transaction.add(R.id.fl_base, fragmentOne)
+                .commit();
+
+        currentfragment = fragmentOne;
 
         ivone.setSelected(true);
         tvone.setTextColor(getResources().getColor(R.color.home_bottom_select_color));
-
-        chooseFragment(0);
 
     }
 
@@ -199,6 +210,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
 
     }
 
+    Fragment currentfragment;
+
     /**
      * 选择对应的fragment
      *
@@ -206,14 +219,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
      */
     private void chooseFragment(int index) {
 
-        FragmentTransaction transaction = null;
-        if (fragmentManager != null)
-            transaction = fragmentManager.beginTransaction();
-
         // 先移除掉所有的Fragment，以防止有多个Fragment显示在界面上的情况
 //        removeFragments(transaction);
 
-        if (transaction == null)
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+
+        if (ft == null)
             return;
 
         switch (index) {
@@ -223,11 +234,21 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                 if (fragmentOne == null)
                     fragmentOne = new FragmentOne();
 
-                if (!fragmentOne.isAdded())
-                    transaction.replace(R.id.fl_base, fragmentOne, "ZERO");
+                if (!fragmentOne.isAdded()) {
+
+                    ft.hide(currentfragment)
+                            .add(R.id.fl_base, fragmentOne)
+                            .commit();
+
+                } else {
+
+                    ft.hide(currentfragment).show(fragmentOne)
+                            .commit();
+                }
+//                    transaction.replace(R.id.fl_base, fragmentOne, "ZERO");
 //                else
 //                    fragmentOne.reBottonLocation();
-
+                currentfragment = fragmentOne;
                 break;
 
             case 1: //
@@ -235,9 +256,20 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                 if (fragmentTwo == null)
                     fragmentTwo = new FragmentTwo();
 
-                if (!fragmentTwo.isAdded())
-                    transaction.replace(R.id.fl_base, fragmentTwo, "ONE");
+                if (!fragmentTwo.isAdded()) {
 
+                    ft.hide(currentfragment)
+                            .add(R.id.fl_base, fragmentTwo)
+                            .commit();
+
+                } else {
+                    ft.hide(currentfragment)
+                            .show(fragmentTwo)
+                            .commit();
+                }
+
+//                    transaction.replace(R.id.fl_base, fragmentTwo, "ONE");
+                currentfragment = fragmentTwo;
                 break;
 
             case 2:
@@ -245,9 +277,20 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                 if (fragmentThree == null)
                     fragmentThree = new FragmentThree();
 
-                if (!fragmentThree.isAdded())
-                    transaction.replace(R.id.fl_base, fragmentThree, "TWO");
+                if (!fragmentThree.isAdded()) {
 
+                    ft.hide(currentfragment)
+                            .add(R.id.fl_base, fragmentThree)
+                            .commit();
+
+                } else {
+                    ft.hide(currentfragment)
+                            .show(fragmentThree)
+                            .commit();
+                }
+
+//                    transaction.replace(R.id.fl_base, fragmentThree, "TWO");
+                currentfragment = fragmentThree;
                 break;
 
 
@@ -256,13 +299,25 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                 if (fragmentFour == null)
                     fragmentFour = new FragmentFour();
 
-                if (!fragmentFour.isAdded())
-                    transaction.replace(R.id.fl_base, fragmentFour, "THREE");
+                if (!fragmentFour.isAdded()) {
 
+                    ft.hide(currentfragment)
+                            .add(R.id.fl_base, fragmentFour)
+                            .commit();
+
+                } else {
+                    ft.hide(currentfragment)
+                            .show(fragmentFour)
+                            .commit();
+                }
+
+//                    transaction.replace(R.id.fl_base, fragmentFour, "THREE");
+
+                currentfragment = fragmentFour;
                 break;
         }
 
-        transaction.commit();
+//        transaction.commit();
 
     }
 

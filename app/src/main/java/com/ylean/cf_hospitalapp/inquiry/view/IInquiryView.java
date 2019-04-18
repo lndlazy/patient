@@ -16,7 +16,7 @@ public interface IInquiryView extends DataUploadView {
 
     void replySuccess();
 
-    void setChatInfo(List<ChatEntry.DataBean> data, boolean isLoop);
+    void setChatInfo(List<ChatEntry.DataBean> data, boolean isLoop, boolean isScrollLastOne);
 
     void endInquirySuccess();
 

@@ -80,25 +80,23 @@ public class IPointsMallPres {
     //获取商品列表
     public void goodsList(String classid) {
 
-        RetrofitHttpUtil
-                .getInstance()
-                .goodsList(
-                        new BaseNoTObserver<GoodsListEntry>() {
+        RetrofitHttpUtil.getInstance().goodsList(
+                new BaseNoTObserver<GoodsListEntry>() {
 
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                                super.onSubscribe(d);
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        super.onSubscribe(d);
 
-                                iPointsView.showLoading("加载中...");
-                            }
+                        iPointsView.showLoading("加载中...");
+                    }
 
-                            @Override
-                            public void onHandleSuccess(GoodsListEntry goodsListEntry) {
+                    @Override
+                    public void onHandleSuccess(GoodsListEntry goodsListEntry) {
 
-                                iPointsView.hideLoading();
-                                if (goodsListEntry != null && goodsListEntry.getData() != null) {
+                        iPointsView.hideLoading();
+                        if (goodsListEntry != null && goodsListEntry.getData() != null) {
 
-                                    iPointsView.setGoodsList(goodsListEntry.getData());
+                            iPointsView.setGoodsList(goodsListEntry.getData());
 
 //                                    List<GoodsListEntry.DataBean> data = goodsListEntry.getData();
 
@@ -112,23 +110,18 @@ public class IPointsMallPres {
 //                                    if (swipeRefreshLayout != null)
 //                                        swipeRefreshLayout.setRefreshing(false);
 
-                                }
-
-                            }
-
-                            @Override
-                            public void onHandleError(String message) {
-                                iPointsView.hideLoading();
-                                iPointsView.showErr(message);
-                                iPointsView.error();
-                            }
-
                         }
-                        , SpValue.CH
-                        , key
-                        , classid
-                        , currentPage
-                        , SpValue.PAGE_SIZE);
+
+                    }
+
+                    @Override
+                    public void onHandleError(String message) {
+                        iPointsView.hideLoading();
+                        iPointsView.showErr(message);
+                        iPointsView.error();
+                    }
+
+                }, SpValue.CH, key, classid, currentPage, SpValue.PAGE_SIZE);
 
     }
 

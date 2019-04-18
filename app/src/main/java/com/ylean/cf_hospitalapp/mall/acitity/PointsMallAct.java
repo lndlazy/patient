@@ -16,6 +16,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.ylean.cf_hospitalapp.R;
 import com.ylean.cf_hospitalapp.base.activity.BaseActivity;
 import com.ylean.cf_hospitalapp.my.adapter.ClassifyAdapter;
@@ -52,6 +53,9 @@ public class PointsMallAct extends BaseActivity implements IPointsView, SwipeRef
     private Map<Integer, GoodsAdapter> mAdaptersMap = new LinkedHashMap<>();
     private Map<Integer, List<GoodsListEntry.DataBean>> mGoodsListMap = new LinkedHashMap<>();
     private int currentPagePosition;//当前viewpage页面的position
+    private RecyclerView recyclerView;
+    private List<GoodsListEntry.DataBean> goodsList;
+    private GoodsAdapter goodsAdapter;
 
 
     @Override
@@ -107,7 +111,7 @@ public class PointsMallAct extends BaseActivity implements IPointsView, SwipeRef
             currentPagePosition = tab.getPosition();
 
             loadGoodsInfo(currentPagePosition);
-//            Logger.d("onTabSelected:" + tab.getText().toString());
+            Logger.d("onTabSelected:" + tab.getText().toString());
         }
 
         @Override
@@ -182,7 +186,7 @@ public class PointsMallAct extends BaseActivity implements IPointsView, SwipeRef
 //        mLists.add(position);
 
         View view = viewList.get(i);
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.recyclerView);
         GridLayoutManager doctorLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(doctorLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -191,8 +195,8 @@ public class PointsMallAct extends BaseActivity implements IPointsView, SwipeRef
         divider.setDrawable(ContextCompat.getDrawable(this, R.drawable.shape_recyclerview_item_gray));
         recyclerView.addItemDecoration(divider);
 
-        final List<GoodsListEntry.DataBean> goodsList = new ArrayList<>();
-        final GoodsAdapter goodsAdapter = new GoodsAdapter(this, goodsList);
+        goodsList = new ArrayList<>();
+        goodsAdapter = new GoodsAdapter(this, goodsList);
         recyclerView.setAdapter(goodsAdapter);
 
         mAdaptersMap.put(i, goodsAdapter);
@@ -230,6 +234,8 @@ public class PointsMallAct extends BaseActivity implements IPointsView, SwipeRef
             @Override
             public void onItemClick(RecyclerView.ViewHolder holder, int position) {
 
+
+                Logger.d("====点击进入商品详情====");
                 //商品详情页面
                 Intent m = new Intent(PointsMallAct.this, GoodsDetailActivity.class);
 //                GoodsListEntry.DataBean goodsInfo = goodsList.get(position);

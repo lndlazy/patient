@@ -21,33 +21,51 @@ public class IFragPicPres {
 
     private int pageOne = 1;
 
-    public void getPicAskInfo(String askTypePic, String token) {
-        RetrofitHttpUtil
-                .getInstance()
-                .askList(
-                        new BaseNoTObserver<MyAskReusltList>() {
+    /**
+     *
+     * @param askType
+     * @param token
+     */
+    public void getAskInfo(String askType, String token) {
 
-                            @Override
-                            public void onHandleSuccess(MyAskReusltList reusltList) {
+        RetrofitHttpUtil.getInstance().askList(
+                new BaseNoTObserver<MyAskReusltList>() {
 
-                                if (reusltList == null || reusltList.getData() == null)
-                                    return;
+                    @Override
+                    public void onHandleSuccess(MyAskReusltList reusltList) {
+
+                        if (reusltList == null || reusltList.getData() == null)
+                            return;
+
+                        switch (askType) {
+
+                            case SpValue.ASK_TYPE_PIC:
 
                                 iFreagThreeView.setPicAskInfo(reusltList.getData());
 
-                            }
+                                break;
 
-                            @Override
-                            public void onHandleError(String message) {
-                                iFreagThreeView.showErr(message);
-                            }
+                            case SpValue.ASK_TYPE_TEL:
+
+                                Logger.d("电话问诊结果");
+
+                                break;
+
+
+                            case SpValue.ASK_TYPE_VIDEO:
+
+                                break;
 
                         }
-                        , token
-                        , SpValue.CH
-                        , askTypePic
-                        , pageOne
-                        , SpValue.PAGE_SIZE);
+
+                    }
+
+                    @Override
+                    public void onHandleError(String message) {
+                        iFreagThreeView.showErr(message);
+                    }
+
+                }, token, SpValue.CH, askType, pageOne, SpValue.PAGE_SIZE);
     }
 
 
@@ -57,7 +75,7 @@ public class IFragPicPres {
         Logger.d("===刷新=== refush ");
         iFreagThreeView.clearPicInfo();
         pageOne = 1;
-        getPicAskInfo(askTypePic, token);
+        getAskInfo(askTypePic, token);
 
     }
 
@@ -66,6 +84,6 @@ public class IFragPicPres {
 
         Logger.d("==nextPage==");
         pageOne++;
-        getPicAskInfo(askTypePic, token);
+        getAskInfo(askTypePic, token);
     }
 }

@@ -48,29 +48,47 @@ public class PayAskDoctorAdapter extends RecyclerView.Adapter<PayAskDoctorAdapte
         holder.tvCompany.setText(doctorInfoList.get(position).getHospitalname());
         holder.tvInfo.setText(TextUtils.isEmpty(doctorInfoList.get(position).getAdeptdesc()) ? "暂无简介" :
                 doctorInfoList.get(position).getAdeptdesc());
-        holder.tvp1.setText(CommonUtils.getNum2(doctorInfoList.get(position).getTwprice()));
-        holder.tvp2.setText(CommonUtils.getNum2(doctorInfoList.get(position).getDhprice()));
-        holder.tvp3.setText(CommonUtils.getNum2(doctorInfoList.get(position).getSpprice()));
+
+        if (doctorInfoList.get(position).getTwstatus() == 0)
+            holder.tvp1.setText(CommonUtils.getNum2(doctorInfoList.get(position).getTwprice()));
+        else
+            holder.tvp1.setText("未开通");
+
+        if (doctorInfoList.get(position).getDhstatus() == 0)
+            holder.tvp2.setText(CommonUtils.getNum2(doctorInfoList.get(position).getDhprice()));
+        else
+            holder.tvp2.setText("未开通");
+
+        if (doctorInfoList.get(position).getSpstatus() == 0)
+            holder.tvp3.setText(CommonUtils.getNum2(doctorInfoList.get(position).getSpprice()));
+        else
+            holder.tvp3.setText("未开通");
+
 
         //图文问诊
         holder.llTuwen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextPage(position, context, SpValue.ASK_TYPE_PIC);
+
+                if (doctorInfoList.get(position).getTwstatus() == 0)
+                    nextPage(position, context, SpValue.ASK_TYPE_PIC);
             }
         });
         //电话问诊
         holder.llTel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextPage(position, context, SpValue.ASK_TYPE_TEL);
+                if (doctorInfoList.get(position).getDhstatus() == 0)
+
+                    nextPage(position, context, SpValue.ASK_TYPE_TEL);
             }
         });
         //视频问诊
         holder.llVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextPage(position, context, SpValue.ASK_TYPE_VIDEO);
+                if (doctorInfoList.get(position).getSpstatus() == 0)
+                    nextPage(position, context, SpValue.ASK_TYPE_VIDEO);
             }
         });
 

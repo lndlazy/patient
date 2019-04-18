@@ -20,21 +20,15 @@ public class AskPagerAdapter extends PagerAdapter {
     private boolean isLoad1 = false;
     private boolean isLoad2 = false;
     private boolean isLoad3 = false;
-    private final View view1;
-    private final View view2;
-    private final View view3;
+    //    private final View view1;
+//    private final View view2;
+//    private final View view3;
     private FragmentThree fragmentThree;
 
-    public AskPagerAdapter(Context context, FragmentThree fragmentThree) {
+    public AskPagerAdapter(Context context, FragmentThree fragmentThree, List<View> viewList) {
 
         this.context = context;
-
-        view1 = View.inflate(context, R.layout.item_recyclerview, null);
-        view2 = View.inflate(context, R.layout.item_recyclerview, null);
-        view3 = View.inflate(context, R.layout.item_recyclerview, null);
-        this.viewList.add(view1);
-        this.viewList.add(view2);
-        this.viewList.add(view3);
+        this.viewList = viewList;
 
         isLoad1 = false;
         isLoad2 = false;
@@ -66,6 +60,9 @@ public class AskPagerAdapter extends PagerAdapter {
             parent.removeAllViews();
         container.addView(view);
 
+        if (fragmentThree == null)
+            return view;
+
         switch (position) {
 
             case 0:
@@ -73,8 +70,7 @@ public class AskPagerAdapter extends PagerAdapter {
                 if (!isLoad1) {
                     isLoad1 = true;
 
-                    if (fragmentThree!=null)
-                        fragmentThree.loadPageOne(view1);
+                    fragmentThree.loadPageOne();
                 }
 
                 break;
@@ -83,6 +79,8 @@ public class AskPagerAdapter extends PagerAdapter {
 
                 if (!isLoad2) {
                     isLoad2 = true;
+
+                    fragmentThree.loadPageTwo();
                 }
 
                 break;
